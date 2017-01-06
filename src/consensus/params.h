@@ -78,6 +78,7 @@ struct Params {
     unsigned int nStakeMinAge;
     unsigned int nStakeMaxAge;
     uint256 nMinimumChainWork;
+    uint256 defaultAssumeValid;
 };
 } // namespace Consensus
 
