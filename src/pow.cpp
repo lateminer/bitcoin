@@ -27,8 +27,13 @@ static arith_uint256 GetTargetLimit(int64_t nTime, bool fProofOfStake, const Con
 
 unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, bool fProofOfStake, const Consensus::Params& params)
 {
-	unsigned int nTargetLimit = UintToArith256(params.powLimit).GetCompact();
-
+    unsigned int nTargetLimit;
+    if (fProofOfStake) {
+        nTargetLimit = UintToArith256(params.posLimit).GetCompact();
+    } else {
+        nTargetLimit = UintToArith256(params.powLimit).GetCompact();
+    }
+    
 	    // Genesis block
 	    if (pindexLast == NULL)
 	        return nTargetLimit;
