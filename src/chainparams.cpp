@@ -95,7 +95,7 @@ public:
 //        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 999999999999ULL; // never
 //        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
 
-        consensus.HardFork1Height = 1000000000;
+        consensus.nHardFork1Height = 1000000000;
         consensus.nLastPOWBlock = 750;
         consensus.nStakeTimestampMask = 0xf;
 
@@ -188,7 +188,7 @@ public:
         consensus.BIP34Hash = uint256S("0x0000000023b3a96d3484e5abb3755c413e7d41500f8e2a5c3f0dd01299cd8ef8");
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.fPowAllowMinDifficultyBlocks = true;
-        consensus.nHardFork1Time = 0;
+        consensus.nHardFork1Height = 1000000000;
         consensus.nLastPOWBlock = 0x7fffffff;
         pchMessageStart[0] = 0xcd;
         pchMessageStart[1] = 0xf2;
@@ -265,7 +265,7 @@ public:
 //        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 999999999999ULL; // never
 //        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
 
-        consensus.HardFork1Height = 1000000000;
+        consensus.nHardFork1Height = 1000000000;
         consensus.nLastPOWBlock = 10000;
         consensus.nStakeTimestampMask = 0xf;
 

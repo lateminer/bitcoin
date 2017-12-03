@@ -3863,9 +3863,9 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIn
     /*
     // NEW BLOCK VERSION 5: FORK
     
-    if (block.nVersion < 5 && nHeight >= consensusParams.HardFork1Height)
+    if (block.nVersion < 5 && nHeight >= consensusParams.nHardFork1Height)
         return DoS(100, error("%s : reject too old nVersion = %d", block.nVersion));
-    else if (block.nVersion > 5 && nHeight < consensusParams.HardFork1Height)
+    else if (block.nVersion > 5 && nHeight < consensusParams.nHardFork1Height)
         return DoS(100, error("%s : reject too new nVersion = %d", block.nVersion));
     */
     
