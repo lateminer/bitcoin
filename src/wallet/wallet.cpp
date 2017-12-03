@@ -667,8 +667,7 @@ bool CheckKernel(CBlockIndex* pindexPrev, unsigned int nBits, int64_t nTime, con
 int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, int64_t nFees)
 {
     int64_t nSubsidy;
-    /* if (Params().GetConsensus().IsHardFork1(pindexPrev->nTime))
-        nSubsidy = COIN * 10;
+        nSubsidy = COIN * 0;
     else */
         nSubsidy = COIN * 30;
 
