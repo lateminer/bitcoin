@@ -60,8 +60,6 @@ struct Params {
     int64_t nTargetSpacing;
     int64_t nTargetTimespan;
     int64_t DifficultyAdjustmentInterval() const { return nTargetTimespan / nTargetSpacing; }
-    int64_t nHardFork1Time;
-    bool IsHardFork1(int64_t nTime) const { return nTime > nHardFork1Time && nTime != 2400000000; }
     unsigned int GetTargetSpacing(int nHeight) { return 90; }
     int nLastPOWBlock;
     int nStakeTimestampMask;

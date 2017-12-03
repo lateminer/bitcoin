@@ -95,7 +95,7 @@ public:
 //        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 999999999999ULL; // never
 //        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
 
-        consensus.nHardFork1Time = 2400000000;
+        consensus.HardFork1Height = 1000000000;
         consensus.nLastPOWBlock = 750;
         consensus.nStakeTimestampMask = 0xf;
 
@@ -265,7 +265,7 @@ public:
 //        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 999999999999ULL; // never
 //        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
 
-        consensus.nHardFork1Time = 2000000000;
+        consensus.HardFork1Height = 1000000000;
         consensus.nLastPOWBlock = 10000;
         consensus.nStakeTimestampMask = 0xf;
 
