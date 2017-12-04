@@ -96,7 +96,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0;
 
         consensus.nLastPOWBlock = 750;
-        consensus.nStakeTimestampMask = 0xf;
+        consensus.nStakeTimestampMask = 0xf; // 15
         consensus.nStakeMinConfirmations = 60;
         consensus.nStakeMinAge = 12 * 60 * 60; // 12 hours
         

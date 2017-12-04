@@ -21,10 +21,6 @@ using namespace std;
 /** Compute the hash modifier for proof-of-stake */
 uint256 ComputeStakeModifier(const CBlockIndex* pindexPrev, const uint256& kernel);
 
-// To decrease granularity of timestamp
-// Supposed to be 2^n-1
-static const int STAKE_TIMESTAMP_MASK = 15;
-
 // Check whether the coinstake timestamp meets protocol
 bool CheckCoinStakeTimestamp(int64_t nTimeBlock, int64_t nTimeTx);
 bool CheckStakeBlockTimestamp(int64_t nTimeBlock);

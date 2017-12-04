@@ -560,7 +560,7 @@ bool SignBlock(CBlock& block, CWallet& wallet, int64_t& nFees)
     CMutableTransaction txCoinBase(block.vtx[0]);
     CMutableTransaction txCoinStake;
     txCoinStake.nTime = GetAdjustedTime();
-    txCoinStake.nTime &= ~STAKE_TIMESTAMP_MASK;
+    txCoinStake.nTime &= ~Params().GetConsensus().nStakeTimestampMask;
 
     int64_t nSearchTime = txCoinStake.nTime; // search to current time
 
