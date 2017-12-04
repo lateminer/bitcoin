@@ -21,8 +21,6 @@ using namespace std;
 /** Compute the hash modifier for proof-of-stake */
 uint256 ComputeStakeModifier(const CBlockIndex* pindexPrev, const uint256& kernel);
 
-static const int nStakeMinConfirmations = 60;
-static const unsigned int nStakeMinAge = 12 * 60 * 60; // 12 hours
 // To decrease granularity of timestamp
 // Supposed to be 2^n-1
 static const int STAKE_TIMESTAMP_MASK = 15;

@@ -97,7 +97,9 @@ public:
 
         consensus.nLastPOWBlock = 750;
         consensus.nStakeTimestampMask = 0xf;
-
+        consensus.nStakeMinConfirmations = 60;
+        consensus.nStakeMinAge = 12 * 60 * 60; // 12 hours
+        
         /**
          * The message start string is designed to be unlikely to occur in normal data.
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce

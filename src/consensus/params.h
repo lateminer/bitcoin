@@ -63,6 +63,9 @@ struct Params {
     unsigned int GetTargetSpacing(int nHeight) { return 90; }
     int nLastPOWBlock;
     int nStakeTimestampMask;
+    
+    int nStakeMinConfirmations;
+    unsigned int nStakeMinAge;
 };
 } // namespace Consensus
 
