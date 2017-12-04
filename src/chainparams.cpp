@@ -78,14 +78,14 @@ public:
         consensus.nMajorityWindow = 1000;
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.posLimit = uint256S("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.nTargetTimespan = 20 * 90; // 30 mins
+        consensus.nTargetTimespan = 20 * 90; // 30 min
         consensus.nTargetSpacing = 90;
         consensus.BIP34Height = 227931;
         consensus.BIP34Hash = uint256S("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8");
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
-        consensus.nRuleChangeActivationThreshold = 19; // 95% of 2016
-        consensus.nMinerConfirmationWindow = 20; // nTargetTimespan / nTargetSpacing
+        consensus.nRuleChangeActivationThreshold = 1900; // 95% of 2000
+        consensus.nMinerConfirmationWindow = 2000; // nTargetTimespan / nTargetSpacing * 100
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
@@ -188,6 +188,8 @@ public:
         consensus.BIP34Hash = uint256S("0x0000000023b3a96d3484e5abb3755c413e7d41500f8e2a5c3f0dd01299cd8ef8");
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.fPowAllowMinDifficultyBlocks = true;
+        consensus.nRuleChangeActivationThreshold = 150; // 75% for testnet
+        consensus.nMinerConfirmationWindow = 200; // nTargetTimespan / nTargetSpacing * 10 for testnet
         consensus.nLastPOWBlock = 0x7fffffff;
         pchMessageStart[0] = 0xcd;
         pchMessageStart[1] = 0xf2;
@@ -253,8 +255,8 @@ public:
         consensus.BIP34Hash = uint256();
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = true;
-        consensus.nRuleChangeActivationThreshold = 1916; // 95% of 2016
-        consensus.nMinerConfirmationWindow = 2016; // nTargetTimespan / nTargetSpacing
+        consensus.nRuleChangeActivationThreshold = 150; // 75% for regtest
+        consensus.nMinerConfirmationWindow = 200; // nTargetTimespan / nTargetSpacing * 10 for testnet
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
