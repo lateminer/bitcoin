@@ -667,11 +667,7 @@ bool CheckKernel(CBlockIndex* pindexPrev, unsigned int nBits, int64_t nTime, con
 int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, int64_t nFees)
 {
     int64_t nSubsidy;
-    /* int64_t CURRENT_SUPPLY = chainActive.Tip()->nMoneySupply;
-    if (CURRENT_SUPPLY >= (MAX_MONEY) - (COIN * 30))
-        nSubsidy = COIN * 0;
-    else */
-        nSubsidy = COIN * 30;
+    nSubsidy = COIN * 30;
 
     LogPrint("creation", "GetProofOfStakeReward(): create=%s nCoinAge=%d\n", FormatMoney(nSubsidy), nCoinAge);
 
