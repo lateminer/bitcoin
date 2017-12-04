@@ -3859,15 +3859,6 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIn
 {
     const int nHeight = pindexPrev == NULL ? 0 : pindexPrev->nHeight + 1;
     const Consensus::Params& consensusParams = Params().GetConsensus();
-
-    /*
-    // NEW BLOCK VERSION 5: FORK
-    
-    if (block.nVersion < 5 && nHeight >= consensusParams.nHardFork1Height)
-        return DoS(100, error("%s : reject too old nVersion = %d", block.nVersion));
-    else if (block.nVersion > 5 && nHeight < consensusParams.nHardFork1Height)
-        return DoS(100, error("%s : reject too new nVersion = %d", block.nVersion));
-    */
     
     if (block.IsProofOfWork() && nHeight > consensusParams.nLastPOWBlock)
     	return state.DoS(100, error("%s : reject proof-of-work at height %d", __func__, nHeight), REJECT_INVALID, "bad-pow-height");
