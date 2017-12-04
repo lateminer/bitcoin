@@ -212,7 +212,6 @@ public:
         genesis = CreateGenesisBlock(1480636800, 499515, 0x1e0ffff0, 2, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
 
-
         vFixedSeeds.clear();
         vSeeds.clear();
         vSeeds.push_back(CDNSSeedData("bitcoin.petertodd.org", "testnet-seed.bitcoin.petertodd.org"));
@@ -235,7 +234,7 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-			( 0, uint256S("0x0000724595fb3b9609d441cbfb9577615c292abf07d996d3edabc48de843642d")),
+            ( 0, uint256S("0x0000724595fb3b9609d441cbfb9577615c292abf07d996d3edabc48de843642d")),
             0,
             0,
             0
@@ -274,7 +273,6 @@ public:
 //        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
 
         consensus.nLastPOWBlock = 10000;
-        consensus.nStakeTimestampMask = 0xf;
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
