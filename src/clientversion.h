@@ -20,7 +20,7 @@
 #define CLIENT_VERSION_BUILD 0
 
 //! Set to true for release, false for prerelease or test build
-#define CLIENT_VERSION_IS_RELEASE true
+#define CLIENT_VERSION_IS_RELEASE false
 
 /**
  * Copyright year (2009-this)
@@ -38,7 +38,7 @@
 #define DO_STRINGIZE(X) #X
 
 //! Copyright string used in Windows .rc files
-#define COPYRIGHT_STR "2014-" STRINGIZE(COPYRIGHT_YEAR) " The DopeCoin Developers"
+#define COPYRIGHT_STR "2014-" STRINGIZE(COPYRIGHT_YEAR) " The Dopecoin Developers"
 
 /**
  * bitcoind-res.rc includes this file, but it cannot cope with real c++ code.
