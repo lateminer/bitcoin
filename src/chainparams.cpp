@@ -80,7 +80,7 @@ public:
         consensus.posLimit = uint256S("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nTargetTimespan = 20 * 90; // 30 min
         consensus.nTargetSpacing = 90;
-        consensus.BIP34Height = -1; // no BIP34
+        consensus.BIP34Height = -1; // BIP34 by default
         consensus.BIP34Hash = uint256();
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
@@ -184,8 +184,6 @@ public:
         consensus.nMajorityEnforceBlockUpgrade = 51;
         consensus.nMajorityRejectBlockOutdated = 75;
         consensus.nMajorityWindow = 100;
-        consensus.BIP34Height = -1; // no BIP34
-        consensus.BIP34Hash = uint256();
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.nRuleChangeActivationThreshold = 150; // 75% for testnet
@@ -260,8 +258,6 @@ public:
         consensus.posLimit = uint256S("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nTargetTimespan = 20 * 90; // 30 mins
         consensus.nTargetSpacing = 90;
-        consensus.BIP34Height = -1; // BIP34 has not necessarily activated on regtest
-        consensus.BIP34Hash = uint256();
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = true;
         consensus.nRuleChangeActivationThreshold = 150; // 75% for regtest
