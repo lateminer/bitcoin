@@ -505,7 +505,7 @@ bool DisconnectBlock(const CBlock& block, CValidationState& state, const CBlockI
 bool CheckStake(std::shared_ptr<CBlock> pblock, CWallet& wallet, const CChainParams& chainparams);
 
 /** Check if block signature is canonical */
-bool IsCanonicalBlockSignature(const std::shared_ptr<const CBlock> pblock);
+bool IsCanonicalBlockSignature(const std::shared_ptr<const CBlock> pblock, bool isLegacy = false);
 
 /** Check a block is completely valid from start to finish (only works on top of our current best block, with cs_main held) */
 bool TestBlockValidity(CValidationState& state, const CChainParams& chainparams, const CBlock& block, CBlockIndex* pindexPrev, bool fCheckPOW = true, bool fCheckMerkleRoot = true, bool fCheckSig = true);

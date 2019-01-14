@@ -176,6 +176,17 @@ bool IsLowDERSignature(const valtype &vchSig, ScriptError* serror, bool haveHash
     if (!IsValidSignatureEncoding(vchSig, haveHashType)) {
         return set_error(serror, SCRIPT_ERR_SIG_DER);
     }
+    std::vector<unsigned char> vchSigCopy(vchSig.begin(), vchSig.begin() + vchSig.size() - 1);
+    if (!CPubKey::CheckLowS(vchSigCopy)) {
+        return set_error(serror, SCRIPT_ERR_SIG_HIGH_S);
+    }
+    return true;
+}
+
+bool IsLegacyLowDERSignature(const valtype &vchSig, ScriptError* serror, bool haveHashType) {
+    if (!IsValidSignatureEncoding(vchSig, haveHashType)) {
+        return set_error(serror, SCRIPT_ERR_SIG_DER);
+    }
     unsigned int nLenR = vchSig[3];
     unsigned int nLenS = vchSig[5+nLenR];
     const unsigned char *S = &vchSig[6+nLenR];
@@ -187,19 +198,6 @@ bool IsLowDERSignature(const valtype &vchSig, ScriptError* serror, bool haveHash
 
     return true;
 }
-
-/*
-bool IsLowDERSignature(const valtype &vchSig, ScriptError* serror) {
-    if (!IsValidSignatureEncoding(vchSig)) {
-        return set_error(serror, SCRIPT_ERR_SIG_DER);
-    }
-    std::vector<unsigned char> vchSigCopy(vchSig.begin(), vchSig.begin() + vchSig.size() - 1);
-    if (!CPubKey::CheckLowS(vchSigCopy)) {
-        return set_error(serror, SCRIPT_ERR_SIG_HIGH_S);
-    }
-    return true;
-}
-*/
 
 bool static IsDefinedHashtypeSignature(const valtype &vchSig) {
     if (vchSig.size() == 0) {

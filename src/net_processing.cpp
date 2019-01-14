@@ -3205,8 +3205,12 @@ bool SendMessages(CNode* pto, CConnman& connman, const std::atomic<bool>& interr
 
 bool ProcessNetBlock(const CChainParams& chainparams, const std::shared_ptr<const CBlock> pblock, bool fForceProcessing, bool* fNewBlock, CNode* pfrom, CConnman& connman)
 {
+    bool isLegacy = false;
+    if (pfrom && pfrom->nVersion < CANONICAL_BLOCK_SIG_VERIFY_NEW_VERSION)
+        isLegacy = true;
+
     // Check if block signature is canonical
-    if (!IsCanonicalBlockSignature(pblock))
+    if (!IsCanonicalBlockSignature(pblock, isLegacy))
     {
         if (pfrom && pfrom->nVersion >= CANONICAL_BLOCK_SIG_VERSION)
             Misbehaving(pfrom->GetId(), 100);

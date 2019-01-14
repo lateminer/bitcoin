@@ -3159,13 +3159,16 @@ bool TestBlockValidity(CValidationState& state, const CChainParams& chainparams,
     return true;
 }
 
-bool IsCanonicalBlockSignature(const std::shared_ptr<const CBlock> pblock)
+bool IsCanonicalBlockSignature(const std::shared_ptr<const CBlock> pblock, bool isLegacy)
 {
     if (pblock->IsProofOfWork()) {
         return pblock->vchBlockSig.empty();
     }
 
-    return IsLowDERSignature(pblock->vchBlockSig, NULL, false);
+    if (!isLegacy)
+        return IsLowDERSignature(pblock->vchBlockSig, NULL, false);
+    else
+        return IsLegacyLowDERSignature(pblock->vchBlockSig, NULL, false);
 }
 
 /**
