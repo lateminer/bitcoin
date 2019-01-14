@@ -215,9 +215,6 @@ QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Warning: The network does not appear to fully agree! Some miners appear to "
 "be experiencing issues."),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
-"Warning: The network does not appear to fully agree! Some miners appear to "
-"be experiencing issues."),
-QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Warning: Unknown block versions being mined! It's possible unknown rules are "
 "in effect"),
 QT_TRANSLATE_NOOP("bitcoin-core", ""

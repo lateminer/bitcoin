@@ -148,7 +148,7 @@ public:
 
     /** Return whether a status update is needed.
      */
-    bool statusUpdateNeeded(int64_t nConflictsReceived);
+    bool statusUpdateNeeded();
 };
 
 #endif // BITCOIN_QT_TRANSACTIONRECORD_H

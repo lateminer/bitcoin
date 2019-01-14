@@ -263,10 +263,10 @@ void TransactionRecord::updateStatus(const CWalletTx &wtx)
 
 }
 
-bool TransactionRecord::statusUpdateNeeded(int64_t nConflictsReceived)
+bool TransactionRecord::statusUpdateNeeded()
 {
     AssertLockHeld(cs_main);
-    return (status.cur_num_blocks != chainActive.Height() || status.cur_num_conflicts != nConflictsReceived);
+    return status.cur_num_blocks != chainActive.Height();
 }
 
 QString TransactionRecord::getTxID() const

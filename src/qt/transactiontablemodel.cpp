@@ -168,11 +168,6 @@ public:
         case CT_UPDATED:
             Q_EMIT parent->dataChanged(parent->index(lowerIndex, parent->Status), parent->index(upperIndex-1, parent->Amount));
             break;
-        case CT_GOT_CONFLICT:
-            Q_EMIT parent->message(parent->tr("Conflict Received"),
-                                 parent->tr("WARNING: Transaction may never be confirmed. Its input was seen being spent by another transaction on the network."),
-                                 CClientUIInterface::MSG_WARNING);
-            break;
         }
     }
 
@@ -198,14 +193,13 @@ public:
             if(lockMain)
             {
                 TRY_LOCK(wallet->cs_wallet, lockWallet);
-                if(lockWallet && rec->statusUpdateNeeded(wallet->nConflictsReceived))
+                if(lockWallet && rec->statusUpdateNeeded())
                 {
                     std::map<uint256, CWalletTx>::iterator mi = wallet->mapWallet.find(rec->hash);
 
                     if(mi != wallet->mapWallet.end())
                     {
                         rec->updateStatus(mi->second);
-                        rec->status.cur_num_conflicts = wallet->nConflictsReceived;
                     }
                 }
             }

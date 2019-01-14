@@ -85,7 +85,10 @@ Q_DECLARE_METATYPE(CAmount)
 // Config is non-copyable so we can only register pointers to it
 Q_DECLARE_METATYPE(Config *)
 
-static void InitMessage(const std::string &message) { LogPrintf("init message: %s\n", message); }
+static void InitMessage(const std::string &message)
+{
+    LogPrintf("init message: %s\n", message);
+}
 
 /*
    Translate string to current locale using Qt.
@@ -649,8 +652,7 @@ int main(int argc, char *argv[])
         exit(EXIT_SUCCESS);
 
     // Start up the payment server early, too, so impatient users that click on
-    // blackcoin: links repeatedly have their payment requests routed to this
-    // process:
+    // blackcoin: links repeatedly have their payment requests routed to this process:
     app.createPaymentServer();
 #endif
 
