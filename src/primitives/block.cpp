@@ -7,6 +7,8 @@
 #include "primitives/block.h"
 
 #include "hash.h"
+#include "crypto/scrypt.h"
+#include "crypto/common.h"
 #include "script/standard.h"
 #include "script/sign.h"
 #include "tinyformat.h"
@@ -15,10 +17,17 @@
 
 uint256 CBlockHeader::GetHash() const
 {
-    if(nVersion < 4)
-        return HashQuark(BEGIN(nVersion), END(nNonce));
+    if(nVersion > 4)
+        return Hash(BEGIN(nVersion), END(nAccumulatorCheckpoint));
+    
+    return GetPoWHash();
+}
 
-    return Hash(BEGIN(nVersion), END(nAccumulatorCheckpoint));
+uint256 CBlockHeader::GetPoWHash() const
+{
+    uint256 thash;
+    scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
+    return thash;
 }
 
 uint256 CBlock::BuildMerkleTree(bool* fMutated) const
