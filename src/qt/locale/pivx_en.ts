@@ -6712,8 +6712,8 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <location line="+3"/>
-        <source>(51472 could be used only on mainnet)</source>
-        <translation type="unfinished">(51472 could be used only on mainnet)</translation>
+        <source>(40420 could be used only on mainnet)</source>
+        <translation type="unfinished">(40420 could be used only on mainnet)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6727,7 +6727,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <location line="+1"/>
-        <source>(must be 51472 for mainnet)</source>
+        <source>(must be 40420 for mainnet)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
