@@ -6381,7 +6381,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
 <context>
     <name>pivx-core</name>
     <message>
-        <location filename="../pivxstrings.cpp" line="+15"/>
+        <location filename="../bitcoinstrings.cpp" line="+15"/>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation type="unfinished">(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</translation>
     </message>

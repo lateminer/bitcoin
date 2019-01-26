@@ -128,11 +128,11 @@ static void initTranslations(QTranslator& qtTranslatorBase, QTranslator& qtTrans
     if (qtTranslator.load("qt_" + lang_territory, QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
         QApplication::installTranslator(&qtTranslator);
 
-    // Load e.g. bitcoin_de.qm (shortcut "de" needs to be defined in pivx.qrc)
+    // Load e.g. bitcoin_de.qm (shortcut "de" needs to be defined in bitcoin.qrc)
     if (translatorBase.load(lang, ":/translations/"))
         QApplication::installTranslator(&translatorBase);
 
-    // Load e.g. bitcoin_de_DE.qm (shortcut "de_DE" needs to be defined in pivx.qrc)
+    // Load e.g. bitcoin_de_DE.qm (shortcut "de_DE" needs to be defined in bitcoin.qrc)
     if (translator.load(lang_territory, ":/translations/"))
         QApplication::installTranslator(&translator);
 }
@@ -499,8 +499,8 @@ int main(int argc, char* argv[])
 // Do not refer to data directory yet, this can be overridden by Intro::pickDataDirectory
 
 /// 2. Basic Qt initialization (not dependent on parameters or configuration)
-    Q_INIT_RESOURCE(pivx_locale);
-    Q_INIT_RESOURCE(pivx);
+    Q_INIT_RESOURCE(bitcoin_locale);
+    Q_INIT_RESOURCE(bitcoin);
 
     BitcoinApplication app(argc, argv);
 #if QT_VERSION > 0x050100
