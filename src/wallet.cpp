@@ -3002,7 +3002,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
         if (Stake(stakeInput.get(), nBits, block.GetBlockTime(), nTxNewTime, hashProofOfStake)) {
             LOCK(cs_main);
             //Double check that this will pass time requirements
-            if (nTxNewTime <= chainActive.Tip()->GetMedianTimePast()) {
+            if (nTxNewTime <= chainActive.Tip()->GetPastTimeLimit()) {
                 LogPrintf("CreateCoinStake() : kernel found, but it is too far in the past \n");
                 continue;
             }

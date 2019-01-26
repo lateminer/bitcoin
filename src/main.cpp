@@ -1124,7 +1124,7 @@ bool CheckFinalTx(const CTransaction& tx, int flags)
     // When the next block is created its previous block will be the current
     // chain tip, so we use that to calculate the median time passed to
     // IsFinalTx() if LOCKTIME_MEDIAN_TIME_PAST is set.
-    const int64_t nBlockTime = (flags & LOCKTIME_MEDIAN_TIME_PAST) ? chainActive.Tip()->GetMedianTimePast() : GetAdjustedTime();
+    const int64_t nBlockTime = GetAdjustedTime();
 
     return IsFinalTx(tx, nBlockHeight, nBlockTime);
 }
@@ -4107,8 +4107,8 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
         return state.DoS(1, error("%s: forked chain older than max reorganization depth (height %d)", __func__, nHeight));
 
     // Check timestamp against prev
-    if (block.GetBlockTime() <= pindexPrev->GetMedianTimePast()) {
-        LogPrintf("Block time = %d , GetMedianTimePast = %d \n", block.GetBlockTime(), pindexPrev->GetMedianTimePast());
+    if (block.GetBlockTime() <= pindexPrev->GetPastTimeLimit()) {
+        LogPrintf("Block time = %d , GetPastTimeLimit = %d \n", block.GetBlockTime(), pindexPrev->GetPastTimeLimit());
         return state.Invalid(error("%s : block's timestamp is too early", __func__),
             REJECT_INVALID, "time-too-old");
     }

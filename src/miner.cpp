@@ -90,7 +90,7 @@ public:
 
 void UpdateTime(CBlockHeader* pblock, const CBlockIndex* pindexPrev)
 {
-    pblock->nTime = std::max(pindexPrev->GetMedianTimePast() + 1, GetAdjustedTime());
+    pblock->nTime = std::max(pindexPrev->GetPastTimeLimit() + 1, GetAdjustedTime());
 
     // Updating time can change work required on testnet:
     if (Params().AllowMinDifficultyBlocks())

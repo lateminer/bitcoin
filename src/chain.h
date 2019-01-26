@@ -159,7 +159,6 @@ public:
     // proof-of-stake specific fields
     uint256 GetBlockTrust() const;
     uint64_t nStakeModifier;             // hash modifier for proof-of-stake
-    unsigned int nStakeModifierChecksum; // checksum of index; in-memeory only
     COutPoint prevoutStake;
     unsigned int nStakeTime;
     uint256 hashProofOfStake;
@@ -200,7 +199,6 @@ public:
         nMoneySupply = 0;
         nFlags = 0;
         nStakeModifier = 0;
-        nStakeModifierChecksum = 0;
         prevoutStake.SetNull();
         nStakeTime = 0;
 
@@ -240,7 +238,6 @@ public:
         nMoneySupply = 0;
         nFlags = 0;
         nStakeModifier = 0;
-        nStakeModifierChecksum = 0;
         hashProofOfStake = uint256();
 
         if (block.IsProofOfStake()) {
@@ -328,6 +325,11 @@ public:
         return pbegin[(pend - pbegin) / 2];
     }
 
+    int64_t GetPastTimeLimit() const
+    {
+        return GetBlockTime();
+    }
+    
     bool IsProofOfWork() const
     {
         return !(nFlags & BLOCK_PROOF_OF_STAKE);
