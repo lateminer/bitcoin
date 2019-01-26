@@ -400,13 +400,13 @@ nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
 # pivxd binary #
-pivxd_SOURCES = pivxd.cpp
+pivxd_SOURCES = bitcoind.cpp
 pivxd_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 pivxd_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 pivxd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-pivxd_SOURCES += pivxd-res.rc
+pivxd_SOURCES += bitcoind-res.rc
 endif
 pivxd_LDADD = \
   $(LIBBITCOIN_SERVER) \
@@ -425,13 +425,13 @@ pivxd_LDADD = \
 pivxd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 
 # pivx-cli binary #
-pivx_cli_SOURCES = pivx-cli.cpp
+pivx_cli_SOURCES = bitcoin-cli.cpp
 pivx_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
 pivx_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 pivx_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-pivx_cli_SOURCES += pivx-cli-res.rc
+pivx_cli_SOURCES += bitcoin-cli-res.rc
 endif
 
 pivx_cli_LDADD = \
@@ -444,13 +444,13 @@ pivx_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 #
 
 # pivx-tx binary #
-pivx_tx_SOURCES = pivx-tx.cpp
+pivx_tx_SOURCES = bitcoin-tx.cpp
 pivx_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 pivx_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 pivx_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-pivx_tx_SOURCES += pivx-tx-res.rc
+pivx_tx_SOURCES += bitcoin-tx-res.rc
 endif
 
 pivx_tx_LDADD = \
