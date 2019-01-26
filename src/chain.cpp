@@ -78,3 +78,10 @@ uint256 CBlockIndex::GetBlockTrust() const
         return bnPoWTrust > 1 ? bnPoWTrust : 1;
     }
 }
+
+const CBlockIndex* GetLastBlockIndex(const CBlockIndex* pindex, bool fProofOfStake)
+{
+    while (pindex && pindex->pprev && (pindex->IsProofOfStake() != fProofOfStake))
+        pindex = pindex->pprev;
+    return pindex;
+}

@@ -33,7 +33,7 @@ double GetDifficulty(const CBlockIndex* blockindex)
         if (chainActive.Tip() == NULL)
             return 1.0;
         else
-            blockindex = chainActive.Tip();
+            blockindex = GetLastBlockIndex(chainActive.Tip(), false);
     }
 
     int nShift = (blockindex->nBits >> 24) & 0xff;
@@ -168,17 +168,22 @@ UniValue getdifficulty(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 0)
         throw runtime_error(
-            "getdifficulty\n"
-            "\nReturns the proof-of-work difficulty as a multiple of the minimum difficulty.\n"
-
-            "\nResult:\n"
-            "n.nnn       (numeric) the proof-of-work difficulty as a multiple of the minimum difficulty.\n"
-
-            "\nExamples:\n" +
+	        "getdifficulty\n"
+	        "\nReturns the difficulty as a multiple of the minimum difficulty.\n"
+	        "\nResult:\n"
+	        "{                            (json object)\n"
+	            "  \"proof-of-work\" : n.nnn, (numeric) the proof-of-work difficulty as a multiple of the minimum difficulty.\n"
+	            "  \"proof-of-stake\" : n.nnn (numeric) the proof-of-stake difficulty as a multiple of the minimum difficulty.\n"
+	        "}\n"
+	        "\nExamples:\n"
             HelpExampleCli("getdifficulty", "") + HelpExampleRpc("getdifficulty", ""));
 
     LOCK(cs_main);
-    return GetDifficulty();
+
+    UniValue obj(UniValue::VOBJ);
+    obj.push_back(Pair("proof-of-work",  GetDifficulty()));
+    obj.push_back(Pair("proof-of-stake", GetDifficulty(GetLastBlockIndex(chainActive.Tip(), true))));
+    return obj;
 }
 
 
@@ -619,7 +624,10 @@ UniValue getblockchaininfo(const UniValue& params, bool fHelp)
             "  \"blocks\": xxxxxx,         (numeric) the current number of blocks processed in the server\n"
             "  \"headers\": xxxxxx,        (numeric) the current number of headers we have validated\n"
             "  \"bestblockhash\": \"...\", (string) the hash of the currently best block\n"
-            "  \"difficulty\": xxxxxx,     (numeric) the current difficulty\n"
+            "  \"difficulty\": {            (json object)\n"
+                    "    \"proof-of-work\": xxxxxx, (numeric) the current proof-of-work difficulty\n"
+                    "    \"proof-of-stake\": xxxxxx (numeric) the current proof-of-stake difficulty\n"
+        	"  },\n"
             "  \"verificationprogress\": xxxx, (numeric) estimate of verification progress [0..1]\n"
             "  \"chainwork\": \"xxxx\"     (string) total amount of work in active chain, in hexadecimal\n"
             "  \"softforks\": [            (array) status of softforks in progress\n"
@@ -642,12 +650,16 @@ UniValue getblockchaininfo(const UniValue& params, bool fHelp)
 
     LOCK(cs_main);
 
+    UniValue diff(UniValue::VOBJ);
+    diff.push_back(Pair("proof-of-work",  (double)GetDifficulty()));
+    diff.push_back(Pair("proof-of-stake", (double)GetDifficulty(GetLastBlockIndex(chainActive.Tip(), true))));
+
     UniValue obj(UniValue::VOBJ);
     obj.push_back(Pair("chain", Params().NetworkIDString()));
     obj.push_back(Pair("blocks", (int)chainActive.Height()));
     obj.push_back(Pair("headers", pindexBestHeader ? pindexBestHeader->nHeight : -1));
     obj.push_back(Pair("bestblockhash", chainActive.Tip()->GetBlockHash().GetHex()));
-    obj.push_back(Pair("difficulty", (double)GetDifficulty()));
+    obj.push_back(Pair("difficulty", diff));
     obj.push_back(Pair("verificationprogress", Checkpoints::GuessVerificationProgress(chainActive.Tip())));
     obj.push_back(Pair("chainwork", chainActive.Tip()->nChainWork.GetHex()));
     CBlockIndex* tip = chainActive.Tip();
