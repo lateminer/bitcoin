@@ -136,14 +136,14 @@ public:
         /** Height or Time Based Activations **/
         nLastPOWBlock = 750;
         nInitialFork1Height = std::numeric_limits<int>::max();
-        nZerocoinStartHeight = 863787;
-        nZerocoinStartTime = 1508214600; // October 17, 2017 4:30:00 AM
-        nBlockEnforceSerialRange = 895400; //Enforce serial range starting this block
-        nBlockRecalculateAccumulators = 908000; //Trigger a recalculation of accumulators
-        nBlockFirstFraudulent = 891737; //First block that bad serials emerged
-        nBlockLastGoodCheckpoint = 891730; //Last valid accumulator checkpoint
-        nBlockEnforceInvalidUTXO = 902850; //Start enforcing the invalid UTXO's
-        nBlockZerocoinV2 = 1153160; //!> The block that zerocoin v2 becomes active - roughly Tuesday, May 8, 2018 4:00:00 AM GMT
+        nZerocoinStartHeight = std::numeric_limits<int>::max();
+        nZerocoinStartTime = std::numeric_limits<int>::max();
+        nBlockEnforceSerialRange = std::numeric_limits<int>::max(); //Enforce serial range starting this block
+        nBlockRecalculateAccumulators = std::numeric_limits<int>::max(); //Trigger a recalculation of accumulators
+        nBlockFirstFraudulent = std::numeric_limits<int>::max(); //First block that bad serials emerged
+        nBlockLastGoodCheckpoint = std::numeric_limits<int>::max(); //Last valid accumulator checkpoint
+        nBlockEnforceInvalidUTXO = std::numeric_limits<int>::max(); //Start enforcing the invalid UTXO's
+        nBlockZerocoinV2 = std::numeric_limits<int>::max(); //!> The block that zerocoin v2 becomes active - roughly Tuesday, May 8, 2018 4:00:00 AM GMT
 
         /**
          * Build the genesis block. Note that the output of the genesis coinbase cannot
@@ -256,14 +256,14 @@ public:
 
         nLastPOWBlock = 100;
         nInitialFork1Height = std::numeric_limits<int>::max();
-        nZerocoinStartHeight = 201576;
-        nZerocoinStartTime = 1501776000;
-        nBlockEnforceSerialRange = 1; //Enforce serial range starting this block
-        nBlockRecalculateAccumulators = 9908000; //Trigger a recalculation of accumulators
-        nBlockFirstFraudulent = 9891737; //First block that bad serials emerged
-        nBlockLastGoodCheckpoint = 9891730; //Last valid accumulator checkpoint
-        nBlockEnforceInvalidUTXO = 9902850; //Start enforcing the invalid UTXO's
-        nBlockZerocoinV2 = 444020; //!> The block that zerocoin v2 becomes active
+        nZerocoinStartHeight = std::numeric_limits<int>::max();
+        nZerocoinStartTime = std::numeric_limits<int>::max();
+        nBlockEnforceSerialRange = std::numeric_limits<int>::max(); //Enforce serial range starting this block
+        nBlockRecalculateAccumulators = std::numeric_limits<int>::max(); //Trigger a recalculation of accumulators
+        nBlockFirstFraudulent = std::numeric_limits<int>::max(); //First block that bad serials emerged
+        nBlockLastGoodCheckpoint = std::numeric_limits<int>::max(); //Last valid accumulator checkpoint
+        nBlockEnforceInvalidUTXO = std::numeric_limits<int>::max(); //Start enforcing the invalid UTXO's
+        nBlockZerocoinV2 = std::numeric_limits<int>::max(); //!> The block that zerocoin v2 becomes active
 
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
         genesis.nNonce = 499515;
