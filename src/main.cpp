@@ -4445,7 +4445,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
     if (nMints || nSpends)
         LogPrintf("%s : block contains %d zPIV mints and %d zPIV spends\n", __func__, nMints, nSpends);
 
-    if (!CheckBlockSignature(*pblock))
+    if (!CheckBlockSignature(*pblock) || (pfrom->nVersion >= CANONICAL_BLOCK_SIG_VERSION && !IsLowDERSignature(pblock->vchBlockSig, NULL)))
         return error("ProcessNewBlock() : bad proof-of-stake block signature");
 
     if (pblock->GetHash() != Params().HashGenesisBlock() && pfrom != NULL) {
