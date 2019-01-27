@@ -175,6 +175,15 @@ static void MutateTxLocktime(CMutableTransaction& tx, const string& cmdVal)
     tx.nLockTime = (unsigned int)newLocktime;
 }
 
+static void MutateTxTime(CMutableTransaction& tx, const string& cmdVal)
+{
+    int64_t newTime = atoi64(cmdVal);
+    if (newTime < 0LL || newTime > 0xffffffffLL)
+        throw runtime_error("Invalid TX time requested");
+
+    tx.nTime = (unsigned int) newTime;
+}
+
 static void MutateTxAddInput(CMutableTransaction& tx, const string& strInput)
 {
     // separate TXID:VOUT in string
@@ -467,6 +476,8 @@ static void MutateTx(CMutableTransaction& tx, const string& command, const strin
         MutateTxVersion(tx, commandVal);
     else if (command == "locktime")
         MutateTxLocktime(tx, commandVal);
+    else if (command == "time")
+        MutateTxTime(tx, commandVal);
 
     else if (command == "delin")
         MutateTxDelInput(tx, commandVal);

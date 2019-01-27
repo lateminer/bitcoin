@@ -30,6 +30,7 @@
  * - unspentness bitvector, for vout[2] and further; least significant byte first
  * - the non-spent CTxOuts (via CTxOutCompressor)
  * - VARINT(nHeight)
+ * - nTime
  *
  * The nCode value consists of:
  * - bit 1: IsCoinBase()
@@ -89,6 +90,9 @@ public:
     //! as new tx version will probably only be introduced at certain heights
     int nVersion;
 
+    //! time of the CTransaction
+    unsigned int nTime;
+
     void FromTx(const CTransaction& tx, int nHeightIn)
     {
         fCoinBase = tx.IsCoinBase();
@@ -96,6 +100,7 @@ public:
         vout = tx.vout;
         nHeight = nHeightIn;
         nVersion = tx.nVersion;
+        nTime = tx.nTime;
         ClearUnspendable();
     }
 
@@ -112,10 +117,11 @@ public:
         std::vector<CTxOut>().swap(vout);
         nHeight = 0;
         nVersion = 0;
+        nTime = 0;
     }
 
     //! empty constructor
-    CCoins() : fCoinBase(false), fCoinStake(false), vout(0), nHeight(0), nVersion(0) {}
+    CCoins() : fCoinBase(false), fCoinStake(false), vout(0), nHeight(0), nVersion(0), nTime(0) {}
 
     //!remove spent outputs at the end of vout
     void Cleanup()
@@ -142,6 +148,7 @@ public:
         to.vout.swap(vout);
         std::swap(to.nHeight, nHeight);
         std::swap(to.nVersion, nVersion);
+        std::swap(to.nTime, nTime);
     }
 
     //! equality test
@@ -154,6 +161,7 @@ public:
                a.fCoinStake == b.fCoinStake &&
                a.nHeight == b.nHeight &&
                a.nVersion == b.nVersion &&
+               a.nTime == b.nTime &&
                a.vout == b.vout;
     }
     friend bool operator!=(const CCoins& a, const CCoins& b)
@@ -194,6 +202,8 @@ public:
                 nSize += ::GetSerializeSize(CTxOutCompressor(REF(vout[i])), nType, nVersion);
         // height
         nSize += ::GetSerializeSize(VARINT(nHeight), nType, nVersion);
+        // time
+        nSize += ::GetSerializeSize(nTime, nType, nVersion);
         return nSize;
     }
 
@@ -225,6 +235,8 @@ public:
         }
         // coinbase height
         ::Serialize(s, VARINT(nHeight), nType, nVersion);
+        // time
+        ::Serialize(s, nTime, nType, nVersion);
     }
 
     template <typename Stream>
@@ -260,6 +272,8 @@ public:
         }
         // coinbase height
         ::Unserialize(s, VARINT(nHeight), nType, nVersion);
+        // time
+        ::Unserialize(s, nTime, nType, nVersion);
         Cleanup();
     }
 

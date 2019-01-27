@@ -2275,6 +2275,11 @@ bool CheckInputs(const CTransaction& tx, CValidationState& state, const CCoinsVi
                         REJECT_INVALID, "bad-txns-premature-spend-of-coinbase");
             }
 
+            // Check transaction timestamp
+            if (coins->nTime > tx.nTime)
+                    return state.DoS(100, error("CheckInputs() : transaction timestamp earlier than input transaction"),
+                    			REJECT_INVALID, "bad-txns-time-earlier-than-input");
+
             // Check for negative or overflow input values
             nValueIn += coins->vout[prevout.n].nValue;
             if (!MoneyRange(coins->vout[prevout.n].nValue) || !MoneyRange(nValueIn))
@@ -2452,6 +2457,7 @@ bool DisconnectBlock(CBlock& block, CValidationState& state, CBlockIndex* pindex
                     coins->fCoinBase = undo.fCoinBase;
                     coins->nHeight = undo.nHeight;
                     coins->nVersion = undo.nVersion;
+                    coins->nTime = undo.nTime;
                 } else {
                     if (coins->IsPruned())
                         fClean = fClean && error("DisconnectBlock() : undo data adding output to missing transaction");
@@ -3967,6 +3973,15 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
             return state.DoS(100, error("CheckBlock() : more than one coinbase"),
                 REJECT_INVALID, "bad-cb-multiple");
 
+    // Check coinbase timestamp
+    if (block.GetBlockTime() > FutureDrift(block.vtx[0].nTime))
+            return state.DoS(25, error("CheckBlock(): coinbase timestamp is too early"),
+                REJECT_INVALID, "bad-cb-time");
+    // Check coinstake timestamp
+    if (block.IsProofOfStake() && !CheckCoinStakeTimestamp(block.GetBlockTime(), block.vtx[1].nTime))
+            return state.DoS(50, error("CheckBlock(): coinstake timestamp violation nTimeBlock=%d nTimeTx=%u", block.GetBlockTime(), block.vtx[1].nTime),
+            	REJECT_INVALID, "bad-cs-time");
+
     if (block.IsProofOfStake()) {
         // Coinbase output should be empty if proof-of-stake block
         if (block.vtx[0].vout.size() != 1 || !block.vtx[0].vout[0].IsEmpty())
@@ -4037,6 +4052,10 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
     for (const CTransaction& tx : block.vtx) {
         if (!CheckTransaction(tx, fZerocoinActive, chainActive.Height() + 1 >= Params().Zerocoin_Block_EnforceSerialRange(), state))
             return error("CheckBlock() : CheckTransaction failed");
+        // check transaction timestamp
+        if (block.GetBlockTime() < (int64_t)tx.nTime)
+           return state.DoS(100, error("CheckBlock() : block timestamp earlier than transaction timestamp"),
+                    REJECT_INVALID, "bad-tx-time");
 
         // double check that there are no double spent zPIV spends in this block
         if (tx.IsZerocoinSpend()) {
