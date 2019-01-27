@@ -23,8 +23,8 @@ static const int GETHEADERS_VERSION = 30000;
 static const int CANONICAL_BLOCK_SIG_VERSION = 40001;
 
 //! disconnect from peers older than this proto version
-static const int MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT = PROTOCOL_VERSION; // use PROTOCOL_VERSION for now
-static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT = PROTOCOL_VERSION; // use PROTOCOL_VERSION for now
+static const int MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT = CANONICAL_BLOCK_SIG_VERSION; // use CANONICAL_BLOCK_SIG_VERSION for now
+static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT = CANONICAL_BLOCK_SIG_VERSION; // use CANONICAL_BLOCK_SIG_VERSION for now
 
 //! masternodes older than this proto version use old strMessage format for mnannounce
 static const int MIN_PEER_MNANNOUNCE = 40003;
