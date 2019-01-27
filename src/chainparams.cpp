@@ -135,6 +135,7 @@ public:
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 750;
+        nInitialFork1Height = std::numeric_limits<int>::max();
         nZerocoinStartHeight = 863787;
         nZerocoinStartTime = 1508214600; // October 17, 2017 4:30:00 AM
         nBlockEnforceSerialRange = 895400; //Enforce serial range starting this block
@@ -254,6 +255,7 @@ public:
         nMaxMoneyOut = 200000000 * COIN;
 
         nLastPOWBlock = 100;
+        nInitialFork1Height = std::numeric_limits<int>::max();
         nZerocoinStartHeight = 201576;
         nZerocoinStartTime = 1501776000;
         nBlockEnforceSerialRange = 1; //Enforce serial range starting this block
