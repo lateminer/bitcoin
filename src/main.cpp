@@ -614,6 +614,17 @@ unsigned int LimitOrphanTxSize(unsigned int nMaxOrphans)
     return nEvicted;
 }
 
+int64_t FutureDrift(int64_t nTime)
+{
+    if ((Params().NetworkID() == CBaseChainParams::REGTEST) && chainActive.Height() <= (Params().LAST_POW_BLOCK() + 500)) {
+             return nTime + 24 * 60 * 60;
+    }
+    else if (chainActive.Height() <= (Params().LAST_POW_BLOCK() + 500)) {
+             return nTime + 20 * 60;
+    }
+    return nTime + 30;
+} 
+
 bool IsStandardTx(const CTransaction& tx, string& reason)
 {
     AssertLockHeld(cs_main);
@@ -641,6 +652,12 @@ bool IsStandardTx(const CTransaction& tx, string& reason)
     // timestamp applications where it matters.
     if (!IsFinalTx(tx, chainActive.Height() + 1)) {
         reason = "non-final";
+        return false;
+    }
+
+    // nTime has different purpose from nLockTime but can be used in similar attacks
+    if (tx.nTime > FutureDrift(GetAdjustedTime())) {
+        reason = "time-too-new";
         return false;
     }
 
@@ -3927,6 +3944,11 @@ bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, bool f
         return state.DoS(50, error("CheckBlockHeader() : proof of work failed"),
             REJECT_INVALID, "high-hash");
 
+    // Check timestamp
+    if (block.GetBlockTime() > FutureDrift(GetAdjustedTime()))
+        return state.Invalid(error("CheckBlockHeader(): block timestamp too far in the future"),
+                             REJECT_INVALID, "time-too-new");
+
     // Version 4 header must be used after Params().Zerocoin_StartHeight(). And never before.
     if (block.GetBlockTime() > Params().Zerocoin_StartTime()) {
         if(block.nVersion < Params().Zerocoin_HeaderVersion())
@@ -3953,7 +3975,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
 
     // Check timestamp
     LogPrint("debug", "%s: block=%s  is proof of stake=%d\n", __func__, block.GetHash().ToString().c_str(), block.IsProofOfStake());
-    if (block.GetBlockTime() > GetAdjustedTime() + (block.IsProofOfStake() ? 180 : 7200)) // 3 minute future drift for PoS
+    if (block.GetBlockTime() > FutureDrift(GetAdjustedTime()))
         return state.Invalid(error("CheckBlock() : block timestamp too far in the future"),
             REJECT_INVALID, "time-too-new");
 
