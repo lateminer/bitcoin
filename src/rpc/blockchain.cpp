@@ -175,7 +175,7 @@ UniValue getdifficulty(const UniValue& params, bool fHelp)
 	            "  \"proof-of-work\" : n.nnn, (numeric) the proof-of-work difficulty as a multiple of the minimum difficulty.\n"
 	            "  \"proof-of-stake\" : n.nnn (numeric) the proof-of-stake difficulty as a multiple of the minimum difficulty.\n"
 	        "}\n"
-	        "\nExamples:\n"
+	        "\nExamples:\n" +
             HelpExampleCli("getdifficulty", "") + HelpExampleRpc("getdifficulty", ""));
 
     LOCK(cs_main);

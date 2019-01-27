@@ -24,6 +24,7 @@
 #include "net.h"
 #include "obfuscation.h"
 #include "pow.h"
+#include "script/interpreter.h"
 #include "spork.h"
 #include "sporkdb.h"
 #include "swifttx.h"
@@ -4422,6 +4423,15 @@ void CBlockIndex::BuildSkip()
         pskip = pprev->GetAncestor(GetSkipHeight(nHeight));
 }
 
+bool static IsCanonicalBlockSignature(const CBlock* pblock)
+{
+    if (pblock->IsProofOfWork()) {
+        return pblock->vchBlockSig.empty();
+    }
+
+    return IsLowDERSignature(pblock->vchBlockSig, NULL);
+}
+
 bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDiskBlockPos* dbp)
 {
     // Preliminary checks
@@ -4445,7 +4455,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
     if (nMints || nSpends)
         LogPrintf("%s : block contains %d zPIV mints and %d zPIV spends\n", __func__, nMints, nSpends);
 
-    if (!CheckBlockSignature(*pblock) || (pfrom->nVersion >= CANONICAL_BLOCK_SIG_VERSION && !IsLowDERSignature(pblock->vchBlockSig, NULL)))
+    if (!CheckBlockSignature(*pblock) || (pfrom->nVersion >= CANONICAL_BLOCK_SIG_VERSION && !IsCanonicalBlockSignature(pblock)))
         return error("ProcessNewBlock() : bad proof-of-stake block signature");
 
     if (pblock->GetHash() != Params().HashGenesisBlock() && pfrom != NULL) {

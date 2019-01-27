@@ -47,7 +47,7 @@ bool CCoins::Spend(const COutPoint& out, CTxInUndo& undo)
         undo.fCoinBase = fCoinBase;
         undo.fCoinStake = fCoinStake;
         undo.nVersion = this->nVersion;
-        undo.nTime = coins->nTime;
+        undo.nTime = nTime;
     }
     return true;
 }

@@ -230,7 +230,7 @@ private:
     void startThread();
 };
 
-#include "pivx.moc"
+#include "bitcoin.moc"
 
 BitcoinCore::BitcoinCore() : QObject()
 {
