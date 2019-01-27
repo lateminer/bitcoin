@@ -17,7 +17,9 @@
 
 uint256 CBlockHeader::GetHash() const
 {
-    if(nVersion > 4)
+    if (nVersion > 4 && nVersion >= (int)0x20000000)
+        return SerializeHash(*this);
+    else if (nVersion > 4)
         return Hash(BEGIN(nVersion), END(nAccumulatorCheckpoint));
     
     return GetPoWHash();
