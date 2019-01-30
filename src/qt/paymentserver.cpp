@@ -48,14 +48,14 @@
 #endif
 
 const int BITCOIN_IPC_CONNECT_TIMEOUT = 1000; // milliseconds
-const QString BITCOIN_IPC_PREFIX("blackcoin:");
+const QString BITCOIN_IPC_PREFIX("potcoin:");
 // BIP70 payment protocol messages
 const char* BIP70_MESSAGE_PAYMENTACK = "PaymentACK";
 const char* BIP70_MESSAGE_PAYMENTREQUEST = "PaymentRequest";
 // BIP71 payment protocol media types
-const char* BIP71_MIMETYPE_PAYMENT = "application/blackcoin-payment";
-const char* BIP71_MIMETYPE_PAYMENTACK = "application/blackcoin-paymentack";
-const char* BIP71_MIMETYPE_PAYMENTREQUEST = "application/blackcoin-paymentrequest";
+const char* BIP71_MIMETYPE_PAYMENT = "application/potcoin-payment";
+const char* BIP71_MIMETYPE_PAYMENTACK = "application/potcoin-paymentack";
+const char* BIP71_MIMETYPE_PAYMENTREQUEST = "application/potcoin-paymentrequest";
 // BIP70 max payment request size in bytes (DoS protection)
 const qint64 BIP70_MAX_PAYMENTREQUEST_SIZE = 50000;
 
@@ -360,7 +360,7 @@ PaymentServer::PaymentServer(QObject* parent, bool startLocalServer) :
     GOOGLE_PROTOBUF_VERIFY_VERSION;
 
     // Install global event filter to catch QFileOpenEvents
-    // on Mac: sent when you click blackcoin: links
+    // on Mac: sent when you click potcoin: links
     // other OSes: helpful when dealing with payment request files
     if (parent)
         parent->installEventFilter(this);
@@ -393,7 +393,7 @@ PaymentServer::~PaymentServer()
 }
 
 //
-// OSX-specific way of handling blackcoin: URIs and PaymentRequest mime types.
+// OSX-specific way of handling potcoin: URIs and PaymentRequest mime types.
 // Also used by paymentservertests.cpp and when opening a payment request file
 // via "Open URI..." menu entry.
 //
@@ -419,7 +419,7 @@ void PaymentServer::initNetManager()
     if (netManager != NULL)
         delete netManager;
 
-    // netManager is used to fetch paymentrequests given in blackcoin: URIs
+    // netManager is used to fetch paymentrequests given in potcoin: URIs
     netManager = new QNetworkAccessManager(this);
 
     QNetworkProxy proxy;
@@ -517,14 +517,14 @@ void PaymentServer::handleURIOrFile(const QString &s)
         return;
     }
 
-    // blackcoin: CashAddr URI
+    // potcoin: CashAddr URI
     QString schemeCash = GUIUtil::bitcoinURIScheme(Params(), true);
     if (handleURI(schemeCash, s))
     {
         return;
     }
 
-    // blackcoin: Legacy URI
+    // potcoin: Legacy URI
     QString schemeLegacy = GUIUtil::bitcoinURIScheme(Params(), false);
     if (handleURI(schemeLegacy, s))
     {

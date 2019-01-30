@@ -1737,7 +1737,7 @@ bool ReadFromDisk(CTransaction& tx, CDiskTxPos& txindex)
 
 CAmount GetProofOfWorkSubsidy()
 {
-	return 10000 * COIN;
+	return 420 * COIN;
 }
 
 CAmount GetProofOfStakeSubsidy()

@@ -476,13 +476,15 @@ std::string HelpMessage(HelpMessageMode mode)
 std::string LicenseInfo()
 {
     const std::string URL_SOURCE_CODE = "<https://github.com/janko33bd/bitcoin>";
-    const std::string URL_WEBSITE = "<http://blackcoin.co/>";
+    const std::string URL_WEBSITE = "<http://potcoin.com/>";
     // todo: remove urls from translations on next change
     return FormatParagraph(strprintf(_("Copyright (C) 2009-%i The Bitcoin Core Developers"), COPYRIGHT_YEAR)) + "\n" +
            "\n" +
            FormatParagraph(strprintf(_("Copyright (C) 2014-%i The Blackcoin Lore Developers"), COPYRIGHT_YEAR)) + "\n" +
            "\n" +
-           FormatParagraph(strprintf(_("Please contribute if you find Blackcoin Lore useful. "
+           FormatParagraph(strprintf(_("Copyright (C) 2014-%i The Potcoin Core Developers"), COPYRIGHT_YEAR)) + "\n" +
+           "\n" +
+           FormatParagraph(strprintf(_("Please contribute if you find Potcoin Core useful. "
                        "Visit %s for further information about the software."),
                URL_WEBSITE)) +
            "\n" +
@@ -763,7 +765,7 @@ void InitLogging()
     fLogIPs = GetBoolArg("-logips", DEFAULT_LOGIPS);
 
     LogPrintf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    LogPrintf("Blackcoin version %s\n", FormatFullVersion());
+    LogPrintf("Potcoin version %s\n", FormatFullVersion());
 }
 
 /** Initialize bitcoin.
@@ -989,7 +991,7 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
 
     // Sanity check
     if (!InitSanityCheck())
-        return InitError(_("Initialization sanity check failed. Blackcoin Lore is shutting down."));
+        return InitError(_("Initialization sanity check failed. Potcoin Core is shutting down."));
 
     std::string strDataDir = GetDataDir().string();
 
@@ -1001,9 +1003,9 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
     try {
         static boost::interprocess::file_lock lock(pathLockFile.string().c_str());
         if (!lock.try_lock())
-            return InitError(strprintf(_("Cannot obtain a lock on data directory %s. Blackcoin Lore is probably already running."), strDataDir));
+            return InitError(strprintf(_("Cannot obtain a lock on data directory %s. Potcoin Core is probably already running."), strDataDir));
     } catch(const boost::interprocess::interprocess_exception& e) {
-        return InitError(strprintf(_("Cannot obtain a lock on data directory %s. Blackcoin Lore is probably already running.") + " %s.", strDataDir, e.what()));
+        return InitError(strprintf(_("Cannot obtain a lock on data directory %s. Potcoin Core is probably already running.") + " %s.", strDataDir, e.what()));
     }
 
 #ifndef WIN32

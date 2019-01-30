@@ -155,7 +155,7 @@
     </message>
     <message>
         <source>Bitcoin</source>
-        <translation>Blackcoin</translation>
+        <translation>Potcoin</translation>
     </message>
     <message>
         <source>Wallet</source>

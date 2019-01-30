@@ -139,6 +139,18 @@ public:
         return ReadLE64(data);
     }
 
+    friend inline bool operator>(const uint256& a, const uint256& b)
+    {
+        for (int i = (256>>3)-1; i >= 0; i--)
+        {
+            if (a.data[i] > b.data[i])
+                return true;
+            else if (a.data[i] < b.data[i])
+                return false;
+        }
+        return false;
+    }
+
     uint64_t GetLow64() const;
 };
 

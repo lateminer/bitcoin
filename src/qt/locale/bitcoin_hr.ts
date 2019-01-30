@@ -67,11 +67,11 @@
     </message>
     <message>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Ovo su vaše Blackcoin adrese za slanje novca. Uvijek provjerite iznos i adresu primatelja prije slanja novca.</translation>
+        <translation>Ovo su vaše Potcoin adrese za slanje novca. Uvijek provjerite iznos i adresu primatelja prije slanja novca.</translation>
     </message>
     <message>
         <source>These are your Bitcoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Ovo su vaše Blackcoin adrese za primanje novca. Preporučamo da koristite novu adresu za primanje za svaku transakciju.</translation>
+        <translation>Ovo su vaše Potcoin adrese za primanje novca. Preporučamo da koristite novu adresu za primanje za svaku transakciju.</translation>
     </message>
     <message>
         <source>Copy &amp;Label</source>
@@ -295,7 +295,7 @@
     </message>
     <message>
         <source>Bitcoin Core client</source>
-        <translation>Blackcoin Lore klijent</translation>
+        <translation>Potcoin Core klijent</translation>
     </message>
     <message>
         <source>Importing blocks from disk...</source>
@@ -307,7 +307,7 @@
     </message>
     <message>
         <source>Send coins to a Bitcoin address</source>
-        <translation>Slanje novca na blackcoin adresu</translation>
+        <translation>Slanje novca na potcoin adresu</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -331,7 +331,7 @@
     </message>
     <message>
         <source>Bitcoin</source>
-        <translation>Blackcoin</translation>
+        <translation>Potcoin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -347,7 +347,7 @@
     </message>
     <message>
         <source>Show information about Bitcoin Core</source>
-        <translation>Prikaži informacije o programu Blackcoin Lore</translation>
+        <translation>Prikaži informacije o programu Potcoin Core</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>
@@ -363,11 +363,11 @@
     </message>
     <message>
         <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Poruku potpišemo s blackcoin adresom, kako bi dokazali vlasništvo nad tom adresom</translation>
+        <translation>Poruku potpišemo s potcoin adresom, kako bi dokazali vlasništvo nad tom adresom</translation>
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>Provjeravanje poruke, kao dokaz, da je potpisana navedenom blackcoin adresom</translation>
+        <translation>Provjeravanje poruke, kao dokaz, da je potpisana navedenom potcoin adresom</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -387,15 +387,15 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Lore</translation>
+        <translation>Potcoin Core</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>Zatraži uplatu (stvara QR kod i blackcoin: URI adresu)</translation>
+        <translation>Zatraži uplatu (stvara QR kod i potcoin: URI adresu)</translation>
     </message>
     <message>
         <source>&amp;About Bitcoin Core</source>
-        <translation>&amp;O programu Blackcoin Lore</translation>
+        <translation>&amp;O programu Potcoin Core</translation>
     </message>
     <message>
         <source>Modify configuration options for Bitcoin Core</source>
@@ -411,7 +411,7 @@
     </message>
     <message>
         <source>Open a bitcoin: URI or payment request</source>
-        <translation>Otvori blackcoin: URI adresu ili zahtjev za uplatu</translation>
+        <translation>Otvori potcoin: URI adresu ili zahtjev za uplatu</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
@@ -423,7 +423,7 @@
     </message>
     <message numerus="yes">
         <source>%n active connection(s) to Bitcoin network</source>
-        <translation><numerusform>%n aktivna veza na Blackcoin mrežu</numerusform><numerusform>%n aktivnih veza na Blackcoin mrežu</numerusform><numerusform>%n aktivnih veza na Blackcoin mrežu</numerusform></translation>
+        <translation><numerusform>%n aktivna veza na Potcoin mrežu</numerusform><numerusform>%n aktivnih veza na Potcoin mrežu</numerusform><numerusform>%n aktivnih veza na Potcoin mrežu</numerusform></translation>
     </message>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
@@ -686,11 +686,11 @@
     </message>
     <message>
         <source>The label associated with this address list entry</source>
-        <translation>Oznaka blackcoin adrese</translation>
+        <translation>Oznaka potcoin adrese</translation>
     </message>
     <message>
         <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Blackcoin adresa. Izmjene adrese su moguće samo za adrese za slanje.</translation>
+        <translation>Potcoin adresa. Izmjene adrese su moguće samo za adrese za slanje.</translation>
     </message>
     <message>
         <source>&amp;Address</source>
@@ -718,7 +718,7 @@
     </message>
     <message>
         <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation>Upisana adresa "%1" nije valjana blackcoin adresa.</translation>
+        <translation>Upisana adresa "%1" nije valjana potcoin adresa.</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -748,7 +748,7 @@
     <name>HelpMessageDialog</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Lore</translation>
+        <translation>Potcoin Core</translation>
     </message>
     <message>
         <source>version</source>
@@ -760,7 +760,7 @@
     </message>
     <message>
         <source>About Bitcoin Core</source>
-        <translation>O programu Blackcoin Lore</translation>
+        <translation>O programu Potcoin Core</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -783,11 +783,11 @@
     </message>
     <message>
         <source>Welcome to Bitcoin Core.</source>
-        <translation>Dobrodošli u programu Blackcoin Lore.</translation>
+        <translation>Dobrodošli u programu Potcoin Core.</translation>
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Lore</translation>
+        <translation>Potcoin Core</translation>
     </message>
     <message>
         <source>Error</source>
@@ -881,7 +881,7 @@
     </message>
     <message>
         <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Automatski otvori port Blackcoin klijenta na ruteru. To radi samo ako ruter podržava UPnP i ako je omogućen.</translation>
+        <translation>Automatski otvori port Potcoin klijenta na ruteru. To radi samo ako ruter podržava UPnP i ako je omogućen.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -929,7 +929,7 @@
     </message>
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Izaberite željeni najmanji dio blackcoina koji će biti prikazan u sučelju i koji će se koristiti za plaćanje.</translation>
+        <translation>Izaberite željeni najmanji dio potcoina koji će biti prikazan u sučelju i koji će se koristiti za plaćanje.</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -956,7 +956,7 @@
     </message>
     <message>
         <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>Prikazani podatci mogu biti zastarjeli. Vaš novčanik se automatski sinkronizira s Blackcoin mrežom kada je veza uspostavljena, ali taj proces još nije završen.</translation>
+        <translation>Prikazani podatci mogu biti zastarjeli. Vaš novčanik se automatski sinkronizira s Potcoin mrežom kada je veza uspostavljena, ali taj proces još nije završen.</translation>
     </message>
     <message>
         <source>Total:</source>
@@ -1087,7 +1087,7 @@
     </message>
     <message>
         <source>Welcome to the Bitcoin Core RPC console.</source>
-        <translation>Dobrodošli u Blackcoin RPC konzolu.</translation>
+        <translation>Dobrodošli u Potcoin RPC konzolu.</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>
@@ -1407,7 +1407,7 @@
     <name>SplashScreen</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Lore</translation>
+        <translation>Potcoin Core</translation>
     </message>
     <message>
         <source>[testnet]</source>
