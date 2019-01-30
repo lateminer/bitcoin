@@ -61,11 +61,11 @@ TESTS =
 BENCHMARKS =
 
 if BUILD_BITCOIND
-  bin_PROGRAMS += lored
+  bin_PROGRAMS += potcoind
 endif
 
 if BUILD_BITCOIN_UTILS
-  bin_PROGRAMS += lore-cli lore-tx
+  bin_PROGRAMS += potcoin-cli potcoin-tx
 if ENABLE_WALLET
   bin_PROGRAMS += wallet-utility
 endif
@@ -378,17 +378,17 @@ libbitcoin_cli_a_SOURCES = \
 nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
-# lored binary #
-lored_SOURCES = bitcoind.cpp
-lored_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-lored_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-lored_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# potcoind binary #
+potcoind_SOURCES = bitcoind.cpp
+potcoind_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+potcoind_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+potcoind_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-lored_SOURCES += bitcoind-res.rc
+potcoind_SOURCES += bitcoind-res.rc
 endif
 
-lored_LDADD = \
+potcoind_LDADD = \
   $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_COMMON) \
   $(LIBUNIVALUE) \
@@ -401,13 +401,13 @@ lored_LDADD = \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
   
-lored_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
+potcoind_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 
-# lore-cli binary #
-lore_cli_SOURCES = bitcoin-cli.cpp
-lore_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
-lore_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-lore_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# potcoin-cli binary #
+potcoin_cli_SOURCES = bitcoin-cli.cpp
+potcoin_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
+potcoin_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+potcoin_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 # wallet-utility binary #
 if ENABLE_WALLET
@@ -418,40 +418,40 @@ wallet_utility_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 endif
 
 if TARGET_WINDOWS
-lore_cli_SOURCES += bitcoin-cli-res.rc
+potcoin_cli_SOURCES += bitcoin-cli-res.rc
 endif
 
-lore_cli_LDADD = \
+potcoin_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_UTIL) \
   $(LIBBITCOIN_CRYPTO)
 
-lore_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
+potcoin_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 if ENABLE_WALLET
 wallet_utility_LDADD = libbitcoin_wallet.a $(LIBBITCOIN_COMMON) $(LIBBITCOIN_CRYPTO) $(LIBSECP256K1) $(LIBBITCOIN_UTIL) $(BOOST_LIBS) $(BDB_LIBS) $(CRYPTO_LIBS)
 endif
 
 #
 
-# lore-tx binary #
-lore_tx_SOURCES = bitcoin-tx.cpp
-lore_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-lore_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-lore_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# potcoin-tx binary #
+potcoin_tx_SOURCES = bitcoin-tx.cpp
+potcoin_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+potcoin_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+potcoin_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-lore_tx_SOURCES += bitcoin-tx-res.rc
+potcoin_tx_SOURCES += bitcoin-tx-res.rc
 endif
 
-lore_tx_LDADD = \
+potcoin_tx_LDADD = \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
   $(LIBBITCOIN_CRYPTO) \
   $(LIBSECP256K1)
 
-lore_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+potcoin_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
 # bitcoinconsensus library #
