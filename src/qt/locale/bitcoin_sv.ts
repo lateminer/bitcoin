@@ -645,7 +645,7 @@
         <translation>flik vertygsrad</translation>
     </message>
     <message>
-        <source>PIVX Core</source>
+        <source>GROW Core</source>
         <translation>PIVX Kärna</translation>
     </message>
     <message>
@@ -669,11 +669,11 @@
         <translation>Utforska masternoder</translation>
     </message>
     <message>
-        <source>&amp;About PIVX Core</source>
+        <source>&amp;About GROW Core</source>
         <translation>Om PIVX Kärnan</translation>
     </message>
     <message>
-        <source>Show information about PIVX Core</source>
+        <source>Show information about GROW Core</source>
         <translation>Visa information om PIVX Kärnan</translation>
     </message>
     <message>
@@ -729,11 +729,11 @@
         <translation>Blockera utforskarfönstret</translation>
     </message>
     <message>
-        <source>Show the PIVX Core help message to get a list with possible PIVX command-line options</source>
-        <translation>Visa PIVX Core hjälp meddelande för att få en lista med möjliga PIVX kommandorad alternativ</translation>
+        <source>Show the GROW Core help message to get a list with possible PIVX command-line options</source>
+        <translation>Visa GROW Core hjälp meddelande för att få en lista med möjliga PIVX kommandorad alternativ</translation>
     </message>
     <message>
-        <source>PIVX Core client</source>
+        <source>GROW Core client</source>
         <translation>PIVX kärn klient</translation>
     </message>
     <message numerus="yes">
@@ -892,8 +892,8 @@ MultiSend: %1</translation>
         <translation>text etikett</translation>
     </message>
     <message>
-        <source>Not all transactions will be shown. To view all transactions you need to set txindex=1 in the configuration file (pivx.conf).</source>
-        <translation>Alla transaktioner kommer inte visas. För att visa alla transaktioner behöver du sätta txindex=1 i konfigurationsfilen (pivx.conf).</translation>
+        <source>Not all transactions will be shown. To view all transactions you need to set txindex=1 in the configuration file (grow.conf).</source>
+        <translation>Alla transaktioner kommer inte visas. För att visa alla transaktioner behöver du sätta txindex=1 i konfigurationsfilen (grow.conf).</translation>
     </message>
 </context>
 <context>
@@ -1231,7 +1231,7 @@ MultiSend: %1</translation>
         <translation>version</translation>
     </message>
     <message>
-        <source>PIVX Core</source>
+        <source>GROW Core</source>
         <translation>PIVX Kärna</translation>
     </message>
     <message>
@@ -1239,7 +1239,7 @@ MultiSend: %1</translation>
         <translation>(%1-bit)</translation>
     </message>
     <message>
-        <source>About PIVX Core</source>
+        <source>About GROW Core</source>
         <translation>Om PIVX Kärna</translation>
     </message>
     <message>
@@ -1286,15 +1286,15 @@ MultiSend: %1</translation>
         <translation>Välkommen</translation>
     </message>
     <message>
-        <source>Welcome to PIVX Core.</source>
-        <translation>Välkommen till PIVX Core.</translation>
+        <source>Welcome to GROW Core.</source>
+        <translation>Välkommen till GROW Core.</translation>
     </message>
     <message>
-        <source>As this is the first time the program is launched, you can choose where PIVX Core will store its data.</source>
-        <translation>Eftersom detta är första gången programmet körs så kan du välja var PIVX Core ska spara sin data.</translation>
+        <source>As this is the first time the program is launched, you can choose where GROW Core will store its data.</source>
+        <translation>Eftersom detta är första gången programmet körs så kan du välja var GROW Core ska spara sin data.</translation>
     </message>
     <message>
-        <source>PIVX Core will download and store a copy of the PIVX block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <source>GROW Core will download and store a copy of the PIVX block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
         <translation>PIVX Kärnan kommer ladda ner och spara en kopia av PIVX block chain. Minst %1GB data kommer sparas i denna katalog och den kommer växa med tiden. Plånboken kommer också sparas i denna katalog.</translation>
     </message>
     <message>
@@ -1306,8 +1306,8 @@ MultiSend: %1</translation>
         <translation>Använd en skräddarsydd data katalog</translation>
     </message>
     <message>
-        <source>PIVX Core</source>
-        <translation>PIVX Core</translation>
+        <source>GROW Core</source>
+        <translation>GROW Core</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
@@ -2230,14 +2230,14 @@ Om AutoMint är tillåten så kommer denna procent att vara som den konfigurerad
         <translation>AutoMint är för tillfället aktiverat och inställt på</translation>
     </message>
     <message>
-        <source>To disable AutoMint add 'enablezeromint=0' in pivx.conf.</source>
-        <translation>För att inaktivera AutoMint, lägg till 'enablezeromint=0' i pivx.conf.</translation>
+        <source>To disable AutoMint add 'enablezeromint=0' in grow.conf.</source>
+        <translation>För att inaktivera AutoMint, lägg till 'enablezeromint=0' i grow.conf.</translation>
     </message>
     <message>
         <source>AutoMint is currently disabled.
-To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in pivx.conf</source>
+To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in grow.conf</source>
         <translation>AutoMint är för närvarande inaktiverat.
-För att aktivera AutoMint ändra 'enablezeromint=0' till 'enablezeromint=1' i pivx.conf</translation>
+För att aktivera AutoMint ändra 'enablezeromint=0' till 'enablezeromint=1' i grow.conf</translation>
     </message>
 </context>
 <context>
@@ -2554,8 +2554,8 @@ Omogna: bekräftade men under 1 mint av samma valör efter den blev mintad</tran
         <source>Show the current status of automatic zPIV minting.
 
 To change the status (restart required):
-- enable: add 'enablezeromint=1' to pivx.conf
-- disable: add 'enablezeromint=0' to pivx.conf
+- enable: add 'enablezeromint=1' to grow.conf
+- disable: add 'enablezeromint=0' to grow.conf
 
 To change the percentage (no restart required):
 - menu Settings-&gt;Options-&gt;Percentage of autominted zPIV
@@ -2564,8 +2564,8 @@ To change the percentage (no restart required):
         <translation>Visa den nuvarande statusen av automatisk zPIV minting.
 
 För att ändra statusen (omstart krävs):
--aktivera: lägg till 'enablezeromint=1' i pivx.conf
--inaktivera: lägg till 'enablezeromint=0' i pivx.conf
+-aktivera: lägg till 'enablezeromint=1' i grow.conf
+-inaktivera: lägg till 'enablezeromint=0' i grow.conf
 
 För att ändra procenten (ingen omstart krävs):
 -meny Inställningar-&gt;Alternativ-&gt;Procent på autominted zPIV
@@ -3995,8 +3995,8 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>PIVX Core is shutting down...</source>
-        <translation>PIVX Core stängs ner...</translation>
+        <source>GROW Core is shutting down...</source>
+        <translation>GROW Core stängs ner...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -4145,8 +4145,8 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>PIVX Core</source>
-        <translation>PIVX Core</translation>
+        <source>GROW Core</source>
+        <translation>GROW Core</translation>
     </message>
     <message>
         <source>Version %1</source>
@@ -4162,7 +4162,7 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
     </message>
     <message>
         <source>The PIVX Core developers</source>
-        <translation>PIVX Core utvecklarna</translation>
+        <translation>GROW Core utvecklarna</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -4826,7 +4826,7 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
         <translation>Beräknade ackumulator kontrollstation är inte vad som sparats av block index</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. PIVX Core is probably already running.</source>
+        <source>Cannot obtain a lock on data directory %s. GROW Core is probably already running.</source>
         <translation>Kan ej låsa in på data katalog %s. PIVX Kärna körs förmodligen redan.</translation>
     </message>
     <message>
@@ -5002,8 +5002,8 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
         <translation>Denna produkt inkluderar mjukvara utvecklad av OpenSSL Projektet för användning i OpenSSL Toolkit &lt;https://www.openssl.org/&gt; och kryptografisk mjukvara skriven av Eric Young och UPnP mjukvara skriven av Thomas Bernard.</translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. PIVX Core is probably already running.</source>
-        <translation>Kan inte binda till %s på denna dator. PIVX Core körs förmodligen redan.</translation>
+        <source>Unable to bind to %s on this computer. GROW Core is probably already running.</source>
+        <translation>Kan inte binda till %s på denna dator. GROW Core körs förmodligen redan.</translation>
     </message>
     <message>
         <source>Unable to locate enough Obfuscation denominated funds for this transaction.</source>
@@ -5030,8 +5030,8 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
         <translation>Varning: -maxtxfee är sätt väldigt högt! Detta är transaktionsavgiften du kommer betala om du skickar en transaktion.</translation>
     </message>
     <message>
-        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong PIVX Core will not work properly.</source>
-        <translation>Varning: Var vänlig kontrollera att din dators tid och datum är korrekt! Om din klocka är fel så kommer PIVX Core inte att fungera korrekt.</translation>
+        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong GROW Core will not work properly.</source>
+        <translation>Varning: Var vänlig kontrollera att din dators tid och datum är korrekt! Om din klocka är fel så kommer GROW Core inte att fungera korrekt.</translation>
     </message>
     <message>
         <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
@@ -5182,8 +5182,8 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
         <translation>Copyright (C) 2014-%i The Dash Core Developers</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The PIVX Core Developers</source>
-        <translation>Copyright (C) 2015-%i The PIVX Core Developers</translation>
+        <source>Copyright (C) 2015-%i The PIVX Core developers</source>
+        <translation>Copyright (C) 2015-%i The PIVX Core developers</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>
@@ -5270,7 +5270,7 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
         <translation>Fel vid laddning av wallet.dat: Plånbok korrupterad</translation>
     </message>
     <message>
-        <source>Error loading wallet.dat: Wallet requires newer version of PIVX Core</source>
+        <source>Error loading wallet.dat: Wallet requires newer version of GROW Core</source>
         <translation>Fel vid laddning av wallet.dat: Plånbok  kräver nyare PIVX Kärna version</translation>
     </message>
     <message>
@@ -5386,7 +5386,7 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
         <translation>Information</translation>
     </message>
     <message>
-        <source>Initialization sanity check failed. PIVX Core is shutting down.</source>
+        <source>Initialization sanity check failed. GROW Core is shutting down.</source>
         <translation>Initierings renlighetscheck misslyckades. PIVX Kärna stängs ner.</translation>
     </message>
     <message>
@@ -6210,7 +6210,7 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
         <translation>Plånboken är låst.</translation>
     </message>
     <message>
-        <source>Wallet needed to be rewritten: restart PIVX Core to complete</source>
+        <source>Wallet needed to be rewritten: restart GROW Core to complete</source>
         <translation>Plånbok behöver skrivas om: starta om PIVX Kärna för att göra klart</translation>
     </message>
     <message>

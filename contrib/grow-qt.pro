@@ -640,21 +640,21 @@ SOURCES += src/activemasternode.cpp \
            src/leveldb/helpers/memenv/memenv.cc \
            src/leveldb/helpers/memenv/memenv_test.cc \
            src/secp256k1/src/java/org_bitcoin_NativeSecp256k1.c
-RESOURCES += src/qt/pivx.qrc src/qt/pivx_locale.qrc
+RESOURCES += src/qt/bitcoin.qrc src/qt/bitcoin_locale.qrc
 
-TRANSLATIONS += src/qt/locale/pivx_bg.ts \
-                src/qt/locale/pivx_de.ts \
-                src/qt/locale/pivx_en.ts \
-                src/qt/locale/pivx_es.ts \
-                src/qt/locale/pivx_fi.ts \
-                src/qt/locale/pivx_fr.ts \
-                src/qt/locale/pivx_it.ts \
-                src/qt/locale/pivx_ja.ts \
-                src/qt/locale/pivx_pl.ts \
-                src/qt/locale/pivx_pt.ts \
-                src/qt/locale/pivx_ru.ts \
-                src/qt/locale/pivx_sk.ts \
-                src/qt/locale/pivx_sv.ts \
-                src/qt/locale/pivx_vi.ts \
-                src/qt/locale/pivx_zh_CN.ts \
-                src/qt/locale/pivx_zh_TW.ts
+TRANSLATIONS += src/qt/locale/bitcoin_bg.ts \
+                src/qt/locale/bitcoin_de.ts \
+                src/qt/locale/bitcoin_en.ts \
+                src/qt/locale/bitcoin_es.ts \
+                src/qt/locale/bitcoin_fi.ts \
+                src/qt/locale/bitcoin_fr.ts \
+                src/qt/locale/bitcoin_it.ts \
+                src/qt/locale/bitcoin_ja.ts \
+                src/qt/locale/bitcoin_pl.ts \
+                src/qt/locale/bitcoin_pt.ts \
+                src/qt/locale/bitcoin_ru.ts \
+                src/qt/locale/bitcoin_sk.ts \
+                src/qt/locale/bitcoin_sv.ts \
+                src/qt/locale/bitcoin_vi.ts \
+                src/qt/locale/bitcoin_zh_CN.ts \
+                src/qt/locale/bitcoin_zh_TW.ts

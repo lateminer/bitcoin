@@ -1,6 +1,6 @@
 [Protocol]
-exec=pivx-qt '%u'
-protocol=pivx
+exec=grow-qt '%u'
+protocol=grow
 input=none
 output=none
 helper=true

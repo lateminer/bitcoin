@@ -601,8 +601,8 @@
         <translation>Alatna traka kartica</translation>
     </message>
     <message>
-        <source>PIVX Core</source>
-        <translation>PIVX Core</translation>
+        <source>GROW Core</source>
+        <translation>GROW Core</translation>
     </message>
     <message>
         <source>Send coins to a PIVX address</source>
@@ -625,12 +625,12 @@
         <translation>Pregledajte masternode</translation>
     </message>
     <message>
-        <source>&amp;About PIVX Core</source>
-        <translation>&amp; O PIVX Coreu</translation>
+        <source>&amp;About GROW Core</source>
+        <translation>&amp; O GROW Coreu</translation>
     </message>
     <message>
-        <source>Show information about PIVX Core</source>
-        <translation>Prikaz informacija o PIVX Coreu</translation>
+        <source>Show information about GROW Core</source>
+        <translation>Prikaz informacija o GROW Coreu</translation>
     </message>
     <message>
         <source>Modify configuration options for PIVX</source>
@@ -653,8 +653,8 @@
         <translation>Šifriranje i dešifriranje privatnih ključeva pomoću zaporke</translation>
     </message>
     <message>
-        <source>PIVX Core client</source>
-        <translation>PIVX Core klijent</translation>
+        <source>GROW Core client</source>
+        <translation>GROW Core klijent</translation>
     </message>
     <message>
         <source>Error</source>
@@ -751,15 +751,15 @@
 <context>
     <name>HelpMessageDialog</name>
     <message>
-        <source>PIVX Core</source>
-        <translation>PIVX Core</translation>
+        <source>GROW Core</source>
+        <translation>GROW Core</translation>
     </message>
     </context>
 <context>
     <name>Intro</name>
     <message>
-        <source>PIVX Core</source>
-        <translation>PIVX Core</translation>
+        <source>GROW Core</source>
+        <translation>GROW Core</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1111,8 +1111,8 @@
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>PIVX Core is shutting down...</source>
-        <translation>PIVX Core se gasi...</translation>
+        <source>GROW Core is shutting down...</source>
+        <translation>GROW Core se gasi...</translation>
     </message>
     </context>
 <context>
@@ -1197,8 +1197,8 @@
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>PIVX Core</source>
-        <translation>PIVX Core</translation>
+        <source>GROW Core</source>
+        <translation>GROW Core</translation>
     </message>
     <message>
         <source>Version %1</source>

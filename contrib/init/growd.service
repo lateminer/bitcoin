@@ -5,19 +5,19 @@
 # See "man systemd.service" for details.
 
 # Note that almost all daemon options could be specified in
-# /etc/pivx/pivx.conf
+# /etc/grow/grow.conf
 
 [Unit]
-Description=PIVX daemon
+Description=GROW daemon
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/pivxd -daemon -conf=/etc/pivx/pivx.conf -pid=/run/pivxd/pivxd.pid
-# Creates /run/pivxd owned by pivx
-RuntimeDirectory=pivxd
-User=pivx
+ExecStart=/usr/bin/growd -daemon -conf=/etc/grow/grow.conf -pid=/run/growd/growd.pid
+# Creates /run/growd owned by grow
+RuntimeDirectory=growd
+User=grow
 Type=forking
-PIDFile=/run/pivxd/pivxd.pid
+PIDFile=/run/growd/growd.pid
 Restart=on-failure
 
 # Hardening measures
