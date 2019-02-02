@@ -46,7 +46,7 @@ bool CaseInsensitiveEqual(const std::string &s1, const std::string &s2)
 BOOST_AUTO_TEST_CASE(cashaddr_testvectors_valid)
 {
     static const std::string CASES[] = {
-        "prefix:x64nx6hz", "PREFIX:X64NX6HZ", "p:gpf8m4h7", "blackcoin:qpzry9x8gf2tvdw0s3jn54khce6mua7lcw20ayyn",
+        "prefix:x64nx6hz", "PREFIX:X64NX6HZ", "p:gpf8m4h7", "potcoin:qpzry9x8gf2tvdw0s3jn54khce6mua7lcw20ayyn",
         "bchtest:testnetaddress4d6njnut", "bchreg:555555555555555555555555555555555555555555555udxmlmrz",
     };
 
@@ -94,8 +94,8 @@ BOOST_AUTO_TEST_CASE(cashaddr_rawencode)
 BOOST_AUTO_TEST_CASE(cashaddr_testvectors_noprefix)
 {
     static const std::pair<std::string, std::string> CASES[] = {
-        {"blackcoin", "qpzry9x8gf2tvdw0s3jn54khce6mua7lcw20ayyn"}, {"prefix", "x64nx6hz"}, {"PREFIX", "X64NX6HZ"},
-        {"p", "gpf8m4h7"}, {"blackcoin", "qpzry9x8gf2tvdw0s3jn54khce6mua7lcw20ayyn"},
+        {"potcoin", "qpzry9x8gf2tvdw0s3jn54khce6mua7lcw20ayyn"}, {"prefix", "x64nx6hz"}, {"PREFIX", "X64NX6HZ"},
+        {"p", "gpf8m4h7"}, {"potcoin", "qpzry9x8gf2tvdw0s3jn54khce6mua7lcw20ayyn"},
         {"blktest", "testnetaddress4d6njnut"}, {"blkreg", "555555555555555555555555555555555555555555555udxmlmrz"},
     };
 

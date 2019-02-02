@@ -115,7 +115,7 @@ static void CheckBlockIndex(const Consensus::Params& consensusParams);
 /** Constant stuff for coinbase transactions we create: */
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "BlackCoin Signed Message:\n";
+const string strMessageMagic = "Potcoin Signed Message:\n";
 
 // Internal stuff
 namespace {
@@ -2696,9 +2696,9 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
 
     // BIP66 is always active
     flags |= SCRIPT_VERIFY_DERSIG;
-    // BlackCoin also requires DER encoding of pubkeys
+    // Potcoin also requires DER encoding of pubkeys
     flags |= SCRIPT_VERIFY_DERKEY;
-    // BlackCoin also requires low S in sigs
+    // Potcoin also requires low S in sigs
     flags |= SCRIPT_VERIFY_LOW_S;
 
     // Start enforcing CHECKLOCKTIMEVERIFY, (BIP65) since protocol v3
