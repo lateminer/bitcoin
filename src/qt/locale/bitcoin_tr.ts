@@ -645,7 +645,7 @@
         <translation>Koinleri PIVX adresine gönder</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and pivx: URIs)</source>
+        <source>Request payments (generates QR codes and grow: URIs)</source>
         <translation>Ödeme talep etme (QR kodları ve pivx üretir: URI'ler)</translation>
     </message>
     <message>
@@ -709,8 +709,8 @@
         <translation>Açık Masternode yapılandırma dosyası</translation>
     </message>
     <message>
-        <source>Open a PIVX: URI or payment request</source>
-        <translation>Bir PIVX: URI veya ödeme isteği açın</translation>
+        <source>Open a GROW: URI or payment request</source>
+        <translation>Bir GROW: URI veya ödeme isteği açın</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>
@@ -2219,7 +2219,7 @@ To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in grow.conf<
         <translation>Geçersiz ödeme adresi %1</translation>
     </message>
     <message>
-        <source>Cannot start pivx: click-to-pay handler</source>
+        <source>Cannot start grow: click-to-pay handler</source>
         <translation>Pivx başlatılamıyor: tıkla ve ödeme işleyicisi</translation>
     </message>
     <message>
@@ -3723,7 +3723,7 @@ Ya daha yüksek mezhepleri daraltın (daha az girdi gereklidir) veya harcama mik
         <translation>Mesaj:</translation>
     </message>
     <message>
-        <source>A message that was attached to the PIVX: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PIVX network.</source>
+        <source>A message that was attached to the GROW: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PIVX network.</source>
         <translation>PIVX e eklenmiş olan bir mesaj: İşleminizle beraber saklanacak olan URI hatırlamanız için. Not: Bu mesaj PIVX ağında yayınlanmayacak.</translation>
     </message>
     <message>

@@ -653,7 +653,7 @@
         <translation>Send mønter til en PIVX adresse</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and pivx: URIs)</source>
+        <source>Request payments (generates QR codes and grow: URIs)</source>
         <translation>Anmod om betaling (genrerer QR kode og PIVX URL)</translation>
     </message>
     <message>
@@ -717,7 +717,7 @@
         <translation>ÅbnMasternode konfigurationsfil</translation>
     </message>
     <message>
-        <source>Open a PIVX: URI or payment request</source>
+        <source>Open a GROW: URI or payment request</source>
         <translation>Åbn en PIVX URl eller betalingsanmodning</translation>
     </message>
     <message>
@@ -2287,7 +2287,7 @@ For at aktivere AutoMint-ændring 'enablezeromint = 0' til 'enablezeromint = 1' 
         <translation>Ugyldig betalingsadresse: %1</translation>
     </message>
     <message>
-        <source>Cannot start pivx: click-to-pay handler</source>
+        <source>Cannot start grow: click-to-pay handler</source>
         <translation>Kan ikke starte PIVX "klik for at betale" systemet</translation>
     </message>
     <message>
@@ -4051,8 +4051,8 @@ Enten mint højere nomineringer (så færre input er nødvendige) eller reducere
         <translation>Besked</translation>
     </message>
     <message>
-        <source>A message that was attached to the PIVX: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PIVX network.</source>
-        <translation>En besked, der var vedhæftet til PIVX: URl wil blive gemt sammen med transaktionen som reference. Note: Beskeden bliver medsendt transaktionen over netværket.</translation>
+        <source>A message that was attached to the GROW: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PIVX network.</source>
+        <translation>En besked, der var vedhæftet til GROW: URl wil blive gemt sammen med transaktionen som reference. Note: Beskeden bliver medsendt transaktionen over netværket.</translation>
     </message>
     <message>
         <source>This is an unverified payment request.</source>

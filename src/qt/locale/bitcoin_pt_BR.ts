@@ -621,8 +621,8 @@
         <translation>Enviar moedas para um endereço PIVX</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and pivx: URIs)</source>
-        <translation>Requisitar pagamentos (gera códigos QR e pivx: URIs)</translation>
+        <source>Request payments (generates QR codes and grow: URIs)</source>
+        <translation>Requisitar pagamentos (gera códigos QR e grow: URIs)</translation>
     </message>
     <message>
         <source>&amp;Privacy</source>
@@ -685,8 +685,8 @@
         <translation>Abrir arquivo de configuração de Masternode</translation>
     </message>
     <message>
-        <source>Open a PIVX: URI or payment request</source>
-        <translation>Abrir um PIVX: URI ou requisição de pagamento</translation>
+        <source>Open a GROW: URI or payment request</source>
+        <translation>Abrir um GROW: URI ou requisição de pagamento</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>

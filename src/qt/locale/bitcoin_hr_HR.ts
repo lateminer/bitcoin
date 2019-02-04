@@ -653,8 +653,8 @@
         <translation>Pošaljite kovanice na PIVX adresu</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and pivx: URIs)</source>
-        <translation>Zahtjev za plaćanje (generira QR kodove i pivx: URI)</translation>
+        <source>Request payments (generates QR codes and grow: URIs)</source>
+        <translation>Zahtjev za plaćanje (generira QR kodove i grow: URI)</translation>
     </message>
     <message>
         <source>&amp;Privacy</source>
@@ -717,8 +717,8 @@
         <translation>Otvori Masternode konfiguracijsku datoteku</translation>
     </message>
     <message>
-        <source>Open a PIVX: URI or payment request</source>
-        <translation>Otvori PIVX: URI zahtjev za plačanje</translation>
+        <source>Open a GROW: URI or payment request</source>
+        <translation>Otvori GROW: URI zahtjev za plačanje</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>
@@ -2288,8 +2288,8 @@ Da biste omogućili, promjenite postavke AutoMint 'enablezeromint=0' na 'enablez
         <translation>Nevažeća adresa za plaćanje %1</translation>
     </message>
     <message>
-        <source>Cannot start pivx: click-to-pay handler</source>
-        <translation>Ne može se pokrenuti pivx: clik-to-pay handler</translation>
+        <source>Cannot start grow: click-to-pay handler</source>
+        <translation>Ne može se pokrenuti grow: clik-to-pay handler</translation>
     </message>
     <message>
         <source>URI cannot be parsed! This can be caused by an invalid PIVX address or malformed URI parameters.</source>
@@ -4052,8 +4052,8 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Poruka:</translation>
     </message>
     <message>
-        <source>A message that was attached to the PIVX: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PIVX network.</source>
-        <translation>Poruka koja je bila povezana s PIVX: URI koji će biti pohranjen s transakcijom za vašu referencu. Napomena: ova poruka neće biti poslana preko PIVX mreže.</translation>
+        <source>A message that was attached to the GROW: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PIVX network.</source>
+        <translation>Poruka koja je bila povezana s GROW: URI koji će biti pohranjen s transakcijom za vašu referencu. Napomena: ova poruka neće biti poslana preko PIVX mreže.</translation>
     </message>
     <message>
         <source>This is an unverified payment request.</source>

@@ -577,7 +577,7 @@
         <translation>发送数字货币到PIVX地址</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and pivx: URIs)</source>
+        <source>Request payments (generates QR codes and grow: URIs)</source>
         <translation>请求支付（生成二维码和pivx：URIs）</translation>
     </message>
     <message>
@@ -641,7 +641,7 @@
         <translation>打开主节点配置文件</translation>
     </message>
     <message>
-        <source>Open a PIVX: URI or payment request</source>
+        <source>Open a GROW: URI or payment request</source>
         <translation>打开PIVX：URI或付款请求</translation>
     </message>
     <message>
@@ -1312,7 +1312,7 @@ Address: %4
         <translation>消息:</translation>
     </message>
     <message>
-        <source>A message that was attached to the PIVX: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PIVX network.</source>
+        <source>A message that was attached to the GROW: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PIVX network.</source>
         <translation>附加到PIVX：URI的消息，该消息将与转账信息一起存储以供参考。 注意：此消息不会通过PIVX网络发送。</translation>
     </message>
     <message>

@@ -565,7 +565,7 @@
         <translation>送出錢幣到 PIVX 地址</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and pivx: URIs)</source>
+        <source>Request payments (generates QR codes and grow: URIs)</source>
         <translation>請求付款 (會產生 QR Code跟 pivx 位址)</translation>
     </message>
     <message>
@@ -625,8 +625,8 @@
         <translation>打開Masternode設定檔</translation>
     </message>
     <message>
-        <source>Open a PIVX: URI or payment request</source>
-        <translation>打開PIVX: 位址或付款請求 </translation>
+        <source>Open a GROW: URI or payment request</source>
+        <translation>打開GROW: 位址或付款請求 </translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>

@@ -197,7 +197,7 @@ void PrepareShutdown()
     /// for example if the data directory was found to be locked.
     /// Be sure that anything that writes files or flushes caches only does this if the respective
     /// module was initialized.
-    RenameThread("pivx-shutoff");
+    RenameThread("grow-shutoff");
     mempool.AddTransactionsUpdated(1);
     StopHTTPRPC();
     StopREST();
@@ -636,7 +636,7 @@ struct CImportingNow {
 
 void ThreadImport(std::vector<boost::filesystem::path> vImportFiles)
 {
-    RenameThread("pivx-loadblk");
+    RenameThread("grow-loadblk");
 
     // -reindex
     if (fReindex) {
@@ -1356,7 +1356,7 @@ bool AppInit2()
 
     // ********************************************************* Step 7: load block chain
 
-    //PIVX: Load Accumulator Checkpoints according to network (main/test/regtest)
+    //GROW: Load Accumulator Checkpoints according to network (main/test/regtest)
     assert(AccumulatorCheckpoints::LoadCheckpoints(Params().NetworkIDString()));
 
     fReindex = GetBoolArg("-reindex", false);

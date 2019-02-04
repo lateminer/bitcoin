@@ -573,8 +573,8 @@
         <translation>Lähetä kolikkoja PIVX osoitteeseen</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and pivx: URIs)</source>
-        <translation>Pyydä maksuja (Generoi QR koodeja ja pivx: URIja)</translation>
+        <source>Request payments (generates QR codes and grow: URIs)</source>
+        <translation>Pyydä maksuja (Generoi QR koodeja ja grow: URIja)</translation>
     </message>
     <message>
         <source>&amp;Masternodes</source>
@@ -594,7 +594,7 @@
     </message>
     <message>
         <source>Modify configuration options for PIVX</source>
-        <translation>Muokkaa konfiguraatio vaihtoehtoja PIVX:lle</translation>
+        <translation>Muokkaa konfiguraatio vaihtoehtoja GROW:lle</translation>
     </message>
     <message>
         <source>Sign messages with your PIVX addresses to prove you own them</source>
@@ -633,8 +633,8 @@
         <translation>Avaa Masternode konfiguraatiotiedosto</translation>
     </message>
     <message>
-        <source>Open a PIVX: URI or payment request</source>
-        <translation>Avaa PIVX: URI tai pyydä maksua</translation>
+        <source>Open a GROW: URI or payment request</source>
+        <translation>Avaa GROW: URI tai pyydä maksua</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>

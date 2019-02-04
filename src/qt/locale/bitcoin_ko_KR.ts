@@ -653,8 +653,8 @@
         <translation>PIVX 주소로 입금하기</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and pivx: URIs)</source>
-        <translation>결제 요청 (QR 코드 및 pivx: URI 생성)</translation>
+        <source>Request payments (generates QR codes and grow: URIs)</source>
+        <translation>결제 요청 (QR 코드 및 grow: URI 생성)</translation>
     </message>
     <message>
         <source>&amp;Privacy</source>
@@ -717,8 +717,8 @@
         <translation>마스터노드 구성 파일 열기</translation>
     </message>
     <message>
-        <source>Open a PIVX: URI or payment request</source>
-        <translation>PIVX: URI 또는 ​​결제 요청 열기</translation>
+        <source>Open a GROW: URI or payment request</source>
+        <translation>GROW: URI 또는 ​​결제 요청 열기</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>
@@ -2287,7 +2287,7 @@ To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in grow.conf<
         <translation>잘못된 결제 주소 %1</translation>
     </message>
     <message>
-        <source>Cannot start pivx: click-to-pay handler</source>
+        <source>Cannot start grow: click-to-pay handler</source>
         <translation>PIVX을 시작할 수 없습니다: 결제하기 위한 클릭 처리</translation>
     </message>
     <message>
@@ -4052,7 +4052,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>메세지:</translation>
     </message>
     <message>
-        <source>A message that was attached to the PIVX: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PIVX network.</source>
+        <source>A message that was attached to the GROW: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PIVX network.</source>
         <translation>참조용으로 트랜잭션과 함께 기록되는 PIVX : URI에 첨부된 메세지입니다. 참고: 이 메세지는 PIVX 네트워크를 통해 전송되지 않습니다.</translation>
     </message>
     <message>

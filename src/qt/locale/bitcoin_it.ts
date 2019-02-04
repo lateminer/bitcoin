@@ -653,8 +653,8 @@
         <translation>Invia valuta all'indirizzo PIVX</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and pivx: URIs)</source>
-        <translation>Richiedi pagamenti (genera codici QR e pivx: URIs)</translation>
+        <source>Request payments (generates QR codes and grow: URIs)</source>
+        <translation>Richiedi pagamenti (genera codici QR e grow: URIs)</translation>
     </message>
     <message>
         <source>&amp;Privacy</source>
@@ -717,8 +717,8 @@
         <translation>Apri file di configurazione del Masternodo</translation>
     </message>
     <message>
-        <source>Open a PIVX: URI or payment request</source>
-        <translation>Apri un PIVX: URI o richiesta di pagamento</translation>
+        <source>Open a GROW: URI or payment request</source>
+        <translation>Apri un GROW: URI o richiesta di pagamento</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>

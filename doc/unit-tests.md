@@ -6,7 +6,7 @@ and tests weren't explicitly disabled.
 
 After configuring, they can be run with 'make check'.
 
-To run the growd tests manually, launch src/test/test_pivx .
+To run the growd tests manually, launch src/test/test_grow.
 
 To add more growd tests, add `BOOST_AUTO_TEST_CASE` functions to the existing
 .cpp files in the test/ directory or add new .cpp files that

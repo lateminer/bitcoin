@@ -609,8 +609,8 @@
         <translation>Odeslat platbuna PIVX adresu</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and pivx: URIs)</source>
-        <translation>Vyžádat platbu (generování QK kódu a pivx: URIs)</translation>
+        <source>Request payments (generates QR codes and grow: URIs)</source>
+        <translation>Vyžádat platbu (generování QK kódu a grow: URIs)</translation>
     </message>
     <message>
         <source>&amp;Privacy</source>
@@ -673,8 +673,8 @@
         <translation>Otevřít Masternodový konfigurační soubor</translation>
     </message>
     <message>
-        <source>Open a PIVX: URI or payment request</source>
-        <translation>Otevřít PIVX: URI nebo platební žádost</translation>
+        <source>Open a GROW: URI or payment request</source>
+        <translation>Otevřít GROW: URI nebo platební žádost</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>

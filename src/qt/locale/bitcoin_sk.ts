@@ -577,8 +577,8 @@
         <translation>Odoslať mince na adresu PIVX</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and pivx: URIs)</source>
-        <translation>Vyžiadať platby (generuje QR kódy a pivx: identifikátory URI)</translation>
+        <source>Request payments (generates QR codes and grow: URIs)</source>
+        <translation>Vyžiadať platby (generuje QR kódy a grow: identifikátory URI)</translation>
     </message>
     <message>
         <source>&amp;Masternodes</source>
@@ -637,8 +637,8 @@
         <translation>Otvoriť konfiguračný súbor masternodu</translation>
     </message>
     <message>
-        <source>Open a PIVX: URI or payment request</source>
-        <translation>Otvorte PIVX: URI alebo žiadosť o platbu</translation>
+        <source>Open a GROW: URI or payment request</source>
+        <translation>Otvorte GROW: URI alebo žiadosť o platbu</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>

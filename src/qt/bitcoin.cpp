@@ -81,7 +81,7 @@ static void InitMessage(const std::string& message)
  */
 static std::string Translate(const char* psz)
 {
-    return QCoreApplication::translate("pivx-core", psz).toStdString();
+    return QCoreApplication::translate("bitcoin-core", psz).toStdString();
 }
 
 static QString GetLangTerritory()
@@ -453,7 +453,7 @@ void BitcoinApplication::initializeResult(int retval)
 
 #ifdef ENABLE_WALLET
         // Now that initialization/startup is done, process any command-line
-        // PIVX: URIs or payment requests:
+        // GROW: URIs or payment requests:
         connect(paymentServer, SIGNAL(receivedPaymentRequest(SendCoinsRecipient)),
             window, SLOT(handlePaymentRequest(SendCoinsRecipient)));
         connect(window, SIGNAL(receivedURI(QString)),
@@ -604,7 +604,7 @@ int main(int argc, char* argv[])
         exit(0);
 
     // Start up the payment server early, too, so impatient users that click on
-    // pivx: links repeatedly have their payment requests routed to this process:
+    // grow: links repeatedly have their payment requests routed to this process:
     app.createPaymentServer();
 #endif
 

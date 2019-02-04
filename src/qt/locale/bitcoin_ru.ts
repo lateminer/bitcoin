@@ -653,8 +653,8 @@
         <translation>Отправить монеты на PIVX адрес</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and pivx: URIs)</source>
-        <translation>Запросить платежи (генерирует QR-код и PIVX: URI)</translation>
+        <source>Request payments (generates QR codes and grow: URIs)</source>
+        <translation>Запросить платежи (генерирует QR-код и GROW: URI)</translation>
     </message>
     <message>
         <source>&amp;Privacy</source>
@@ -717,8 +717,8 @@
         <translation>Открыть файл настроек мастернод</translation>
     </message>
     <message>
-        <source>Open a PIVX: URI or payment request</source>
-        <translation>Открыть PIVX: URI или запрос платежа</translation>
+        <source>Open a GROW: URI or payment request</source>
+        <translation>Открыть GROW: URI или запрос платежа</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>
@@ -2287,8 +2287,8 @@ To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in grow.conf<
         <translation>Неверный адрес оплаты %1</translation>
     </message>
     <message>
-        <source>Cannot start pivx: click-to-pay handler</source>
-        <translation>Не удалось запустить pivx: обработчик click-to-pay </translation>
+        <source>Cannot start grow: click-to-pay handler</source>
+        <translation>Не удалось запустить grow: обработчик click-to-pay </translation>
     </message>
     <message>
         <source>URI cannot be parsed! This can be caused by an invalid PIVX address or malformed URI parameters.</source>
@@ -4051,8 +4051,8 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Сообщение:</translation>
     </message>
     <message>
-        <source>A message that was attached to the PIVX: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PIVX network.</source>
-        <translation>Сообщение, которое было прикреплено к URI PIVX: URI, который будет сохранен с транзакцией для вашей справки. Примечание. Это сообщение не будет отправлено через сеть PIVX.</translation>
+        <source>A message that was attached to the GROW: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PIVX network.</source>
+        <translation>Сообщение, которое было прикреплено к URI GROW: URI, который будет сохранен с транзакцией для вашей справки. Примечание. Это сообщение не будет отправлено через сеть PIVX.</translation>
     </message>
     <message>
         <source>This is an unverified payment request.</source>

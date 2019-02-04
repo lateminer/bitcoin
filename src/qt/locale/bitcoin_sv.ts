@@ -653,8 +653,8 @@
         <translation>Skicka mynt till en PIVX adress</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and pivx: URIs)</source>
-        <translation>Begär betalning (genererar QR kod och pivx: URls)</translation>
+        <source>Request payments (generates QR codes and grow: URIs)</source>
+        <translation>Begär betalning (genererar QR kod och grow: URls)</translation>
     </message>
     <message>
         <source>&amp;Privacy</source>
@@ -717,8 +717,8 @@
         <translation>Öppna Huvudnodens konfigurations fil </translation>
     </message>
     <message>
-        <source>Open a PIVX: URI or payment request</source>
-        <translation>Öppna en PIVX: URI eller betalningsförfrågan</translation>
+        <source>Open a GROW: URI or payment request</source>
+        <translation>Öppna en GROW: URI eller betalningsförfrågan</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>
@@ -2263,8 +2263,8 @@ För att aktivera AutoMint ändra 'enablezeromint=0' till 'enablezeromint=1' i g
         <translation>Ogiltig betalningsadress %1</translation>
     </message>
     <message>
-        <source>Cannot start pivx: click-to-pay handler</source>
-        <translation>Kan ej starta pivx: klicka-för-att-betala hanterare</translation>
+        <source>Cannot start grow: click-to-pay handler</source>
+        <translation>Kan ej starta grow: klicka-för-att-betala hanterare</translation>
     </message>
     <message>
         <source>URI cannot be parsed! This can be caused by an invalid PIVX address or malformed URI parameters.</source>
@@ -3968,8 +3968,8 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
         <translation>Medelande:</translation>
     </message>
     <message>
-        <source>A message that was attached to the PIVX: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PIVX network.</source>
-        <translation>Ett medelande som var bifogat till PIVX: URI som kommer sparas med transaktionen som din referens. Lägg märke till: Detta meddelande kommer inte skickas genom PIVX nätverket.</translation>
+        <source>A message that was attached to the GROW: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PIVX network.</source>
+        <translation>Ett medelande som var bifogat till GROW: URI som kommer sparas med transaktionen som din referens. Lägg märke till: Detta meddelande kommer inte skickas genom PIVX nätverket.</translation>
     </message>
     <message>
         <source>This is an unverified payment request.</source>

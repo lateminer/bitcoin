@@ -841,7 +841,7 @@
     </message>
     <message>
         <location line="+11"/>
-        <source>Request payments (generates QR codes and pivx: URIs)</source>
+        <source>Request payments (generates QR codes and grow: URIs)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -921,7 +921,7 @@
     </message>
     <message>
         <location line="+17"/>
-        <source>Open a PIVX: URI or payment request</source>
+        <source>Open a GROW: URI or payment request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2953,7 +2953,7 @@ To enable AutoMint change &apos;enablezeromint=0&apos; to &apos;enablezeromint=1
     </message>
     <message>
         <location line="-104"/>
-        <source>Cannot start pivx: click-to-pay handler</source>
+        <source>Cannot start grow: click-to-pay handler</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5299,7 +5299,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <location line="+10"/>
-        <source>A message that was attached to the PIVX: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PIVX network.</source>
+        <source>A message that was attached to the GROW: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PIVX network.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

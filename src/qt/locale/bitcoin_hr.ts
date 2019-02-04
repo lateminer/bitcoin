@@ -609,8 +609,8 @@
         <translation>Pošaljite kovanice na PIVX adresu</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and pivx: URIs)</source>
-        <translation>Zahtjev za plaćanja (generira QR kodove i pivx: URI)</translation>
+        <source>Request payments (generates QR codes and grow: URIs)</source>
+        <translation>Zahtjev za plaćanja (generira QR kodove i grow: URI)</translation>
     </message>
     <message>
         <source>&amp;Privacy</source>

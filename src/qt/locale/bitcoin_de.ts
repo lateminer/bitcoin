@@ -653,8 +653,8 @@
         <translation>An eine PIVX-Adresse überweisen</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and pivx: URIs)</source>
-        <translation>Zahlung anfordern (QR-Code Generierung und pivx: URIs)</translation>
+        <source>Request payments (generates QR codes and grow: URIs)</source>
+        <translation>Zahlung anfordern (QR-Code Generierung und grow: URIs)</translation>
     </message>
     <message>
         <source>&amp;Privacy</source>
@@ -713,8 +713,8 @@
         <translation>Öffne Masternode Einstellungsdatei</translation>
     </message>
     <message>
-        <source>Open a PIVX: URI or payment request</source>
-        <translation>Öffne eine PIVX: URI oder Zahlungsanfrage</translation>
+        <source>Open a GROW: URI or payment request</source>
+        <translation>Öffne eine GROW: URI oder Zahlungsanfrage</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>
@@ -2279,7 +2279,7 @@ Um das automatische Prägen zu aktivieren ändere 'enablezeromint=0' zu 'enablez
         <translation>Ungültige Zahlungsaufforderungsadresse %1</translation>
     </message>
     <message>
-        <source>Cannot start pivx: click-to-pay handler</source>
+        <source>Cannot start grow: click-to-pay handler</source>
         <translation>Kann PIVX nicht starten: click-to-pay Handler</translation>
     </message>
     <message>
@@ -4043,7 +4043,7 @@ Präge entweder höhere Stückelungen (damit weniger Eingaben benötigt werdenn)
         <translation>Nachricht:</translation>
     </message>
     <message>
-        <source>A message that was attached to the PIVX: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PIVX network.</source>
+        <source>A message that was attached to the GROW: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PIVX network.</source>
         <translation>Eine an die PIVX-URI angefügte Nachricht, die zusammen mit der Transaktion gespeichert wird. Hinweis: Diese Nachricht wird nicht über das PIVX-Netzwerk gesendet.</translation>
     </message>
     <message>

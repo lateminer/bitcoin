@@ -653,7 +653,7 @@
         <translation>Envoyer des pièces à une adresse PIVX</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and pivx: URIs)</source>
+        <source>Request payments (generates QR codes and grow: URIs)</source>
         <translation>Requêtes de paiements (Génère des QR codes et des URIs PIVX)</translation>
     </message>
     <message>
@@ -717,8 +717,8 @@
         <translation>Ouvrir le fichier de configuration de Masternode</translation>
     </message>
     <message>
-        <source>Open a PIVX: URI or payment request</source>
-        <translation>Ouvrir un PIVX: URI ou requête de paiement</translation>
+        <source>Open a GROW: URI or payment request</source>
+        <translation>Ouvrir un GROW: URI ou requête de paiement</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>
@@ -2222,8 +2222,8 @@ Pour activer Auto-monnayage, changez 'enablezeromint = 0' en 'enablezeromint = 1
         <translation>Adresse de paiement invalide %1</translation>
     </message>
     <message>
-        <source>Cannot start pivx: click-to-pay handler</source>
-        <translation>Impossible de démarrer pivx: gestionnaire click-to-pay</translation>
+        <source>Cannot start grow: click-to-pay handler</source>
+        <translation>Impossible de démarrer grow: gestionnaire click-to-pay</translation>
     </message>
     <message>
         <source>URI cannot be parsed! This can be caused by an invalid PIVX address or malformed URI parameters.</source>
