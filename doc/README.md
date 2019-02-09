@@ -3,11 +3,11 @@ GROW Core
 
 Setup
 ---------------------
-[GROW Core](http://pivx.org/wallet) is the original PIVX client and it builds the backbone of the network. However, it downloads and stores the entire history of PIVX transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
+[GROW Core](http://pivx.org/wallet) is the original GROW client and it builds the backbone of the network. However, it downloads and stores the entire history of GROW transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
 
 Running
 ---------------------
-The following are some helpful notes on how to run PIVX on your native platform.
+The following are some helpful notes on how to run GROW on your native platform.
 
 ### Unix
 
@@ -34,7 +34,7 @@ for help and more information.
 
 Building
 ---------------------
-The following are developer notes on how to build PIVX on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
+The following are developer notes on how to build GROW on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
 
 - [OSX Build Notes](build-osx.md)
 - [Unix Build Notes](build-unix.md)

@@ -62,11 +62,11 @@
         <translation>Adresy pro přijetí peněz</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your GROW addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>Toto jsou Vaše PIVX adresy pro poslání platby. Vždy si překontrolujte množství peněz a cílovou adresu než platbu odešlete.</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your GROW addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>Toto jsou Vaše PIVX adresy pro přijetí plateb. Je doporučeno použít novou adresu pro každou novou transakci.</translation>
     </message>
     <message>
@@ -605,7 +605,7 @@
         <translation>GROW Core</translation>
     </message>
     <message>
-        <source>Send coins to a PIVX address</source>
+        <source>Send coins to a GROW address</source>
         <translation>Odeslat platbuna PIVX adresu</translation>
     </message>
     <message>
@@ -637,11 +637,11 @@
         <translation>Upravit možnosti konfigurace pro PIVX</translation>
     </message>
     <message>
-        <source>Sign messages with your PIVX addresses to prove you own them</source>
+        <source>Sign messages with your GROW addresses to prove you own them</source>
         <translation>Podepsat zprávy Vaší PIVX adresou pro prokázaní, že jste jejich vlastníkem</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified PIVX addresses</source>
+        <source>Verify messages to ensure they were signed with specified GROW addresses</source>
         <translation>Ověřit zprávy k zajištění, že bylypodepsány vybranými PIVX adresami</translation>
     </message>
     <message>
@@ -1081,7 +1081,7 @@ MultiSend: %1</translation>
         <translation>Upravit adresu k odeslání platby</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid PIVX address.</source>
+        <source>The entered address "%1" is not a valid GROW address.</source>
         <translation>Zadaná adresa "%1" není validní PIVX adresa.</translation>
     </message>
     <message>
@@ -2212,7 +2212,7 @@ Prosím zkontrolujte adresu a zkuste to znovu.</translation>
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
-        <source>The PIVX address to sign the message with</source>
+        <source>The GROW address to sign the message with</source>
         <translation>PIVX adresa pro podepsání zprávy</translation>
     </message>
     <message>
@@ -2240,15 +2240,15 @@ Prosím zkontrolujte adresu a zkuste to znovu.</translation>
         <translation>Kopírovat aktuální podpis do systémové mezipaměti</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this PIVX address</source>
+        <source>Sign the message to prove you own this GROW address</source>
         <translation>Podepsat zprávu k prokázání, že vlastníte tuto PIVX adresu</translation>
     </message>
     <message>
-        <source>The PIVX address the message was signed with</source>
+        <source>The GROW address the message was signed with</source>
         <translation>PIVX adresa zprávy byla podpsána</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified PIVX address</source>
+        <source>Verify the message to ensure it was signed with the specified GROW address</source>
         <translation>Verifikujte zprávu pro ujištění, že byla podepsána zmíněnou PIVX adresou</translation>
     </message>
     <message>
@@ -2402,7 +2402,7 @@ Prosím zkontrolujte adresu a zkuste to znovu.</translation>
     </message>
     </context>
 <context>
-    <name>pivx-core</name>
+    <name>bitcoin-core</name>
     <message>
         <source>Error</source>
         <translation>Chyba</translation>

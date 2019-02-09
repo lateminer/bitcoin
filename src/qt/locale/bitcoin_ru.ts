@@ -62,11 +62,11 @@
         <translation>Адреса получения</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your GROW addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>Это ваши PIVX-адреса для отправки платежей. Перед отправкой монет всегда проверяйте сумму и адрес получателя.</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your GROW addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>Это ваши PIVX-адреса для получения платежей. Для каждой транзакции рекомендуется использовать новый адрес получения.</translation>
     </message>
     <message>
@@ -254,12 +254,12 @@
         <translation>Адрес:</translation>
     </message>
     <message>
-        <source>Enter a PIVX Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>Введите PIVX адрес, которым вы хотите зашифровать, используя BIP 38. Введите пароль в среднем поле. Нажмите "Зашифровать", чтобы создать зашиврованный секретный ключ.</translation>
+        <source>Enter a GROW Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
+        <translation>Введите GROW адрес, которым вы хотите зашифровать, используя BIP 38. Введите пароль в среднем поле. Нажмите "Зашифровать", чтобы создать зашиврованный секретный ключ.</translation>
     </message>
     <message>
-        <source>The PIVX address to encrypt</source>
-        <translation>Адрес PIVX для зашифровки</translation>
+        <source>The GROW address to encrypt</source>
+        <translation>Адрес GROW для зашифровки</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -290,7 +290,7 @@
         <translation>Копировать текущую подпись в системный буфер обмена</translation>
     </message>
     <message>
-        <source>Encrypt the private key for this PIVX address</source>
+        <source>Encrypt the private key for this GROW address</source>
         <translation>Зашифровать личные ключи для этого PIVX адреса </translation>
     </message>
     <message>
@@ -649,7 +649,7 @@
         <translation>GROW Core</translation>
     </message>
     <message>
-        <source>Send coins to a PIVX address</source>
+        <source>Send coins to a GROW address</source>
         <translation>Отправить монеты на PIVX адрес</translation>
     </message>
     <message>
@@ -681,11 +681,11 @@
         <translation>Изменение параметров конфигурации PIVX</translation>
     </message>
     <message>
-        <source>Sign messages with your PIVX addresses to prove you own them</source>
+        <source>Sign messages with your GROW addresses to prove you own them</source>
         <translation>Подписывайте сообщения вашими PIVX адресами, чтобы доказать, что вы их владелец</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified PIVX addresses</source>
+        <source>Verify messages to ensure they were signed with specified GROW addresses</source>
         <translation>Проверте сообщения, чтобы убедиться, что они были подписаны указанным PIVX адресом </translation>
     </message>
     <message>
@@ -1185,7 +1185,7 @@ MultiSend: %1</translation>
         <translation>Изменить адрес отправки</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid PIVX address.</source>
+        <source>The entered address "%1" is not a valid GROW address.</source>
         <translation>Введенный адрес "%1" не является PIVX адресом.</translation>
     </message>
     <message>
@@ -1448,8 +1448,8 @@ MultiSend: %1</translation>
         <translation>Введите адрес для отправки</translation>
     </message>
     <message>
-        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other PIVX addresses after it matures.
-To Add: enter percentage to give and PIVX address to add to the MultiSend vector.
+        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other GROW addresses after it matures.
+To Add: enter percentage to give and GROW address to add to the MultiSend vector.
 To Delete: Enter address to delete and press delete.
 MultiSend will not be activated unless you have clicked Activate</source>
         <translation>MultiSend позволяет вам автоматически отправлять до 100% вознаграждения за мастерноды и хранение, после их созревания, на другие PIVX адреса.
@@ -1882,8 +1882,8 @@ Please be patient after clicking import.</source>
         <translation>Отключив проведение неподтвержденных изменений все изменения о транзакции &lt;br/&gt;не будут использованы пока транзакция не получит хотя бы одно подтверждение.&lt;br/&gt;Также это влияет на расчет вашего баланса.</translation>
     </message>
     <message>
-        <source>Automatically open the PIVX client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Автоматически открыть клиентский порт PIVX через роутер. Ваш роутер должен поддерживать UPnP, а сам сервис должен быть включен.</translation>
+        <source>Automatically open the GROW client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Автоматически открыть клиентский порт GROW через роутер. Ваш роутер должен поддерживать UPnP, а сам сервис должен быть включен.</translation>
     </message>
     <message>
         <source>Accept connections from outside</source>
@@ -2291,7 +2291,7 @@ To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in grow.conf<
         <translation>Не удалось запустить grow: обработчик click-to-pay </translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid PIVX address or malformed URI parameters.</source>
+        <source>URI cannot be parsed! This can be caused by an invalid GROW address or malformed URI parameters.</source>
         <translation>URI не интерпретируется! Причиной этому может быть неверный PIVX адрес или неверные параметеры URI.</translation>
     </message>
     <message>
@@ -2501,7 +2501,7 @@ zGROW are mature when they have more than 20 confirmations AND more than 2 mints
         <translation>Оплатить &amp;кому:</translation>
     </message>
     <message>
-        <source>The PIVX address to send the payment to. Creates local payment to yourself when empty.</source>
+        <source>The GROW address to send the payment to. Creates local payment to yourself when empty.</source>
         <translation>Адрес PIVX для отправки платежа. Создает локальный платеж себе, когда он пуст.</translation>
     </message>
     <message>
@@ -2927,8 +2927,8 @@ Maximum allowed: </source>
         <translation>Не предоставляется адрес «Pay To», создающий местный платеж</translation>
     </message>
     <message>
-        <source>Invalid Pivx Address</source>
-        <translation>неправильный PIVX адрес</translation>
+        <source>Invalid GROW Address</source>
+        <translation>неправильный GROW адрес</translation>
     </message>
     <message>
         <source>Invalid Send Amount</source>
@@ -3029,7 +3029,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Сумма</translation>
     </message>
     <message>
-        <source>Enter a PIVX address (e.g. %1)</source>
+        <source>Enter a GROW address (e.g. %1)</source>
         <translation>Введите адрес PIVX (например %1)</translation>
     </message>
     <message>
@@ -3908,7 +3908,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Инструмент разделения блоков не работает с несколькими адресами. Попробуй еще раз.</translation>
     </message>
     <message>
-        <source>Warning: Invalid PIVX address</source>
+        <source>Warning: Invalid GROW address</source>
         <translation>Предупреждение: неправильный PIVX адрес</translation>
     </message>
     <message>
@@ -4011,7 +4011,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Оплатить &amp;кому:</translation>
     </message>
     <message>
-        <source>The PIVX address to send the payment to</source>
+        <source>The GROW address to send the payment to</source>
         <translation>Адрес PIVX для отправки платежа</translation>
     </message>
     <message>
@@ -4101,7 +4101,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Вы можете подписывать сообщения с вашими адресами, чтобы доказать, что вы ими владеете. Будьте осторожны, чтобы не подписывать ничего неопределенного, поскольку фишинг-атаки могут попытаться обмануть вас, подписав вашу личность на них. Подпишите только полные подробные заявления, с которыми вы согласны.</translation>
     </message>
     <message>
-        <source>The PIVX address to sign the message with</source>
+        <source>The GROW address to sign the message with</source>
         <translation>Адрес PIVX для подписи сообщения с помощью</translation>
     </message>
     <message>
@@ -4133,15 +4133,15 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Копировать текущую подпись в системный буфер обмена</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this PIVX address</source>
+        <source>Sign the message to prove you own this GROW address</source>
         <translation>Подпишите сообщение, чтобы подтвердить свой адрес PIVX</translation>
     </message>
     <message>
-        <source>The PIVX address the message was signed with</source>
+        <source>The GROW address the message was signed with</source>
         <translation>Адрес PIVX, которым подписано сообщение</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified PIVX address</source>
+        <source>Verify the message to ensure it was signed with the specified GROW address</source>
         <translation>Проверте сообщение, чтобы убедиться, что оно было подписано указанным PIVX адресом </translation>
     </message>
     <message>
@@ -4245,7 +4245,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>The PIVX Core developers</source>
-        <translation>Разработчики GROW Core</translation>
+        <translation>Разработчики PIVX Core</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -4883,7 +4883,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
 </context>
 <context>
-    <name>pivx-core</name>
+    <name>bitcoin-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = сохранить tx метаданные, например, владельца учетной записи и информацию о запросе платежа, 2 = удалить tx метаданные)</translation>
@@ -5266,7 +5266,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Copyright (C) 2015-%i The PIVX Core developers</source>
-        <translation>Copyright (C) 2015-%i Разработчики GROW Core</translation>
+        <translation>Copyright (C) 2015-%i Разработчики PIVX Core</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>

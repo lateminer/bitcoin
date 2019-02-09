@@ -62,11 +62,11 @@
         <translation>Mottagar adresser</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your GROW addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>Det här är dina PIVX adresser för att skicka betalningar. Kontrollera alltid summan och mottagaradressen före du sänder mynt.</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your GROW addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>Det här är dina PIVX adresser för att ta emot betalningar. Det är rekomenderat att använda en ny mottagaradress för varje transaktion.</translation>
     </message>
     <message>
@@ -254,12 +254,12 @@
         <translation>Adress:</translation>
     </message>
     <message>
-        <source>Enter a PIVX Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>Fyll i en PIVX Adress som du skulle vilja cryptera med BIP 38. Skriv in en lösenfras i den mittersta lådan. Tryck kryptera för att beräkna fram den krypterade privata nyckeln.</translation>
+        <source>Enter a GROW Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
+        <translation>Fyll i en GROW Adress som du skulle vilja cryptera med BIP 38. Skriv in en lösenfras i den mittersta lådan. Tryck kryptera för att beräkna fram den krypterade privata nyckeln.</translation>
     </message>
     <message>
-        <source>The PIVX address to encrypt</source>
-        <translation>PIVX adressen som ska krypteras</translation>
+        <source>The GROW address to encrypt</source>
+        <translation>GROW adressen som ska krypteras</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -290,7 +290,7 @@
         <translation>Kopiera den nuvarande signaturen till systemets urklipp</translation>
     </message>
     <message>
-        <source>Encrypt the private key for this PIVX address</source>
+        <source>Encrypt the private key for this GROW address</source>
         <translation>Kryptera den privata nyckeln för denna PIVX adressen</translation>
     </message>
     <message>
@@ -649,7 +649,7 @@
         <translation>PIVX Kärna</translation>
     </message>
     <message>
-        <source>Send coins to a PIVX address</source>
+        <source>Send coins to a GROW address</source>
         <translation>Skicka mynt till en PIVX adress</translation>
     </message>
     <message>
@@ -681,11 +681,11 @@
         <translation>Ändra konfigurationsval för PIVX</translation>
     </message>
     <message>
-        <source>Sign messages with your PIVX addresses to prove you own them</source>
+        <source>Sign messages with your GROW addresses to prove you own them</source>
         <translation>Signera meddelanden med din PIVX adress för att visa att du äger dem</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified PIVX addresses</source>
+        <source>Verify messages to ensure they were signed with specified GROW addresses</source>
         <translation>Verifiera meddelandet för att säkerställa att de blev signerat med den specifika PIVX adressen.</translation>
     </message>
     <message>
@@ -1185,7 +1185,7 @@ MultiSend: %1</translation>
         <translation>Redigera skickande adress</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid PIVX address.</source>
+        <source>The entered address "%1" is not a valid GROW address.</source>
         <translation>Den inmatade adressen "%1" är ej en giltig PIVX adress.</translation>
     </message>
     <message>
@@ -1448,8 +1448,8 @@ MultiSend: %1</translation>
         <translation>Mata in Adress att Skicka till</translation>
     </message>
     <message>
-        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other PIVX addresses after it matures.
-To Add: enter percentage to give and PIVX address to add to the MultiSend vector.
+        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other GROW addresses after it matures.
+To Add: enter percentage to give and GROW address to add to the MultiSend vector.
 To Delete: Enter address to delete and press delete.
 MultiSend will not be activated unless you have clicked Activate</source>
         <translation>MultiSend tillåter dig att automatiskt skicka upp till 100% av dina staking eller huvudnod belöningar till en lista av andra PIVX adresser efter att belöningarna har mognat.
@@ -1877,8 +1877,8 @@ Var god vänta efter att du trycker på importera.</translation>
         <translation>Om du avaktiverar spenderandet av okonfirmerad växel så kommer växeln från en transaktion &lt;br/&gt;ej kunna användas föräns transaktionen har minst en bekräftelse. &lt;br/&gt; Detta påverkar även hur ditt saldo beräknas.</translation>
     </message>
     <message>
-        <source>Automatically open the PIVX client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Öppna automatiskt PIVX klient porten på denna router. Detta funkar endast om din router stödjer UPnP och är påslaget.</translation>
+        <source>Automatically open the GROW client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Öppna automatiskt GROW klient porten på denna router. Detta funkar endast om din router stödjer UPnP och är påslaget.</translation>
     </message>
     <message>
         <source>Accept connections from outside</source>
@@ -2267,7 +2267,7 @@ För att aktivera AutoMint ändra 'enablezeromint=0' till 'enablezeromint=1' i g
         <translation>Kan ej starta grow: klicka-för-att-betala hanterare</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid PIVX address or malformed URI parameters.</source>
+        <source>URI cannot be parsed! This can be caused by an invalid GROW address or malformed URI parameters.</source>
         <translation>URI kunde ej analyseras! Detta kan orsakas av en ogiltig PIVX adress eller felproducerade URI parametrar.</translation>
     </message>
     <message>
@@ -2477,7 +2477,7 @@ zGROW är mogna när de har över 20 bekräftelser OCH över 2 präglingar av sa
         <translation>Betala &amp;Till:</translation>
     </message>
     <message>
-        <source>The PIVX address to send the payment to. Creates local payment to yourself when empty.</source>
+        <source>The GROW address to send the payment to. Creates local payment to yourself when empty.</source>
         <translation>PIVX adress att skicka betalningen till. Skapar betalning till dig själv när den är tom.</translation>
     </message>
     <message>
@@ -2905,8 +2905,8 @@ Högsta tillåtna:</translation>
         <translation>Ingen 'Betala Till' adress inmatad, skapar lokal betalning</translation>
     </message>
     <message>
-        <source>Invalid Pivx Address</source>
-        <translation>Ogiltig Pivx Adress</translation>
+        <source>Invalid GROW Address</source>
+        <translation>Ogiltig GROW Adress</translation>
     </message>
     <message>
         <source>Invalid Send Amount</source>
@@ -3007,7 +3007,7 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
         <translation>Mängd</translation>
     </message>
     <message>
-        <source>Enter a PIVX address (e.g. %1)</source>
+        <source>Enter a GROW address (e.g. %1)</source>
         <translation>Mata in en PIVX adress (e.g. %1)</translation>
     </message>
     <message>
@@ -3825,7 +3825,7 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
         <translation>Split block verktyget fungerar inte med flera adresser. Försök igen.</translation>
     </message>
     <message>
-        <source>Warning: Invalid PIVX address</source>
+        <source>Warning: Invalid GROW address</source>
         <translation>Varning: Ogiltig PIVX adress</translation>
     </message>
     <message>
@@ -3928,7 +3928,7 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
         <translation>Betala &amp;Till:</translation>
     </message>
     <message>
-        <source>The PIVX address to send the payment to</source>
+        <source>The GROW address to send the payment to</source>
         <translation>PIVX adressen att skicka betalningen till</translation>
     </message>
     <message>
@@ -4018,7 +4018,7 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
         <translation>Du kan signera meddelanden med din egna adress för att bevisa att du äger dem. Se upp för att signera något vagt, då phishing-attacker kan försöka lura dig att signera din identitet åt dom. Signera endast fullt detaljerade påståenden du går med på.</translation>
     </message>
     <message>
-        <source>The PIVX address to sign the message with</source>
+        <source>The GROW address to sign the message with</source>
         <translation>PIVX adressen för signera meddelandet med</translation>
     </message>
     <message>
@@ -4050,15 +4050,15 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
         <translation>Kopiera den nuvarande signaturen till systemets urklipp</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this PIVX address</source>
+        <source>Sign the message to prove you own this GROW address</source>
         <translation>Signera meddelandet för att bevisa att du äger denna PIVX adress</translation>
     </message>
     <message>
-        <source>The PIVX address the message was signed with</source>
+        <source>The GROW address the message was signed with</source>
         <translation>PIVX adressen meddelandet blev signerat med</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified PIVX address</source>
+        <source>Verify the message to ensure it was signed with the specified GROW address</source>
         <translation>Verifiera meddelandet för att säkerställa att de blev signerat med den specifika PIVX adressen.</translation>
     </message>
     <message>
@@ -4162,7 +4162,7 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
     </message>
     <message>
         <source>The PIVX Core developers</source>
-        <translation>GROW Core utvecklarna</translation>
+        <translation>PIVX Core utvecklarna</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -4800,7 +4800,7 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
     </message>
 </context>
 <context>
-    <name>pivx-core</name>
+    <name>bitcoin-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = behåll tx meta data t.ex. kontoägare och information om betalningsförfråga, 2 = släpp tx meta data)</translation>

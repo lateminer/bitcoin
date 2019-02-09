@@ -293,7 +293,7 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
                 return InvalidAmount;
             }
             total += subtotal;
-        } else { // User-entered pivx address / amount:
+        } else { // User-entered PIVX/GROW address / amount:
             if (!validateAddress(rcp.address)) {
                 return InvalidAddress;
             }

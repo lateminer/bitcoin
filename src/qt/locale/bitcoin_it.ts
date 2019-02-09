@@ -62,11 +62,11 @@
         <translation>Indirizzi di ricezione</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your GROW addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>Questi sono gli indirizzi PIVX per l'invio di pagamenti. Controlla sempre l'importo e l'indirizzo di ricezione prima di inviare valuta.</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your GROW addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>Questi sono gli indirizzi PIVX per la ricezione di pagamenti. Si raccomanda di utilizzare un indirizzo diverso per ogni transazione.</translation>
     </message>
     <message>
@@ -254,12 +254,12 @@
         <translation>Indirizzo:</translation>
     </message>
     <message>
-        <source>Enter a PIVX Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>Inserire un indirizzo PIVX da crittografare utilizzando BIP 38. Inserire una password nel campo centrale. Cliccare su "cripta" per generare la chiave privata crittografata.</translation>
+        <source>Enter a GROW Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
+        <translation>Inserire un indirizzo GROW da crittografare utilizzando BIP 38. Inserire una password nel campo centrale. Cliccare su "cripta" per generare la chiave privata crittografata.</translation>
     </message>
     <message>
-        <source>The PIVX address to encrypt</source>
-        <translation>Indirizzo PIVX da crittografare</translation>
+        <source>The GROW address to encrypt</source>
+        <translation>Indirizzo GROW da crittografare</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -290,7 +290,7 @@
         <translation>Copiare la firma corrente negli Appunti di sistema</translation>
     </message>
     <message>
-        <source>Encrypt the private key for this PIVX address</source>
+        <source>Encrypt the private key for this GROW address</source>
         <translation>Crittografa la chiave privata per questo indirizzo PIVX</translation>
     </message>
     <message>
@@ -649,7 +649,7 @@
         <translation>GROW Core</translation>
     </message>
     <message>
-        <source>Send coins to a PIVX address</source>
+        <source>Send coins to a GROW address</source>
         <translation>Invia valuta all'indirizzo PIVX</translation>
     </message>
     <message>
@@ -681,11 +681,11 @@
         <translation>Modifica le opzioni di configurazione per PIVX</translation>
     </message>
     <message>
-        <source>Sign messages with your PIVX addresses to prove you own them</source>
+        <source>Sign messages with your GROW addresses to prove you own them</source>
         <translation>Firma i messaggi con i tuoi indirizzi PIVX per dimostrare di essere il proprietario </translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified PIVX addresses</source>
+        <source>Verify messages to ensure they were signed with specified GROW addresses</source>
         <translation>Verifica i messaggi per assicurarsi che siano stati firmati con indirizzi PIVX specifici</translation>
     </message>
     <message>
@@ -1173,7 +1173,7 @@ MultiSend: %1</translation>
         <translation>Modifica indirizzo di invio</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid PIVX address.</source>
+        <source>The entered address "%1" is not a valid GROW address.</source>
         <translation>L'indirizzo inserito "%1" non è un indirizzo PIVX valido.</translation>
     </message>
     <message>
@@ -1436,8 +1436,8 @@ MultiSend: %1</translation>
         <translation>Inserire indirizzo destinatario</translation>
     </message>
     <message>
-        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other PIVX addresses after it matures.
-To Add: enter percentage to give and PIVX address to add to the MultiSend vector.
+        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other GROW addresses after it matures.
+To Add: enter percentage to give and GROW address to add to the MultiSend vector.
 To Delete: Enter address to delete and press delete.
 MultiSend will not be activated unless you have clicked Activate</source>
         <translation>MultiSend ti permette di inviare automaticamente ad una lista di indirizzi PIVX fino al 100% delle ricompense di stake o masternodi, dopo che queste sono mature.
@@ -2483,7 +2483,7 @@ Per cambiare la percentuale (riavvio non necessario):
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
-        <source>The PIVX address to sign the message with</source>
+        <source>The GROW address to sign the message with</source>
         <translation>L'indirizzo PIVX per firmare il messaggio con</translation>
     </message>
     <message>
@@ -2507,15 +2507,15 @@ Per cambiare la percentuale (riavvio non necessario):
         <translation>Copiare la firma corrente negli Appunti di sistema</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this PIVX address</source>
+        <source>Sign the message to prove you own this GROW address</source>
         <translation>Firmare il messaggio per dimostrare di possedere questo indirizzo PIVX</translation>
     </message>
     <message>
-        <source>The PIVX address the message was signed with</source>
+        <source>The GROW address the message was signed with</source>
         <translation>L'indirizzo PIVX con cui è stato firmato il messaggio</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified PIVX address</source>
+        <source>Verify the message to ensure it was signed with the specified GROW address</source>
         <translation>Verificare il messaggio per assicurarsi che sia stato firmato con l'indirizzo PIVX specificato </translation>
     </message>
     <message>
@@ -2677,7 +2677,7 @@ Per cambiare la percentuale (riavvio non necessario):
     </message>
     </context>
 <context>
-    <name>pivx-core</name>
+    <name>bitcoin-core</name>
     <message>
         <source>Error</source>
         <translation>Errore</translation>

@@ -70,14 +70,14 @@ This help message
 \fBbackupwallet 'destination'\fR
 Safely copies *wallet.dat* to 'destination', which can be a directory or a path with filename.
 .TP
-\fBgetaccount 'pivxaddress'\fR
+\fBgetaccount 'growaddress'\fR
 Returns the account associated with the given address.
 .TP
-\fBsetaccount 'pivxaddress' ['account']\fR
+\fBsetaccount 'growaddress' ['account']\fR
 Sets the ['account'] associated with the given address. ['account'] may be omitted to remove an address from ['account'].
 .TP
 \fBgetaccountaddress 'account'\fR
-Returns a new pivx address for 'account'.
+Returns a new GROW address for 'account'.
 .TP
 \fBgetaddressesbyaccount 'account'\fR
 Returns the list of addresses associated with the given 'account'.
@@ -110,13 +110,13 @@ Returns a recent hashes per second performance measurement while generating.
 Returns an object containing server information.
 .TP
 \fBgetnewaddress 'account'\fR
-Returns a new pivx address for receiving payments. If 'account' is specified (recommended), it is added to the address book so payments received with the address will be credited to 'account'.
+Returns a new GROW address for receiving payments. If 'account' is specified (recommended), it is added to the address book so payments received with the address will be credited to 'account'.
 .TP
 \fBgetreceivedbyaccount 'account' ['minconf=1']\fR
 Returns the total amount received by addresses associated with 'account' in transactions with at least ['minconf'] confirmations.
 .TP
-\fBgetreceivedbyaddress 'pivxaddress' ['minconf=1']\fR
-Returns the total amount received by 'pivxaddress' in transactions with at least ['minconf'] confirmations.
+\fBgetreceivedbyaddress 'growaddress' ['minconf=1']\fR
+Returns the total amount received by 'growaddress' in transactions with at least ['minconf'] confirmations.
 .TP
 \fBgettransaction 'txid'\fR
 Returns information about a specific transaction, given hexadecimal transaction ID.
@@ -168,21 +168,21 @@ Returns a list of the last ['count'] transactions for 'account' \- for all accou
 \fBmove <'fromaccount'> <'toaccount'> <'amount'> ['minconf=1'] ['comment']\fR
 Moves funds between accounts.
 .TP
-\fBsendfrom* <'account'> <'pivxaddress'> <'amount'> ['minconf=1'] ['comment'] ['comment-to']\fR
-Sends amount from account's balance to 'pivxaddress'. This method will fail if there is less than amount GROW with ['minconf'] confirmations in the account's balance (unless account is the empty-string-named default account; it behaves like the *sendtoaddress* method). Returns transaction ID on success.
+\fBsendfrom* <'account'> <'growaddress'> <'amount'> ['minconf=1'] ['comment'] ['comment-to']\fR
+Sends amount from account's balance to 'growaddress'. This method will fail if there is less than amount GROW with ['minconf'] confirmations in the account's balance (unless account is the empty-string-named default account; it behaves like the *sendtoaddress* method). Returns transaction ID on success.
 .TP
-\fBsendtoaddress 'pivxaddress' 'amount' ['comment'] ['comment-to']\fR
-Sends amount from the server's available balance to 'pivxaddress'. amount is a real and is rounded to the nearest 0.01. Returns transaction id on success.
+\fBsendtoaddress 'growaddress' 'amount' ['comment'] ['comment-to']\fR
+Sends amount from the server's available balance to 'growaddress'. amount is a real and is rounded to the nearest 0.01. Returns transaction id on success.
 .TP
 \fBstop\fR
 Stops the pivx server.
 .TP
-\fBvalidateaddress 'pivxaddress'\fR
-Checks that 'pivxaddress' looks like a proper PIVX address. Returns an object containing:
+\fBvalidateaddress 'growaddress'\fR
+Checks that 'growaddress' looks like a proper GROW address. Returns an object containing:
 
     "isvalid" : true or false.
     "ismine"  : true if the address is in the server's wallet.
-    "address" : pivxaddress.
+    "address" : growaddress.
 
     *note: ismine and address are only returned if the address is valid.
 

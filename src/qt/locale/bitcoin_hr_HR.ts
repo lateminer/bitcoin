@@ -62,11 +62,11 @@
         <translation>Adresa primatelja</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your GROW addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>To su vaše PIVX adrese za slanje plaćanja. Uvijek provjerite iznos i adresu primatelja prije slanja novca.</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your GROW addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>To su vaše PIVX adrese za primanje uplata. Preporuča se upotreba nove adrese primatelja za svaku transakciju.</translation>
     </message>
     <message>
@@ -254,12 +254,12 @@
         <translation>Adresa:</translation>
     </message>
     <message>
-        <source>Enter a PIVX Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>Unesite PIVX adresu koju želite šifrirati pomoću BIP 38. Unesite zaporku u srednjem okviru. Pritisnite šifriranje za izračunavanje šifriranog privatnog ključa.</translation>
+        <source>Enter a GROW Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
+        <translation>Unesite GROW adresu koju želite šifrirati pomoću BIP 38. Unesite zaporku u srednjem okviru. Pritisnite šifriranje za izračunavanje šifriranog privatnog ključa.</translation>
     </message>
     <message>
-        <source>The PIVX address to encrypt</source>
-        <translation>PIVX adresa za šifriranje</translation>
+        <source>The GROW address to encrypt</source>
+        <translation>GROW adresa za šifriranje</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -290,7 +290,7 @@
         <translation>Kopirajte trenutačni potpis u međuspremnik sustava</translation>
     </message>
     <message>
-        <source>Encrypt the private key for this PIVX address</source>
+        <source>Encrypt the private key for this GROW address</source>
         <translation>Šifriranje privatnog ključa za ovu PIVX adresu</translation>
     </message>
     <message>
@@ -649,7 +649,7 @@
         <translation>GROW Core</translation>
     </message>
     <message>
-        <source>Send coins to a PIVX address</source>
+        <source>Send coins to a GROW address</source>
         <translation>Pošaljite kovanice na PIVX adresu</translation>
     </message>
     <message>
@@ -681,11 +681,11 @@
         <translation>Izmijenite konfiguracijske opcije za PIVX</translation>
     </message>
     <message>
-        <source>Sign messages with your PIVX addresses to prove you own them</source>
+        <source>Sign messages with your GROW addresses to prove you own them</source>
         <translation>Potpišite poruke s vašim PIVX adresama kako biste dokazali da ih posjedujete</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified PIVX addresses</source>
+        <source>Verify messages to ensure they were signed with specified GROW addresses</source>
         <translation>Potvrdite poruke kako biste bili sigurni da su potpisani s određenim PIVX adresama</translation>
     </message>
     <message>
@@ -1185,7 +1185,7 @@ Višestruko slanje: %1</translation>
         <translation>Uređivanje adrese slanja</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid PIVX address.</source>
+        <source>The entered address "%1" is not a valid GROW address.</source>
         <translation>Unesena adresa "%1" nije važeća PIVX adresa.</translation>
     </message>
     <message>
@@ -1448,8 +1448,8 @@ Višestruko slanje: %1</translation>
         <translation>Unesite adresu za slanje</translation>
     </message>
     <message>
-        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other PIVX addresses after it matures.
-To Add: enter percentage to give and PIVX address to add to the MultiSend vector.
+        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other GROW addresses after it matures.
+To Add: enter percentage to give and GROW address to add to the MultiSend vector.
 To Delete: Enter address to delete and press delete.
 MultiSend will not be activated unless you have clicked Activate</source>
         <translation>MultiSend vam omogućuje da automatski pošaljete do 100% svoje nagrade za ulog ili masternode  nagrade na popis drugih PIVX adresa nakon što sazrijete.
@@ -1881,8 +1881,8 @@ Budite strpljivi nakon što kliknete uvoz.</translation>
         <translation>Ako onemogućite potrošnju nepotvrđenih promjena, promjena s transakcijskog kanala bit će upotrijebljena sve dok ta transakcija nema barem jednu potvrdu. To također utječe na izračun salda.</translation>
     </message>
     <message>
-        <source>Automatically open the PIVX client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Automatski otvorite PIVX klijentski priključak na rooteru. To funkcionira samo kada vaš rooter podržava UPnP i omogućen je.</translation>
+        <source>Automatically open the GROW client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Automatski otvorite GROW klijentski priključak na rooteru. To funkcionira samo kada vaš rooter podržava UPnP i omogućen je.</translation>
     </message>
     <message>
         <source>Accept connections from outside</source>
@@ -2292,7 +2292,7 @@ Da biste omogućili, promjenite postavke AutoMint 'enablezeromint=0' na 'enablez
         <translation>Ne može se pokrenuti grow: clik-to-pay handler</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid PIVX address or malformed URI parameters.</source>
+        <source>URI cannot be parsed! This can be caused by an invalid GROW address or malformed URI parameters.</source>
         <translation>URI se ne može analizirati! To može biti uzrokovana nevažećom PIVX adresom ili nepravilnim URI parametrima.</translation>
     </message>
     <message>
@@ -2502,7 +2502,7 @@ zGROW su zreli kada imaju više od 20 potvrda I više od 2 mint od iste denomina
         <translation>Platiti:</translation>
     </message>
     <message>
-        <source>The PIVX address to send the payment to. Creates local payment to yourself when empty.</source>
+        <source>The GROW address to send the payment to. Creates local payment to yourself when empty.</source>
         <translation>PIVX adresa za slanje uplate. Stvara lokalno plaćanje za sebe kada je prazno.</translation>
     </message>
     <message>
@@ -2926,8 +2926,8 @@ Maksimalno dopušteno:</translation>
         <translation>Nije dodijeljena adresa "Plati", stvarajući lokalnu uplatu</translation>
     </message>
     <message>
-        <source>Invalid Pivx Address</source>
-        <translation>Nevažeća Pivx Adresa</translation>
+        <source>Invalid GROW Address</source>
+        <translation>Nevažeća GROW Adresa</translation>
     </message>
     <message>
         <source>Invalid Send Amount</source>
@@ -3027,7 +3027,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Iznos</translation>
     </message>
     <message>
-        <source>Enter a PIVX address (e.g. %1)</source>
+        <source>Enter a GROW address (e.g. %1)</source>
         <translation>Unesite PIVX adresu (npr., %1)</translation>
     </message>
     <message>
@@ -3909,7 +3909,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Alat za podjelu blocka ne funkcionira s više adresa. Pokušajte ponovo.</translation>
     </message>
     <message>
-        <source>Warning: Invalid PIVX address</source>
+        <source>Warning: Invalid GROW address</source>
         <translation>Upozorenje: Nevažeća PIVX adresa</translation>
     </message>
     <message>
@@ -4012,7 +4012,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Platiti:</translation>
     </message>
     <message>
-        <source>The PIVX address to send the payment to</source>
+        <source>The GROW address to send the payment to</source>
         <translation>PIVX adresa za slanje uplate</translation>
     </message>
     <message>
@@ -4102,7 +4102,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Možete potpisati poruke s vašim adresama kako biste dokazali da ih posjedujete. Pazite da ne potpišete ništa nejasno, jer napadi za krađu identiteta mogu Vas pokušati uvjeriti da vam potpišu identitet. Potpišite samo detalje oko kojih se slažete.</translation>
     </message>
     <message>
-        <source>The PIVX address to sign the message with</source>
+        <source>The GROW address to sign the message with</source>
         <translation>PIVX adresa za potpisivanje poruke</translation>
     </message>
     <message>
@@ -4134,15 +4134,15 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Kopirajte trenutačni potpis u međuspremnik sustava</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this PIVX address</source>
+        <source>Sign the message to prove you own this GROW address</source>
         <translation>Potpišite poruku da biste dokazali da ste vlasnik ove PIVX adrese</translation>
     </message>
     <message>
-        <source>The PIVX address the message was signed with</source>
+        <source>The GROW address the message was signed with</source>
         <translation>PIVX adresa s kojom je potpisana poruka</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified PIVX address</source>
+        <source>Verify the message to ensure it was signed with the specified GROW address</source>
         <translation>Potvrdite poruku kako biste bili sigurni da je potpisana s navedenom PIVX adresom</translation>
     </message>
     <message>
@@ -4246,7 +4246,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>The PIVX Core developers</source>
-        <translation>GROW Core programeri</translation>
+        <translation>PIVX Core programeri</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -4885,7 +4885,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
 </context>
 <context>
-    <name>pivx-core</name>
+    <name>bitcoin-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = zadržite metapodatke tx, npr. Vlasnika računa i podatke o zahtjevu za plaćanje, 2 = odbaci meta podataka tx)</translation>

@@ -513,7 +513,7 @@
         <translation>&amp;Rdzeń PIVX</translation>
     </message>
     <message>
-        <source>Send coins to a PIVX address</source>
+        <source>Send coins to a GROW address</source>
         <translation>Wyślij monety do adresu PIVX</translation>
     </message>
     <message>
@@ -541,11 +541,11 @@
         <translation>Modyfikuj opcje konfiguracji PIVX</translation>
     </message>
     <message>
-        <source>Sign messages with your PIVX addresses to prove you own them</source>
+        <source>Sign messages with your GROW addresses to prove you own them</source>
         <translation>Zatwierdź wiadomość z twoimi adresami PIVX, by udowodnić, że jesteś w ich posiadaniu</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified PIVX addresses</source>
+        <source>Verify messages to ensure they were signed with specified GROW addresses</source>
         <translation>Zweryfikuj wiadomości by upewnić się, że zostały zatwierdzone z podanego adresu PIVX</translation>
     </message>
     <message>
@@ -1463,7 +1463,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations </translation>
         <translation>Liczba</translation>
     </message>
     <message>
-        <source>Enter a PIVX address (e.g. %1)</source>
+        <source>Enter a GROW address (e.g. %1)</source>
         <translation>Wprowadź adres PIVX (np. %1)</translation>
     </message>
     <message>
@@ -1894,7 +1894,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations </translation>
         <translation>Alt+P</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this PIVX address</source>
+        <source>Sign the message to prove you own this GROW address</source>
         <translation>Zatwierdź wiadomość, aby udowodnić, że podany adres PIVX jest w twoim posiadaniu</translation>
     </message>
     <message>
@@ -2028,7 +2028,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations </translation>
     </message>
     </context>
 <context>
-    <name>pivx-core</name>
+    <name>bitcoin-core</name>
     <message>
         <source>Error</source>
         <translation>Błąd</translation>

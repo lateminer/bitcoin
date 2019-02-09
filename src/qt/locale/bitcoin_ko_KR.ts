@@ -62,11 +62,11 @@
         <translation>받을 주소</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your GROW addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>이 주소들은 송금할 PIVX 주소입니다. 송금하기 전 항상 금액과 주소를 확인해주세요.</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your GROW addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>이 주소들은 입금 받을 PIVX 주소입니다. 매 거래마다 새로운 입금 주소를 사용하는 것이 좋습니다.</translation>
     </message>
     <message>
@@ -254,12 +254,12 @@
         <translation>주소:</translation>
     </message>
     <message>
-        <source>Enter a PIVX Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>BIP 38 알고리즘으로 암호화할 PIVX 지갑 주소를 입력. 중간박스에 암호구절 입력. 암호화된 개인키를 계산하시려면 암호화 클릭</translation>
+        <source>Enter a GROW Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
+        <translation>BIP 38 알고리즘으로 암호화할 GROW 지갑 주소를 입력. 중간박스에 암호구절 입력. 암호화된 개인키를 계산하시려면 암호화 클릭</translation>
     </message>
     <message>
-        <source>The PIVX address to encrypt</source>
-        <translation>암호화할 PIVX 주소</translation>
+        <source>The GROW address to encrypt</source>
+        <translation>암호화할 GROW 주소</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -290,7 +290,7 @@
         <translation>현재 서명을 시스템 클립 보드에 복사</translation>
     </message>
     <message>
-        <source>Encrypt the private key for this PIVX address</source>
+        <source>Encrypt the private key for this GROW address</source>
         <translation>이 PIVX 주소의 개인키 암호화</translation>
     </message>
     <message>
@@ -649,7 +649,7 @@
         <translation>GROW Core</translation>
     </message>
     <message>
-        <source>Send coins to a PIVX address</source>
+        <source>Send coins to a GROW address</source>
         <translation>PIVX 주소로 입금하기</translation>
     </message>
     <message>
@@ -681,11 +681,11 @@
         <translation>PIVX에 대한 구성 옵션 수정</translation>
     </message>
     <message>
-        <source>Sign messages with your PIVX addresses to prove you own them</source>
+        <source>Sign messages with your GROW addresses to prove you own them</source>
         <translation>PIVX 주소로 메시지에 서명하여 소유하고 있음을 증명하십시오.</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified PIVX addresses</source>
+        <source>Verify messages to ensure they were signed with specified GROW addresses</source>
         <translation>메시지가 지정된 PIVX 주소로 서명되었는지 확인합니다.</translation>
     </message>
     <message>
@@ -1185,7 +1185,7 @@ Address: %4
         <translation>보내는 주소 수정</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid PIVX address.</source>
+        <source>The entered address "%1" is not a valid GROW address.</source>
         <translation>입력된 주소 "%1"는 올바른 PIVX 주소가 아닙니다.</translation>
     </message>
     <message>
@@ -1448,8 +1448,8 @@ Address: %4
         <translation>보낼 주소 입력</translation>
     </message>
     <message>
-        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other PIVX addresses after it matures.
-To Add: enter percentage to give and PIVX address to add to the MultiSend vector.
+        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other GROW addresses after it matures.
+To Add: enter percentage to give and GROW address to add to the MultiSend vector.
 To Delete: Enter address to delete and press delete.
 MultiSend will not be activated unless you have clicked Activate</source>
         <translation>다중전송을 사용하면 성취 한 뒤 다른 PIVX 주소 목록에 최대 100% 스테이크 또는 마스터노드 보상을 자동으로 보낼 수 있습니다.
@@ -1882,8 +1882,8 @@ Please be patient after clicking import.</source>
         <translation>확인되지 않은 변경사항을 사용하지 않도록 설정하면 해당 트랜잭션에 하나 이상의 컨펌이 진행되야&lt;br/&gt;트랜잭션에 변경사항을 적용할 수 있습니다.&lt;br/&gt;또한 이것은 잔액 계산 방식에도 영향을 줍니다.</translation>
     </message>
     <message>
-        <source>Automatically open the PIVX client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>라우터에서 PIVX 클라이언트 포트를 자동으로 엽니다. 이 기능은 라우터가 UPnP를 지원하고 활성화 된 경우에만 사용할 수 있습니다.</translation>
+        <source>Automatically open the GROW client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>라우터에서 GROW 클라이언트 포트를 자동으로 엽니다. 이 기능은 라우터가 UPnP를 지원하고 활성화 된 경우에만 사용할 수 있습니다.</translation>
     </message>
     <message>
         <source>Accept connections from outside</source>
@@ -2291,7 +2291,7 @@ To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in grow.conf<
         <translation>PIVX을 시작할 수 없습니다: 결제하기 위한 클릭 처리</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid PIVX address or malformed URI parameters.</source>
+        <source>URI cannot be parsed! This can be caused by an invalid GROW address or malformed URI parameters.</source>
         <translation>URI를 분석할 수 없습니다! 이는 잘못된 PIVX 주소 또는 URI 매개변수 손상으로 인해 발생할 수 있습니다.</translation>
     </message>
     <message>
@@ -2501,7 +2501,7 @@ zGROW는 성명서가 20 개 이상 있고 명칭이 동일하지 않은 2 개 �
         <translation>지불 &amp;대상:</translation>
     </message>
     <message>
-        <source>The PIVX address to send the payment to. Creates local payment to yourself when empty.</source>
+        <source>The GROW address to send the payment to. Creates local payment to yourself when empty.</source>
         <translation>GROW를 전송할 PIVX 주소입니다. 비어있을 때 자신에게 지불할 주소를 생성합니다.</translation>
     </message>
     <message>
@@ -2929,8 +2929,8 @@ Maximum allowed: </source>
         <translation>주소를 입력하지 않아, 신규 주소를 생성합니다.</translation>
     </message>
     <message>
-        <source>Invalid Pivx Address</source>
-        <translation>잘못된 PIVX 주소</translation>
+        <source>Invalid GROW Address</source>
+        <translation>잘못된 GROW 주소</translation>
     </message>
     <message>
         <source>Invalid Send Amount</source>
@@ -3030,7 +3030,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>금액</translation>
     </message>
     <message>
-        <source>Enter a PIVX address (e.g. %1)</source>
+        <source>Enter a GROW address (e.g. %1)</source>
         <translation>PIVX 주소를 입력하세요 (예 %1)</translation>
     </message>
     <message>
@@ -3909,7 +3909,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>분할 블록 도구는 여러 주소에서 작동하지 않습니다. 다시 시도하십시오.</translation>
     </message>
     <message>
-        <source>Warning: Invalid PIVX address</source>
+        <source>Warning: Invalid GROW address</source>
         <translation>경고: 잘못된 PIVX 주소</translation>
     </message>
     <message>
@@ -4012,7 +4012,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>지불 &amp;대상:</translation>
     </message>
     <message>
-        <source>The PIVX address to send the payment to</source>
+        <source>The GROW address to send the payment to</source>
         <translation>보낼 PIVX 주소</translation>
     </message>
     <message>
@@ -4102,7 +4102,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>자신의 주소로 메세지에 서명할 수 있습니다. 피싱 공격으로 사용자를 속일 수 있으므로 서명에 주의해주세요. 동의하는 바에 한하여 서명하십시오.</translation>
     </message>
     <message>
-        <source>The PIVX address to sign the message with</source>
+        <source>The GROW address to sign the message with</source>
         <translation>메세지를 서명하기 위한 PIVX 주소</translation>
     </message>
     <message>
@@ -4134,15 +4134,15 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>현재 서명을 시스템 클립 보드에 복사</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this PIVX address</source>
+        <source>Sign the message to prove you own this GROW address</source>
         <translation>이 PIVX 주소를 소유하고 있다는 것을 증명하기 위해 메세지에 서명하십시오</translation>
     </message>
     <message>
-        <source>The PIVX address the message was signed with</source>
+        <source>The GROW address the message was signed with</source>
         <translation>메세지에 서명된 PIVX 주소</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified PIVX address</source>
+        <source>Verify the message to ensure it was signed with the specified GROW address</source>
         <translation>메세지가 지정된 PIVX 주소로 서명되었는지 확인해주세요</translation>
     </message>
     <message>
@@ -4246,7 +4246,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>The PIVX Core developers</source>
-        <translation>GROW Core 개발자</translation>
+        <translation>PIVX Core 개발자</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -4885,7 +4885,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
 </context>
 <context>
-    <name>pivx-core</name>
+    <name>bitcoin-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = tx 메타 데이터 유지 예 : 계정 소유자 및 지불 요청 정보, 2 = tx 메타 데이터 삭제)</translation>
@@ -5268,7 +5268,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Copyright (C) 2015-%i The PIVX Core developers</source>
-        <translation>Copyright (C) 2015-%i The GROW Core 개발자</translation>
+        <translation>Copyright (C) 2015-%i The PIVX Core 개발자</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>

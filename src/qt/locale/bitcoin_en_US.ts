@@ -62,12 +62,12 @@
         <translation>Receiving addresses</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>These are your PIVX addresses for sending payments. Always check the amount and the receiving address before sending coins.</translation>
+        <source>These are your GROW addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>These are your GROW addresses for sending payments. Always check the amount and the receiving address before sending coins.</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>These are your PIVX addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</translation>
+        <source>These are your GROW addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>These are your GROW addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -239,16 +239,16 @@
         <translation>&amp;BIP 38 Encrypt</translation>
     </message>
     <message>
-        <source>Enter a Pivx Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>Enter a Pivx Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</translation>
+        <source>Enter a GROW Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
+        <translation>Enter a GROW Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</translation>
     </message>
     <message>
         <source>Address:</source>
         <translation>Address:</translation>
     </message>
     <message>
-        <source>The PIVX address to sign the message with</source>
-        <translation>The PIVX address to sign the message with</translation>
+        <source>The GROW address to sign the message with</source>
+        <translation>The GROW address to sign the message with</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -279,8 +279,8 @@
         <translation>Copy the current signature to the system clipboard</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this PIVX address</source>
-        <translation>Sign the message to prove you own this PIVX address</translation>
+        <source>Sign the message to prove you own this GROW address</source>
+        <translation>Sign the message to prove you own this GROW address</translation>
     </message>
     <message>
         <source>Encrypt &amp;Key</source>
@@ -303,12 +303,12 @@
         <translation>Enter the BIP 38 encrypted private key. Enter the passphrase in the middle box. Click Decrypt Key to compute the private key. After the key is decrypted, clicking 'Import Address' will add this private key to the wallet.</translation>
     </message>
     <message>
-        <source>The PIVX address the message was signed with</source>
-        <translation>The PIVX address the message was signed with</translation>
+        <source>The GROW address the message was signed with</source>
+        <translation>The GROW address the message was signed with</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified PIVX address</source>
-        <translation>Verify the message to ensure it was signed with the specified PIVX address</translation>
+        <source>Verify the message to ensure it was signed with the specified GROW address</source>
+        <translation>Verify the message to ensure it was signed with the specified GROW address</translation>
     </message>
     <message>
         <source>Decrypt &amp;Key</source>
@@ -606,8 +606,8 @@
         <translation>GROW Core</translation>
     </message>
     <message>
-        <source>Send coins to a PIVX address</source>
-        <translation>Send coins to a PIVX address</translation>
+        <source>Send coins to a GROW address</source>
+        <translation>Send coins to a GROW address</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and grow: URIs)</source>
@@ -634,12 +634,12 @@
         <translation>Modify configuration options for PIVX</translation>
     </message>
     <message>
-        <source>Sign messages with your PIVX addresses to prove you own them</source>
-        <translation>Sign messages with your PIVX addresses to prove you own them</translation>
+        <source>Sign messages with your GROW addresses to prove you own them</source>
+        <translation>Sign messages with your GROW addresses to prove you own them</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified PIVX addresses</source>
-        <translation>Verify messages to ensure they were signed with specified PIVX addresses</translation>
+        <source>Verify messages to ensure they were signed with specified GROW addresses</source>
+        <translation>Verify messages to ensure they were signed with specified GROW addresses</translation>
     </message>
     <message>
         <source>&amp;BIP38 tool</source>
@@ -1138,8 +1138,8 @@ Address: %4
         <translation>Edit sending address</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid PIVX address.</source>
-        <translation>The entered address "%1" is not a valid PIVX address.</translation>
+        <source>The entered address "%1" is not a valid GROW address.</source>
+        <translation>The entered address "%1" is not a valid GROW address.</translation>
     </message>
     <message>
         <source>The entered address "%1" is already in the address book.</source>
@@ -1401,12 +1401,12 @@ Address: %4
         <translation>Enter Address to Send to</translation>
     </message>
     <message>
-        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other PIVX addresses after it matures.
-To Add: enter percentage to give and PIVX address to add to the MultiSend vector.
+        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other GROW addresses after it matures.
+To Add: enter percentage to give and GROW address to add to the MultiSend vector.
 To Delete: Enter address to delete and press delete.
 MultiSend will not be activated unless you have clicked Activate</source>
-        <translation>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other PIVX addresses after it matures.
-To Add: enter percentage to give and PIVX address to add to the MultiSend vector.
+        <translation>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other GROW addresses after it matures.
+To Add: enter percentage to give and GROW address to add to the MultiSend vector.
 To Delete: Enter address to delete and press delete.
 MultiSend will not be activated unless you have clicked Activate</translation>
     </message>
@@ -1646,8 +1646,8 @@ Please check the address and try again.</translation>
         <translation>If you disable the spending of unconfirmed change, the change from a transaction&lt;br/&gt;cannot be used until that transaction has at least one confirmation.&lt;br/&gt;This also affects how your balance is computed.</translation>
     </message>
     <message>
-        <source>Automatically open the PIVX client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Automatically open the PIVX client port on the router. This only works when your router supports UPnP and it is enabled.</translation>
+        <source>Automatically open the GROW client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Automatically open the GROW client port on the router. This only works when your router supports UPnP and it is enabled.</translation>
     </message>
     <message>
         <source>Accept connections from outside</source>
@@ -2096,8 +2096,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Cannot start grow: click-to-pay handler</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid PIVX address or malformed URI parameters.</source>
-        <translation>URI cannot be parsed! This can be caused by an invalid PIVX address or malformed URI parameters.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid GROW address or malformed URI parameters.</source>
+        <translation>URI cannot be parsed! This can be caused by an invalid GROW address or malformed URI parameters.</translation>
     </message>
     <message>
         <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
@@ -2182,8 +2182,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Amount</translation>
     </message>
     <message>
-        <source>Enter a PIVX address (e.g. %1)</source>
-        <translation>Enter a PIVX address (e.g. %1)</translation>
+        <source>Enter a GROW address (e.g. %1)</source>
+        <translation>Enter a GROW address (e.g. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -2952,8 +2952,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>anonymous funds</translation>
     </message>
     <message>
-        <source>Warning: Invalid PIVX address</source>
-        <translation>Warning: Invalid PIVX address</translation>
+        <source>Warning: Invalid GROW address</source>
+        <translation>Warning: Invalid GROW address</translation>
     </message>
     <message>
         <source>any available funds (not recommended)</source>
@@ -3059,8 +3059,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Pay &amp;To:</translation>
     </message>
     <message>
-        <source>The PIVX address to send the payment to</source>
-        <translation>The PIVX address to send the payment to</translation>
+        <source>The GROW address to send the payment to</source>
+        <translation>The GROW address to send the payment to</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -3149,8 +3149,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>You can sign messages with your addresses to prove you own them. Be careful not to sign anything vague, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</translation>
     </message>
     <message>
-        <source>The PIVX address to sign the message with</source>
-        <translation>The PIVX address to sign the message with</translation>
+        <source>The GROW address to sign the message with</source>
+        <translation>The GROW address to sign the message with</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -3181,16 +3181,16 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Copy the current signature to the system clipboard</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this PIVX address</source>
-        <translation>Sign the message to prove you own this PIVX address</translation>
+        <source>Sign the message to prove you own this GROW address</source>
+        <translation>Sign the message to prove you own this GROW address</translation>
     </message>
     <message>
-        <source>The PIVX address the message was signed with</source>
-        <translation>The PIVX address the message was signed with</translation>
+        <source>The GROW address the message was signed with</source>
+        <translation>The GROW address the message was signed with</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified PIVX address</source>
-        <translation>Verify the message to ensure it was signed with the specified PIVX address</translation>
+        <source>Verify the message to ensure it was signed with the specified GROW address</source>
+        <translation>Verify the message to ensure it was signed with the specified GROW address</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -3884,7 +3884,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
     </message>
 </context>
 <context>
-    <name>pivx-core</name>
+    <name>bitcoin-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</translation>

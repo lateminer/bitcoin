@@ -953,7 +953,7 @@ zGROW are mature when they have more than 20 confirmations AND more than 2 mints
                              </size>
                             </property>
                             <property name="toolTip">
-                             <string>The PIVX address to send the payment to. Creates local payment to yourself when empty.</string>
+                             <string>The GROW address to send the payment to. Creates local payment to yourself when empty.</string>
                             </property>
                            </widget>
                           </item>

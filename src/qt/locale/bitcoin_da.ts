@@ -62,11 +62,11 @@
         <translation>Modtageradresse</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your GROW addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>Dine adresser til at sende betalinger med. Kontroller altid både beløb og modtageradresse før afsendelse.</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your GROW addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>Dette er dine modtager adresser. Det anbefales at anvende en ny adresse til hver transaktion</translation>
     </message>
     <message>
@@ -254,12 +254,12 @@
         <translation>Adresse</translation>
     </message>
     <message>
-        <source>Enter a PIVX Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>Indtast en PIVX-adresse, som du gerne vil kryptere ved hjælp af BIP 38. Indtast en adgangskode i mellemkassen. Tryk på krypteringen for at beregne den krypterede private nøgle.</translation>
+        <source>Enter a GROW Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
+        <translation>Indtast en GROW-adresse, som du gerne vil kryptere ved hjælp af BIP 38. Indtast en adgangskode i mellemkassen. Tryk på krypteringen for at beregne den krypterede private nøgle.</translation>
     </message>
     <message>
-        <source>The PIVX address to encrypt</source>
-        <translation>PIVX-adressen for at kryptere</translation>
+        <source>The GROW address to encrypt</source>
+        <translation>GROW-adressen for at kryptere</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -290,7 +290,7 @@
         <translation>Kopier den aktuelle underskrift til udklipsholderen.</translation>
     </message>
     <message>
-        <source>Encrypt the private key for this PIVX address</source>
+        <source>Encrypt the private key for this GROW address</source>
         <translation>Krypter den private nøgle for denne PIVX-adresse</translation>
     </message>
     <message>
@@ -646,15 +646,15 @@
     </message>
     <message>
         <source>GROW Core</source>
-        <translation>PIVX kerne</translation>
+        <translation>GROW kerne</translation>
     </message>
     <message>
-        <source>Send coins to a PIVX address</source>
+        <source>Send coins to a GROW address</source>
         <translation>Send mønter til en PIVX adresse</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and grow: URIs)</source>
-        <translation>Anmod om betaling (genrerer QR kode og PIVX URL)</translation>
+        <translation>Anmod om betaling (genrerer QR kode og GROW URL)</translation>
     </message>
     <message>
         <source>&amp;Privacy</source>
@@ -670,23 +670,23 @@
     </message>
     <message>
         <source>&amp;About GROW Core</source>
-        <translation>&amp;Om PIVX kerne</translation>
+        <translation>&amp;Om GROW kerne</translation>
     </message>
     <message>
         <source>Show information about GROW Core</source>
-        <translation>Vis information om PIVX kerne</translation>
+        <translation>Vis information om GROW kerne</translation>
     </message>
     <message>
         <source>Modify configuration options for PIVX</source>
         <translation>Ret konfigurationsindstillinger for PIVX</translation>
     </message>
     <message>
-        <source>Sign messages with your PIVX addresses to prove you own them</source>
-        <translation>Underskriv beskeder med Deres PIVX adresser for at bekræfte at De ejer dem.</translation>
+        <source>Sign messages with your GROW addresses to prove you own them</source>
+        <translation>Underskriv beskeder med Deres GROW adresser for at bekræfte at De ejer dem.</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified PIVX addresses</source>
-        <translation>Verificer besked for at sikre, at den er underskrevet med den opgivne PIVX adresse</translation>
+        <source>Verify messages to ensure they were signed with specified GROW addresses</source>
+        <translation>Verificer besked for at sikre, at den er underskrevet med den opgivne GROW adresse</translation>
     </message>
     <message>
         <source>&amp;BIP38 tool</source>
@@ -718,7 +718,7 @@
     </message>
     <message>
         <source>Open a GROW: URI or payment request</source>
-        <translation>Åbn en PIVX URl eller betalingsanmodning</translation>
+        <translation>Åbn en GROW URl eller betalingsanmodning</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>
@@ -730,11 +730,11 @@
     </message>
     <message>
         <source>Show the GROW Core help message to get a list with possible PIVX command-line options</source>
-        <translation>Vis hjelpetekster fra PIVX kernen for at få en liste med mulige PIVX kommandolinie-startparametre</translation>
+        <translation>Vis hjelpetekster fra GROW kernen for at få en liste med mulige PIVX kommandolinie-startparametre</translation>
     </message>
     <message>
         <source>GROW Core client</source>
-        <translation>PIVX kerneklient</translation>
+        <translation>GROW kerneklient</translation>
     </message>
     <message numerus="yes">
         <source>%n active connection(s) to PIVX network</source>
@@ -1185,7 +1185,7 @@ Adresse: %4
         <translation>Ret afsenderadresse</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid PIVX address.</source>
+        <source>The entered address "%1" is not a valid GROW address.</source>
         <translation>Den indtastede adresse %1 er ikke en gyldig PIVX adresse</translation>
     </message>
     <message>
@@ -1232,7 +1232,7 @@ Adresse: %4
     </message>
     <message>
         <source>GROW Core</source>
-        <translation>PIVX kerne</translation>
+        <translation>GROW kerne</translation>
     </message>
     <message>
         <source>(%1-bit)</source>
@@ -1240,7 +1240,7 @@ Adresse: %4
     </message>
     <message>
         <source>About GROW Core</source>
-        <translation>om PIVX kerne</translation>
+        <translation>om GROW kerne</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -1287,11 +1287,11 @@ Adresse: %4
     </message>
     <message>
         <source>Welcome to GROW Core.</source>
-        <translation>Velkommen til PIVX kerne</translation>
+        <translation>Velkommen til GROW kerne</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where GROW Core will store its data.</source>
-        <translation>Da det er første gang programmet startes, kan De vælge hvor PIVX kernen skal lagre sine data</translation>
+        <translation>Da det er første gang programmet startes, kan De vælge hvor GROW kernen skal lagre sine data</translation>
     </message>
     <message>
         <source>GROW Core will download and store a copy of the PIVX block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
@@ -1307,7 +1307,7 @@ Adresse: %4
     </message>
     <message>
         <source>GROW Core</source>
-        <translation>PIVX kerne</translation>
+        <translation>GROW kerne</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
@@ -1448,12 +1448,12 @@ Adresse: %4
         <translation>Indtast modtageradresse</translation>
     </message>
     <message>
-        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other PIVX addresses after it matures.
-To Add: enter percentage to give and PIVX address to add to the MultiSend vector.
+        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other GROW addresses after it matures.
+To Add: enter percentage to give and GROW address to add to the MultiSend vector.
 To Delete: Enter address to delete and press delete.
 MultiSend will not be activated unless you have clicked Activate</source>
-        <translation>Multisend tillader at De automatisk kan sende op til 100% af Deres belønninger fra såvel indskud som masternodebelønninger til en liste over andre PIVX adressater når den er tilstrækkelig stor. 
-For at tilføje: Indtast procentsatsen De ønsker at overføre samt den PIVX adresse som skal modtage via Multisendsystemet. 
+        <translation>Multisend tillader at De automatisk kan sende op til 100% af Deres belønninger fra såvel indskud som masternodebelønninger til en liste over andre GROW adressater når den er tilstrækkelig stor. 
+For at tilføje: Indtast procentsatsen De ønsker at overføre samt den GROW adresse som skal modtage via Multisendsystemet. 
 For at fjerne: Indtast adressen som skal slettes og klik på slet. 
 Multisend vil ikke fungere med mindre systemet er aktiveret.</translation>
     </message>
@@ -1882,8 +1882,8 @@ Vær tålmodig efter at du har klikket på import.</translation>
         <translation>Hvis De slår "brug af ubekræftede penge tilbage" vil penge tilbage &lt;br/&gt; ikke kunne benyttes før transaktionen er bekræftet mindst en gang. &lt;br/&gt;Dette har også indflydelse på opgørelsen af saldoen.</translation>
     </message>
     <message>
-        <source>Automatically open the PIVX client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Åbn PIVX klientporten på ruteren automatisk. Virker kun hvis UPnP er slået til i ruteren. </translation>
+        <source>Automatically open the GROW client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Åbn GROW klientporten på ruteren automatisk. Virker kun hvis UPnP er slået til i ruteren. </translation>
     </message>
     <message>
         <source>Accept connections from outside</source>
@@ -2291,7 +2291,7 @@ For at aktivere AutoMint-ændring 'enablezeromint = 0' til 'enablezeromint = 1' 
         <translation>Kan ikke starte PIVX "klik for at betale" systemet</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid PIVX address or malformed URI parameters.</source>
+        <source>URI cannot be parsed! This can be caused by an invalid GROW address or malformed URI parameters.</source>
         <translation>URl kan ikke fortolkes! Det kan skyldes en ugyldig adresse, eller forkerte URl parametre.</translation>
     </message>
     <message>
@@ -2501,7 +2501,7 @@ zGROW er modne, når de har mere end 20 bekræftelser OG mere end 2 minutter med
         <translation>Betal &amp;Til</translation>
     </message>
     <message>
-        <source>The PIVX address to send the payment to. Creates local payment to yourself when empty.</source>
+        <source>The GROW address to send the payment to. Creates local payment to yourself when empty.</source>
         <translation>PIVX-adressen for at sende betalingen til. Opretter lokal betaling til dig selv, når du er tom.</translation>
     </message>
     <message>
@@ -2928,8 +2928,8 @@ Maksimum tilladt:</translation>
         <translation>Ingen 'Betal til' adresse, der er oprettet, skaber lokal betaling</translation>
     </message>
     <message>
-        <source>Invalid Pivx Address</source>
-        <translation> Ugyldig PIVX adresse</translation>
+        <source>Invalid GROW Address</source>
+        <translation> Ugyldig GROW adresse</translation>
     </message>
     <message>
         <source>Invalid Send Amount</source>
@@ -3030,7 +3030,7 @@ Enten mint højere nomineringer (så færre input er nødvendige) eller reducere
         <translation>Beløb</translation>
     </message>
     <message>
-        <source>Enter a PIVX address (e.g. %1)</source>
+        <source>Enter a GROW address (e.g. %1)</source>
         <translation>Indtast en PIVX adresse (F.eks. %1)</translation>
     </message>
     <message>
@@ -3908,7 +3908,7 @@ Enten mint højere nomineringer (så færre input er nødvendige) eller reducere
         <translation>Split blok værktøjet virker ikke med flere adresser. Prøv igen</translation>
     </message>
     <message>
-        <source>Warning: Invalid PIVX address</source>
+        <source>Warning: Invalid GROW address</source>
         <translation>Advarsel! Ugyldig PIVX adresse</translation>
     </message>
     <message>
@@ -4011,7 +4011,7 @@ Enten mint højere nomineringer (så færre input er nødvendige) eller reducere
         <translation>Betal &amp;Til</translation>
     </message>
     <message>
-        <source>The PIVX address to send the payment to</source>
+        <source>The GROW address to send the payment to</source>
         <translation>PIVX adressen, som betalingen skal sendes til</translation>
     </message>
     <message>
@@ -4079,7 +4079,7 @@ Enten mint højere nomineringer (så færre input er nødvendige) eller reducere
     <name>ShutdownWindow</name>
     <message>
         <source>GROW Core is shutting down...</source>
-        <translation>PIVX kernen lukker ned</translation>
+        <translation>GROW kernen lukker ned</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -4101,7 +4101,7 @@ Enten mint højere nomineringer (så færre input er nødvendige) eller reducere
         <translation>De kan underskrive beskeder med Deres adresser or at bevise ejerskab. Vær forsigtig med at underskrive noget De er usikker på såsom forsøg op at narre Dem til at oplyse Deres identitet. Skriv kun under på noget De kan stå inde for, og som De er enig i. </translation>
     </message>
     <message>
-        <source>The PIVX address to sign the message with</source>
+        <source>The GROW address to sign the message with</source>
         <translation>Den PIVX adresse, der skal bruges til at underskrive beskeden med.</translation>
     </message>
     <message>
@@ -4133,15 +4133,15 @@ Enten mint højere nomineringer (så færre input er nødvendige) eller reducere
         <translation>Kopier den aktuelle underskrift til udklipsholderen.</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this PIVX address</source>
+        <source>Sign the message to prove you own this GROW address</source>
         <translation>Underskriv beskeden for at bevise, at De ejer denne PIVX adresse.</translation>
     </message>
     <message>
-        <source>The PIVX address the message was signed with</source>
+        <source>The GROW address the message was signed with</source>
         <translation>Beskeden er underskrevet med denne PIVX adresse</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified PIVX address</source>
+        <source>Verify the message to ensure it was signed with the specified GROW address</source>
         <translation>verificer beskeden for at sikre, at den blev underskrevet med den rigtige PIVX adresse.</translation>
     </message>
     <message>
@@ -4229,7 +4229,7 @@ Enten mint højere nomineringer (så færre input er nødvendige) eller reducere
     <name>SplashScreen</name>
     <message>
         <source>GROW Core</source>
-        <translation>PIVX kerne</translation>
+        <translation>GROW kerne</translation>
     </message>
     <message>
         <source>Version %1</source>
@@ -4883,7 +4883,7 @@ Enten mint højere nomineringer (så færre input er nødvendige) eller reducere
     </message>
 </context>
 <context>
-    <name>pivx-core</name>
+    <name>bitcoin-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = beholdtx metadata. For eksempel information om kontoejer og betalngsanmodninger, 2 = drop TX metadata)</translation>
@@ -5087,7 +5087,7 @@ Enten mint højere nomineringer (så færre input er nødvendige) eller reducere
     </message>
     <message>
         <source>Unable to bind to %s on this computer. GROW Core is probably already running.</source>
-        <translation>Det var ikke muligt at forbinde %s på denne computer. PIVX kører sandsynligvis allerede.</translation>
+        <translation>Det var ikke muligt at forbinde %s på denne computer. GROW kører sandsynligvis allerede.</translation>
     </message>
     <message>
         <source>Unable to locate enough Obfuscation denominated funds for this transaction.</source>
@@ -5355,7 +5355,7 @@ Enten mint højere nomineringer (så færre input er nødvendige) eller reducere
     </message>
     <message>
         <source>Error loading wallet.dat: Wallet requires newer version of GROW Core</source>
-        <translation>Fejl ved indlæsning af wallet.dat: Tegnebogen kræver en nyere version af PIVX core</translation>
+        <translation>Fejl ved indlæsning af wallet.dat: Tegnebogen kræver en nyere version af GROW core</translation>
     </message>
     <message>
         <source>Error opening block database</source>
@@ -5471,7 +5471,7 @@ Enten mint højere nomineringer (så færre input er nødvendige) eller reducere
     </message>
     <message>
         <source>Initialization sanity check failed. GROW Core is shutting down.</source>
-        <translation>Initiering af sanitetskontrollen fejlede. PIVX core lukker ned. </translation>
+        <translation>Initiering af sanitetskontrollen fejlede. GROW Core lukker ned. </translation>
     </message>
     <message>
         <source>Input is not valid.</source>
@@ -6295,7 +6295,7 @@ Enten mint højere nomineringer (så færre input er nødvendige) eller reducere
     </message>
     <message>
         <source>Wallet needed to be rewritten: restart GROW Core to complete</source>
-        <translation>Tegnebogen måtte genskrives. Genstart PIVX core for at gøre færdig</translation>
+        <translation>Tegnebogen måtte genskrives. Genstart GROW Core for at gøre færdig</translation>
     </message>
     <message>
         <source>Wallet options:</source>

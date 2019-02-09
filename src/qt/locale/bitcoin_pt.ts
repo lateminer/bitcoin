@@ -62,11 +62,11 @@
         <translation>Endereços de recebimento</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your GROW addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>Esses são seus endereços PIVX para onde enviar pagamentos. Confira sempre o montante e os endereços de destino antes de enviar moedas.</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your GROW addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>Esses são seus endereços PIVX onde receber pagamentos. Recomenda-se o uso de um novo endereço para cada transacção.</translation>
     </message>
     <message>
@@ -666,7 +666,7 @@
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
-        <source>The PIVX address to sign the message with</source>
+        <source>The GROW address to sign the message with</source>
         <translation>Um endereço PIVX para assinar a mensagem</translation>
     </message>
     <message>
@@ -698,11 +698,11 @@
         <translation>Copiar a assinatura para a area de trabalho</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this PIVX address</source>
+        <source>Sign the message to prove you own this GROW address</source>
         <translation>Assinar a Mensagem para provar que você e dono desse endereço PIVX.</translation>
     </message>
     <message>
-        <source>The PIVX address the message was signed with</source>
+        <source>The GROW address the message was signed with</source>
         <translation>O endereço PIVX que foi assinado com</translation>
     </message>
     <message>
@@ -904,7 +904,7 @@
     <name>ZPivControlDialog</name>
     </context>
 <context>
-    <name>pivx-core</name>
+    <name>bitcoin-core</name>
     <message>
         <source>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</source>
         <translation>Deletar todas as transações da carteira e somente recuperar aquelas partes do blockchain através de -rescan na inicialização</translation>

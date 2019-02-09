@@ -62,11 +62,11 @@
         <translation>Endereços de recebimento</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your GROW addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>Esses são seus endereços PIVX para envio de pagamentos. Sempre verifique a quantia e os endereços de recebimento antes de enviar moedas.</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your GROW addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>Esses são seus endereços PIVX para recebimento de pagamentos. É recomendado usar um novo endereço para cada transação.</translation>
     </message>
     <message>
@@ -254,7 +254,7 @@
         <translation>Endereço:</translation>
     </message>
     <message>
-        <source>Enter a PIVX Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
+        <source>Enter a GROW Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
         <translation>Insira um endereço que você deseja criptografar usando a BIP 38. Insira a palavra-chave na caixa do meio. Pressione criptografar para computar a chave privada criptografada.</translation>
     </message>
     <message>
@@ -617,7 +617,7 @@
         <translation>GROW Core</translation>
     </message>
     <message>
-        <source>Send coins to a PIVX address</source>
+        <source>Send coins to a GROW address</source>
         <translation>Enviar moedas para um endereço PIVX</translation>
     </message>
     <message>
@@ -649,11 +649,11 @@
         <translation>Modificar opções de configuração para PIVX</translation>
     </message>
     <message>
-        <source>Sign messages with your PIVX addresses to prove you own them</source>
+        <source>Sign messages with your GROW addresses to prove you own them</source>
         <translation>Assine mensagens com seus endereços PIVX para provar que você os detém</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified PIVX addresses</source>
+        <source>Verify messages to ensure they were signed with specified GROW addresses</source>
         <translation>Verifique as mensagens para ter certeza que estão assinadas com os endereços PIVX especificados</translation>
     </message>
     <message>
@@ -1118,7 +1118,7 @@ MultiSend: %1</translation>
         <translation>Editar endereço remetente</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid PIVX address.</source>
+        <source>The entered address "%1" is not a valid GROW address.</source>
         <translation>O endereço que você selecionou, "%1" , não é um endereço válido de PIVX</translation>
     </message>
     <message>
@@ -1668,8 +1668,8 @@ Favor verificar o endereço e tente novamente.</translation>
         <translation>C&amp;arteira</translation>
     </message>
     <message>
-        <source>Automatically open the PIVX client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Abrir automaticamente a porta do cliente PIVX no roteador. Isto somente funciona quando seu roteador suporta UPnP e este esteja habilitado.</translation>
+        <source>Automatically open the GROW client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Abrir automaticamente a porta do cliente GROW no roteador. Isto somente funciona quando seu roteador suporta UPnP e este esteja habilitado.</translation>
     </message>
     <message>
         <source>Accept connections from outside</source>
@@ -1998,7 +1998,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Pagar &amp;Para:</translation>
     </message>
     <message>
-        <source>The PIVX address to send the payment to. Creates local payment to yourself when empty.</source>
+        <source>The GROW address to send the payment to. Creates local payment to yourself when empty.</source>
         <translation>O endereço PIVX para enviar o pagamento. Cria um pagamento local para si mesmo quando vazio.</translation>
     </message>
     <message>
@@ -2173,7 +2173,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Quantidade</translation>
     </message>
     <message>
-        <source>Enter a PIVX address (e.g. %1)</source>
+        <source>Enter a GROW address (e.g. %1)</source>
         <translation>Insira um endereço PIVX (e.g. %1)</translation>
     </message>
     <message>
@@ -2819,7 +2819,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Copiar troco</translation>
     </message>
     <message>
-        <source>Warning: Invalid PIVX address</source>
+        <source>Warning: Invalid GROW address</source>
         <translation>Aviso: endereço PIVX inválido</translation>
     </message>
     <message>
@@ -2906,7 +2906,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Pagar &amp;Para:</translation>
     </message>
     <message>
-        <source>The PIVX address to send the payment to</source>
+        <source>The GROW address to send the payment to</source>
         <translation>O endereço PIVX para enviar o pagamento</translation>
     </message>
     <message>
@@ -2988,7 +2988,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>&amp;Assinar mensagem</translation>
     </message>
     <message>
-        <source>The PIVX address to sign the message with</source>
+        <source>The GROW address to sign the message with</source>
         <translation>O endereço PIVX para assinar a mensagem</translation>
     </message>
     <message>
@@ -3020,15 +3020,15 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Copia a assinatura atual do sistema de transferência</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this PIVX address</source>
+        <source>Sign the message to prove you own this GROW address</source>
         <translation>Assine a mensagem para provar que você possui este endereço PIVX</translation>
     </message>
     <message>
-        <source>The PIVX address the message was signed with</source>
+        <source>The GROW address the message was signed with</source>
         <translation>O endereço PIVX que assinou a mensagem</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified PIVX address</source>
+        <source>Verify the message to ensure it was signed with the specified GROW address</source>
         <translation>Verifique a mensagem para ter certeza que foi assinada com o endereço PIVX especificado.</translation>
     </message>
     <message>
@@ -3128,7 +3128,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
     </message>
     <message>
         <source>The PIVX Core developers</source>
-        <translation>Os desenvolvedores do GROW Core</translation>
+        <translation>Os desenvolvedores do PIVX Core</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -3654,7 +3654,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
     </message>
     </context>
 <context>
-    <name>pivx-core</name>
+    <name>bitcoin-core</name>
     <message>
         <source>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</source>
         <translation>Deletar todas as transações da carteira e somente recuperar aquelas partes da blockchain através de -rescan na inicialização</translation>
@@ -3793,7 +3793,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
     </message>
     <message>
         <source>Copyright (C) 2015-%i The PIVX Core developers</source>
-        <translation>Todos os direitos reservados (C) 2015-%i aos Desenvolvedores do GROW Core</translation>
+        <translation>Todos os direitos reservados (C) 2015-%i aos Desenvolvedores do PIVX Core</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>

@@ -62,11 +62,11 @@
         <translation>接收地址</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your GROW addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>这是用于发送PIVX的地址。在发送PIVX之前，请认真核查发送金额和接收地址。</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your GROW addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>这是用于接收PIVX的钱包地址。建议每一笔交易都使用一个新的钱包地址。</translation>
     </message>
     <message>
@@ -573,7 +573,7 @@
         <translation>GROW Core</translation>
     </message>
     <message>
-        <source>Send coins to a PIVX address</source>
+        <source>Send coins to a GROW address</source>
         <translation>发送数字货币到PIVX地址</translation>
     </message>
     <message>
@@ -605,11 +605,11 @@
         <translation>修改PIVX的配置选项</translation>
     </message>
     <message>
-        <source>Sign messages with your PIVX addresses to prove you own them</source>
+        <source>Sign messages with your GROW addresses to prove you own them</source>
         <translation>使用您的PIVX地址验证消息，以证明您拥有他们</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified PIVX addresses</source>
+        <source>Verify messages to ensure they were signed with specified GROW addresses</source>
         <translation>验证消息确保它已使用指定的PIVX地址进行签名</translation>
     </message>
     <message>
@@ -920,7 +920,7 @@ Address: %4
         <translation>如果您要禁用未经确认发送，在至少有一个确认之前&lt;br/&gt;不能更改。&lt;br/&gt;这也将影响您的余额计算。</translation>
     </message>
     <message>
-        <source>Automatically open the PIVX client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <source>Automatically open the GROW client port on the router. This only works when your router supports UPnP and it is enabled.</source>
         <translation>自动打开路由器上的PIVX钱包使用的端口。 这只有当您的路由器支持UPnP并且该享生效时才有用。</translation>
     </message>
     <message>
@@ -1338,7 +1338,7 @@ Address: %4
         <translation>您可以使用地址签名消息，以证明您拥有他们。 小心不要签名任何您不了解的，因为网络钓鱼攻击可能会试图欺骗您，以让您签名。 只能签署您熟悉并且了解和同意的。</translation>
     </message>
     <message>
-        <source>The PIVX address to sign the message with</source>
+        <source>The GROW address to sign the message with</source>
         <translation>该PIVX地址签名的消息</translation>
     </message>
     <message>
@@ -1366,15 +1366,15 @@ Address: %4
         <translation>将当前签名复制到系统剪贴板</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this PIVX address</source>
+        <source>Sign the message to prove you own this GROW address</source>
         <translation>签署消息以证明您拥有此PIVX地址</translation>
     </message>
     <message>
-        <source>The PIVX address the message was signed with</source>
+        <source>The GROW address the message was signed with</source>
         <translation>由PIVX地址签名的消息</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified PIVX address</source>
+        <source>Verify the message to ensure it was signed with the specified GROW address</source>
         <translation>验证消息确保它已使用指定的PIVX地址进行签名</translation>
     </message>
     <message>
@@ -1536,7 +1536,7 @@ Address: %4
     <name>ZPivControlDialog</name>
     </context>
 <context>
-    <name>pivx-core</name>
+    <name>bitcoin-core</name>
     <message>
         <source>Execute command when a relevant alert is received or we see a really long fork (%s in cmd is replaced by message)</source>
         <translation>在收到相关警报时执行命令，或者看到一个很长的分叉（cmd中的%s被消息替换）</translation>

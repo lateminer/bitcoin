@@ -39,7 +39,7 @@ namespace GUIUtil
 QString dateTimeStr(const QDateTime& datetime);
 QString dateTimeStr(qint64 nTime);
 
-// Render PIVX addresses in monospace font
+// Render PIVX/GROW addresses in monospace font
 QFont bitcoinAddressFont();
 
 // Set up widgets for address and amounts

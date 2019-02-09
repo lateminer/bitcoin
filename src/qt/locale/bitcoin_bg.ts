@@ -62,12 +62,12 @@
         <translation>Получаващ адрес</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Това са вашите PIVX адреси за изпращане на плащания. Винаги проверявайте количеството и адреса на получателя, преди да изпратите монети.</translation>
+        <source>These are your GROW addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Това са вашите GROW адреси за изпращане на плащания. Винаги проверявайте количеството и адреса на получателя, преди да изпратите монети.</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Това са вашите PIVX адреси за получаване на плащания. Препоръчително е да използвате нови адреси за получаване за всяка транзакция.</translation>
+        <source>These are your GROW addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Това са вашите GROW адреси за получаване на плащания. Препоръчително е да използвате нови адреси за получаване за всяка транзакция.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -254,12 +254,12 @@
         <translation>Адрес:</translation>
     </message>
     <message>
-        <source>Enter a PIVX Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>Въведете Pivx адрес, който искате да криптиране с BIP 38. Въведете парола в средното поле. Натиснете 'криптирай', за да се изчисли криптирания таен ключ. </translation>
+        <source>Enter a GROW Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
+        <translation>Въведете GROW адрес, който искате да криптиране с BIP 38. Въведете парола в средното поле. Натиснете 'криптирай', за да се изчисли криптирания таен ключ. </translation>
     </message>
     <message>
-        <source>The PIVX address to encrypt</source>
-        <translation>PIVX Адреса за криптиране</translation>
+        <source>The GROW address to encrypt</source>
+        <translation>GROW Адреса за криптиране</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -290,7 +290,7 @@
         <translation>Копирай сегашния подпис в системния буфер</translation>
     </message>
     <message>
-        <source>Encrypt the private key for this PIVX address</source>
+        <source>Encrypt the private key for this GROW address</source>
         <translation>Криптирай тайния ключ за този PIVX адрес</translation>
     </message>
     <message>
@@ -649,7 +649,7 @@
         <translation>PIVX Ядро</translation>
     </message>
     <message>
-        <source>Send coins to a PIVX address</source>
+        <source>Send coins to a GROW address</source>
         <translation>Изпратете монети до PIVX адрес</translation>
     </message>
     <message>
@@ -670,23 +670,23 @@
     </message>
     <message>
         <source>&amp;About GROW Core</source>
-        <translation>&amp;Относно PIVX Ядрото</translation>
+        <translation>&amp;Относно GROW Ядрото</translation>
     </message>
     <message>
         <source>Show information about GROW Core</source>
-        <translation>Информациза за PIVX Ядрото</translation>
+        <translation>Информациза за GROW Ядрото</translation>
     </message>
     <message>
         <source>Modify configuration options for PIVX</source>
         <translation>Промени PIVX конфигурацията</translation>
     </message>
     <message>
-        <source>Sign messages with your PIVX addresses to prove you own them</source>
-        <translation>Подпишете съобщения със своте PIVX адреси, за да докажете че са Ваши</translation>
+        <source>Sign messages with your GROW addresses to prove you own them</source>
+        <translation>Подпишете съобщения със своте GROW адреси, за да докажете че са Ваши</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified PIVX addresses</source>
-        <translation>Проеврете съобщения, за да се убедите, че са подписани с указаните PIVX адреси</translation>
+        <source>Verify messages to ensure they were signed with specified GROW addresses</source>
+        <translation>Проеврете съобщения, за да се убедите, че са подписани с указаните GROW адреси</translation>
     </message>
     <message>
         <source>&amp;BIP38 tool</source>
@@ -1181,7 +1181,7 @@ Address: %4
         <translation>Редактирай адрес за изпращане</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid PIVX address.</source>
+        <source>The entered address "%1" is not a valid GROW address.</source>
         <translation>Зададения адрес "%1"не е валиден PIVX адрес.</translation>
     </message>
     <message>
@@ -1444,12 +1444,12 @@ Address: %4
         <translation>Въведете адреса на Получателя</translation>
     </message>
     <message>
-        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other PIVX addresses after it matures.
-To Add: enter percentage to give and PIVX address to add to the MultiSend vector.
+        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other GROW addresses after it matures.
+To Add: enter percentage to give and GROW address to add to the MultiSend vector.
 To Delete: Enter address to delete and press delete.
 MultiSend will not be activated unless you have clicked Activate</source>
-        <translation>МултиИзпращане Ви позволява автоматично да изпращате до 100% от вашите стейк или мастърноуд възнаграждения към списък от други PIVX адреси.
-Да Добавите: въведете процент и задайте PIVX адрес към вектора за МултиИзпращане
+        <translation>МултиИзпращане Ви позволява автоматично да изпращате до 100% от вашите стейк или мастърноуд възнаграждения към списък от други GROW адреси.
+Да Добавите: въведете процент и задайте GROW адрес към вектора за МултиИзпращане
 Да Прамахнете: Въведете адрес за изстриване и натиснете истрий (del).
 МултиИзпращането няма да бъде активирано докато не кликнете "Активирай"</translation>
     </message>
@@ -1878,8 +1878,8 @@ Please be patient after clicking import.</source>
         <translation>Aко изключите харча на непотвърдено ресто, рестото от превод&lt;br/&gt;не може да се използва, докато превода не получи поне 1 потвърждение. &lt;br/&gt;Това влияе и на начина по който общите Ви средства се преизчисляват.</translation>
     </message>
     <message>
-        <source>Automatically open the PIVX client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Автоматично отвори PIVX порта в рутера. Това става само ако рутера Ви подържа UPnP и последния е включен.</translation>
+        <source>Automatically open the GROW client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Автоматично отвори GROW порта в рутера. Това става само ако рутера Ви подържа UPnP и последния е включен.</translation>
     </message>
     <message>
         <source>Accept connections from outside</source>
@@ -2280,7 +2280,7 @@ To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in grow.conf<
         <translation>Провал при стартирането на grow: click-to-pay обработвател</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid PIVX address or malformed URI parameters.</source>
+        <source>URI cannot be parsed! This can be caused by an invalid GROW address or malformed URI parameters.</source>
         <translation>URI не може да се парсне. Вероятна причина е невалиден PIVX адрес или зле-форматирани URI Параметри.</translation>
     </message>
     <message>
@@ -2490,7 +2490,7 @@ zGROW са узрели, тогава когато имат повече от 20
         <translation>Плати На:</translation>
     </message>
     <message>
-        <source>The PIVX address to send the payment to. Creates local payment to yourself when empty.</source>
+        <source>The GROW address to send the payment to. Creates local payment to yourself when empty.</source>
         <translation>Адреса на който да изпратим плащането. Ако е празно - плащането е до себе си.</translation>
     </message>
     <message>
@@ -2917,8 +2917,8 @@ Maximum allowed: </source>
         <translation>Без 'Плати На' адрес, плащането е локално</translation>
     </message>
     <message>
-        <source>Invalid Pivx Address</source>
-        <translation>Невалиден PIVX адрес</translation>
+        <source>Invalid GROW Address</source>
+        <translation>Невалиден GROW адрес</translation>
     </message>
     <message>
         <source>Invalid Send Amount</source>
@@ -3019,7 +3019,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Сума</translation>
     </message>
     <message>
-        <source>Enter a PIVX address (e.g. %1)</source>
+        <source>Enter a GROW address (e.g. %1)</source>
         <translation>Задайте PIVX адрес (например %1)</translation>
     </message>
     <message>
@@ -3897,7 +3897,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Инструмента за разделяне на блока не работи, когато се изпраща до няколко адреса едновременно. Опитайте пак.</translation>
     </message>
     <message>
-        <source>Warning: Invalid PIVX address</source>
+        <source>Warning: Invalid GROW address</source>
         <translation>Предупреждение: Невалиден GROW адрес</translation>
     </message>
     <message>
@@ -4000,7 +4000,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Плати На:</translation>
     </message>
     <message>
-        <source>The PIVX address to send the payment to</source>
+        <source>The GROW address to send the payment to</source>
         <translation>PIVX адреса - получател на плащането</translation>
     </message>
     <message>
@@ -4090,7 +4090,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Може да подписвате съобщения с Вашите адреси, за да докажете че сте техен притежател. Внимавайте да не подписвате нищо съмнително, тъй като има хакерски атаки, които целят да придобият вашата самоличност. Само подписвайте пълен и ясен текст, с който сте напълно съгласни.</translation>
     </message>
     <message>
-        <source>The PIVX address to sign the message with</source>
+        <source>The GROW address to sign the message with</source>
         <translation>PIVX адреса, с който да подпишете съобщението</translation>
     </message>
     <message>
@@ -4122,15 +4122,15 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Копирай сегашния подпис в системния буфер</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this PIVX address</source>
+        <source>Sign the message to prove you own this GROW address</source>
         <translation>Подпишете съобщението, за да докажете, че притежавате този PIVX адрес</translation>
     </message>
     <message>
-        <source>The PIVX address the message was signed with</source>
+        <source>The GROW address the message was signed with</source>
         <translation>PIVX адреса, който е подписано съобщението</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified PIVX address</source>
+        <source>Verify the message to ensure it was signed with the specified GROW address</source>
         <translation>Поверете съобщението, за да се уверите, че е подписано със зададения PIVX адрес</translation>
     </message>
     <message>
@@ -4234,7 +4234,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>The PIVX Core developers</source>
-        <translation>GROW Core разработчици</translation>
+        <translation>PIVX Core разработчици</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -4872,7 +4872,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
 </context>
 <context>
-    <name>pivx-core</name>
+    <name>bitcoin-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = пази мета данните от преводи, например собственик на акаунта и ифнормация за изисквани плащания, 2 = изхръвли мета данните от преводи)</translation>
@@ -5251,7 +5251,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Copyright (C) 2015-%i The PIVX Core developers</source>
-        <translation>Всички права запазени (c) 2015-%i GROW Core разработчици</translation>
+        <translation>Всички права запазени (c) 2015-%i PIVX Core разработчици</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>
