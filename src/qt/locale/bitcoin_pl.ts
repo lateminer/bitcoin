@@ -510,11 +510,11 @@
     </message>
     <message>
         <source>GROW Core</source>
-        <translation>&amp;Rdzeń PIVX</translation>
+        <translation>&amp;Rdzeń GROW</translation>
     </message>
     <message>
         <source>Send coins to a GROW address</source>
-        <translation>Wyślij monety do adresu PIVX</translation>
+        <translation>Wyślij monety do adresu GROW</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and grow: URIs)</source>
@@ -537,16 +537,16 @@
         <translation>Pokaż informacje o rdzeniu bitcoina</translation>
     </message>
     <message>
-        <source>Modify configuration options for PIVX</source>
-        <translation>Modyfikuj opcje konfiguracji PIVX</translation>
+        <source>Modify configuration options for GROW</source>
+        <translation>Modyfikuj opcje konfiguracji GROW</translation>
     </message>
     <message>
         <source>Sign messages with your GROW addresses to prove you own them</source>
-        <translation>Zatwierdź wiadomość z twoimi adresami PIVX, by udowodnić, że jesteś w ich posiadaniu</translation>
+        <translation>Zatwierdź wiadomość z twoimi adresami GROW, by udowodnić, że jesteś w ich posiadaniu</translation>
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified GROW addresses</source>
-        <translation>Zweryfikuj wiadomości by upewnić się, że zostały zatwierdzone z podanego adresu PIVX</translation>
+        <translation>Zweryfikuj wiadomości by upewnić się, że zostały zatwierdzone z podanego adresu GROW</translation>
     </message>
     <message>
         <source>&amp;BIP38 tool</source>
@@ -585,12 +585,12 @@
         <translation>Okno eksplorera bloków</translation>
     </message>
     <message>
-        <source>Show the GROW Core help message to get a list with possible PIVX command-line options</source>
-        <translation>Pokaż wiadomość pomocy rdzenia PIVX, aby dostać listę możliwych opcji PIVX command-line</translation>
+        <source>Show the GROW Core help message to get a list with possible GROW command-line options</source>
+        <translation>Pokaż wiadomość pomocy rdzenia GROW, aby dostać listę możliwych opcji GROW command-line</translation>
     </message>
     <message>
         <source>GROW Core client</source>
-        <translation>Rdzeń PIVX klient</translation>
+        <translation>Rdzeń GROW klient</translation>
     </message>
     <message>
         <source>Synchronizing with network...</source>
@@ -900,7 +900,7 @@ MultiWysyłlka: %1</translation>
     <name>HelpMessageDialog</name>
     <message>
         <source>GROW Core</source>
-        <translation>&amp;Rdzeń PIVX</translation>
+        <translation>&amp;Rdzeń GROW</translation>
     </message>
     </context>
 <context>
@@ -915,7 +915,7 @@ MultiWysyłlka: %1</translation>
     </message>
     <message>
         <source>GROW Core</source>
-        <translation>&amp;Rdzeń PIVX</translation>
+        <translation>&amp;Rdzeń GROW</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1190,12 +1190,12 @@ Proszę sprawdzić adres i spróbować ponownie</translation>
         <translation>Zezwól na przychodzące połączenia</translation>
     </message>
     <message>
-        <source>Automatically start PIVX after logging in to the system.</source>
-        <translation>Automatycznie uruchom PIVX po zalogowaniu do systemu</translation>
+        <source>Automatically start GROW after logging in to the system.</source>
+        <translation>Automatycznie uruchom GROW po zalogowaniu do systemu</translation>
     </message>
     <message>
-        <source>&amp;Start PIVX on system login</source>
-        <translation>&amp;Uruchom PIVX podczas logowania do systemu</translation>
+        <source>&amp;Start GROW on system login</source>
+        <translation>&amp;Uruchom GROW podczas logowania do systemu</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -1214,8 +1214,8 @@ Proszę sprawdzić adres i spróbować ponownie</translation>
         <translation>&amp;Sieć</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting PIVX.</source>
-        <translation>Język interfejsu użytkownika może być wybrany tutaj. Ustawienia ulegną zmianie po restarcie PIVX</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting GROW.</source>
+        <translation>Język interfejsu użytkownika może być wybrany tutaj. Ustawienia ulegną zmianie po restarcie GROW</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
@@ -1224,8 +1224,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
 https://www.transifex.com/pivx-project/pivx-project-translations </translation>
     </message>
     <message>
-        <source>Connect to the PIVX network through a SOCKS5 proxy.</source>
-        <translation>Połącz z siecią PIVX poprzez SOCKS5 proxy.</translation>
+        <source>Connect to the GROW network through a SOCKS5 proxy.</source>
+        <translation>Połącz z siecią GROW poprzez SOCKS5 proxy.</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -1464,7 +1464,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations </translation>
     </message>
     <message>
         <source>Enter a GROW address (e.g. %1)</source>
-        <translation>Wprowadź adres PIVX (np. %1)</translation>
+        <translation>Wprowadź adres GROW (np. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1895,7 +1895,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations </translation>
     </message>
     <message>
         <source>Sign the message to prove you own this GROW address</source>
-        <translation>Zatwierdź wiadomość, aby udowodnić, że podany adres PIVX jest w twoim posiadaniu</translation>
+        <translation>Zatwierdź wiadomość, aby udowodnić, że podany adres GROW jest w twoim posiadaniu</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>
@@ -1930,7 +1930,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations </translation>
     <name>SplashScreen</name>
     <message>
         <source>GROW Core</source>
-        <translation>&amp;Rdzeń PIVX</translation>
+        <translation>&amp;Rdzeń GROW</translation>
     </message>
     </context>
 <context>

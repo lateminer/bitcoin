@@ -63,11 +63,11 @@
     </message>
     <message>
         <source>These are your GROW addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Toto sú vaše PIVX adresy na odosielanie platieb. Pred odoslaním vždy skontrolujte výšku a adresu prijemcu.</translation>
+        <translation>Toto sú vaše GROW adresy na odosielanie platieb. Pred odoslaním vždy skontrolujte výšku a adresu prijemcu.</translation>
     </message>
     <message>
         <source>These are your GROW addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Toto sú vaše PIVX adresy na prijímanie platieb. Pre každú transakciu sa odporúča použiť novú prijímaciu adresu.</translation>
+        <translation>Toto sú vaše GROW adresy na prijímanie platieb. Pre každú transakciu sa odporúča použiť novú prijímaciu adresu.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -172,8 +172,8 @@
         <translation>Potvrďte šifrovanie peňaženky</translation>
     </message>
     <message>
-        <source>PIVX will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
-        <translation>PIVX sa teraz ukončí, aby dokončil proces šifrovania. Nezabudnite, že šifrovanie peňaženky nemôže úplne ochrániť vaše GROW pred odcudzením škodlivým softvérom, ktorý infikuje váš počítač.</translation>
+        <source>GROW will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
+        <translation>GROW sa teraz ukončí, aby dokončil proces šifrovania. Nezabudnite, že šifrovanie peňaženky nemôže úplne ochrániť vaše GROW pred odcudzením škodlivým softvérom, ktorý infikuje váš počítač.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -574,7 +574,7 @@
     </message>
     <message>
         <source>Send coins to a GROW address</source>
-        <translation>Odoslať mince na adresu PIVX</translation>
+        <translation>Odoslať mince na adresu GROW</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and grow: URIs)</source>
@@ -597,16 +597,16 @@
         <translation>Zobraziť informácie o GROW Core</translation>
     </message>
     <message>
-        <source>Modify configuration options for PIVX</source>
-        <translation>Zmeňte možnosti konfigurácie pre PIVX</translation>
+        <source>Modify configuration options for GROW</source>
+        <translation>Zmeňte možnosti konfigurácie pre GROW</translation>
     </message>
     <message>
         <source>Sign messages with your GROW addresses to prove you own them</source>
-        <translation>Podpíšte správy pomocou adresy PIVX, aby ste preukázali, že ich vlastníte</translation>
+        <translation>Podpíšte správy pomocou adresy GROW, aby ste preukázali, že ich vlastníte</translation>
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified GROW addresses</source>
-        <translation>Overte správy, aby sa zabezpečilo, že boli podpísané zadanými PIVX adresami</translation>
+        <translation>Overte správy, aby sa zabezpečilo, že boli podpísané zadanými GROW adresami</translation>
     </message>
     <message>
         <source>&amp;BIP38 tool</source>
@@ -649,8 +649,8 @@
         <translation>Okno blockchain prehliadača</translation>
     </message>
     <message>
-        <source>Show the GROW Core help message to get a list with possible PIVX command-line options</source>
-        <translation>Zobraziť pomocnú správu programu GROW Core a získajte zoznam možností príkazového riadka PIVX</translation>
+        <source>Show the GROW Core help message to get a list with possible GROW command-line options</source>
+        <translation>Zobraziť pomocnú správu programu GROW Core a získajte zoznam možností príkazového riadka GROW</translation>
     </message>
     <message>
         <source>GROW Core client</source>
@@ -1115,7 +1115,7 @@ MultiSend: %1</translation>
     <name>SignVerifyMessageDialog</name>
     <message>
         <source>The GROW address to sign the message with</source>
-        <translation>Adresa PIVX, ktorou chcete správu podpísať</translation>
+        <translation>Adresa GROW, ktorou chcete správu podpísať</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1139,15 +1139,15 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>Sign the message to prove you own this GROW address</source>
-        <translation>Podpíšte správu, aby ste preukázali, že ste vlastníkom tejto PIVX adresy</translation>
+        <translation>Podpíšte správu, aby ste preukázali, že ste vlastníkom tejto GROW adresy</translation>
     </message>
     <message>
         <source>The GROW address the message was signed with</source>
-        <translation>PIVX adresa, ktorou bola správa podpísaná</translation>
+        <translation>GROW adresa, ktorou bola správa podpísaná</translation>
     </message>
     <message>
         <source>Verify the message to ensure it was signed with the specified GROW address</source>
-        <translation>Skontrolujte správu, aby ste sa uistili, že bola podpísaná zadanou PIVX adresou</translation>
+        <translation>Skontrolujte správu, aby ste sa uistili, že bola podpísaná zadanou GROW adresou</translation>
     </message>
     <message>
         <source>Reset all sign message fields</source>

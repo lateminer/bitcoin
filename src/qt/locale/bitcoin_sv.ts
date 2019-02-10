@@ -63,11 +63,11 @@
     </message>
     <message>
         <source>These are your GROW addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Det här är dina PIVX adresser för att skicka betalningar. Kontrollera alltid summan och mottagaradressen före du sänder mynt.</translation>
+        <translation>Det här är dina GROW adresser för att skicka betalningar. Kontrollera alltid summan och mottagaradressen före du sänder mynt.</translation>
     </message>
     <message>
         <source>These are your GROW addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Det här är dina PIVX adresser för att ta emot betalningar. Det är rekomenderat att använda en ny mottagaradress för varje transaktion.</translation>
+        <translation>Det här är dina GROW adresser för att ta emot betalningar. Det är rekomenderat att använda en ny mottagaradress för varje transaktion.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -176,8 +176,8 @@
         <translation>Bekräfta plånboks krypering</translation>
     </message>
     <message>
-        <source>PIVX will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
-        <translation>PIVX kommer att stängas ner nu för att färdigställa kryperingsprocessen. Kom ihåg att kryptering av din plånbok inte kan säkerställa dina PIVs från att bli stulna av skadeprogram som infekterat din dator.</translation>
+        <source>GROW will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
+        <translation>GROW kommer att stängas ner nu för att färdigställa kryperingsprocessen. Kom ihåg att kryptering av din plånbok inte kan säkerställa dina PIVs från att bli stulna av skadeprogram som infekterat din dator.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -291,7 +291,7 @@
     </message>
     <message>
         <source>Encrypt the private key for this GROW address</source>
-        <translation>Kryptera den privata nyckeln för denna PIVX adressen</translation>
+        <translation>Kryptera den privata nyckeln för denna GROW adressen</translation>
     </message>
     <message>
         <source>Reset all fields</source>
@@ -646,11 +646,11 @@
     </message>
     <message>
         <source>GROW Core</source>
-        <translation>PIVX Kärna</translation>
+        <translation>GROW Kärna</translation>
     </message>
     <message>
         <source>Send coins to a GROW address</source>
-        <translation>Skicka mynt till en PIVX adress</translation>
+        <translation>Skicka mynt till en GROW adress</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and grow: URIs)</source>
@@ -670,23 +670,23 @@
     </message>
     <message>
         <source>&amp;About GROW Core</source>
-        <translation>Om PIVX Kärnan</translation>
+        <translation>Om GROW Kärnan</translation>
     </message>
     <message>
         <source>Show information about GROW Core</source>
-        <translation>Visa information om PIVX Kärnan</translation>
+        <translation>Visa information om GROW Kärnan</translation>
     </message>
     <message>
-        <source>Modify configuration options for PIVX</source>
-        <translation>Ändra konfigurationsval för PIVX</translation>
+        <source>Modify configuration options for GROW</source>
+        <translation>Ändra konfigurationsval för GROW</translation>
     </message>
     <message>
         <source>Sign messages with your GROW addresses to prove you own them</source>
-        <translation>Signera meddelanden med din PIVX adress för att visa att du äger dem</translation>
+        <translation>Signera meddelanden med din GROW adress för att visa att du äger dem</translation>
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified GROW addresses</source>
-        <translation>Verifiera meddelandet för att säkerställa att de blev signerat med den specifika PIVX adressen.</translation>
+        <translation>Verifiera meddelandet för att säkerställa att de blev signerat med den specifika GROW adressen.</translation>
     </message>
     <message>
         <source>&amp;BIP38 tool</source>
@@ -729,16 +729,16 @@
         <translation>Blockera utforskarfönstret</translation>
     </message>
     <message>
-        <source>Show the GROW Core help message to get a list with possible PIVX command-line options</source>
-        <translation>Visa GROW Core hjälp meddelande för att få en lista med möjliga PIVX kommandorad alternativ</translation>
+        <source>Show the GROW Core help message to get a list with possible GROW command-line options</source>
+        <translation>Visa GROW Core hjälp meddelande för att få en lista med möjliga GROW kommandorad alternativ</translation>
     </message>
     <message>
         <source>GROW Core client</source>
-        <translation>PIVX kärn klient</translation>
+        <translation>GROW kärn klient</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to PIVX network</source>
-        <translation><numerusform>%n aktiv(a) annslutning(ar) till PIVX nätverket</numerusform><numerusform>%n aktiv(a) annslutning(ar) till PIVX nätverket</numerusform></translation>
+        <source>%n active connection(s) to GROW network</source>
+        <translation><numerusform>%n aktiv(a) annslutning(ar) till GROW nätverket</numerusform><numerusform>%n aktiv(a) annslutning(ar) till GROW nätverket</numerusform></translation>
     </message>
     <message>
         <source>Synchronizing with network...</source>
@@ -1186,7 +1186,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>The entered address "%1" is not a valid GROW address.</source>
-        <translation>Den inmatade adressen "%1" är ej en giltig PIVX adress.</translation>
+        <translation>Den inmatade adressen "%1" är ej en giltig GROW adress.</translation>
     </message>
     <message>
         <source>The entered address "%1" is already in the address book.</source>
@@ -1232,7 +1232,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>GROW Core</source>
-        <translation>PIVX Kärna</translation>
+        <translation>GROW Kärna</translation>
     </message>
     <message>
         <source>(%1-bit)</source>
@@ -1240,7 +1240,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>About GROW Core</source>
-        <translation>Om PIVX Kärna</translation>
+        <translation>Om GROW Kärna</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -1294,8 +1294,8 @@ MultiSend: %1</translation>
         <translation>Eftersom detta är första gången programmet körs så kan du välja var GROW Core ska spara sin data.</translation>
     </message>
     <message>
-        <source>GROW Core will download and store a copy of the PIVX block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>PIVX Kärnan kommer ladda ner och spara en kopia av PIVX block chain. Minst %1GB data kommer sparas i denna katalog och den kommer växa med tiden. Plånboken kommer också sparas i denna katalog.</translation>
+        <source>GROW Core will download and store a copy of the GROW block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>GROW Kärnan kommer ladda ner och spara en kopia av GROW block chain. Minst %1GB data kommer sparas i denna katalog och den kommer växa med tiden. Plånboken kommer också sparas i denna katalog.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1452,8 +1452,8 @@ MultiSend: %1</translation>
 To Add: enter percentage to give and GROW address to add to the MultiSend vector.
 To Delete: Enter address to delete and press delete.
 MultiSend will not be activated unless you have clicked Activate</source>
-        <translation>MultiSend tillåter dig att automatiskt skicka upp till 100% av dina staking eller huvudnod belöningar till en lista av andra PIVX adresser efter att belöningarna har mognat.
-För att Lägga till: Ange procent att ge och PIVX adress för att lägga till i MultiSend vektorn.
+        <translation>MultiSend tillåter dig att automatiskt skicka upp till 100% av dina staking eller huvudnod belöningar till en lista av andra GROW adresser efter att belöningarna har mognat.
+För att Lägga till: Ange procent att ge och GROW adress för att lägga till i MultiSend vektorn.
 För att Ta Bort: Ange adressen som ska tas bort och tryck ta bort.
 MultiSend kommer inte aktiveras om du inte tryckt på Aktivera</translation>
     </message>
@@ -1811,16 +1811,16 @@ Var god vänta efter att du trycker på importera.</translation>
         <translation>Fördunkling Konfiguration</translation>
     </message>
     <message>
-        <source>Obfuscation was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening PIVX's configuration screen.</source>
-        <translation>Fördunkling sattes framgångsrikt till grundläggande (%1 och 2 rundor). Du kan ändra det här när du vill genom att öppna PIVX's konfigurationsskärm.</translation>
+        <source>Obfuscation was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening GROW's configuration screen.</source>
+        <translation>Fördunkling sattes framgångsrikt till grundläggande (%1 och 2 rundor). Du kan ändra det här när du vill genom att öppna GROW's konfigurationsskärm.</translation>
     </message>
     <message>
-        <source>Obfuscation was successfully set to high (%1 and 8 rounds). You can change this at any time by opening PIVX's configuration screen.</source>
-        <translation>Fördunkling sattes framgångsrikt till hög (%1 och 8 rundor). Du kan ändra det här när du vill genom att öppna PIVX's konfigurationsskärm.</translation>
+        <source>Obfuscation was successfully set to high (%1 and 8 rounds). You can change this at any time by opening GROW's configuration screen.</source>
+        <translation>Fördunkling sattes framgångsrikt till hög (%1 och 8 rundor). Du kan ändra det här när du vill genom att öppna GROW's konfigurationsskärm.</translation>
     </message>
     <message>
-        <source>Obfuscation was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening PIVX's configuration screen.</source>
-        <translation>Fördunkling sattes framgångsrikt till maximal (%1 och 16 rundor). Du kan ändra det här när du vill genom att öppna PIVX's konfigurationsskärm.</translation>
+        <source>Obfuscation was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening GROW's configuration screen.</source>
+        <translation>Fördunkling sattes framgångsrikt till maximal (%1 och 16 rundor). Du kan ändra det här när du vill genom att öppna GROW's konfigurationsskärm.</translation>
     </message>
 </context>
 <context>
@@ -1893,12 +1893,12 @@ Var god vänta efter att du trycker på importera.</translation>
         <translation>Expert</translation>
     </message>
     <message>
-        <source>Automatically start PIVX after logging in to the system.</source>
-        <translation>Starta PIVX automatiskt efter inloggning på systemet.</translation>
+        <source>Automatically start GROW after logging in to the system.</source>
+        <translation>Starta GROW automatiskt efter inloggning på systemet.</translation>
     </message>
     <message>
-        <source>&amp;Start PIVX on system login</source>
-        <translation>&amp;Starta PIVX vid systeminloggning</translation>
+        <source>&amp;Start GROW on system login</source>
+        <translation>&amp;Starta GROW vid systeminloggning</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -1921,8 +1921,8 @@ Var god vänta efter att du trycker på importera.</translation>
         <translation>&amp;Nätverk</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting PIVX.</source>
-        <translation>Användargränssnittets språk kan väljas här. Denna inställning börjar gälla efter att man startat om PIVX.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting GROW.</source>
+        <translation>Användargränssnittets språk kan väljas här. Denna inställning börjar gälla efter att man startat om GROW.</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
@@ -1963,8 +1963,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Staking delnings tröskel:</translation>
     </message>
     <message>
-        <source>Connect to the PIVX network through a SOCKS5 proxy.</source>
-        <translation>Anslut till PIVX nätverket via en SOCKS5 proxy.</translation>
+        <source>Connect to the GROW network through a SOCKS5 proxy.</source>
+        <translation>Anslut till GROW nätverket via en SOCKS5 proxy.</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -2130,8 +2130,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Nuvarande låst saldo endast i "watch only" adresser</translation>
     </message>
     <message>
-        <source>Your current PIVX balance, unconfirmed and immature transactions included</source>
-        <translation>Ditt nuvarande PIVX saldo, obekräftade och omogna transaktioner är inkluderade</translation>
+        <source>Your current GROW balance, unconfirmed and immature transactions included</source>
+        <translation>Ditt nuvarande GROW saldo, obekräftade och omogna transaktioner är inkluderade</translation>
     </message>
     <message>
         <source>zGROW Balance</source>
@@ -2150,8 +2150,8 @@ Immature: confirmed, but less than 1 mint of the same denomination after it was 
 Omogna: bekräftade men under 1 myntning av samma valör efter den blev präglad</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the PIVX network after a connection is established, but this process has not completed yet.</source>
-        <translation>Informationen kan vara föråldrad. Din plånbok synkroniserar automatiskt med PIVX nätverket efter att en anslutning är etablerad, men denna process har inte blivit klar än.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the GROW network after a connection is established, but this process has not completed yet.</source>
+        <translation>Informationen kan vara föråldrad. Din plånbok synkroniserar automatiskt med GROW nätverket efter att en anslutning är etablerad, men denna process har inte blivit klar än.</translation>
     </message>
     <message>
         <source>OVERVIEW</source>
@@ -2268,7 +2268,7 @@ För att aktivera AutoMint ändra 'enablezeromint=0' till 'enablezeromint=1' i g
     </message>
     <message>
         <source>URI cannot be parsed! This can be caused by an invalid GROW address or malformed URI parameters.</source>
-        <translation>URI kunde ej analyseras! Detta kan orsakas av en ogiltig PIVX adress eller felproducerade URI parametrar.</translation>
+        <translation>URI kunde ej analyseras! Detta kan orsakas av en ogiltig GROW adress eller felproducerade URI parametrar.</translation>
     </message>
     <message>
         <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
@@ -2353,8 +2353,8 @@ För att aktivera AutoMint ändra 'enablezeromint=0' till 'enablezeromint=1' i g
         <translation>Zerocoin Handlingar:</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the PIVX network after a connection is established, but this process has not completed yet.</source>
-        <translation>nformationen kan vara föråldrad. Din plånbok synkroniserar automatiskt med PIVX nätverket efter att en anslutning är etablerad, men denna process har inte blivit klar än.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the GROW network after a connection is established, but this process has not completed yet.</source>
+        <translation>nformationen kan vara föråldrad. Din plånbok synkroniserar automatiskt med GROW nätverket efter att en anslutning är etablerad, men denna process har inte blivit klar än.</translation>
     </message>
     <message>
         <source>Mint Zerocoin</source>
@@ -2478,7 +2478,7 @@ zGROW är mogna när de har över 20 bekräftelser OCH över 2 präglingar av sa
     </message>
     <message>
         <source>The GROW address to send the payment to. Creates local payment to yourself when empty.</source>
-        <translation>PIVX adress att skicka betalningen till. Skapar betalning till dig själv när den är tom.</translation>
+        <translation>GROW adress att skicka betalningen till. Skapar betalning till dig själv när den är tom.</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -3008,7 +3008,7 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
     </message>
     <message>
         <source>Enter a GROW address (e.g. %1)</source>
-        <translation>Mata in en PIVX adress (e.g. %1)</translation>
+        <translation>Mata in en GROW adress (e.g. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -3137,8 +3137,8 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
         <translation>Blockchain</translation>
     </message>
     <message>
-        <source>Open the PIVX debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Öppna PIVX felsökningslogg från den nuvarande data katalogen. Detta kan ta några sekunder för stora logg filer.</translation>
+        <source>Open the GROW debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Öppna GROW felsökningslogg från den nuvarande data katalogen. Detta kan ta några sekunder för stora logg filer.</translation>
     </message>
     <message>
         <source>Number of Masternodes</source>
@@ -3341,8 +3341,8 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
         <translation>Ut:</translation>
     </message>
     <message>
-        <source>Welcome to the PIVX RPC console.</source>
-        <translation>Välkommen till PIVX RPC konsol.</translation>
+        <source>Welcome to the GROW RPC console.</source>
+        <translation>Välkommen till GROW RPC konsol.</translation>
     </message>
     <message>
         <source>&amp;Disconnect Node</source>
@@ -3448,16 +3448,16 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
         <translation>En valfri etikett att associera med den nya mottagaradressen.</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the PIVX network.</source>
-        <translation>Ett frivilligt meddelande att bifoga till betalningsförfrågan, som kommer visas när förfrågan öppnas. Observera: Medelandet kommer inte skickas med betalningen över PIVX nätverket.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the GROW network.</source>
+        <translation>Ett frivilligt meddelande att bifoga till betalningsförfrågan, som kommer visas när förfrågan öppnas. Observera: Medelandet kommer inte skickas med betalningen över GROW nätverket.</translation>
     </message>
     <message>
         <source>RECEIVE</source>
         <translation>ERHÅLLA</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the PIVX network.</source>
-        <translation>Ett frivilligt meddelande att bifoga till betalningsförfrågan, vilket kommer visas när förfrågan öppnas.&lt;br&gt;Observera: Medelandet kommer inte skickas med betalningen över PIVX nätverket.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the GROW network.</source>
+        <translation>Ett frivilligt meddelande att bifoga till betalningsförfrågan, vilket kommer visas när förfrågan öppnas.&lt;br&gt;Observera: Medelandet kommer inte skickas med betalningen över GROW nätverket.</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
@@ -3737,8 +3737,8 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
         <translation>Om 1000 uGROWs är den valda skräddarsydda avgiften och transaktionen är bara 250 bytes så kommer "per kilobyte" bara betala 250 uGROWs i avgift,&lt;br /&gt;medans "minst totalt" betalar 1000 uGROWs. För transaktioner större än en kilobyte så betalar båda per kilobyte.</translation>
     </message>
     <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for PIVX transactions than the network can process.</source>
-        <translation>Att endast betala minimum avgift är okej så länge som transaktionsvolymen är mindre än rummet i blocken.&lt;br /&gt;Men var medveten om att detta kan sluta som en transaktion som aldrig blir bekräftad när det finns ett större behov av PIVX transaktioner än nätverket kan bearbeta.</translation>
+        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for GROW transactions than the network can process.</source>
+        <translation>Att endast betala minimum avgift är okej så länge som transaktionsvolymen är mindre än rummet i blocken.&lt;br /&gt;Men var medveten om att detta kan sluta som en transaktion som aldrig blir bekräftad när det finns ett större behov av GROW transaktioner än nätverket kan bearbeta.</translation>
     </message>
     <message>
         <source>normal</source>
@@ -3826,7 +3826,7 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
     </message>
     <message>
         <source>Warning: Invalid GROW address</source>
-        <translation>Varning: Ogiltig PIVX adress</translation>
+        <translation>Varning: Ogiltig GROW adress</translation>
     </message>
     <message>
         <source>%1 to %2</source>
@@ -3929,7 +3929,7 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
     </message>
     <message>
         <source>The GROW address to send the payment to</source>
-        <translation>PIVX adressen att skicka betalningen till</translation>
+        <translation>GROW adressen att skicka betalningen till</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -3968,8 +3968,8 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
         <translation>Medelande:</translation>
     </message>
     <message>
-        <source>A message that was attached to the GROW: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PIVX network.</source>
-        <translation>Ett medelande som var bifogat till GROW: URI som kommer sparas med transaktionen som din referens. Lägg märke till: Detta meddelande kommer inte skickas genom PIVX nätverket.</translation>
+        <source>A message that was attached to the GROW: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the GROW network.</source>
+        <translation>Ett medelande som var bifogat till GROW: URI som kommer sparas med transaktionen som din referens. Lägg märke till: Detta meddelande kommer inte skickas genom GROW nätverket.</translation>
     </message>
     <message>
         <source>This is an unverified payment request.</source>
@@ -4019,7 +4019,7 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
     </message>
     <message>
         <source>The GROW address to sign the message with</source>
-        <translation>PIVX adressen för signera meddelandet med</translation>
+        <translation>GROW adressen för signera meddelandet med</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -4051,15 +4051,15 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
     </message>
     <message>
         <source>Sign the message to prove you own this GROW address</source>
-        <translation>Signera meddelandet för att bevisa att du äger denna PIVX adress</translation>
+        <translation>Signera meddelandet för att bevisa att du äger denna GROW adress</translation>
     </message>
     <message>
         <source>The GROW address the message was signed with</source>
-        <translation>PIVX adressen meddelandet blev signerat med</translation>
+        <translation>GROW adressen meddelandet blev signerat med</translation>
     </message>
     <message>
         <source>Verify the message to ensure it was signed with the specified GROW address</source>
-        <translation>Verifiera meddelandet för att säkerställa att de blev signerat med den specifika PIVX adressen.</translation>
+        <translation>Verifiera meddelandet för att säkerställa att de blev signerat med den specifika GROW adressen.</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -4827,7 +4827,7 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
     </message>
     <message>
         <source>Cannot obtain a lock on data directory %s. GROW Core is probably already running.</source>
-        <translation>Kan ej låsa in på data katalog %s. PIVX Kärna körs förmodligen redan.</translation>
+        <translation>Kan ej låsa in på data katalog %s. GROW Kärna körs förmodligen redan.</translation>
     </message>
     <message>
         <source>Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</source>
@@ -5271,7 +5271,7 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
     </message>
     <message>
         <source>Error loading wallet.dat: Wallet requires newer version of GROW Core</source>
-        <translation>Fel vid laddning av wallet.dat: Plånbok  kräver nyare PIVX Kärna version</translation>
+        <translation>Fel vid laddning av wallet.dat: Plånbok  kräver nyare GROW Kärna version</translation>
     </message>
     <message>
         <source>Error opening block database</source>
@@ -5387,7 +5387,7 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
     </message>
     <message>
         <source>Initialization sanity check failed. GROW Core is shutting down.</source>
-        <translation>Initierings renlighetscheck misslyckades. PIVX Kärna stängs ner.</translation>
+        <translation>Initierings renlighetscheck misslyckades. GROW Kärna stängs ner.</translation>
     </message>
     <message>
         <source>Input is not valid.</source>
@@ -5498,8 +5498,8 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
 </translation>
     </message>
     <message>
-        <source>Disable all PIVX specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
-        <translation>Avaktivera all PIVX funktionalitet (Huvudnoder, Zerocoin, SwiftX, Budgeting) (0-1, standard: %u)</translation>
+        <source>Disable all GROW specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
+        <translation>Avaktivera all GROW funktionalitet (Huvudnoder, Zerocoin, SwiftX, Budgeting) (0-1, standard: %u)</translation>
     </message>
     <message>
         <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>
@@ -6211,7 +6211,7 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
     </message>
     <message>
         <source>Wallet needed to be rewritten: restart GROW Core to complete</source>
-        <translation>Plånbok behöver skrivas om: starta om PIVX Kärna för att göra klart</translation>
+        <translation>Plånbok behöver skrivas om: starta om GROW Kärna för att göra klart</translation>
     </message>
     <message>
         <source>Wallet options:</source>

@@ -63,11 +63,11 @@
     </message>
     <message>
         <source>These are your GROW addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>To su vaše PIVX adrese za slanje plaćanja. Uvijek provjerite iznos i adresu primatelja prije slanja novca.</translation>
+        <translation>To su vaše GROW adrese za slanje plaćanja. Uvijek provjerite iznos i adresu primatelja prije slanja novca.</translation>
     </message>
     <message>
         <source>These are your GROW addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>To su vaše PIVX adrese za primanje uplata. Preporuča se upotreba nove adrese primanja za svaku transakciju.</translation>
+        <translation>To su vaše GROW adrese za primanje uplata. Preporuča se upotreba nove adrese primanja za svaku transakciju.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -172,8 +172,8 @@
         <translation>Potvrdite šifriranje novčanika</translation>
     </message>
     <message>
-        <source>PIVX will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
-        <translation>PIVX se sada zatvara kako bi dovršio proces šifriranja. Ne zaboravite da šifriranje vašeg novčanika ne može u potpunosti zaštititi vaše GROW od krađe zlonamjernog softvera koji zarazi vaše računalo.</translation>
+        <source>GROW will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
+        <translation>GROW se sada zatvara kako bi dovršio proces šifriranja. Ne zaboravite da šifriranje vašeg novčanika ne može u potpunosti zaštititi vaše GROW od krađe zlonamjernog softvera koji zarazi vaše računalo.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -606,7 +606,7 @@
     </message>
     <message>
         <source>Send coins to a GROW address</source>
-        <translation>Pošaljite kovanice na PIVX adresu</translation>
+        <translation>Pošaljite kovanice na GROW adresu</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and grow: URIs)</source>
@@ -633,16 +633,16 @@
         <translation>Prikaz informacija o GROW Coreu</translation>
     </message>
     <message>
-        <source>Modify configuration options for PIVX</source>
-        <translation>Izmijenite opcije konfiguracije za PIVX</translation>
+        <source>Modify configuration options for GROW</source>
+        <translation>Izmijenite opcije konfiguracije za GROW</translation>
     </message>
     <message>
         <source>Sign messages with your GROW addresses to prove you own them</source>
-        <translation>Potpišite poruke s vašim PIVX adresama kako biste dokazali da ih posjedujete</translation>
+        <translation>Potpišite poruke s vašim GROW adresama kako biste dokazali da ih posjedujete</translation>
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified GROW addresses</source>
-        <translation>Potvrdite poruke kako biste bili sigurni da su potpisani s određenim PIVX adresama</translation>
+        <translation>Potvrdite poruke kako biste bili sigurni da su potpisani s određenim GROW adresama</translation>
     </message>
     <message>
         <source>&amp;BIP38 tool</source>
@@ -1119,7 +1119,7 @@
     <name>SignVerifyMessageDialog</name>
     <message>
         <source>The GROW address to sign the message with</source>
-        <translation>PIVX adresa za potpisivanje poruke s</translation>
+        <translation>GROW adresa za potpisivanje poruke s</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1143,15 +1143,15 @@
     </message>
     <message>
         <source>Sign the message to prove you own this GROW address</source>
-        <translation>Potpišite poruku da biste dokazali da ste vlasnik ove PIVX adrese</translation>
+        <translation>Potpišite poruku da biste dokazali da ste vlasnik ove GROW adrese</translation>
     </message>
     <message>
         <source>The GROW address the message was signed with</source>
-        <translation>PIVX adresa s kojom je potpisana poruka</translation>
+        <translation>GROW adresa s kojom je potpisana poruka</translation>
     </message>
     <message>
         <source>Verify the message to ensure it was signed with the specified GROW address</source>
-        <translation>Potvrdite poruku kako biste bili sigurni da je potpisan s navedenom PIVX adresom</translation>
+        <translation>Potvrdite poruku kako biste bili sigurni da je potpisan s navedenom GROW adresom</translation>
     </message>
     <message>
         <source>Reset all sign message fields</source>

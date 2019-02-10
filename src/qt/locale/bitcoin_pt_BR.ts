@@ -63,11 +63,11 @@
     </message>
     <message>
         <source>These are your GROW addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Esses são seus endereços PIVX para envio de pagamentos. Sempre verifique a quantia e os endereços de recebimento antes de enviar moedas.</translation>
+        <translation>Esses são seus endereços GROW para envio de pagamentos. Sempre verifique a quantia e os endereços de recebimento antes de enviar moedas.</translation>
     </message>
     <message>
         <source>These are your GROW addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Esses são seus endereços PIVX para recebimento de pagamentos. É recomendado usar um novo endereço para cada transação.</translation>
+        <translation>Esses são seus endereços GROW para recebimento de pagamentos. É recomendado usar um novo endereço para cada transação.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -176,8 +176,8 @@
         <translation>Confirmar criptografia de carteira</translation>
     </message>
     <message>
-        <source>PIVX will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
-        <translation>PIVX vai fechar agora para finalizar o processo de criptografia. Lembre-se que encriptar sua carteira não pode proteger totalmente suas PIVs de serem roubadas por malwares infectando seu computador.</translation>
+        <source>GROW will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
+        <translation>GROW vai fechar agora para finalizar o processo de criptografia. Lembre-se que encriptar sua carteira não pode proteger totalmente suas PIVs de serem roubadas por malwares infectando seu computador.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -618,7 +618,7 @@
     </message>
     <message>
         <source>Send coins to a GROW address</source>
-        <translation>Enviar moedas para um endereço PIVX</translation>
+        <translation>Enviar moedas para um endereço GROW</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and grow: URIs)</source>
@@ -645,16 +645,16 @@
         <translation>Mostra informação sobre o GROW Core</translation>
     </message>
     <message>
-        <source>Modify configuration options for PIVX</source>
-        <translation>Modificar opções de configuração para PIVX</translation>
+        <source>Modify configuration options for GROW</source>
+        <translation>Modificar opções de configuração para GROW</translation>
     </message>
     <message>
         <source>Sign messages with your GROW addresses to prove you own them</source>
-        <translation>Assine mensagens com seus endereços PIVX para provar que você os detém</translation>
+        <translation>Assine mensagens com seus endereços GROW para provar que você os detém</translation>
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified GROW addresses</source>
-        <translation>Verifique as mensagens para ter certeza que estão assinadas com os endereços PIVX especificados</translation>
+        <translation>Verifique as mensagens para ter certeza que estão assinadas com os endereços GROW especificados</translation>
     </message>
     <message>
         <source>&amp;BIP38 tool</source>
@@ -697,12 +697,12 @@
         <translation>Janela de exploração de blocos</translation>
     </message>
     <message>
-        <source>Show the GROW Core help message to get a list with possible PIVX command-line options</source>
-        <translation>Mostra a ajuda da GROW Core para receber uma lista com possíveis opções de linha de comando PIVX</translation>
+        <source>Show the GROW Core help message to get a list with possible GROW command-line options</source>
+        <translation>Mostra a ajuda da GROW Core para receber uma lista com possíveis opções de linha de comando GROW</translation>
     </message>
     <message>
         <source>GROW Core client</source>
-        <translation>Cliente Core PIVX</translation>
+        <translation>Cliente Core GROW</translation>
     </message>
     <message>
         <source>Synchronizing with network...</source>
@@ -1119,7 +1119,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>The entered address "%1" is not a valid GROW address.</source>
-        <translation>O endereço que você selecionou, "%1" , não é um endereço válido de PIVX</translation>
+        <translation>O endereço que você selecionou, "%1" , não é um endereço válido de GROW</translation>
     </message>
     <message>
         <source>The entered address "%1" is already in the address book.</source>
@@ -1223,8 +1223,8 @@ MultiSend: %1</translation>
         <translation>Como essa é a primeira vez que o programa é utilizado, você pode escolher onde GROW Core vai armazenar os seus dados.</translation>
     </message>
     <message>
-        <source>GROW Core will download and store a copy of the PIVX block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>GROW Core vai baixar e armazenar uma cópia da blockchain PIVX. Pelo menos %1GB de informação será armazenado neste diretório e irá aumentar com o tempo. A carteira também será armazenada neste diretório.</translation>
+        <source>GROW Core will download and store a copy of the GROW block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>GROW Core vai baixar e armazenar uma cópia da blockchain GROW. Pelo menos %1GB de informação será armazenado neste diretório e irá aumentar com o tempo. A carteira também será armazenada neste diretório.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1606,16 +1606,16 @@ Favor verificar o endereço e tente novamente.</translation>
         <translation>Configuração de ofuscação</translation>
     </message>
     <message>
-        <source>Obfuscation was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening PIVX's configuration screen.</source>
-        <translation>Ofuscação foi definida com sucesso para o básico (%1 e 2 rodadas) Você pode mudar isto a qualquer tempo ao abrir a configuração de tela PIVX's.</translation>
+        <source>Obfuscation was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening GROW's configuration screen.</source>
+        <translation>Ofuscação foi definida com sucesso para o básico (%1 e 2 rodadas) Você pode mudar isto a qualquer tempo ao abrir a configuração de tela GROW's.</translation>
     </message>
     <message>
-        <source>Obfuscation was successfully set to high (%1 and 8 rounds). You can change this at any time by opening PIVX's configuration screen.</source>
-        <translation>Ofuscação foi definida com sucesso para alto (%1 e 8 rodadas). Você pode mudar isto a qualquer tempo ao abrir a configuração de tela PIVX's.</translation>
+        <source>Obfuscation was successfully set to high (%1 and 8 rounds). You can change this at any time by opening GROW's configuration screen.</source>
+        <translation>Ofuscação foi definida com sucesso para alto (%1 e 8 rodadas). Você pode mudar isto a qualquer tempo ao abrir a configuração de tela GROW's.</translation>
     </message>
     <message>
-        <source>Obfuscation was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening PIVX's configuration screen.</source>
-        <translation>Ofuscação foi definida com sucesso para máxima (%1 e 16 rodadas). Você pode mudar isto a qualquer tempo ao abrir a configuração de tela PIVX's.</translation>
+        <source>Obfuscation was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening GROW's configuration screen.</source>
+        <translation>Ofuscação foi definida com sucesso para máxima (%1 e 16 rodadas). Você pode mudar isto a qualquer tempo ao abrir a configuração de tela GROW's.</translation>
     </message>
 </context>
 <context>
@@ -1688,12 +1688,12 @@ Favor verificar o endereço e tente novamente.</translation>
         <translation>Expert</translation>
     </message>
     <message>
-        <source>Automatically start PIVX after logging in to the system.</source>
-        <translation>Iniciar automaticamente PIVX depois de logar no sistema.</translation>
+        <source>Automatically start GROW after logging in to the system.</source>
+        <translation>Iniciar automaticamente GROW depois de logar no sistema.</translation>
     </message>
     <message>
-        <source>&amp;Start PIVX on system login</source>
-        <translation>&amp;Iniciar PIVX ao logar no sistema</translation>
+        <source>&amp;Start GROW on system login</source>
+        <translation>&amp;Iniciar GROW ao logar no sistema</translation>
     </message>
     <message>
         <source>Enable coin &amp;control features</source>
@@ -1708,8 +1708,8 @@ Favor verificar o endereço e tente novamente.</translation>
         <translation>&amp;Rede</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting PIVX.</source>
-        <translation>A linguagem da interface pode ser definida aqui. Está configuração terá efeito após reinício do PIVX.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting GROW.</source>
+        <translation>A linguagem da interface pode ser definida aqui. Está configuração terá efeito após reinício do GROW.</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
@@ -1718,8 +1718,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
 https://www.transifex.com/pivx-project/pivx-project-translations</translation>
     </message>
     <message>
-        <source>Connect to the PIVX network through a SOCKS5 proxy.</source>
-        <translation>Conectar à rede PIVX através de um proxy SOCKS5</translation>
+        <source>Connect to the GROW network through a SOCKS5 proxy.</source>
+        <translation>Conectar à rede GROW através de um proxy SOCKS5</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -1853,8 +1853,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Imaturo:</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the PIVX network after a connection is established, but this process has not completed yet.</source>
-        <translation>A informação mostrada pode estar desatualizada. A sua carteira se sincroniza automaticamente com a rede PIVX após estabelecer uma conexão, mas esse processo ainda não foi concluído.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the GROW network after a connection is established, but this process has not completed yet.</source>
+        <translation>A informação mostrada pode estar desatualizada. A sua carteira se sincroniza automaticamente com a rede GROW após estabelecer uma conexão, mas esse processo ainda não foi concluído.</translation>
     </message>
     <message>
         <source>Unconfirmed transactions to watch-only addresses</source>
@@ -1950,8 +1950,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Ações Zerocoin:</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the PIVX network after a connection is established, but this process has not completed yet.</source>
-        <translation>A informação mostrada pode estar desatualizada. A sua carteira se sincroniza automaticamente com a rede PIVX após estabelecer uma conexão, mas esse processo ainda não foi concluído.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the GROW network after a connection is established, but this process has not completed yet.</source>
+        <translation>A informação mostrada pode estar desatualizada. A sua carteira se sincroniza automaticamente com a rede GROW após estabelecer uma conexão, mas esse processo ainda não foi concluído.</translation>
     </message>
     <message>
         <source>0</source>
@@ -1999,7 +1999,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
     </message>
     <message>
         <source>The GROW address to send the payment to. Creates local payment to yourself when empty.</source>
-        <translation>O endereço PIVX para enviar o pagamento. Cria um pagamento local para si mesmo quando vazio.</translation>
+        <translation>O endereço GROW para enviar o pagamento. Cria um pagamento local para si mesmo quando vazio.</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2174,7 +2174,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
     </message>
     <message>
         <source>Enter a GROW address (e.g. %1)</source>
-        <translation>Insira um endereço PIVX (e.g. %1)</translation>
+        <translation>Insira um endereço GROW (e.g. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -2431,8 +2431,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>saída:</translation>
     </message>
     <message>
-        <source>Welcome to the PIVX RPC console.</source>
-        <translation>Bem-vindo ao console da PIVX RPC</translation>
+        <source>Welcome to the GROW RPC console.</source>
+        <translation>Bem-vindo ao console da GROW RPC</translation>
     </message>
     <message>
         <source>Do you want to continue?.&lt;br /&gt;</source>
@@ -2735,8 +2735,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Se a taxa padrão estiver definida para 1000 uGROWs e a transação for somente de 250 bytes, então "por kilobyte" pagará somente 250 uGROWs em taxa,&lt;br /&gt; pagará pelo menos 1000 uGROWs. Para transações maiores que um kilobyte ambas pagam por kilobyte.</translation>
     </message>
     <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for PIVX transactions than the network can process.</source>
-        <translation>Pagar a taxa mínima é aceitável desde que existe menos volume de transações que espaço nos blocos. &lt;br/&gt; Mas fique atento que isso pode acabar em uma transação que nunca será confirmada caso haja mais demanda por transações de PIVX do que a rede pode processar.</translation>
+        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for GROW transactions than the network can process.</source>
+        <translation>Pagar a taxa mínima é aceitável desde que existe menos volume de transações que espaço nos blocos. &lt;br/&gt; Mas fique atento que isso pode acabar em uma transação que nunca será confirmada caso haja mais demanda por transações de GROW do que a rede pode processar.</translation>
     </message>
     <message>
         <source>normal</source>
@@ -2820,7 +2820,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
     </message>
     <message>
         <source>Warning: Invalid GROW address</source>
-        <translation>Aviso: endereço PIVX inválido</translation>
+        <translation>Aviso: endereço GROW inválido</translation>
     </message>
     <message>
         <source>%1 to %2</source>
@@ -2907,7 +2907,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
     </message>
     <message>
         <source>The GROW address to send the payment to</source>
-        <translation>O endereço PIVX para enviar o pagamento</translation>
+        <translation>O endereço GROW para enviar o pagamento</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2989,7 +2989,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
     </message>
     <message>
         <source>The GROW address to sign the message with</source>
-        <translation>O endereço PIVX para assinar a mensagem</translation>
+        <translation>O endereço GROW para assinar a mensagem</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -3021,15 +3021,15 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
     </message>
     <message>
         <source>Sign the message to prove you own this GROW address</source>
-        <translation>Assine a mensagem para provar que você possui este endereço PIVX</translation>
+        <translation>Assine a mensagem para provar que você possui este endereço GROW</translation>
     </message>
     <message>
         <source>The GROW address the message was signed with</source>
-        <translation>O endereço PIVX que assinou a mensagem</translation>
+        <translation>O endereço GROW que assinou a mensagem</translation>
     </message>
     <message>
         <source>Verify the message to ensure it was signed with the specified GROW address</source>
-        <translation>Verifique a mensagem para ter certeza que foi assinada com o endereço PIVX especificado.</translation>
+        <translation>Verifique a mensagem para ter certeza que foi assinada com o endereço GROW especificado.</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -3713,7 +3713,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
     </message>
     <message>
         <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong GROW Core will not work properly.</source>
-        <translation>Aviso: Favor verificar se o horário e data de seu computador estão corretos! Se o seu relógio estiver errado o Core PIVX não vai funcionar corretamente.</translation>
+        <translation>Aviso: Favor verificar se o horário e data de seu computador estão corretos! Se o seu relógio estiver errado o Core GROW não vai funcionar corretamente.</translation>
     </message>
     <message>
         <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>

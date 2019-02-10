@@ -63,11 +63,11 @@
     </message>
     <message>
         <source>These are your GROW addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Aquestes són les teves adreces PIVX per fer enviar pagaments. Sempre comprova l'import i l'adreça de recepció abans d'enviar les monedes.</translation>
+        <translation>Aquestes són les teves adreces GROW per fer enviar pagaments. Sempre comprova l'import i l'adreça de recepció abans d'enviar les monedes.</translation>
     </message>
     <message>
         <source>These are your GROW addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Aquestes són les teves adreces PIVX per rebre pagaments. Es recomana utilitzar noves adreces de recepció per cada transacció.</translation>
+        <translation>Aquestes són les teves adreces GROW per rebre pagaments. Es recomana utilitzar noves adreces de recepció per cada transacció.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -168,8 +168,8 @@
         <translation>Confirma l'encriptació del moneder</translation>
     </message>
     <message>
-        <source>PIVX will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
-        <translation>PIVX es tancarà per finalitzar el procés d'encriptació. Recorda que encriptant el teu moneder no protegeix els teus GROW de ser robats si el teu ordinador està infectat amb programari maliciós.</translation>
+        <source>GROW will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
+        <translation>GROW es tancarà per finalitzar el procés d'encriptació. Recorda que encriptant el teu moneder no protegeix els teus GROW de ser robats si el teu ordinador està infectat amb programari maliciós.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -426,7 +426,7 @@
     </message>
     <message>
         <source>Send coins to a GROW address</source>
-        <translation>Envia monedes a una adreça PIVX</translation>
+        <translation>Envia monedes a una adreça GROW</translation>
     </message>
     <message>
         <source>&amp;Privacy</source>
@@ -806,7 +806,7 @@
     </message>
     <message>
         <source>The entered address "%1" is not a valid GROW address.</source>
-        <translation>L'adreça introduïda "%1" no és una adreça PIVX vàlida.</translation>
+        <translation>L'adreça introduïda "%1" no és una adreça GROW vàlida.</translation>
     </message>
     <message>
         <source>The entered address "%1" is already in the address book.</source>
@@ -1214,8 +1214,8 @@
         <translation>Expert</translation>
     </message>
     <message>
-        <source>Automatically start PIVX after logging in to the system.</source>
-        <translation>Inicia PIVX automàticament després d'identificar-te en el sistema.</translation>
+        <source>Automatically start GROW after logging in to the system.</source>
+        <translation>Inicia GROW automàticament després d'identificar-te en el sistema.</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>

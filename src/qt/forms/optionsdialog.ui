@@ -30,10 +30,10 @@
        <item>
         <widget class="QCheckBox" name="bitcoinAtStartup">
          <property name="toolTip">
-          <string>Automatically start PIVX after logging in to the system.</string>
+          <string>Automatically start GROW after logging in to the system.</string>
          </property>
          <property name="text">
-          <string>&amp;Start PIVX on system login</string>
+          <string>&amp;Start GROW on system login</string>
          </property>
         </widget>
        </item>
@@ -319,7 +319,7 @@
        <item>
         <widget class="QCheckBox" name="connectSocks">
          <property name="toolTip">
-          <string>Connect to the PIVX network through a SOCKS5 proxy.</string>
+          <string>Connect to the GROW network through a SOCKS5 proxy.</string>
          </property>
          <property name="text">
           <string>&amp;Connect through SOCKS5 proxy (default proxy):</string>
@@ -485,7 +485,7 @@
          <item>
           <widget class="QValueComboBox" name="lang">
            <property name="toolTip">
-            <string>The user interface language can be set here. This setting will take effect after restarting PIVX.</string>
+            <string>The user interface language can be set here. This setting will take effect after restarting GROW.</string>
            </property>
           </widget>
          </item>

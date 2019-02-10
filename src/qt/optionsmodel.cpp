@@ -171,7 +171,7 @@ void OptionsModel::Init()
     if (settings.contains("nPreferredDenom"))
         SoftSetArg("-preferredDenom", settings.value("nPreferredDenom").toString().toStdString());
     if (settings.contains("nAnonymizePivxAmount"))
-        SoftSetArg("-anonymizepivxamount", settings.value("nAnonymizePivxAmount").toString().toStdString());
+        SoftSetArg("-anonymizegrowamount", settings.value("nAnonymizePivxAmount").toString().toStdString());
 
     language = settings.value("language").toString();
 }

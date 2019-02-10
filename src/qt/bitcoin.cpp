@@ -172,7 +172,7 @@ private:
     void handleRunawayException(std::exception* e);
 };
 
-/** Main PIVX application object */
+/** Main PIVX/GROW application object */
 class BitcoinApplication : public QApplication
 {
     Q_OBJECT
@@ -475,7 +475,7 @@ void BitcoinApplication::shutdownResult(int retval)
 
 void BitcoinApplication::handleRunawayException(const QString& message)
 {
-    QMessageBox::critical(0, "Runaway exception", BitcoinGUI::tr("A fatal error occurred. PIVX can no longer continue safely and will quit.") + QString("\n\n") + message);
+    QMessageBox::critical(0, "Runaway exception", BitcoinGUI::tr("A fatal error occurred. GROW can no longer continue safely and will quit.") + QString("\n\n") + message);
     ::exit(1);
 }
 
