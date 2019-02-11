@@ -25,7 +25,9 @@ static const int CANONICAL_BLOCK_SIG_VERSION = 40001;
 //! disconnect from peers older than this proto version
 static const int MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT = CANONICAL_BLOCK_SIG_VERSION; // use CANONICAL_BLOCK_SIG_VERSION for now
 static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT = CANONICAL_BLOCK_SIG_VERSION; // use CANONICAL_BLOCK_SIG_VERSION for now
-
+static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_GROWNNEWNET_40003 = 40003;
+static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_GROWNNEWNET_40004 = 40004; //For Later
+static const int MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT_DOPE = 40002; //Default Dope Mainnet
 //! masternodes older than this proto version use old strMessage format for mnannounce
 static const int MIN_PEER_MNANNOUNCE = 40003;
 

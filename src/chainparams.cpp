@@ -200,8 +200,8 @@ public:
         fHeadersFirstSyncingActive = false;
 
         nPoolMaxTransactions = 3;
-        strSporkKey = "0499A7AF4806FC6DE640D23BC5936C29B77ADF2174B4F45492727F897AE63CF8D27B2F05040606E0D14B547916379FA10716E344E745F880EDC037307186AA25B7";
-        strObfuscationPoolDummyAddress = "D87q2gC9j6nNrnzCsg4aY6bHMLsT9nUhEw";
+        strSporkKey = "040EE37D745991B433EC58DE821E1B6EFAC7D80DA9CFDCF42F97C4224DC468BF1ED89D4898C48EE9822A485D19016051BCC6A85989CEAB9D8A1FA129E1015D5294";
+        strObfuscationPoolDummyAddress = "D7qLCPEFsCLNGcLUBNHazPEuvn5xxWUtHd";
         nStartMasternodePayments = 1403728576; //Wed, 25 Jun 2014 20:36:16 GMT
 
         /** Zerocoin */
@@ -293,8 +293,8 @@ public:
         fTestnetToBeDeprecatedFieldRPC = true;
 
         nPoolMaxTransactions = 2;
-        strSporkKey = "04A8B319388C0F8588D238B9941DC26B26D3F9465266B368A051C5C100F79306A557780101FE2192FE170D7E6DEFDCBEE4C8D533396389C0DAFFDBC842B002243C";
-        strObfuscationPoolDummyAddress = "y57cqfGRkekRyDRNeJiLtYVEbvhXrNbmox";
+        strSporkKey = "0456DEB2969D41F1E9C1CA51E6B1DE8AD2C5CA1F4C24BF64B778F6855458DE0220532F815D54FA38FE2085F644B8C072A191E13747B4A880D24FC8852808FA897A";
+        strObfuscationPoolDummyAddress = "mvnkQw3iGLr3vr6SokPp7HNGdfXQtCUk9E";
         nStartMasternodePayments = 1420837558; //Fri, 09 Jan 2015 21:05:58 GMT
         nBudget_Fee_Confirmations = 3; // Number of confirmations for the finalization fee. We have to make this very short
                                        // here because we only have a 8 block finalization window on testnet

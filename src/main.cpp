@@ -6320,15 +6320,15 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 //       it was the one which was commented out
 int ActiveProtocol()
 {
-    // SPORK_14 is used for 70913 (v3.1.0+)
+    // for networksplit Masternodes Dope -> Grown
     if (IsSporkActive(SPORK_14_NEW_PROTOCOL_ENFORCEMENT))
-            return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
+            return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_GROWNNEWNET_40003;
 
-    // SPORK_15 was used for 70912 (v3.0.5+), commented out now.
-    //if (IsSporkActive(SPORK_15_NEW_PROTOCOL_ENFORCEMENT_2))
-    //        return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
+    // for zerocoin or stuff like that later
+    if (IsSporkActive(SPORK_15_NEW_PROTOCOL_ENFORCEMENT_2))
+            return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_GROWNNEWNET_40004;
 
-    return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
+    return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT_DOPE;
 }
 
 // requires LOCK(cs_vRecvMsg)
