@@ -8,12 +8,9 @@
 #include "main.h"
 #include "stakeinput.h"
 
-
-// MODIFIER_INTERVAL: time to elapse before new modifier is computed
-static const unsigned int MODIFIER_INTERVAL = 15 * 60;
-static const unsigned int MODIFIER_INTERVAL_TESTNET = 15 * 60;
-extern unsigned int nModifierInterval;
-extern unsigned int getIntervalVersion(bool fTestNet);
+// To decrease granularity of timestamp
+// Supposed to be 2^n-1
+static const int STAKE_TIMESTAMP_MASK = 15;
 
 // MODIFIER_INTERVAL_RATIO:
 // ratio of group interval length between the last group and the first group

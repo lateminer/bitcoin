@@ -2112,11 +2112,11 @@ bool CWallet::SelectStakeCoins(std::list<std::unique_ptr<CStakeInput> >& listInp
             }
 
             //check for min age
-            if (GetAdjustedTime() - nTxTime < nStakeMinAge)
+            if (GetAdjustedTime() - nTxTime < Params().StakeMinAge())
                 continue;
 
             //check that it is matured
-            if (out.nDepth < (out.tx->IsCoinStake() ? Params().COINBASE_MATURITY() : 10))
+            if (out.nDepth < (out.tx->IsCoinStake() ? Params().CoinbaseMaturity() : 10))
                 continue;
 
             //add to our stake set
@@ -2185,7 +2185,7 @@ bool CWallet::MintableCoins()
                 nTxTime = mapBlockIndex.at(out.tx->hashBlock)->GetBlockTime();
             }
 
-            if (GetAdjustedTime() - nTxTime > nStakeMinAge)
+            if (GetAdjustedTime() - nTxTime > Params().StakeMinAge())
                 return true;
         }
     }
@@ -4114,7 +4114,7 @@ void CWallet::AutoCombineDust()
             if (!out.fSpendable)
                 continue;
             //no coins should get this far if they dont have proper maturity, this is double checking
-            if (out.tx->IsCoinStake() && out.tx->GetDepthInMainChain() < Params().COINBASE_MATURITY() + 1)
+            if (out.tx->IsCoinStake() && out.tx->GetDepthInMainChain() < Params().CoinbaseMaturity() + 1)
                 continue;
 
             COutPoint outpt(out.tx->GetHash(), out.i);
@@ -4203,7 +4203,7 @@ bool CWallet::MultiSend()
     for (const COutput& out : vCoins) {
 
         //need output with precise confirm count - this is how we identify which is the output to send
-        if (out.tx->GetDepthInMainChain() != Params().COINBASE_MATURITY() + 1)
+        if (out.tx->GetDepthInMainChain() != Params().CoinbaseMaturity() + 1)
             continue;
 
         COutPoint outpoint(out.tx->GetHash(), out.i);
@@ -4396,7 +4396,7 @@ int CMerkleTx::GetBlocksToMaturity() const
     LOCK(cs_main);
     if (!(IsCoinBase() || IsCoinStake()))
         return 0;
-    return max(0, (Params().COINBASE_MATURITY() + 1) - GetDepthInMainChain());
+    return max(0, (Params().CoinbaseMaturity() + 1) - GetDepthInMainChain());
 }
 
 

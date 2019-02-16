@@ -75,7 +75,9 @@ public:
     int64_t TargetTimespan() const { return nTargetTimespan; }
     int64_t TargetSpacing() const { return nTargetSpacing; }
     int64_t Interval() const { return nTargetTimespan / nTargetSpacing; }
-    int COINBASE_MATURITY() const { return nMaturity; }
+    int CoinbaseMaturity() const { return nMaturity; }
+    unsigned int ModifierInterval() const { return nModifierInterval; }
+    unsigned int StakeMinAge() const { return nStakeMinAge; }
     CAmount MaxMoneyOut() const { return nMaxMoneyOut; }
     /** The masternode count that we will allow the see-saw reward payments to be off by */
     int MasternodeCountDrift() const { return nMasternodeCountDrift; }
@@ -142,6 +144,8 @@ protected:
     int nInitialFork1Height;
     int nMasternodeCountDrift;
     int nMaturity;
+    unsigned int nModifierInterval;
+    unsigned int nStakeMinAge;
     CAmount nMaxMoneyOut;
     int nMinerThreads;
     std::vector<CDNSSeedData> vSeeds;

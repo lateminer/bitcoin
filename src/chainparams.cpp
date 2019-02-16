@@ -127,9 +127,11 @@ public:
         nRejectBlockOutdatedMajority = 6840; // 95%
         nToCheckBlockUpgradeMajority = 7200; // Approximate expected amount of blocks in 7 days (960*7.5)
         nMinerThreads = 0;
-        nTargetTimespan = 20 * 90; // GROW: 30 minutes
-        nTargetSpacing = 1 * 90;   // GROW: 90 seconds
-        nMaturity = 60;
+        nTargetTimespan = 20 * 90;   // GROW: 30 minutes
+        nTargetSpacing = 1 * 90;     // GROW: 90 seconds
+        nMaturity = 60;              // GROW: 60 blocks
+        nModifierInterval = 15 * 60; // GROW: 15 minutes
+        nStakeMinAge = 12 * 60 * 60; // GROW: 12 hours
         nMasternodeCountDrift = 20;
         nMaxMoneyOut = 200000000 * COIN;
 
@@ -252,6 +254,8 @@ public:
         nTargetTimespan = 20 * 90; // GROW: 30 minutes
         nTargetSpacing = 1 * 90;   // GROW: 90 seconds
         nMaturity = 10;
+        nModifierInterval = 15 * 60;
+        nStakeMinAge = 1 * 60 * 60;
         nMasternodeCountDrift = 4;
         nMaxMoneyOut = 200000000 * COIN;
 

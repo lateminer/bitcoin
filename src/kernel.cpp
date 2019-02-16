@@ -5,6 +5,7 @@
 
 #include <boost/assign/list_of.hpp>
 
+#include "chainparams.h"
 #include "db.h"
 #include "kernel.h"
 #include "script/interpreter.h"
@@ -17,23 +18,10 @@ using namespace std;
 
 bool fTestNet = false; //Params().NetworkID() == CBaseChainParams::TESTNET;
 
-// Modifier interval: time to elapse before new modifier is computed
-// Set to 3-hour for production network and 20-minute for test network
-unsigned int nModifierInterval;
-int nStakeTargetSpacing = 90;
-
-unsigned int getIntervalVersion(bool fTestNet)
-{
-    if (fTestNet)
-        return MODIFIER_INTERVAL_TESTNET;
-    else
-        return MODIFIER_INTERVAL;
-}
-
 // Get time weight
 int64_t GetWeight(int64_t nIntervalBeginning, int64_t nIntervalEnd)
 {
-    return nIntervalEnd - nIntervalBeginning - nStakeMinAge;
+    return nIntervalEnd - nIntervalBeginning - Params().StakeMinAge();
 }
 
 // Get the last stake modifier and its generation time from a given block
@@ -54,7 +42,7 @@ static bool GetLastStakeModifier(const CBlockIndex* pindex, uint64_t& nStakeModi
 static int64_t GetStakeModifierSelectionIntervalSection(int nSection)
 {
     assert(nSection >= 0 && nSection < 64);
-    int64_t a = getIntervalVersion(fTestNet) * 63 / (63 + ((63 - nSection) * (MODIFIER_INTERVAL_RATIO - 1)));
+    int64_t a = Params().ModifierInterval() * 63 / (63 + ((63 - nSection) * (MODIFIER_INTERVAL_RATIO - 1)));
     return a;
 }
 
@@ -157,14 +145,14 @@ bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeMod
     if (GetBoolArg("-printstakemodifier", false))
         LogPrintf("ComputeNextStakeModifier: prev modifier= %s time=%s\n", std::to_string(nStakeModifier).c_str(), DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nModifierTime).c_str());
 
-    if (nModifierTime / getIntervalVersion(fTestNet) >= pindexPrev->GetBlockTime() / getIntervalVersion(fTestNet))
+    if (nModifierTime / Params().ModifierInterval() >= pindexPrev->GetBlockTime() / Params().ModifierInterval())
         return true;
 
     // Sort candidate blocks by timestamp
     vector<pair<int64_t, uint256> > vSortedByTimestamp;
-    vSortedByTimestamp.reserve(64 * getIntervalVersion(fTestNet) / nStakeTargetSpacing);
+    vSortedByTimestamp.reserve(64 * Params().ModifierInterval() / Params().TargetSpacing());
     int64_t nSelectionInterval = GetStakeModifierSelectionInterval();
-    int64_t nSelectionIntervalStart = (pindexPrev->GetBlockTime() / getIntervalVersion(fTestNet)) * getIntervalVersion(fTestNet) - nSelectionInterval;
+    int64_t nSelectionIntervalStart = (pindexPrev->GetBlockTime() / Params().ModifierInterval()) * Params().ModifierInterval() - nSelectionInterval;
     const CBlockIndex* pindex = pindexPrev;
 
     while (pindex && pindex->GetBlockTime() >= nSelectionIntervalStart) {
@@ -284,9 +272,9 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     if (nTimeTx < nTimeBlockFrom)
         return error("CheckStakeKernelHash() : nTime violation");
 
-    if (nTimeBlockFrom + nStakeMinAge > nTimeTx) // Min age requirement
+    if (nTimeBlockFrom + Params().StakeMinAge() > nTimeTx) // Min age requirement
         return error("CheckStakeKernelHash() : min age violation - nTimeBlockFrom=%d nStakeMinAge=%d nTimeTx=%d",
-                     nTimeBlockFrom, nStakeMinAge, nTimeTx);
+                     nTimeBlockFrom, Params().StakeMinAge(), nTimeTx);
 
     //grab difficulty
     uint256 bnTargetPerCoinDay;
@@ -391,5 +379,5 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
 bool CheckCoinStakeTimestamp(int64_t nTimeBlock, int64_t nTimeTx)
 {
     // v0.3 protocol
-    return (nTimeBlock == nTimeTx);
+    return (nTimeBlock == nTimeTx) && ((nTimeTx & STAKE_TIMESTAMP_MASK) == 0);
 }
