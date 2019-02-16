@@ -2219,6 +2219,10 @@ Please check the address and try again.</source>
         <translation>PIVX Core kehittäjät</translation>
     </message>
     <message>
+        <source>The GROW Core developers</source>
+        <translation>GROW Core kehittäjät</translation>
+    </message>
+    <message>
         <source>[testnet]</source>
         <translation>[testnet]</translation>
     </message>

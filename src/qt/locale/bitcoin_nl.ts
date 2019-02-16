@@ -4249,6 +4249,10 @@ Ofwel het munten van hogere denominaties (dus minder invoer nodig) of het te bes
         <translation>De PIVX Kernontwikkelaars</translation>
     </message>
     <message>
+        <source>The GROW Core developers</source>
+        <translation>De GROW Kernontwikkelaars</translation>
+    </message>
+    <message>
         <source>[testnet]</source>
         <translation>[testnet]</translation>
     </message>

@@ -4248,6 +4248,10 @@ Enten mint højere nomineringer (så færre input er nødvendige) eller reducere
         <translation>PIVX "core" udviklerne</translation>
     </message>
     <message>
+        <source>The GROW Core developers</source>
+        <translation>GROW "core" udviklerne</translation>
+    </message>
+    <message>
         <source>[testnet]</source>
         <translation>[Testnet]</translation>
     </message>

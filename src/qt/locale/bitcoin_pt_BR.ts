@@ -3131,6 +3131,10 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Os desenvolvedores do PIVX Core</translation>
     </message>
     <message>
+        <source>The GROW Core developers</source>
+        <translation>Os desenvolvedores do GROW Core</translation>
+    </message>
+    <message>
         <source>[testnet]</source>
         <translation>[testnet]</translation>
     </message>

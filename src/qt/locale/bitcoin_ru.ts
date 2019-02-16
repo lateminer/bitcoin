@@ -4248,6 +4248,10 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Разработчики PIVX Core</translation>
     </message>
     <message>
+        <source>The GROW Core developers</source>
+        <translation>Разработчики GROW Core</translation>
+    </message>
+    <message>
         <source>[testnet]</source>
         <translation>[тестовая сеть]</translation>
     </message>

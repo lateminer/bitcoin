@@ -4165,6 +4165,10 @@ Minta antingen högre valörer (så att färre inputs behövs) eller spendera mi
         <translation>PIVX Core utvecklarna</translation>
     </message>
     <message>
+        <source>The GROW Core developers</source>
+        <translation>GROW Core utvecklarna</translation>
+    </message>
+    <message>
         <source>[testnet]</source>
         <translation>[testnet]</translation>
     </message>

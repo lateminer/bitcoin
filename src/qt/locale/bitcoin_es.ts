@@ -4249,6 +4249,10 @@ O mint las denominaciones más altas (por lo tanto, se necesitan menos datos) o 
         <translation>Los desarrolladores de PIVX Core</translation>
     </message>
     <message>
+        <source>The GROW Core developers</source>
+        <translation>Los desarrolladores de GROW Core</translation>
+    </message>
+    <message>
         <source>[testnet]</source>
         <translation>[testnet]</translation>
     </message>

@@ -4240,6 +4240,10 @@ Präge entweder höhere Stückelungen (damit weniger Eingaben benötigt werdenn)
         <translation>Die PIVX Core Entwickler</translation>
     </message>
     <message>
+        <source>The GROW Core developers</source>
+        <translation>Die GROW Core Entwickler</translation>
+    </message>
+    <message>
         <source>[testnet]</source>
         <translation>[Testnetzwerk]</translation>
     </message>

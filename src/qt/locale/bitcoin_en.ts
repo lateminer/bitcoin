@@ -5553,6 +5553,11 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+1"/>
+        <source>The GROW Core developers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../networkstyle.cpp" line="+20"/>
         <source>[testnet]</source>
         <translation>[testnet]</translation>

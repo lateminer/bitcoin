@@ -2476,6 +2476,10 @@ Nematura: konfirmita, sed malpli ol 1 minto el la samo nomado post ĝin estis mi
         <source>The PIVX Core developers</source>
         <translation>La PIVX kerno programistoj</translation>
     </message>
+    <message>
+        <source>The GROW Core developers</source>
+        <translation>La GROW kerno programistoj</translation>
+    </message>
     </context>
 <context>
     <name>TrafficGraphWidget</name>
