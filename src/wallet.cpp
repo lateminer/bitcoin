@@ -2999,7 +2999,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
         nTxNewTime = GetAdjustedTime();
 
         //iterates each utxo inside of CheckStakeKernelHash()
-        if (Stake(stakeInput.get(), nBits, block.GetBlockTime(), nTxNewTime, hashProofOfStake)) {
+        if (CheckStakeKernelHash(stakeInput.get(), nBits, block.GetBlockTime(), nTxNewTime, hashProofOfStake)) {
             LOCK(cs_main);
             //Double check that this will pass time requirements
             if (nTxNewTime <= chainActive.Tip()->GetPastTimeLimit()) {
