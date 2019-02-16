@@ -190,6 +190,8 @@ public:
      */
     static bool CheckLowS(const std::vector<unsigned char>& vchSig);
 
+    static bool CheckSignatureElement(const unsigned char *vch, int len, bool half);
+
     //! Recover a public key from a compact signature.
     bool RecoverCompact(const uint256& hash, const std::vector<unsigned char>& vchSig);
 

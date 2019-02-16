@@ -164,6 +164,23 @@ bool IsLowDERSignature(const valtype &vchSig, ScriptError* serror) {
     if (!IsValidSignatureEncoding(vchSig)) {
         return set_error(serror, SCRIPT_ERR_SIG_DER);
     }
+    unsigned int nLenR = vchSig[3];
+    unsigned int nLenS = vchSig[5+nLenR];
+    const unsigned char *S = &vchSig[6+nLenR];
+    // If the S value is above the order of the curve divided by two, its
+    // complement modulo the order could have been used instead, which is
+    // one byte shorter when encoded correctly.
+    if (!CPubKey::CheckSignatureElement(S, nLenS, true))
+        return set_error(serror, SCRIPT_ERR_SIG_HIGH_S);
+
+    return true;
+}
+
+/*
+bool IsLowDERSignature(const valtype &vchSig, ScriptError* serror) {
+    if (!IsValidSignatureEncoding(vchSig)) {
+        return set_error(serror, SCRIPT_ERR_SIG_DER);
+    }
     // https://bitcoin.stackexchange.com/a/12556:
     //     Also note that inside transaction signatures, an extra hashtype byte
     //     follows the actual signature data.
@@ -176,6 +193,7 @@ bool IsLowDERSignature(const valtype &vchSig, ScriptError* serror) {
 
     return true;
 }
+*/
 
 bool static IsDefinedHashtypeSignature(const valtype &vchSig) {
     if (vchSig.size() == 0) {
