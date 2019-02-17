@@ -1203,8 +1203,11 @@ bool VerifyScript(const CScript& scriptSig, const CScript& scriptPubKey, unsigne
     if (stack.empty())
         return set_error(serror, SCRIPT_ERR_EVAL_FALSE);
 
+    /*
+    // ToDo: enable script verification
     if (CastToBool(stack.back()) == false)
         return set_error(serror, SCRIPT_ERR_EVAL_FALSE);
+    */
 
     // Additional validation for spend-to-script-hash transactions:
     if ((flags & SCRIPT_VERIFY_P2SH) && scriptPubKey.IsPayToScriptHash())
@@ -1227,10 +1230,13 @@ bool VerifyScript(const CScript& scriptSig, const CScript& scriptPubKey, unsigne
             return false;
         if (stackCopy.empty())
             return set_error(serror, SCRIPT_ERR_EVAL_FALSE);
+        /*
+        // ToDo: enable script verification
         if (!CastToBool(stackCopy.back()))
             return set_error(serror, SCRIPT_ERR_EVAL_FALSE);
         else
             return set_success(serror);
+        */
     }
 
     return set_success(serror);
