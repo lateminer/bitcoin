@@ -159,6 +159,7 @@ public:
     // proof-of-stake specific fields
     uint256 GetBlockTrust() const;
     uint64_t nStakeModifier;             // hash modifier for proof-of-stake
+    uint256 nStakeModifierV2;
     COutPoint prevoutStake;
     unsigned int nStakeTime;
     uint256 hashProofOfStake;
@@ -199,6 +200,7 @@ public:
         nMoneySupply = 0;
         nFlags = 0;
         nStakeModifier = 0;
+        nStakeModifierV2 = 0;
         prevoutStake.SetNull();
         nStakeTime = 0;
 
@@ -238,6 +240,7 @@ public:
         nMoneySupply = 0;
         nFlags = 0;
         nStakeModifier = 0;
+        nStakeModifierV2 = 0;
         hashProofOfStake = uint256();
 
         if (block.IsProofOfStake()) {
