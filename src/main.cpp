@@ -1773,13 +1773,13 @@ double ConvertBitsToDouble(unsigned int nBits)
     return dDiff;
 }
 
-int64_t GetBlockValue(int nHeight)
+int64_t GetBlockValue(int nHeight, bool isProofOfWork)
 {
     int64_t nSubsidy = 0;
 
     if (nHeight == 1) {
         nSubsidy = 145000000 * COIN;
-    } else if (nHeight <= Params().LAST_POW_BLOCK()) {
+    } else if (nHeight <= Params().LAST_POW_BLOCK() && isProofOfWork) {
          nSubsidy = 0;
     } else if (nHeight < Params().Initial_Fork1_Height()) {
          nSubsidy = 30 * COIN;
@@ -2985,12 +2985,12 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     nTimeConnect += nTime1 - nTimeStart;
     LogPrint("bench", "      - Connect %u transactions: %.2fms (%.3fms/tx, %.3fms/txin) [%.2fs]\n", (unsigned)block.vtx.size(), 0.001 * (nTime1 - nTimeStart), 0.001 * (nTime1 - nTimeStart) / block.vtx.size(), nInputs <= 1 ? 0 : 0.001 * (nTime1 - nTimeStart) / (nInputs - 1), nTimeConnect * 0.000001);
 
-    CAmount nExpectedMint = GetBlockValue(pindex->pprev->nHeight) + nFees;
+    CAmount nExpectedReward = GetBlockValue(pindex->pprev->nHeight, block.IsProofOfWork()) + nFees;
 
     //Check that the block does not overmint
-    if (!IsBlockValueValid(block, nExpectedMint, pindex->nMint)) {
+    if (!IsBlockValueValid(block, nExpectedReward, pindex->nMint)) {
         return state.DoS(100, error("ConnectBlock() : reward pays too much (actual=%s vs limit=%s)",
-                                    FormatMoney(pindex->nMint), FormatMoney(nExpectedMint)),
+                                    FormatMoney(pindex->nMint), FormatMoney(nExpectedReward)),
                          REJECT_INVALID, "bad-cb-amount");
     }
 
