@@ -900,7 +900,7 @@ bool CheckZerocoinMint(const uint256& txHash, const CTxOut& txout, CValidationSt
 
 bool ContextualCheckZerocoinMint(const CTransaction& tx, const PublicCoin& coin, const CBlockIndex* pindex)
 {
-    if (pindex->nHeight >= Params().Zerocoin_Block_V2_Start() && Params().NetworkID() != CBaseChainParams::TESTNET) {
+    if (pindex->nHeight >= Params().Zerocoin_StartHeight() && Params().NetworkID() != CBaseChainParams::TESTNET) {
         //See if this coin has already been added to the blockchain
         uint256 txid;
         int nHeight;
@@ -916,7 +916,7 @@ bool ContextualCheckZerocoinMint(const CTransaction& tx, const PublicCoin& coin,
 bool ContextualCheckZerocoinSpend(const CTransaction& tx, const CoinSpend& spend, CBlockIndex* pindex, const uint256& hashBlock)
 {
     //Check to see if the zPIV/zGROW is properly signed
-    if (pindex->nHeight >= Params().Zerocoin_Block_V2_Start()) {
+    if (pindex->nHeight >= Params().Zerocoin_StartHeight()) {
         if (!spend.HasValidSignature())
             return error("%s: V2 zGROW spend does not have a valid signature", __func__);
 
@@ -937,8 +937,7 @@ bool ContextualCheckZerocoinSpend(const CTransaction& tx, const CoinSpend& spend
 
     //Reject serial's that are not in the acceptable value range
     bool fUseV1Params = spend.getVersion() < libzerocoin::PrivateCoin::PUBKEY_VERSION;
-    if (pindex->nHeight > Params().Zerocoin_Block_EnforceSerialRange() &&
-        !spend.HasValidSerial(Params().Zerocoin_Params(fUseV1Params)))
+    if (!spend.HasValidSerial(Params().Zerocoin_Params(fUseV1Params)))
         return error("%s : zGROW spend with serial %s from tx %s is not in valid range\n", __func__,
                      spend.getCoinSerialNumber().GetHex(), tx.GetHash().GetHex());
 
@@ -1000,7 +999,7 @@ bool CheckZerocoinSpend(const CTransaction& tx, bool fVerifySignature, CValidati
                 return state.DoS(100, error("%s: Zerocoinspend could not find accumulator associated with checksum %s", __func__, HexStr(BEGIN(nChecksum), END(nChecksum))));
             }
 
-            Accumulator accumulator(Params().Zerocoin_Params(chainActive.Height() < Params().Zerocoin_Block_V2_Start()),
+            Accumulator accumulator(Params().Zerocoin_Params(chainActive.Height() < Params().Zerocoin_StartHeight()),
                                     newSpend.getDenomination(), bnAccumulatorValue);
 
             //Check that the coin has been accumulated
@@ -1779,9 +1778,9 @@ int64_t GetBlockValue(int nHeight, bool isProofOfWork)
 
     if (nHeight == 1) {
         nSubsidy = 145000000 * COIN;
-    } else if (nHeight <= Params().LAST_POW_BLOCK() && isProofOfWork) {
+    } else if (nHeight <= Params().LAST_POW_BLOCK() || isProofOfWork) {
          nSubsidy = 0;
-    } else if (nHeight < Params().Initial_Fork1_Height()) {
+    } else if (nHeight < Params().NewRewardStructure_Height()) {
          nSubsidy = 30 * COIN;
     } else
          nSubsidy = 25 * COIN;
@@ -1994,7 +1993,7 @@ int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCou
 {
     int64_t ret = 0;
 
-    if (nHeight >= Params().Initial_Fork1_Height() && nHeight < Params().Zerocoin_Block_V2_Start()) {
+    if (nHeight >= Params().NewRewardStructure_Height() && nHeight < Params().Zerocoin_StartHeight()) {
         return GetSeeSaw(blockValue, nMasternodeCount, nHeight);
     } else {
         ret = 15 * COIN;
@@ -2224,7 +2223,7 @@ void AddInvalidSpendsToMap(const CBlock& block)
 
 bool ValidOutPoint(const COutPoint out, int nHeight)
 {
-    bool isInvalid = nHeight >= Params().Block_Enforce_Invalid() && invalid_out::ContainsOutPoint(out);
+    bool isInvalid = invalid_out::ContainsOutPoint(out);
     return !isInvalid;
 }
 
@@ -2635,15 +2634,6 @@ bool RecalculatePIVSupply(int nHeightStart)
         pindex->nMoneySupply = nSupplyPrev + nValueOut - nValueIn;
         nSupplyPrev = pindex->nMoneySupply;
 
-        // Add fraudulent funds to the supply and remove any recovered funds.
-        if (pindex->nHeight == Params().Zerocoin_Block_RecalculateAccumulators()) {
-            LogPrintf("%s : Original money supply=%s\n", __func__, FormatMoney(pindex->nMoneySupply));
-
-            CAmount nLocked = GetInvalidUTXOValue();
-            pindex->nMoneySupply -= nLocked;
-            LogPrintf("%s : Removing locked from supply - %s : supply=%s\n", __func__, FormatMoney(nLocked), FormatMoney(pindex->nMoneySupply));
-        }
-
         assert(pblocktree->WriteBlockIndex(CDiskBlockIndex(pindex)));
 
         if (pindex->nHeight < chainActive.Height())
@@ -2662,7 +2652,7 @@ bool ReindexAccumulators(list<uint256>& listMissingCheckpoints, string& strError
         LogPrintf("%s : finding missing checkpoints\n", __func__);
 
         //search the chain to see when zerocoin started
-        int nZerocoinStart = Params().Zerocoin_Block_V2_Start();
+        int nZerocoinStart = Params().Zerocoin_StartHeight();
 
         // find each checkpoint that is missing
         CBlockIndex* pindex = chainActive[nZerocoinStart];
@@ -2707,7 +2697,7 @@ bool ReindexAccumulators(list<uint256>& listMissingCheckpoints, string& strError
 bool UpdateZPIVSupply(const CBlock& block, CBlockIndex* pindex, bool fJustCheck)
 {
     std::list<CZerocoinMint> listMints;
-    bool fFilterInvalid = pindex->nHeight >= Params().Zerocoin_Block_RecalculateAccumulators();
+    bool fFilterInvalid = true;
     BlockToZerocoinMintList(block, listMints, fFilterInvalid);
     std::list<libzerocoin::CoinDenomination> listSpends = ZerocoinSpendListFromBlock(block, fFilterInvalid);
 
@@ -2960,13 +2950,6 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         pos.nTxOffset += ::GetSerializeSize(tx, SER_DISK, CLIENT_VERSION);
     }
 
-    //A one-time event where money supply counts were off and recalculated on a certain block.
-    if (pindex->nHeight == Params().Zerocoin_Block_RecalculateAccumulators() + 1) {
-        RecalculateZPIVMinted();
-        RecalculateZPIVSpent();
-        RecalculatePIVSupply(Params().Zerocoin_StartHeight());
-    }
-
     //Track zPIV/zGROW money supply in the block index
     if (!UpdateZPIVSupply(block, pindex, fJustCheck))
         return state.DoS(100, error("%s: Failed to calculate new zGROW supply for block=%s height=%d", __func__,
@@ -2995,7 +2978,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     }
 
     // Ensure that accumulator checkpoints are valid and in the same state as this instance of the chain
-    AccumulatorMap mapAccumulators(Params().Zerocoin_Params(pindex->nHeight < Params().Zerocoin_Block_V2_Start()));
+    AccumulatorMap mapAccumulators(Params().Zerocoin_Params(pindex->nHeight < Params().Zerocoin_StartHeight()));
     if (!ValidateAccumulatorCheckpoint(block, pindex, mapAccumulators))
         return state.DoS(100, error("%s: Failed to validate accumulator checkpoint for block=%s height=%d", __func__,
                                     block.GetHash().GetHex(), pindex->nHeight), REJECT_INVALID, "bad-acc-checkpoint");
@@ -3083,10 +3066,6 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     int64_t nTime4 = GetTimeMicros();
     nTimeCallbacks += nTime4 - nTime3;
     LogPrint("bench", "    - Callbacks: %.2fms [%.2fs]\n", 0.001 * (nTime4 - nTime3), nTimeCallbacks * 0.000001);
-
-    //Continue tracking possible movement of fraudulent funds until they are completely frozen
-    if (pindex->nHeight >= Params().Zerocoin_Block_FirstFraudulent() && pindex->nHeight <= Params().Zerocoin_Block_RecalculateAccumulators() + 1)
-        AddInvalidSpendsToMap(block);
 
     //Remove zerocoinspends from the pending map
     for (const uint256& txid : vSpendsInBlock) {
@@ -4047,7 +4026,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
     bool fZerocoinActive = block.GetBlockTime() > Params().Zerocoin_StartTime();
     vector<CBigNum> vBlockSerials;
     for (const CTransaction& tx : block.vtx) {
-        if (!CheckTransaction(tx, fZerocoinActive, chainActive.Height() + 1 >= Params().Zerocoin_Block_EnforceSerialRange(), state))
+        if (!CheckTransaction(tx, fZerocoinActive, true, state))
             return error("CheckBlock() : CheckTransaction failed");
         // check transaction timestamp
         if (block.GetBlockTime() < (int64_t)tx.nTime)
@@ -4249,7 +4228,7 @@ bool AcceptBlockHeader(const CBlock& block, CValidationState& state, CBlockIndex
 
 bool ContextualCheckZerocoinStake(int nHeight, CStakeInput* stake)
 {
-    if (nHeight < Params().Zerocoin_Block_V2_Start())
+    if (nHeight < Params().Zerocoin_StartHeight())
         return error("%s: zGROW stake block is less than allowed start height", __func__);
 
     if (CZPivStake* zPIV = dynamic_cast<CZPivStake*>(stake)) {

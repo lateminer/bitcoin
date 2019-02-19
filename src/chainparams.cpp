@@ -137,15 +137,10 @@ public:
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 750;
-        nInitialFork1Height = std::numeric_limits<int>::max();
         nZerocoinStartHeight = std::numeric_limits<int>::max();
         nZerocoinStartTime = std::numeric_limits<int>::max();
-        nBlockEnforceSerialRange = std::numeric_limits<int>::max(); //Enforce serial range starting this block
-        nBlockRecalculateAccumulators = std::numeric_limits<int>::max(); //Trigger a recalculation of accumulators
-        nBlockFirstFraudulent = std::numeric_limits<int>::max(); //First block that bad serials emerged
-        nBlockLastGoodCheckpoint = std::numeric_limits<int>::max(); //Last valid accumulator checkpoint
-        nBlockEnforceInvalidUTXO = std::numeric_limits<int>::max(); //Start enforcing the invalid UTXO's
-        nBlockZerocoinV2 = std::numeric_limits<int>::max(); //!> The block that zerocoin v2 becomes active - roughly Tuesday, May 8, 2018 4:00:00 AM GMT
+        nNewRewardStructureHeight = std::numeric_limits<int>::max();
+        nNewKernelProtocolTime = nZerocoinStartTime;
 
         /**
          * Build the genesis block. Note that the output of the genesis coinbase cannot
@@ -205,7 +200,6 @@ public:
         strSporkKey = "040EE37D745991B433EC58DE821E1B6EFAC7D80DA9CFDCF42F97C4224DC468BF1ED89D4898C48EE9822A485D19016051BCC6A85989CEAB9D8A1FA129E1015D5294";
         strObfuscationPoolDummyAddress = "D7qLCPEFsCLNGcLUBNHazPEuvn5xxWUtHd";
         nStartMasternodePayments = 1403728576; //Wed, 25 Jun 2014 20:36:16 GMT
-        nNewKernelProtocolTime = std::numeric_limits<int>::max();
 
         /** Zerocoin */
         zerocoinModulus = "25195908475657893494027183240048398571429282126204032027777137836043662020707595556264018525880784"
@@ -261,15 +255,10 @@ public:
         nMaxMoneyOut = 200000000 * COIN;
 
         nLastPOWBlock = 100;
-        nInitialFork1Height = std::numeric_limits<int>::max();
         nZerocoinStartHeight = std::numeric_limits<int>::max();
         nZerocoinStartTime = std::numeric_limits<int>::max();
-        nBlockEnforceSerialRange = std::numeric_limits<int>::max(); //Enforce serial range starting this block
-        nBlockRecalculateAccumulators = std::numeric_limits<int>::max(); //Trigger a recalculation of accumulators
-        nBlockFirstFraudulent = std::numeric_limits<int>::max(); //First block that bad serials emerged
-        nBlockLastGoodCheckpoint = std::numeric_limits<int>::max(); //Last valid accumulator checkpoint
-        nBlockEnforceInvalidUTXO = std::numeric_limits<int>::max(); //Start enforcing the invalid UTXO's
-        nBlockZerocoinV2 = std::numeric_limits<int>::max(); //!> The block that zerocoin v2 becomes active
+        nNewRewardStructureHeight = std::numeric_limits<int>::max();
+        nNewKernelProtocolTime = nZerocoinStartTime;
 
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
         genesis.nNonce = 499515;
@@ -301,7 +290,6 @@ public:
         strSporkKey = "0456DEB2969D41F1E9C1CA51E6B1DE8AD2C5CA1F4C24BF64B778F6855458DE0220532F815D54FA38FE2085F644B8C072A191E13747B4A880D24FC8852808FA897A";
         strObfuscationPoolDummyAddress = "mvnkQw3iGLr3vr6SokPp7HNGdfXQtCUk9E";
         nStartMasternodePayments = 1420837558; //Fri, 09 Jan 2015 21:05:58 GMT
-        nNewKernelProtocolTime = std::numeric_limits<int>::max();
 
         nBudget_Fee_Confirmations = 3; // Number of confirmations for the finalization fee. We have to make this very short
                                        // here because we only have a 8 block finalization window on testnet

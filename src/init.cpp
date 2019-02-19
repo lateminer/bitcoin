@@ -1488,8 +1488,8 @@ bool AppInit2()
 
                 // Force recalculation of accumulators.
                 if (GetBoolArg("-reindexaccumulators", false)) {
-                    if (chainActive.Height() > Params().Zerocoin_Block_V2_Start()) {
-                        CBlockIndex *pindex = chainActive[Params().Zerocoin_Block_V2_Start()];
+                    if (chainActive.Height() > Params().Zerocoin_StartHeight()) {
+                        CBlockIndex *pindex = chainActive[Params().Zerocoin_StartHeight()];
                         while (pindex->nHeight < chainActive.Height()) {
                             if (!count(listAccCheckpointsNoDB.begin(), listAccCheckpointsNoDB.end(),
                                        pindex->nAccumulatorCheckpoint))

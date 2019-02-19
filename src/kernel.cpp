@@ -337,7 +337,7 @@ bool CheckStakeKernelHash(CStakeInput* stakeInput, unsigned int nBits, unsigned 
         nTryTime = nTimeTx + nHashDrift - i;
 
         // if stake hash does not meet the target then continue to next iteration
-        if (nTimeTx >= Params().NewKernelProtocolTime()) {
+        if (nTimeTx >= Params().NewKernelProtocol_Time()) {
             // New protocol
             if (!CheckStakeNewProtocol(ssUniqueID, nValueIn, nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake))
                 continue;
@@ -406,7 +406,7 @@ bool CheckProofOfStake(CBlockIndex* pindexPrev, const CBlock block, uint256& has
 
     unsigned int nTxTime = block.nTime;
 
-    if (nTxTime >= Params().NewKernelProtocolTime()) {
+    if (nTxTime >= Params().NewKernelProtocol_Time()) {
         // New protocol
         // Stake modifier
         uint64_t nStakeModifier = 0;

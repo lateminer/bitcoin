@@ -97,7 +97,7 @@ public:
     std::string SporkKey() const { return strSporkKey; }
     std::string ObfuscationPoolDummyAddress() const { return strObfuscationPoolDummyAddress; }
     int64_t StartMasternodePayments() const { return nStartMasternodePayments; }
-    int64_t NewKernelProtocolTime() const { return nNewKernelProtocolTime; }
+    int64_t NewKernelProtocol_Time() const { return nNewKernelProtocolTime; }
     int64_t Budget_Fee_Confirmations() const { return nBudget_Fee_Confirmations; }
 
     CBaseChainParams::Network NetworkID() const { return networkID; }
@@ -115,15 +115,9 @@ public:
 
     /** Height or Time Based Activations **/
     int LAST_POW_BLOCK() const { return nLastPOWBlock; }
-    int Initial_Fork1_Height() const { return nInitialFork1Height; }
     int Zerocoin_StartHeight() const { return nZerocoinStartHeight; }
-    int Zerocoin_Block_EnforceSerialRange() const { return nBlockEnforceSerialRange; }
-    int Zerocoin_Block_RecalculateAccumulators() const { return nBlockRecalculateAccumulators; }
-    int Zerocoin_Block_FirstFraudulent() const { return nBlockFirstFraudulent; }
-    int Zerocoin_Block_LastGoodCheckpoint() const { return nBlockLastGoodCheckpoint; }
     int Zerocoin_StartTime() const { return nZerocoinStartTime; }
-    int Block_Enforce_Invalid() const { return nBlockEnforceInvalidUTXO; }
-    int Zerocoin_Block_V2_Start() const { return nBlockZerocoinV2; }
+    int NewRewardStructure_Height() const { return nNewRewardStructureHeight; }
 
 protected:
     CChainParams() {}
@@ -142,7 +136,7 @@ protected:
     int64_t nTargetTimespan;
     int64_t nTargetSpacing;
     int nLastPOWBlock;
-    int nInitialFork1Height;
+    int nNewRewardStructureHeight;
     int nMasternodeCountDrift;
     int nMaturity;
     unsigned int nModifierInterval;
@@ -179,13 +173,6 @@ protected:
     int nZerocoinStartHeight;
     int nZerocoinStartTime;
     int nZerocoinRequiredStakeDepth;
-
-    int nBlockEnforceSerialRange;
-    int nBlockRecalculateAccumulators;
-    int nBlockFirstFraudulent;
-    int nBlockLastGoodCheckpoint;
-    int nBlockEnforceInvalidUTXO;
-    int nBlockZerocoinV2;
 };
 
 /**
