@@ -1038,7 +1038,9 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
             REJECT_INVALID, "bad-txns-vout-empty");
 
     // Size limits
-    unsigned int nMaxSize = MAX_ZEROCOIN_TX_SIZE;
+    // ToDo: replace after Zerocoin activation
+    // unsigned int nMaxSize = MAX_ZEROCOIN_TX_SIZE;
+    unsigned int nMaxSize = GetAdjustedTime() < Params().Zerocoin_StartTime() ? MAX_BLOCK_SIZE_LEGACY : MAX_ZEROCOIN_TX_SIZE;
 
     if (::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION) > nMaxSize)
         return state.DoS(100, error("CheckTransaction() : size limits failed"),
@@ -1327,7 +1329,9 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
         // merely non-standard transaction.
         if (!tx.IsZerocoinSpend()) {
             unsigned int nSigOps = GetLegacySigOpCount(tx);
-            unsigned int nMaxSigOps = MAX_TX_SIGOPS_CURRENT;
+            // ToDo: replace after Zerocoin activation
+            // unsigned int nMaxSigOps = MAX_TX_SIGOPS_CURRENT;
+            unsigned int nMaxSigOps = GetAdjustedTime() > Params().Zerocoin_StartTime() ? MAX_TX_SIGOPS_CURRENT : MAX_TX_SIGOPS_LEGACY;
             nSigOps += GetP2SHSigOpCount(tx, view);
             if(nSigOps > nMaxSigOps)
                 return state.DoS(0,
@@ -1536,7 +1540,9 @@ bool AcceptableInputs(CTxMemPool& pool, CValidationState& state, const CTransact
         // MAX_BLOCK_SIGOPS; we still consider this an invalid rather than
         // merely non-standard transaction.
         unsigned int nSigOps = GetLegacySigOpCount(tx);
-        unsigned int nMaxSigOps = MAX_TX_SIGOPS_CURRENT;
+        // ToDo: replace after Zerocoin activation
+        // unsigned int nMaxSigOps = MAX_TX_SIGOPS_CURRENT;
+        unsigned int nMaxSigOps = GetAdjustedTime() > Params().Zerocoin_StartTime() ? MAX_TX_SIGOPS_CURRENT : MAX_TX_SIGOPS_LEGACY;
         nSigOps += GetP2SHSigOpCount(tx, view);
         if (nSigOps > nMaxSigOps)
             return state.DoS(0,
@@ -2705,7 +2711,7 @@ bool UpdateZPIVSupply(const CBlock& block, CBlockIndex* pindex, bool fJustCheck)
     std::list<libzerocoin::CoinDenomination> listSpends = ZerocoinSpendListFromBlock(block, fFilterInvalid);
 
     // Initialize zerocoin supply to the supply from previous block
-    if (pindex->pprev && pindex->pprev->GetBlockHeader().nVersion > 4) {
+    if (pindex->pprev && (pindex->pprev->GetBlockHeader().nVersion > 4) && (pindex->pprev->GetBlockHeader().nVersion <= (int)0x20000000)) {
         for (auto& denom : zerocoinDenomList) {
             pindex->mapZerocoinSupply.at(denom) = pindex->pprev->mapZerocoinSupply.at(denom);
         }
@@ -2836,7 +2842,9 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     blockundo.vtxundo.reserve(block.vtx.size() - 1);
     CAmount nValueOut = 0;
     CAmount nValueIn = 0;
-    unsigned int nMaxBlockSigOps = MAX_BLOCK_SIGOPS_CURRENT;
+    // ToDo: replace after Zerocoin activation
+    // unsigned int nMaxBlockSigOps = MAX_BLOCK_SIGOPS_CURRENT;
+    unsigned int nMaxBlockSigOps = block.nTime > (unsigned int)Params().Zerocoin_StartTime() ? MAX_BLOCK_SIGOPS_CURRENT : MAX_BLOCK_SIGOPS_LEGACY;
     vector<uint256> vSpendsInBlock;
     uint256 hashBlock = block.GetHash();
     for (unsigned int i = 0; i < block.vtx.size(); i++) {
@@ -3940,7 +3948,9 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
     // because we receive the wrong transactions for it.
 
     // Size limits
-    unsigned int nMaxBlockSize = MAX_BLOCK_SIZE_CURRENT;
+    // ToDo: replace after Zerocoin activation
+    // unsigned int nMaxBlockSize = MAX_BLOCK_SIZE_CURRENT;
+    unsigned int nMaxBlockSize = GetAdjustedTime() > Params().Zerocoin_StartTime() ? MAX_BLOCK_SIZE_CURRENT : MAX_BLOCK_SIZE_LEGACY;
     if (block.vtx.empty() || block.vtx.size() > nMaxBlockSize || ::GetSerializeSize(block, SER_NETWORK, PROTOCOL_VERSION) > nMaxBlockSize)
         return state.DoS(100, error("CheckBlock() : size limits failed"),
             REJECT_INVALID, "bad-blk-length");
