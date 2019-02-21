@@ -225,7 +225,7 @@ double ConvertBitsToDouble(unsigned int nBits);
 int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCount, bool isZPIVStake);
 
 bool ActivateBestChain(CValidationState& state, CBlock* pblock = NULL, bool fAlreadyChecked = false);
-CAmount GetBlockValue(int nHeight, bool isProofOfWork = false);
+CAmount GetBlockValue(int nHeight);
 
 /** Create a new block index entry for a given block hash */
 CBlockIndex* InsertBlockIndex(uint256 hash);

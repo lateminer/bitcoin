@@ -190,7 +190,17 @@ bool IsBlockValueValid(const CBlock& block, CAmount nExpectedValue, CAmount nMin
         LogPrint("masternode","IsBlockValueValid() : WARNING: Couldn't find previous block\n");
     }
 
-    //LogPrintf("XX69----------> IsBlockValueValid(): nMinted: %d, nExpectedValue: %d\n", FormatMoney(nMinted), FormatMoney(nExpectedValue));
+    //LogPrintf("XX69----------> IsBlockValueValid(): Block %d: nMinted=%d, nExpectedValue=%d\n", nHeight, FormatMoney(nMinted), FormatMoney(nExpectedValue));
+
+    // Additional reward check in initial phase
+	if (nHeight > 1 && nHeight <= Params().LAST_POW_BLOCK()) {
+		if (nMinted > 30 * COIN) {
+            LogPrintf("IsBlockValueValid(): invalid reward (actual=%d)\n", FormatMoney(nMinted));
+            return false;
+        }
+		
+        return true;
+    }
 
     if (!masternodeSync.IsSynced()) { //there is no budget data to use to check anything
         //super blocks will always be on these blocks, max 100 per budgeting

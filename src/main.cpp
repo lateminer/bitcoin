@@ -1775,13 +1775,13 @@ double ConvertBitsToDouble(unsigned int nBits)
     return dDiff;
 }
 
-int64_t GetBlockValue(int nHeight, bool isProofOfWork)
+int64_t GetBlockValue(int nHeight)
 {
     int64_t nSubsidy = 0;
 
-    if (nHeight == 1) {
+    if (nHeight == 0) {
         nSubsidy = 145000000 * COIN;
-    } else if (nHeight <= Params().LAST_POW_BLOCK() || isProofOfWork) {
+    } else if (nHeight < Params().LAST_POW_BLOCK()) {
          nSubsidy = 0;
     } else if (nHeight < Params().NewRewardStructure_Height()) {
          nSubsidy = 30 * COIN;
@@ -2971,7 +2971,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     nTimeConnect += nTime1 - nTimeStart;
     LogPrint("bench", "      - Connect %u transactions: %.2fms (%.3fms/tx, %.3fms/txin) [%.2fs]\n", (unsigned)block.vtx.size(), 0.001 * (nTime1 - nTimeStart), 0.001 * (nTime1 - nTimeStart) / block.vtx.size(), nInputs <= 1 ? 0 : 0.001 * (nTime1 - nTimeStart) / (nInputs - 1), nTimeConnect * 0.000001);
 
-    CAmount nExpectedReward = GetBlockValue(pindex->pprev->nHeight, block.IsProofOfWork()) + nFees;
+    CAmount nExpectedReward = GetBlockValue(pindex->pprev->nHeight) + nFees;
 
     //Check that the block does not overmint
     if (!IsBlockValueValid(block, nExpectedReward, pindex->nMint)) {
