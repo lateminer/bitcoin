@@ -316,24 +316,23 @@ public:
         pchMessageStart[1] = 0xbf;
         pchMessageStart[2] = 0xb5;
         pchMessageStart[3] = 0xda;
+        nDefaultPort = 20420;
         nEnforceBlockUpgradeMajority = 750;
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 1;
         nTargetTimespan = 20 * 90; // GROW: 30 minutes
         nTargetSpacing = 1 * 90;   // GROW: 90 seconds
-        bnProofOfWorkLimit = ~uint256(0) >> 20;
+
         CMutableTransaction txNew;
-        txNew.nTime = 1512432000;
-        genesis.nTime = 1512432000;
+        txNew.nTime = 1550741119;
+        genesis.nTime = 1550741119;
         genesis.nBits = 0x1e0fffff;
         genesis.nNonce = 1;
 
         hashGenesisBlock = genesis.GetHash();
-        nDefaultPort = 20420;
-        // ToDo: fix regtest
-        // assert(hashGenesisBlock == uint256("0x54d3072d1c4b35205203747b2bb488d7036c140256f86d8a754cb3b0ac3b6a70"));
-        // assert(genesis.hashMerkleRoot == uint256S("0x17ec3b34beb9a67f4c0bf9bfd414bcbc75abe2a7ccffb6cfa8b02c0d24725cbc"));
+        assert(hashGenesisBlock == uint256("0xc4e5324385e4f591d4c2f173aba2d59e2d5bf1aa06f3f7e6b7fabca5fc9d51f0"));
+        assert(genesis.hashMerkleRoot == uint256S("0x0e58d4b3215bb1889d5a027d40269a167b93c68e9ae28961de4717558be92d38"));
 
         vFixedSeeds.clear(); //! Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //! Regtest mode doesn't have any DNS seeds.
