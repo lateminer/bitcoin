@@ -3734,7 +3734,9 @@ CBlockIndex* AddToBlockIndex(const CBlock& block)
         if (!ComputeNextStakeModifier(pindexNew->pprev, nStakeModifier, fGeneratedStakeModifier))
             LogPrintf("AddToBlockIndex() : ComputeNextStakeModifier() failed \n");
         pindexNew->SetStakeModifier(nStakeModifier, fGeneratedStakeModifier);
-        pindexNew->nStakeModifierV2 = ComputeStakeModifierV2(pindexNew->pprev, block.IsProofOfStake() ? block.vtx[1].vin[0].prevout.hash : hash);
+        if (pindexNew->nHeight < Params().Zerocoin_StartHeight()) {
+            pindexNew->nStakeModifierV2 = ComputeStakeModifierV2(pindexNew->pprev, block.IsProofOfStake() ? block.vtx[1].vin[0].prevout.hash : hash);
+        }
     }
     pindexNew->nChainWork = (pindexNew->pprev ? pindexNew->pprev->nChainWork : 0) + GetBlockProof(*pindexNew);
     pindexNew->RaiseValidity(BLOCK_VALID_TREE);
@@ -3887,14 +3889,14 @@ bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, bool f
         return state.Invalid(error("CheckBlockHeader(): block timestamp too far in the future"),
                              REJECT_INVALID, "time-too-new");
 
-    // Version 4 header must be used after Params().Zerocoin_StartHeight(). And never before.
+    // Version 5 header must be used after Params().Zerocoin_StartHeight(). And never before.
     if (block.GetBlockTime() > Params().Zerocoin_StartTime()) {
         if(block.nVersion < Params().Zerocoin_HeaderVersion())
-            return state.DoS(50, error("CheckBlockHeader() : block version must be above 4 after ZerocoinStartHeight"),
+            return state.DoS(50, error("CheckBlockHeader() : block version must be above 5 after ZerocoinStartHeight"),
             REJECT_INVALID, "block-version");
     } else {
         if (block.nVersion >= Params().Zerocoin_HeaderVersion())
-            return state.DoS(50, error("CheckBlockHeader() : block version must be below 4 before ZerocoinStartHeight"),
+            return state.DoS(50, error("CheckBlockHeader() : block version must be below 5 before ZerocoinStartHeight"),
             REJECT_INVALID, "block-version");
     }
 
@@ -4281,6 +4283,11 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
             return state.DoS(100, error("%s : prev block %s is invalid, unable to add block %s", __func__, block.hashPrevBlock.GetHex(), block.GetHash().GetHex()),
                              REJECT_INVALID, "bad-prevblk");
         }
+    }
+
+    if (pindexPrev->nHeight + 1 < Params().Zerocoin_StartTime()) {
+        if (block.IsProofOfStake() && !CheckCoinStakeTimestamp(block.GetBlockTime(), (int64_t)block.vtx[1].nTime))
+            return state.DoS(50, error("%s : coinstake timestamp violation nTimeBlock=%d nTimeTx=%u\n", __func__, block.GetBlockTime(), block.vtx[1].nTime));
     }
 
     if (block.IsProofOfStake()) {

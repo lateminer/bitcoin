@@ -66,6 +66,8 @@ static bool SelectBlockFromCandidates(
     uint64_t nStakeModifierPrev,
     const CBlockIndex** pindexSelected)
 {
+    bool fModifierNew = false;
+    bool fFirstRun = true;
     bool fSelected = false;
     uint256 hashBest = 0;
     *pindexSelected = (const CBlockIndex*)0;
@@ -77,12 +79,21 @@ static bool SelectBlockFromCandidates(
         if (fSelected && pindex->GetBlockTime() > nSelectionIntervalStop)
             break;
 
+        //if the lowest block height (vSortedByTimestamp[0]) is >= switch height, use new modifier calc
+        if (fFirstRun){
+            fModifierNew = pindex->nHeight >= Params().Zerocoin_StartHeight();
+            fFirstRun = false;
+        }
+
         if (mapSelectedBlocks.count(pindex->GetBlockHash()) > 0)
             continue;
 
         // compute the selection hash by hashing an input that is unique to that block
         uint256 hashProof;
-        hashProof = pindex->GetBlockHash();
+        if (fModifierNew)
+            hashProof = pindex->GetBlockHash();
+        else
+            hashProof = pindex->IsProofOfStake() ? 0 : pindex->GetBlockHash();
 
         CDataStream ss(SER_GETHASH, 0);
         ss << hashProof << nStakeModifierPrev;
@@ -269,16 +280,20 @@ uint256 ComputeStakeModifierV2(const CBlockIndex* pindexPrev, const uint256& ker
 // coinstake must meet hash target according to the protocol:
 // kernel (input 0) must meet the formula
 //     hash(nStakeModifier + txPrev.block.nTime + txPrev.nTime + txPrev.vout.hash + txPrev.vout.n + nTime) < bnTarget * nWeight
-bool CheckStakeProtocolV2(uint256 nStakeModifierV2, const CTransaction& txPrev, const COutPoint& prevout, unsigned int nTimeTx, const uint256& bnTarget,
+bool CheckStakeV2(CBlockIndex* pindexPrev, unsigned int nTxPrevTime, const COutPoint& prevout, unsigned int nTimeTx, int64_t nValueIn, const uint256& bnTarget,
                 uint256& hashProofOfStake)
 {
+     if (nTimeTx < nTxPrevTime) // Transaction timestamp violation
+        return error("CheckStakeV2() : nTime violation");
+
     // Weight
-    int64_t nValueIn = txPrev.vout[prevout.n].nValue;
     if (nValueIn == 0)
         return false;
 
+    uint256 nStakeModifierV2 = pindexPrev->nStakeModifierV2;
+
     CDataStream ss(SER_GETHASH, 0);
-    ss << nStakeModifierV2 << txPrev.nTime << prevout.hash << prevout.n << nTimeTx;
+    ss << nStakeModifierV2 << nTxPrevTime << prevout.hash << prevout.n << nTimeTx;
     hashProofOfStake = Hash(ss.begin(), ss.end());
 
     uint256 bnCoinDayWeight = uint256(nValueIn);
@@ -316,35 +331,57 @@ bool CheckStakeKernelHash(CStakeInput* stakeInput, unsigned int nBits, unsigned 
     uint256 bnTargetPerCoinDay;
     bnTargetPerCoinDay.SetCompact(nBits);
 
-    //grab stake modifier
-    uint64_t nStakeModifier = 0;
-    if (!stakeInput->GetModifier(nStakeModifier))
-        return error("failed to get kernel stake modifier");
-
     bool fSuccess = false;
     unsigned int nTryTime = 0;
     int nHeightStart = chainActive.Height();
     int nHashDrift = 30;
     CDataStream ssUniqueID = stakeInput->GetUniqueness();
+
+    CBlockIndex *pindex = stakeInput->GetIndexFrom();
+    CBlock block;
+    ReadBlockFromDisk(block, pindex);
+    uint256 hashBlock;
+    CTransaction txPrev;
+    stakeInput->GetTxFrom(txPrev);
+
     CAmount nValueIn = stakeInput->GetValue();
+    int nIndex;
+    for (nIndex = 0; nIndex < (int)txPrev.vout.size(); nIndex++) {
+        if (txPrev.vout[nIndex].nValue == nValueIn) {
+            break;
+        }
+    }
+
+    COutPoint prev;
+    prev.n = nIndex;
+    prev.hash = txPrev.GetHash();
+    nTryTime &= ~STAKE_TIMESTAMP_MASK;
+    int64_t nValueInV2 = txPrev.vout[nIndex].nValue;
+
     for (int i = 0; i < nHashDrift; i++) //iterate the hashing
     {
         //new block came in, move on
         if (chainActive.Height() != nHeightStart)
             break;
 
-        //hash this iteration
-        nTryTime = nTimeTx + nHashDrift - i;
-
         // if stake hash does not meet the target then continue to next iteration
-        if (nTimeTx >= Params().NewKernelProtocol_Time()) {
+        if (chainActive.Height() > Params().Zerocoin_StartHeight()) {
             // New protocol
+            //grab stake modifier
+            uint64_t nStakeModifier = 0;
+            if (!stakeInput->GetModifier(nStakeModifier))
+                return error("failed to get kernel stake modifier");
+
+            //hash this iteration
+            nTryTime = nTimeTx + nHashDrift - i;
             if (!CheckStakeNewProtocol(ssUniqueID, nValueIn, nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake))
                 continue;
         } else {
             // Old protocol
-            // if (!CheckStakeProtocolV2(nStakeModifier2, txPrev, txin.prevout, tx.nTime, stake->GetValue(), bnTargetPerCoinDay, hashProofOfStake))
-                // continue;
+            //hash this iteration
+            nTryTime = nTimeTx - i;
+            if (!CheckStakeV2(chainActive.Tip(), txPrev.nTime, prev, nTryTime, nValueInV2, bnTargetPerCoinDay, hashProofOfStake) || !((nTryTime & STAKE_TIMESTAMP_MASK) == 0))
+                continue;
         }
 
         fSuccess = true; // if we make it this far then we have successfully created a stake hash
@@ -404,11 +441,11 @@ bool CheckProofOfStake(CBlockIndex* pindexPrev, const CBlock block, uint256& has
     uint256 bnTargetPerCoinDay;
     bnTargetPerCoinDay.SetCompact(block.nBits);
 
+    int64_t nValueInV2 = txPrev.vout[txin.prevout.n].nValue;
     unsigned int nTxTime = block.nTime;
 
-    if (nTxTime >= Params().NewKernelProtocol_Time()) {
+    if (block.nVersion > 4 && block.nVersion <= (int)0x20000000) {
         // New protocol
-        // Stake modifier
         uint64_t nStakeModifier = 0;
         if (!stake->GetModifier(nStakeModifier))
             return error("%s failed to get modifier for stake input\n", __func__);
@@ -420,10 +457,7 @@ bool CheckProofOfStake(CBlockIndex* pindexPrev, const CBlock block, uint256& has
         }
     } else {
         // Old protocol
-        // Stake modifier
-        uint256 nStakeModifierV2 = pindexPrev->nStakeModifierV2;
-
-        if (!CheckStakeProtocolV2(nStakeModifierV2, txPrev, txin.prevout, tx.nTime, bnTargetPerCoinDay,
+        if (!CheckStakeV2(pindexPrev, txPrev.nTime, txin.prevout, tx.nTime, nValueInV2, bnTargetPerCoinDay,
                         hashProofOfStake)) {
             return error("CheckProofOfStake() : INFO: check kernel failed on coinstake %s, hashProof=%s \n",
                         tx.GetHash().GetHex(), hashProofOfStake.GetHex());
@@ -450,6 +484,9 @@ bool VerifySignature(const CTransaction& txFrom, const CTransaction& txTo, unsig
 // Check whether the coinstake timestamp meets protocol
 bool CheckCoinStakeTimestamp(int64_t nTimeBlock, int64_t nTimeTx)
 {
-    // v0.3 protocol
+    if (chainActive.Height() >= Params().Zerocoin_StartTime()){
+        return (nTimeBlock == nTimeTx);
+    }
+    // old protocol
     return (nTimeBlock == nTimeTx) && ((nTimeTx & STAKE_TIMESTAMP_MASK) == 0);
 }

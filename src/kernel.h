@@ -21,7 +21,7 @@ bool GetKernelStakeModifier(uint256 hashBlockFrom, uint64_t& nStakeModifier, int
 bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeModifier, bool& fGeneratedStakeModifier);
 uint256 ComputeStakeModifierV2(const CBlockIndex* pindexPrev, const uint256& kernel);
 
-bool CheckStakeProtocolV2(uint256 nStakeModifierV2, const CTransaction& txPrev, const COutPoint& prevout, unsigned int nTimeTx, const uint256& bnTarget, uint256& hashProofOfStake);
+bool CheckStakeV2(CBlockIndex* pindexPrev, unsigned int nTxPrevTime, const COutPoint& prevout, unsigned int nTimeTx, int64_t nValueIn, const uint256& bnTarget, uint256& hashProofOfStake);
 bool CheckStakeNewProtocol(const CDataStream& ssUniqueID, CAmount nValueIn, const uint64_t nStakeModifier, const uint256& bnTarget, unsigned int nTimeBlockFrom, unsigned int& nTimeTx, uint256& hashProofOfStake);
 bool CheckStakeKernelHash(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockFrom, unsigned int& nTimeTx, uint256& hashProofOfStake);
 

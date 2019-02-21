@@ -114,10 +114,14 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         pblock->nVersion = GetArg("-blockversion", pblock->nVersion);
 
     bool fZerocoinActive = GetAdjustedTime() >= Params().Zerocoin_StartTime();
-    pblock->nVersion = 5;   // Supports CLTV activation
+    if (fZerocoinActive)
+        pblock->nVersion = 5;
+    else
+        pblock->nVersion = 4;
 
     // Create coinbase tx
     CMutableTransaction txNew;
+    txNew.nTime = GetAdjustedTime();
     txNew.vin.resize(1);
     txNew.vin[0].prevout.SetNull();
     txNew.vout.resize(1);
@@ -125,6 +129,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
     pblock->vtx.push_back(txNew);
     pblocktemplate->vTxFees.push_back(-1);   // updated at end
     pblocktemplate->vTxSigOps.push_back(-1); // updated at end
+    unsigned int nTxNewTime = 0;
 
     // ppcoin: if coinstake available add coinstake tx
     static int64_t nLastCoinStakeSearchTime = GetAdjustedTime(); // only initialized at startup
@@ -135,14 +140,14 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         CBlockIndex* pindexPrev = chainActive.Tip();
         pblock->nBits = GetNextWorkRequired(pindexPrev, pblock, fProofOfStake);
         CMutableTransaction txCoinStake;
-        txCoinStake.nTime = GetAdjustedTime();
         txCoinStake.nTime &= ~STAKE_TIMESTAMP_MASK;
-        int64_t nSearchTime = txCoinStake.nTime; // search to current time
+        int64_t nSearchTime = pblock->nTime; // search to current time
         bool fStakeFound = false;
         if (nSearchTime >= nLastCoinStakeSearchTime) {
-            unsigned int nTxNewTime = 0;
-            if (pwallet->CreateCoinStake(*pwallet, pblock->nBits, nSearchTime - nLastCoinStakeSearchTime, txCoinStake, nTxNewTime)) {
-                pblock->nTime = nTxNewTime;
+            nTxNewTime &= ~STAKE_TIMESTAMP_MASK;
+            if (pwallet->CreateCoinStake(*pwallet, pblock->nBits, nSearchTime - nLastCoinStakeSearchTime, txCoinStake, txCoinStake.nTime)) {
+                pblock->vtx[0].nTime = pblock->nTime = txCoinStake.nTime;
+                nTxNewTime = txCoinStake.nTime;
                 pblock->vtx[0].vout[0].SetEmpty();
                 pblock->vtx.push_back(CTransaction(txCoinStake));
                 fStakeFound = true;
@@ -425,9 +430,17 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             }
         }
 
-        if (!fProofOfStake) {
+        if (!fProofOfStake && pblock->nTime > Params().StartMasternodePayments()) {
             //Masternode and general budget payments
             FillBlockPayee(txNew, nFees, fProofOfStake, false);
+
+            //Make payee
+            if (txNew.vout.size() > 1) {
+                pblock->payee = txNew.vout[1].scriptPubKey;
+            }
+        } else if (!fProofOfStake && pblock->nTime < Params().StartMasternodePayments()) {
+            txNew.vout[0].nValue = GetBlockValue(nHeight);
+            txNew.vin[0].scriptSig = CScript() << nHeight << OP_0;
 
             //Make payee
             if (txNew.vout.size() > 1) {
@@ -446,8 +459,11 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             pblocktemplate->vTxFees[0] = -nFees;
         }
 
+        pblock->vtx[1].nTime = pblock->nTime = pblock->vtx[0].nTime = nTxNewTime;
+
         // Fill in header
         pblock->hashPrevBlock = pindexPrev->GetBlockHash();
+        pblock->nTime = max(pindexPrev->GetPastTimeLimit()+1, pblock->GetMaxTransactionTime());
         if (!fProofOfStake)
             UpdateTime(pblock, pindexPrev);
         pblock->nBits = GetNextWorkRequired(pindexPrev, pblock, fProofOfStake);

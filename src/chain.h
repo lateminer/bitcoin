@@ -231,7 +231,7 @@ public:
         nTime = block.nTime;
         nBits = block.nBits;
         nNonce = block.nNonce;
-        if(block.nVersion > 3)
+        if (block.nVersion > 4 && block.nVersion <= (int)0x20000000)
             nAccumulatorCheckpoint = block.nAccumulatorCheckpoint;
 
         //Proof of Stake
@@ -240,7 +240,9 @@ public:
         nMoneySupply = 0;
         nFlags = 0;
         nStakeModifier = 0;
-        nStakeModifierV2 = 0;
+        if (!(block.nVersion > 4 && block.nVersion <= (int)0x20000000))
+            nStakeModifierV2 = 0;
+
         hashProofOfStake = uint256();
 
         if (block.IsProofOfStake()) {
@@ -481,10 +483,12 @@ public:
         READWRITE(nTime);
         READWRITE(nBits);
         READWRITE(nNonce);
-        if(this->nVersion > 4) {
+        if(this->nVersion > 4 && this->nVersion < (int)0x20000000) {
             READWRITE(nAccumulatorCheckpoint);
             READWRITE(mapZerocoinSupply);
             READWRITE(vMintDenominationsInBlock);
+        } else {
+            READWRITE(nStakeModifierV2);
         }
 
     }
