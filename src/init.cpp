@@ -1628,10 +1628,17 @@ bool AppInit2()
 
         if (GetBoolArg("-upgradewallet", fFirstRun)) {
             int nMaxVersion = GetArg("-upgradewallet", 0);
+            if (nMaxVersion < FEATURE_LATEST)
+                nMaxVersion = FEATURE_LATEST;
             if (nMaxVersion == 0) // the -upgradewallet without argument case
             {
                 LogPrintf("Performing wallet upgrade to %i\n", FEATURE_LATEST);
                 nMaxVersion = CLIENT_VERSION;
+
+                // ToDo: remove later
+                if (nMaxVersion < FEATURE_LATEST)
+                    nMaxVersion = FEATURE_LATEST;
+
                 pwalletMain->SetMinVersion(FEATURE_LATEST); // permanently upgrade the wallet immediately
             } else
                 LogPrintf("Allowing wallet upgrade up to %i\n", nMaxVersion);
