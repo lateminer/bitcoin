@@ -472,7 +472,7 @@ public:
         } else {
             const_cast<CDiskBlockIndex*>(this)->prevoutStake.SetNull();
             const_cast<CDiskBlockIndex*>(this)->nStakeTime = 0;
-            const_cast<CDiskBlockIndex*>(this)->hashProofOfStake = uint256();
+            const_cast<CDiskBlockIndex*>(this)->hashProofOfStake = GetProofOfWorkHash();
         }
 
         // block header
@@ -506,6 +506,18 @@ public:
         return block.GetHash();
     }
 
+    uint256 GetProofOfWorkHash() const
+    {
+        CBlockHeader block;
+        block.nVersion = nVersion;
+        block.hashPrevBlock = hashPrev;
+        block.hashMerkleRoot = hashMerkleRoot;
+        block.nTime = nTime;
+        block.nBits = nBits;
+        block.nNonce = nNonce;
+        block.nAccumulatorCheckpoint = nAccumulatorCheckpoint;
+        return block.GetPoWHash();
+    }
 
     std::string ToString() const
     {

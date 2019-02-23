@@ -670,7 +670,8 @@ bool CTxMemPool::ReadFeeEstimates(CAutoFile& filein)
     try {
         int nVersionRequired, nVersionThatWrote;
         filein >> nVersionRequired >> nVersionThatWrote;
-        if (nVersionRequired > CLIENT_VERSION)
+        // ToDo: remove later
+        if (nVersionRequired > CLIENT_VERSION && CLIENT_VERSION > 40000)
             return error("CTxMemPool::ReadFeeEstimates() : up-version (%d) fee estimate file", nVersionRequired);
 
         LOCK(cs);

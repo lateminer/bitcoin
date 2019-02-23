@@ -135,29 +135,55 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
     static int64_t nLastCoinStakeSearchTime = GetAdjustedTime(); // only initialized at startup
 
     if (fProofOfStake) {
-        boost::this_thread::interruption_point();
-        pblock->nTime = GetAdjustedTime();
-        CBlockIndex* pindexPrev = chainActive.Tip();
-        pblock->nBits = GetNextWorkRequired(pindexPrev, pblock, fProofOfStake);
-        CMutableTransaction txCoinStake;
-        txCoinStake.nTime &= ~STAKE_TIMESTAMP_MASK;
-        int64_t nSearchTime = pblock->nTime; // search to current time
-        bool fStakeFound = false;
-        if (nSearchTime >= nLastCoinStakeSearchTime) {
-            nTxNewTime &= ~STAKE_TIMESTAMP_MASK;
-            if (pwallet->CreateCoinStake(*pwallet, pblock->nBits, nSearchTime - nLastCoinStakeSearchTime, txCoinStake, txCoinStake.nTime)) {
-                pblock->vtx[0].nTime = pblock->nTime = txCoinStake.nTime;
-                nTxNewTime = txCoinStake.nTime;
-                pblock->vtx[0].vout[0].SetEmpty();
-                pblock->vtx.push_back(CTransaction(txCoinStake));
-                fStakeFound = true;
+        if (fZerocoinActive) {
+            boost::this_thread::interruption_point();
+            CBlockIndex* pindexPrev = chainActive.Tip();
+            pblock->nTime = GetAdjustedTime();
+            pblock->nBits = GetNextWorkRequired(pindexPrev, pblock, fProofOfStake);
+            CMutableTransaction txCoinStake;
+            int64_t nSearchTime = pblock->nTime; // search to current time
+            bool fStakeFound = false;
+            if (nSearchTime >= nLastCoinStakeSearchTime) {
+                unsigned int nTxNewTime = 0;
+                if (pwallet->CreateCoinStake(*pwallet, pblock->nBits, nSearchTime - nLastCoinStakeSearchTime, txCoinStake, nTxNewTime)) {
+                    pblock->vtx[0].nTime = pblock->nTime = nTxNewTime;
+                    pblock->vtx[0].vout[0].SetEmpty();
+                    pblock->vtx.push_back(CTransaction(txCoinStake));
+                    fStakeFound = true;
+                }
+                nLastCoinStakeSearchInterval = nSearchTime - nLastCoinStakeSearchTime;
+                nLastCoinStakeSearchTime = nSearchTime;
             }
-            nLastCoinStakeSearchInterval = nSearchTime - nLastCoinStakeSearchTime;
-            nLastCoinStakeSearchTime = nSearchTime;
-        }
 
-        if (!fStakeFound)
-            return NULL;
+            if (!fStakeFound)
+                return NULL;
+
+        } else {
+            boost::this_thread::interruption_point();
+            CBlockIndex* pindexPrev = chainActive.Tip();
+            pblock->nTime = GetAdjustedTime();
+            pblock->nBits = GetNextWorkRequired(pindexPrev, pblock, fProofOfStake);
+            CMutableTransaction txCoinStake;
+            txCoinStake.nTime &= ~STAKE_TIMESTAMP_MASK;
+            int64_t nSearchTime = txCoinStake.nTime; // search to current time
+            bool fStakeFound = false;
+            if (nSearchTime >= nLastCoinStakeSearchTime) {
+                nTxNewTime &= ~STAKE_TIMESTAMP_MASK;
+                if (pwallet->CreateCoinStake(*pwallet, pblock->nBits, nSearchTime - nLastCoinStakeSearchTime, txCoinStake, txCoinStake.nTime)) {
+                    pblock->vtx[0].nTime = pblock->nTime = txCoinStake.nTime;
+                    nTxNewTime = txCoinStake.nTime;
+                    pblock->vtx[0].vout[0].SetEmpty();
+                    pblock->vtx.push_back(CTransaction(txCoinStake));
+                    fStakeFound = true;
+                }
+                nLastCoinStakeSearchInterval = nSearchTime - nLastCoinStakeSearchTime;
+                nLastCoinStakeSearchTime = nSearchTime;
+            }
+
+            if (!fStakeFound)
+                return NULL;
+
+        }
     }
 
     // Largest block you're willing to create:
@@ -467,7 +493,11 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
 
         // Fill in header
         pblock->hashPrevBlock = pindexPrev->GetBlockHash();
-        pblock->nTime = max(pindexPrev->GetPastTimeLimit()+1, pblock->GetMaxTransactionTime());
+
+        if (!fZerocoinActive) {
+            pblock->nTime = max(pindexPrev->GetPastTimeLimit()+1, pblock->GetMaxTransactionTime());
+        }
+
         if (!fProofOfStake)
             UpdateTime(pblock, pindexPrev);
         pblock->nBits = GetNextWorkRequired(pindexPrev, pblock, fProofOfStake);

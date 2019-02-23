@@ -101,8 +101,9 @@ uint256 CMutableTransaction::GetHash() const
 std::string CMutableTransaction::ToString() const
 {
     std::string str;
-    str += strprintf("CMutableTransaction(ver=%d, vin.size=%u, vout.size=%u, nLockTime=%u)\n",
+    str += strprintf("CMutableTransaction(ver=%d, nTime=%u, vin.size=%u, vout.size=%u, nLockTime=%u)\n",
         nVersion,
+        nTime,
         vin.size(),
         vout.size(),
         nLockTime);

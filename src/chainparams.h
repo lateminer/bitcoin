@@ -117,6 +117,7 @@ public:
     int Zerocoin_StartHeight() const { return nZerocoinStartHeight; }
     int Zerocoin_StartTime() const { return nZerocoinStartTime; }
     int NewRewardStructure_Height() const { return nNewRewardStructureHeight; }
+    int NewRewardStructure_Time() const { return nNewRewardStructureTime; }
 
 protected:
     CChainParams() {}
@@ -135,7 +136,6 @@ protected:
     int64_t nTargetTimespan;
     int64_t nTargetSpacing;
     int nLastPOWBlock;
-    int nNewRewardStructureHeight;
     int nMasternodeCountDrift;
     int nMaturity;
     unsigned int nModifierInterval;
@@ -171,6 +171,8 @@ protected:
     int nZerocoinStartHeight;
     int nZerocoinStartTime;
     int nZerocoinRequiredStakeDepth;
+    int nNewRewardStructureHeight;
+    int nNewRewardStructureTime;
 };
 
 /**

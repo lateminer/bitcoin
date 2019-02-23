@@ -83,8 +83,7 @@ public:
 
     uint256 GetHash()
     {
-        uint256 n = Hash(BEGIN(nSporkID), END(nTimeSigned));
-        return n;
+        return SerializeHash(*this);
     }
 
     ADD_SERIALIZE_METHODS;
@@ -95,7 +94,9 @@ public:
         READWRITE(nSporkID);
         READWRITE(nValue);
         READWRITE(nTimeSigned);
-        READWRITE(vchSig);
+        if (!(nType & SER_GETHASH)) {
+            READWRITE(vchSig);
+        }
     }
 };
 

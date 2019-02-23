@@ -54,7 +54,7 @@ public:
         READWRITE(nNonce);
 
         //zerocoin active, header changes to include accumulator checksum
-        if(nVersion > 4)
+        if(nVersion > 4 && nVersion <= (int)0x20000000)
             READWRITE(nAccumulatorCheckpoint);
     }
 
@@ -115,7 +115,6 @@ public:
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(*(CBlockHeader*)this);
         READWRITE(vtx);
-	if(vtx.size() > 1 && vtx[1].IsCoinStake())
 		READWRITE(vchBlockSig);
     }
 

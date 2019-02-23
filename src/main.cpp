@@ -1742,10 +1742,12 @@ bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos)
     }
 
     // Check the header
+    /*
     if (block.IsProofOfWork()) {
         if (!CheckProofOfWork(block.GetHash(), block.nBits))
             return error("ReadBlockFromDisk : Errors in block header");
     }
+    */
 
     return true;
 }
@@ -1792,7 +1794,7 @@ int64_t GetBlockValue(int nHeight)
     } else if (nHeight < Params().NewRewardStructure_Height()) {
          nSubsidy = 30 * COIN;
     } else
-         nSubsidy = 25 * COIN;
+         nSubsidy = 22 * COIN;
 
     return nSubsidy;
 }
@@ -2005,7 +2007,7 @@ int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCou
     if (nHeight >= Params().NewRewardStructure_Height() && nHeight < Params().Zerocoin_StartHeight()) {
         return GetSeeSaw(blockValue, nMasternodeCount, nHeight);
     } else {
-        ret = 15 * COIN;
+        ret = 12 * COIN;
         if (isZPIVStake)
             ret = 10 * COIN;
     }
@@ -2180,6 +2182,7 @@ bool CScriptCheck::operator()()
     return true;
 }
 
+// ToDo: replace values
 CBitcoinAddress addressExp1("DQZzqnSR6PXxagep1byLiRg9ZurCZ5KieQ");
 CBitcoinAddress addressExp2("DTQYdnNqKuEHXyNeeYhPQGGGdqHbXYwjpj");
 
@@ -2961,6 +2964,13 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         pos.nTxOffset += ::GetSerializeSize(tx, SER_DISK, CLIENT_VERSION);
     }
 
+    //A one-time event where money supply counts were off and recalculated on a certain block.
+    if (pindex->nHeight == Params().Zerocoin_StartHeight() + 1) {
+        RecalculateZPIVMinted();
+        RecalculateZPIVSpent();
+        RecalculatePIVSupply(Params().Zerocoin_StartHeight());
+    }
+
     //Track zPIV/zGROW money supply in the block index
     if (!UpdateZPIVSupply(block, pindex, fJustCheck))
         return state.DoS(100, error("%s: Failed to calculate new zGROW supply for block=%s height=%d", __func__,
@@ -3730,11 +3740,16 @@ CBlockIndex* AddToBlockIndex(const CBlock& block)
             LogPrintf("AddToBlockIndex() : SetStakeEntropyBit() failed \n");
 
         // ppcoin: record proof-of-stake hash value
+        /*
         if (pindexNew->IsProofOfStake()) {
             if (!mapProofOfStake.count(hash))
                 LogPrintf("AddToBlockIndex() : hashProofOfStake not found in map \n");
             pindexNew->hashProofOfStake = mapProofOfStake[hash];
         }
+        */
+        if (!mapProofOfStake.count(hash))
+            LogPrintf("AddToBlockIndex() : hashProofOfStake not found in map \n");
+        pindexNew->hashProofOfStake = mapProofOfStake[hash];
 
         // ppcoin: compute stake modifier
         uint64_t nStakeModifier = 0;
@@ -3888,7 +3903,7 @@ bool FindUndoPos(CValidationState& state, int nFile, CDiskBlockPos& pos, unsigne
 bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, bool fCheckPOW)
 {
     // Check proof of work matches claimed amount
-    if (fCheckPOW && !CheckProofOfWork(block.GetHash(), block.nBits))
+    if (fCheckPOW && !CheckProofOfWork(block.GetPoWHash(), block.nBits))
         return state.DoS(50, error("CheckBlockHeader() : proof of work failed"),
             REJECT_INVALID, "high-hash");
 
@@ -3968,10 +3983,13 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
     if (block.GetBlockTime() > FutureDrift(block.vtx[0].nTime))
             return state.DoS(25, error("CheckBlock(): coinbase timestamp is too early"),
                 REJECT_INVALID, "bad-cb-time");
+
     // Check coinstake timestamp
-    if (block.IsProofOfStake() && !CheckCoinStakeTimestamp(block.GetBlockTime(), block.vtx[1].nTime))
-            return state.DoS(50, error("CheckBlock(): coinstake timestamp violation nTimeBlock=%d nTimeTx=%u", block.GetBlockTime(), block.vtx[1].nTime),
-            	REJECT_INVALID, "bad-cs-time");
+    if (block.GetBlockTime() < Params().Zerocoin_StartTime()) {
+        if (block.IsProofOfStake() && !CheckCoinStakeTimestamp(block.GetBlockTime(), block.vtx[1].nTime))
+                return state.DoS(50, error("CheckBlock(): coinstake timestamp violation nTimeBlock=%d nTimeTx=%u", block.GetBlockTime(), block.vtx[1].nTime),
+            	    REJECT_INVALID, "bad-cs-time");
+    }
 
     if (block.IsProofOfStake()) {
         // Coinbase output should be empty if proof-of-stake block
@@ -4313,6 +4331,13 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         if (stake->IsZPIV() && !ContextualCheckZerocoinStake(pindexPrev->nHeight, stake.get()))
             return state.DoS(100, error("%s: staked zGROW fails context checks", __func__));
 
+        uint256 hash = block.GetHash();
+        if(!mapProofOfStake.count(hash)) // add to mapProofOfStake
+            mapProofOfStake.insert(make_pair(hash, hashProofOfStake));
+    }
+
+    if (block.IsProofOfWork()){
+        uint256 hashProofOfStake = block.GetPoWHash();
         uint256 hash = block.GetHash();
         if(!mapProofOfStake.count(hash)) // add to mapProofOfStake
             mapProofOfStake.insert(make_pair(hash, hashProofOfStake));
