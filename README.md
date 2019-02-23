@@ -29,19 +29,19 @@ For more information about technology, check [pivx.org](http://pivx.org).
 <tr><td>P2P Port</td><td>40420</td></tr>
 <tr><td>RPC Port</td><td>40421</td></tr>
 <tr><td>Max Coin Supply</td><td>Infinite</td></tr>
-<tr><td>Premine</td><td>145,000,000 DOPE**</td></tr>
+<tr><td>Premine</td><td>145.000.000 DOPE**</td></tr>
 </table>
 
 *Scrypt Proof-of-Work with 0 reward was active up to block 750.
 
-**145,000,000 DOPE have been produced for swapping from DopeCoinV3 to DopeCoinV4. Unclaimed burned in block [32847](https://chainz.cryptoid.info/dope/block.dws?32847.htm). To find out how the premine was distributed, check [this post](https://bitcointalk.org/index.php?topic=467641.msg17885856#msg17885856) on BitcoinTalk.
+**145.000.000 DOPE have been produced for swapping from DopeCoinV3 to DopeCoinV4. Unclaimed burned in block [32847](https://chainz.cryptoid.info/dope/block.dws?32847.htm). To find out how the premine was distributed, check [this post](https://bitcointalk.org/index.php?topic=467641.msg17885856#msg17885856) on BitcoinTalk.
 
 ### Reward Distribution
 
 <table>
 <th colspan=4>Genesis Block</th>
 <tr><th>Block Height</th><th>Reward Amount</th><th>Notes</th></tr>
-<tr><td>1</td><td>145,000,000 DOPE</td><td>Initial premine, burnt in block <a href="https://chainz.cryptoid.info/dope/block.dws?32847.htm">32847</a></td></tr>
+<tr><td>1</td><td>145.000.000 DOPE</td><td>Initial premine, burnt in block <a href="https://chainz.cryptoid.info/dope/block.dws?32847.htm">32847</a></td></tr>
 </table>
 
 ### Rewards Breakdown
@@ -54,7 +54,7 @@ For more information about technology, check [pivx.org](http://pivx.org).
 <tr><td>Phase 3</td><td>?-∞</td><td>25 GROW</td><td>88% (22 GROW/zGROW)</td><td>12% (3 GROW)</td></tr>
 </table>
 
-### Building GROW
+### Building
 Check out [/doc](/doc) for specific OS build instructions.
 
 ### License
