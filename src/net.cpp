@@ -1566,7 +1566,9 @@ void static ThreadStakeMinter()
         BitcoinMiner(pwallet, true);
         boost::this_thread::interruption_point();
     } catch (std::exception& e) {
-        LogPrintf("ThreadStakeMinter() exception \n");
+        // Phore: add restart of ThreadStakeMinter() after exception
+        LogPrintf("ThreadStakeMinter() exception: %s \n", e.what());
+        ThreadStakeMinter();
     } catch (...) {
         LogPrintf("ThreadStakeMinter() error \n");
     }
