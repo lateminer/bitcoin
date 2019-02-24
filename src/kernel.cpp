@@ -274,7 +274,9 @@ uint256 ComputeStakeModifierV2(const CBlockIndex* pindexPrev, const uint256& ker
     if (!pindexPrev)
         return uint256(); // genesis block's modifier is 0
 
-    LogPrintf("ComputeStakeModifierV2: kernel=%s, nStakeModifierV2=%s\n", kernel.ToString().c_str(), pindexPrev->nStakeModifierV2.ToString().c_str());
+    if (GetBoolArg("-printstakemodifier", false)) {
+        LogPrintf("ComputeStakeModifierV2: kernel=%s, nStakeModifierV2=%s\n", kernel.ToString().c_str(), pindexPrev->nStakeModifierV2.ToString().c_str());
+    }
 
     CDataStream ss(SER_GETHASH, 0);
     ss << kernel << pindexPrev->nStakeModifierV2;
