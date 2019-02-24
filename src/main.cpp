@@ -3914,11 +3914,11 @@ bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, bool f
 
     // Version 5 header must be used after Params().Zerocoin_StartHeight(). And never before.
     if (block.GetBlockTime() > Params().Zerocoin_StartTime()) {
-        if(block.nVersion < Params().Zerocoin_HeaderVersion())
+        if (block.nVersion < Params().Zerocoin_HeaderVersion() || block.nVersion >= (int)0x20000000)
             return state.DoS(50, error("CheckBlockHeader() : block version must be above 5 after ZerocoinStartHeight"),
             REJECT_INVALID, "block-version");
     } else {
-        if (block.nVersion >= Params().Zerocoin_HeaderVersion())
+        if (block.nVersion >= Params().Zerocoin_HeaderVersion() && block.nVersion < (int)0x20000000)
             return state.DoS(50, error("CheckBlockHeader() : block version must be below 5 before ZerocoinStartHeight"),
             REJECT_INVALID, "block-version");
     }
@@ -3988,7 +3988,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
     if (block.GetBlockTime() < Params().Zerocoin_StartTime()) {
         if (block.IsProofOfStake() && !CheckCoinStakeTimestamp(block.GetBlockTime(), block.vtx[1].nTime))
                 return state.DoS(50, error("CheckBlock(): coinstake timestamp violation nTimeBlock=%d nTimeTx=%u", block.GetBlockTime(), block.vtx[1].nTime),
-            	    REJECT_INVALID, "bad-cs-time");
+                    REJECT_INVALID, "bad-cs-time");
     }
 
     if (block.IsProofOfStake()) {
@@ -4126,6 +4126,7 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
     if (pcheckpoint && nHeight < pcheckpoint->nHeight)
         return state.DoS(0, error("%s : forked chain older than last checkpoint (height %d)", __func__, nHeight));
 
+    /*
     // Reject block.nVersion=1 blocks when 95% (75% on testnet) of the network has upgraded:
     if (block.nVersion < 2 &&
         CBlockIndex::IsSuperMajority(2, pindexPrev, Params().RejectBlockOutdatedMajority())) {
@@ -4138,6 +4139,7 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
         return state.Invalid(error("%s : rejected nVersion=2 block", __func__),
             REJECT_OBSOLETE, "bad-version");
     }
+    */
 
     // Reject block.nVersion=4 blocks when 95% (75% on testnet) of the network has upgraded:
     if (block.nVersion < 5 && CBlockIndex::IsSuperMajority(5, pindexPrev, Params().RejectBlockOutdatedMajority())) {
