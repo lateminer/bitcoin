@@ -123,6 +123,12 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
         result.push_back(Pair("nextblockhash", pnext->GetBlockHash().GetHex()));
 
     result.push_back(Pair("moneysupply",ValueFromAmount(blockindex->nMoneySupply)));
+    
+    result.push_back(Pair("flags", blockindex->IsProofOfStake() ? "proof-of-stake" : "proof-of-work"));
+    result.push_back(Pair("modifier", blockindex->nStakeModifier));
+    result.push_back(Pair("modifierv2", blockindex->nStakeModifierV2.GetHex()));
+    if (block.IsProofOfStake())
+        result.push_back(Pair("signature", HexStr(block.vchBlockSig.begin(), block.vchBlockSig.end())));
 
     UniValue zpivObj(UniValue::VOBJ);
     for (auto denom : libzerocoin::zerocoinDenomList) {
