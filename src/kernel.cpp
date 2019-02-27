@@ -451,7 +451,7 @@ bool CheckProofOfStake(CBlockIndex* pindexPrev, const CBlock block, uint256& has
     int64_t nValueInV2 = txPrev.vout[txin.prevout.n].nValue;
     unsigned int nTxTime = block.nTime;
 
-    if (block.nVersion > 4 && block.nVersion <= (int)0x20000000) {
+    if (block.nVersion > 4 && block.nVersion < (int)0x20000000) {
         // New protocol
         uint64_t nStakeModifier = 0;
         if (!stake->GetModifier(nStakeModifier))

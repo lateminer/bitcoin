@@ -2714,7 +2714,7 @@ bool UpdateZPIVSupply(const CBlock& block, CBlockIndex* pindex, bool fJustCheck)
     std::list<libzerocoin::CoinDenomination> listSpends = ZerocoinSpendListFromBlock(block, fFilterInvalid);
 
     // Initialize zerocoin supply to the supply from previous block
-    if (pindex->pprev && (pindex->pprev->GetBlockHeader().nVersion > 4) && (pindex->pprev->GetBlockHeader().nVersion <= (int)0x20000000)) {
+    if (pindex->pprev && (pindex->pprev->GetBlockHeader().nVersion > 4) && (pindex->pprev->GetBlockHeader().nVersion < (int)0x20000000)) {
         for (auto& denom : zerocoinDenomList) {
             pindex->mapZerocoinSupply.at(denom) = pindex->pprev->mapZerocoinSupply.at(denom);
         }
@@ -4254,6 +4254,11 @@ bool AcceptBlockHeader(const CBlock& block, CValidationState& state, CBlockIndex
 
     if (pindex == NULL)
         pindex = AddToBlockIndex(block);
+
+    /*
+    if (pindex->nHeight > Params().LAST_POW_BLOCK())
+        pindex->SetProofOfStake();
+    */
 
     if (ppindex)
         *ppindex = pindex;

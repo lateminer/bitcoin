@@ -231,7 +231,7 @@ public:
         nTime = block.nTime;
         nBits = block.nBits;
         nNonce = block.nNonce;
-        if (block.nVersion > 4 && block.nVersion <= (int)0x20000000)
+        if (block.nVersion > 4 && block.nVersion < (int)0x20000000)
             nAccumulatorCheckpoint = block.nAccumulatorCheckpoint;
 
         //Proof of Stake
@@ -240,7 +240,7 @@ public:
         nMoneySupply = 0;
         nFlags = 0;
         nStakeModifier = 0;
-        if (!(block.nVersion > 4 && block.nVersion <= (int)0x20000000))
+        if (!(block.nVersion > 4 && block.nVersion < (int)0x20000000))
             nStakeModifierV2 = 0;
 
         hashProofOfStake = uint256();
