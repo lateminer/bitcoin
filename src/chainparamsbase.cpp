@@ -29,7 +29,7 @@ public:
 static CBaseMainParams mainParams;
 
 /**
- * Testnet (v3)
+ * Testnet
  */
 class CBaseTestNetParams : public CBaseMainParams
 {
@@ -38,12 +38,12 @@ public:
     {
         networkID = CBaseChainParams::TESTNET;
         nRPCPort = 51475;
-        strDataDir = "testnet4";
+        strDataDir = "testnet";
     }
 };
 static CBaseTestNetParams testNetParams;
 
-/*
+/**
  * Regression test
  */
 class CBaseRegTestParams : public CBaseTestNetParams
@@ -57,7 +57,7 @@ public:
 };
 static CBaseRegTestParams regTestParams;
 
-/*
+/**
  * Unit test
  */
 class CBaseUnitTestParams : public CBaseMainParams
