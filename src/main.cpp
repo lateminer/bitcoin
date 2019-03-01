@@ -1164,6 +1164,10 @@ CAmount GetMinRelayFee(const CTransaction& tx, unsigned int nBytes, bool fAllowF
 
     CAmount nMinFee = ::minRelayTxFee.GetFee(nBytes);
 
+    // GROW: minimum fee 0.0001 GROW
+    if (nMinFee < DEFAULT_TRANSACTION_MINFEE)
+        nMinFee = DEFAULT_TRANSACTION_MINFEE;
+
     if (fAllowFree) {
         // There is a free transaction area in blocks created by most miners,
         // * If we are relaying we allow transactions up to DEFAULT_BLOCK_PRIORITY_SIZE - 1000
