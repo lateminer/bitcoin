@@ -69,11 +69,11 @@ static const Checkpoints::CCheckpointData data = {
 
 static Checkpoints::MapCheckpoints mapCheckpointsTestnet =
     boost::assign::map_list_of
-    (4000, uint256("0x4bb08900b1bee0c5a87cd6782dd5263b4041f599a632406780c1d9c88d7a4323"));
+    (100, uint256("0x000008a085bde61a7b4aacb02d0d634d4bb77c37354e98111f3f3d72e9440198")); // last PoW block on testnet
 static const Checkpoints::CCheckpointData dataTestnet = {
     &mapCheckpointsTestnet,
-    1514384960,
-    7967,
+    1551471258,
+    122,
     1920};
 
 static Checkpoints::MapCheckpoints mapCheckpointsRegtest =
@@ -266,8 +266,7 @@ public:
         hashGenesisBlock = genesis.GetHash();
         assert(hashGenesisBlock == uint256("0x2acfa8ef95f8014d38217cdcecd3850e081a86976bb1bb8497f519fc1dcac3bc"));
 
-        vFixedSeeds.clear();
-        vSeeds.clear();
+        vSeeds.push_back(CDNSSeedData("51.15.34.13", "51.15.34.13"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 196);
