@@ -2288,8 +2288,8 @@ bool CheckInputs(const CTransaction& tx, CValidationState& state, const CCoinsVi
 
             // Check transaction timestamp
             if (coins->nTime > tx.nTime)
-                    return state.DoS(100, error("CheckInputs() : transaction timestamp earlier than input transaction"),
-                    			REJECT_INVALID, "bad-txns-time-earlier-than-input");
+                return state.DoS(100, error("CheckInputs() : transaction timestamp earlier than input transaction"),
+                    REJECT_INVALID, "bad-txns-time-earlier-than-input");
 
             // Check for negative or overflow input values
             nValueIn += coins->vout[prevout.n].nValue;

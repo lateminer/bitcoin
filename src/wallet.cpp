@@ -2742,6 +2742,8 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, CAmount> >& vecSend,
     wtxNew.BindWallet(this);
     CMutableTransaction txNew;
 
+    txNew.nTime = GetAdjustedTime();
+
     {
         LOCK2(cs_main, cs_wallet);
         {
