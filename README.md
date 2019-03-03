@@ -8,8 +8,8 @@ Originally, our focus was to provide the marijuana industry with payment gateway
 Our current blockchain technology is focused on fast private transactions using the Zerocoin protocol. GROW has been forked from PIVX and utilizes its proof of stake protocol, called zPoS, combined with regular PoS and masternodes for securing its network. zPoS incentivises using the privacy features available in GROW by granting a higher block reward for zPoS over regular PoS and masternodes.
 
 The goal of GROW is to achieve a decentralized sustainable crypto currency with near instant full-time private transactions, fair governance and community intelligence.
-- Anonymized transactions & consensus using the [_Zerocoin Protocol_](http://www.pivx.org/zpiv) and [zPoS](https://pivx.org/zpos/).
-- Light/mobile wallet privacy using the [Zerocoin Light Node Protocol](https://pivx.org/wp-content/uploads/2018/11/Zerocoin_Light_Node_Protocol.pdf)
+- Anonymized transactions & consensus using the [_Zerocoin Protocol_](http://www.pivx.org/zpiv) and [_zPoS_](https://pivx.org/zpos/).
+- Light/mobile wallet privacy using the [_Zerocoin Light Node Protocol_](https://pivx.org/wp-content/uploads/2018/11/Zerocoin_Light_Node_Protocol.pdf)
 - Fast transactions featuring guaranteed zero confirmation transactions, based on PIVX's _SwiftX_.
 - Decentralized blockchain voting utilizing Masternode technology to form a DAO. The blockchain will distribute monthly treasury funds based on successful proposals submitted by the community and voted on by the DAO.
 
@@ -22,7 +22,7 @@ For more information about technology, check [pivx.org](http://pivx.org).
 <tr><td>PoW Algo</td><td>Scrypt*</td></tr>
 <tr><td>PoS Algo</td><td>PoS 3.0</td></tr>
 <tr><td>Block Time</td><td>90 seconds</td></tr>
-<tr><td>Difficulty Retargeting</td><td>Every Block</td></tr>
+<tr><td>Difficulty Retargeting</td><td>Every block</td></tr>
 <tr><td>Stake Min Age</td><td>12 hours</td></tr>
 <tr><td>Coin Maturity</td><td>60 blocks</td></tr>
 <tr><td>Min TX Fee</td><td>0.0001 GROW</td></tr>
@@ -50,8 +50,8 @@ For more information about technology, check [pivx.org](http://pivx.org).
 <th>Phase</th><th>Block Height</th><th>Reward</th><th>Masternodes & Stakers</th><th>Budget</th>
 <tr><td>Phase 0</td><td>2-750</td><td>0 or 30 DOPE</td><td>100% (0 or 30 DOPE)</td><td>N/A</td></tr>
 <tr><td>Phase 1</td><td>751-?</td><td>30 DOPE/GROW</td><td>100% (30 DOPE/GROW)</td><td>N/A</td></tr>
-<tr><td>Phase 2</td><td>?-?</td><td>25 GROW</td><td>88% (22 GROW)</td><td>12% (3 GROW)</td></tr>
-<tr><td>Phase 3</td><td>?-∞</td><td>25 GROW</td><td>88% (22 GROW/zGROW)</td><td>12% (3 GROW)</td></tr>
+<tr><td>Phase 2</td><td>?-?</td><td>30 GROW</td><td>84% (25 GROW)</td><td>16% (5 GROW)</td></tr>
+<tr><td>Phase 3</td><td>?-∞</td><td>30 GROW</td><td>84% (25 GROW/zGROW)</td><td>16% (5 GROW)</td></tr>
 </table>
 
 ### Building
