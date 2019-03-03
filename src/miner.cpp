@@ -138,7 +138,6 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
     pblock->vtx.push_back(txNew);
     pblocktemplate->vTxFees.push_back(-1);   // updated at end
     pblocktemplate->vTxSigOps.push_back(-1); // updated at end
-    unsigned int nTxNewTime = 0;
 
     // ppcoin: if coinstake available add coinstake tx
     static int64_t nLastCoinStakeSearchTime = GetAdjustedTime(); // only initialized at startup
@@ -164,7 +163,8 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             }
 
             if (!fStakeFound) {
-                LogPrintf("CreateNewBlock(): stake not found\n");
+                // GROW: this is needless!
+                // LogPrintf("CreateNewBlock(): stake not found\n");
                 return NULL;
             }
 
@@ -173,14 +173,13 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             pblock->nTime = GetAdjustedTime();
             pblock->nBits = GetNextWorkRequired(pindexPrev, pblock, fProofOfStake);
             CMutableTransaction txCoinStake;
+            txCoinStake.nTime = GetAdjustedTime();
             txCoinStake.nTime &= ~STAKE_TIMESTAMP_MASK;
             int64_t nSearchTime = txCoinStake.nTime; // search to current time
             bool fStakeFound = false;
             if (nSearchTime >= nLastCoinStakeSearchTime) {
-                nTxNewTime &= ~STAKE_TIMESTAMP_MASK;
                 if (pwallet->CreateCoinStake(*pwallet, pblock->nBits, nSearchTime - nLastCoinStakeSearchTime, txCoinStake, txCoinStake.nTime)) {
                     pblock->vtx[0].nTime = pblock->nTime = txCoinStake.nTime;
-                    nTxNewTime = txCoinStake.nTime;
                     pblock->vtx[0].vout[0].SetEmpty();
                     pblock->vtx.push_back(CTransaction(txCoinStake));
                     fStakeFound = true;
@@ -190,7 +189,8 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             }
 
             if (!fStakeFound) {
-                LogPrintf("CreateNewBlock(): stake not found\n");
+                // GROW: this is needless!
+                // LogPrintf("CreateNewBlock(): stake not found\n");
                 return NULL;
             }
         }
@@ -501,7 +501,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             pblocktemplate->vTxFees[0] = -nFees;
         }
 
-        pblock->vtx[1].nTime = pblock->nTime = pblock->vtx[0].nTime = nTxNewTime;
+        pblock->vtx[1].nTime = pblock->nTime = pblock->vtx[0].nTime;
 
         // Fill in header
         pblock->hashPrevBlock = pindexPrev->GetBlockHash();
@@ -836,6 +836,8 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
                 hashTarget.SetCompact(pblock->nBits);
             }
         }
+        // Let miner rest a little bit
+        MilliSleep(500);
     }
 }
 
