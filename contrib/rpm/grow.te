@@ -1,0 +1,81 @@
+policy_module(grow, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type grow_t;
+type grow_exec_t;
+init_daemon_domain(grow_t, grow_exec_t)
+
+permissive grow_t;
+
+type grow_initrc_exec_t;
+init_script_file(grow_initrc_exec_t)
+
+type grow_conf_t;
+files_type(grow_conf_t)
+
+type grow_var_lib_t;
+files_type(grow_var_lib_t)
+
+type grow_var_run_t;
+files_type(grow_var_run_t)
+
+type grow_port_t;
+corenet_port(grow_port_t)
+
+########################################
+#
+# grow local policy
+#
+allow grow_t self:process { fork };
+
+allow grow_t self:fifo_file rw_fifo_file_perms;
+allow grow_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(grow_t, grow_conf_t, grow_conf_t)
+manage_files_pattern(grow_t, grow_conf_t, grow_conf_t)
+
+manage_dirs_pattern(grow_t, grow_var_lib_t, grow_var_lib_t)
+manage_files_pattern(grow_t, grow_var_lib_t, grow_var_lib_t)
+files_var_lib_filetrans(grow_t, grow_var_lib_t, { dir file })
+
+manage_dirs_pattern(grow_t, grow_var_run_t, grow_var_run_t)
+manage_files_pattern(grow_t, grow_var_run_t, grow_var_run_t)
+
+sysnet_dns_name_resolve(grow_t)
+corenet_all_recvfrom_unlabeled(grow_t)
+
+allow grow_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(grow_t)
+corenet_tcp_sendrecv_generic_node(grow_t)
+corenet_tcp_sendrecv_all_ports(grow_t)
+corenet_tcp_bind_generic_node(grow_t)
+
+gen_require(`
+    type grow_port_t;
+')
+allow grow_t grow_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type grow_port_t;
+')
+allow grow_t grow_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(grow_t)
+
+files_read_etc_files(grow_t)
+
+miscfiles_read_localization(grow_t)
+
+sysnet_dns_name_resolve(grow_t)
+
+allow grow_t grow_exec_t:file execute_no_trans;
+allow grow_t self:process setsched;
+corecmd_exec_ls(grow_t)
+corenet_tcp_connect_http_port(grow_t)
+dev_read_urand(grow_t)
+fs_getattr_xattr_fs(grow_t)
+kernel_read_system_state(grow_t)

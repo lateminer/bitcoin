@@ -19,6 +19,8 @@
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader* pblock, bool fProofOfStake)
 {
+    if (Params().NetworkID() == CBaseChainParams::REGTEST)
+        return pindexLast->nBits;
 
     uint256 bnTargetLimit = fProofOfStake ? Params().ProofOfStakeLimit() : Params().ProofOfWorkLimit();
 
@@ -70,8 +72,12 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
         return error("CheckProofOfWork() : nBits below minimum work");
 
     // Check proof of work matches claimed amount
-    if (hash > bnTarget && hash != Params().HashGenesisBlock())
-        return error("CheckProofOfWork() : hash doesn't match nBits");
+    if (hash > bnTarget && hash != Params().HashGenesisBlock()) {
+        if (Params().MineBlocksOnDemand())
+            return false;
+        else
+            return error("CheckProofOfWork() : hash doesn't match nBits");
+    }
 
     return true;
 }

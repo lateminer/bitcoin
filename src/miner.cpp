@@ -108,16 +108,25 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         return NULL;
     CBlock* pblock = &pblocktemplate->block; // pointer for convenience
 
-    // -regtest only: allow overriding block.nVersion with
-    // -blockversion=N to test forking scenarios
-    if (Params().MineBlocksOnDemand())
-        pblock->nVersion = GetArg("-blockversion", pblock->nVersion);
+    // Tip
+    CBlockIndex* pindexPrev;
+    {   // Don't keep cs_main locked
+        LOCK(cs_main);
+        pindexPrev = chainActive.Tip();
+    }
+    const int nHeight = pindexPrev->nHeight + 1;
 
-    bool fZerocoinActive = GetAdjustedTime() >= Params().Zerocoin_StartTime();
+    // Make sure to create the correct block version after zerocoin is enabled
+    bool fZerocoinActive = nHeight >= Params().Zerocoin_StartHeight();
     if (fZerocoinActive)
         pblock->nVersion = 5;
     else
         pblock->nVersion = 4;
+
+    // -regtest only: allow overriding block.nVersion with
+    // -blockversion=N to test forking scenarios
+    if (Params().MineBlocksOnDemand())
+        pblock->nVersion = GetArg("-blockversion", pblock->nVersion);
 
     // Create coinbase tx
     CMutableTransaction txNew;
@@ -137,7 +146,6 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
     if (fProofOfStake) {
         if (fZerocoinActive) {
             boost::this_thread::interruption_point();
-            CBlockIndex* pindexPrev = chainActive.Tip();
             pblock->nTime = GetAdjustedTime();
             pblock->nBits = GetNextWorkRequired(pindexPrev, pblock, fProofOfStake);
             CMutableTransaction txCoinStake;
@@ -155,12 +163,13 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
                 nLastCoinStakeSearchTime = nSearchTime;
             }
 
-            if (!fStakeFound)
+            if (!fStakeFound) {
+                LogPrintf("CreateNewBlock(): stake not found\n");
                 return NULL;
+            }
 
         } else {
             boost::this_thread::interruption_point();
-            CBlockIndex* pindexPrev = chainActive.Tip();
             pblock->nTime = GetAdjustedTime();
             pblock->nBits = GetNextWorkRequired(pindexPrev, pblock, fProofOfStake);
             CMutableTransaction txCoinStake;
@@ -180,9 +189,10 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
                 nLastCoinStakeSearchTime = nSearchTime;
             }
 
-            if (!fStakeFound)
+            if (!fStakeFound) {
+                LogPrintf("CreateNewBlock(): stake not found\n");
                 return NULL;
-
+            }
         }
     }
 
@@ -210,8 +220,6 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
     {
         LOCK2(cs_main, mempool.cs);
 
-        CBlockIndex* pindexPrev = chainActive.Tip();
-        const int nHeight = pindexPrev->nHeight + 1;
         CCoinsViewCache view(pcoinsTip);
 
         // Priority order to process transactions
@@ -460,13 +468,17 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             }
         }
 
-        if (!fProofOfStake && pblock->nTime > Params().StartMasternodePayments()) {
+        if (!fProofOfStake && pblock->nTime >= Params().StartMasternodePayments()) {
             //Masternode and general budget payments
             FillBlockPayee(txNew, nFees, fProofOfStake, false);
 
             //Make payee
             if (txNew.vout.size() > 1) {
                 pblock->payee = txNew.vout[1].scriptPubKey;
+            } else {
+                CAmount blockValue = nFees + GetBlockValue(pindexPrev->nHeight);
+                txNew.vout[0].nValue = blockValue;
+                txNew.vin[0].scriptSig = CScript() << nHeight << OP_0;
             }
         } else if (!fProofOfStake && pblock->nTime < Params().StartMasternodePayments()) {
             txNew.vout[0].nValue = GetBlockValue(nHeight);
@@ -503,8 +515,8 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         pblock->nBits = GetNextWorkRequired(pindexPrev, pblock, fProofOfStake);
         pblock->nNonce = 0;
 
+        //Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated
         if (fZerocoinActive) {
-            //Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated
             uint256 nCheckpoint;
             uint256 hashBlockLastAccumulated = chainActive[nHeight - (nHeight % 10) - 10]->GetBlockHash();
             if (nHeight >= pCheckpointCache.first || pCheckpointCache.second.first != hashBlockLastAccumulated) {
@@ -528,6 +540,31 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             pblock->nAccumulatorCheckpoint = pCheckpointCache.second.second;
         }
         pblocktemplate->vTxSigOps[0] = GetLegacySigOpCount(pblock->vtx[0]);
+
+        if (fProofOfStake) {
+            unsigned int nExtraNonce = 0;
+            IncrementExtraNonce(pblock, pindexPrev, nExtraNonce);
+            LogPrintf("CPUMiner : proof-of-stake block found %s \n", pblock->GetHash().ToString().c_str());
+            if (pblock->IsZerocoinStake()) {
+                //Find the key associated with the zerocoin that is being staked
+                libzerocoin::CoinSpend spend = TxInToZerocoinSpend(pblock->vtx[1].vin[0]);
+                CBigNum bnSerial = spend.getCoinSerialNumber();
+                CKey key;
+                if (!pwallet->GetZerocoinKey(bnSerial, key)) {
+                    LogPrintf("%s: failed to find zPIV with serial %s, unable to sign block\n", __func__, bnSerial.GetHex());
+                    return NULL;
+                }
+
+                //Sign block with the zPIV key
+                if (!SignBlockWithKey(*pblock, key)) {
+                    LogPrintf("BitcoinMiner(): Signing new block with zPIV key failed \n");
+                    return NULL;
+                }
+            } else if (!SignBlock(*pblock, *pwallet)) {
+                LogPrintf("BitcoinMiner(): Signing new block with UTXO key failed \n");
+                return NULL;
+            }
+        }
 
         CValidationState state;
         if (!TestBlockValidity(state, *pblock, pindexPrev, false, false)) {

@@ -310,7 +310,6 @@ public:
     {
         networkID = CBaseChainParams::REGTEST;
         strNetworkID = "regtest";
-        strNetworkID = "regtest";
         pchMessageStart[0] = 0xfa;
         pchMessageStart[1] = 0xbf;
         pchMessageStart[2] = 0xb5;
@@ -322,6 +321,18 @@ public:
         nMinerThreads = 1;
         nTargetTimespan = 20 * 90; // GROW: 30 minutes
         nTargetSpacing = 1 * 90;   // GROW: 90 seconds
+        bnProofOfWorkLimit = ~uint256(0) >> 1;
+        nMaturity = 10;
+        nModifierInterval = 15 * 60;
+        nStakeMinAge = 1 * 60 * 60;
+        nMasternodeCountDrift = 4;
+        nMaxMoneyOut = 200000000 * COIN;
+
+        nLastPOWBlock = 100;
+        nZerocoinStartHeight = 300;
+        nZerocoinStartTime = 1501776000;
+        nNewRewardStructureHeight = nZerocoinStartHeight;
+        nNewRewardStructureTime = nZerocoinStartTime;
 
         CMutableTransaction txNew;
         txNew.nTime = 1550741119;
@@ -331,7 +342,6 @@ public:
 
         hashGenesisBlock = genesis.GetHash();
         assert(hashGenesisBlock == uint256("0xc4e5324385e4f591d4c2f173aba2d59e2d5bf1aa06f3f7e6b7fabca5fc9d51f0"));
-        assert(genesis.hashMerkleRoot == uint256S("0x0e58d4b3215bb1889d5a027d40269a167b93c68e9ae28961de4717558be92d38"));
 
         vFixedSeeds.clear(); //! Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //! Regtest mode doesn't have any DNS seeds.
@@ -341,6 +351,7 @@ public:
         fDefaultConsistencyChecks = true;
         fRequireStandard = false;
         fMineBlocksOnDemand = true;
+        fSkipProofOfWorkCheck = true;
         fTestnetToBeDeprecatedFieldRPC = false;
     }
     const Checkpoints::CCheckpointData& Checkpoints() const

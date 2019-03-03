@@ -238,6 +238,11 @@ bool GetKernelStakeModifier(uint256 hashBlockFrom, uint64_t& nStakeModifier, int
     const CBlockIndex* pindexFrom = mapBlockIndex[hashBlockFrom];
     nStakeModifierHeight = pindexFrom->nHeight;
     nStakeModifierTime = pindexFrom->GetBlockTime();
+    // Fixed stake modifier only for regtest
+    if (Params().NetworkID() == CBaseChainParams::REGTEST) {
+        nStakeModifier = pindexFrom->nStakeModifier;
+        return true;
+    }
     int64_t nStakeModifierSelectionInterval = GetStakeModifierSelectionInterval();
     const CBlockIndex* pindex = pindexFrom;
     CBlockIndex* pindexNext = chainActive[pindexFrom->nHeight + 1];
@@ -287,15 +292,19 @@ uint256 ComputeStakeModifierV2(const CBlockIndex* pindexPrev, const uint256& ker
 // coinstake must meet hash target according to the protocol:
 // kernel (input 0) must meet the formula
 //     hash(nStakeModifier + txPrev.block.nTime + txPrev.nTime + txPrev.vout.hash + txPrev.vout.n + nTime) < bnTarget * nWeight
-bool CheckStakeV2(CBlockIndex* pindexPrev, unsigned int nTxPrevTime, const COutPoint& prevout, unsigned int nTimeTx, int64_t nValueIn, const uint256& bnTarget,
-                uint256& hashProofOfStake)
+bool CheckStakeV2(CBlockIndex* pindexPrev, unsigned int nTxPrevTime, const COutPoint& prevout, unsigned int nTimeTx,
+                int64_t nValueIn, const uint256& bnTarget, uint256& hashProofOfStake)
 {
-     if (nTimeTx < nTxPrevTime) // Transaction timestamp violation
+     // Transaction timestamp check
+     if (nTimeTx < nTxPrevTime)
         return error("CheckStakeV2() : nTime violation");
 
-    // Weight
+    // Weight check
     if (nValueIn == 0)
-        return false;
+        return error("CheckStakeV2() : nValueIn cannot be zero");
+
+    // Weighted target
+    uint256 bnWeightedTarget = uint256(nValueIn) * bnTarget;
 
     uint256 nStakeModifierV2 = pindexPrev->nStakeModifierV2;
 
@@ -303,10 +312,16 @@ bool CheckStakeV2(CBlockIndex* pindexPrev, unsigned int nTxPrevTime, const COutP
     ss << nStakeModifierV2 << nTxPrevTime << prevout.hash << prevout.n << nTimeTx;
     hashProofOfStake = Hash(ss.begin(), ss.end());
 
-    uint256 bnCoinDayWeight = uint256(nValueIn);
+    // GROW: ugly hack for Dopecoin testnet: skip kernel check up to block 135
+    // ToDo: find and fix issues
+    if (Params().NetworkID() == CBaseChainParams::TESTNET && nTimeTx < 1551507712)
+        return true;
 
     // Now check if proof-of-stake hash meets target protocol
-    return hashProofOfStake < (bnCoinDayWeight * bnTarget);
+    if (hashProofOfStake > bnWeightedTarget)
+        return false;
+
+    return true;
 }
 
 // PIVX kernel protocol
@@ -327,12 +342,15 @@ bool CheckStakeNewProtocol(const CDataStream& ssUniqueID, CAmount nValueIn, cons
 
 bool CheckStakeKernelHash(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockFrom, unsigned int& nTimeTx, uint256& hashProofOfStake)
 {
-    if (nTimeTx < nTimeBlockFrom)
-        return error("CheckStakeKernelHash() : nTime violation");
+    if(Params().NetworkID() != CBaseChainParams::REGTEST) {
+        if (nTimeTx < nTimeBlockFrom)
+            return error("CheckStakeKernelHash() : nTime violation");
 
-    if (nTimeBlockFrom + Params().StakeMinAge() > nTimeTx) // Min age requirement
-        return error("CheckStakeKernelHash() : min age violation - nTimeBlockFrom=%d nStakeMinAge=%d nTimeTx=%d",
-                     nTimeBlockFrom, Params().StakeMinAge(), nTimeTx);
+        if ((nTimeBlockFrom + Params().StakeMinAge() > nTimeTx)) // Min age requirement
+            return error("CheckStakeKernelHash() : min age violation - nTimeBlockFrom=%d nStakeMinAge=%d nTimeTx=%d",
+                         nTimeBlockFrom, Params().StakeMinAge(), nTimeTx);
+
+    }
 
     //grab difficulty
     uint256 bnTargetPerCoinDay;

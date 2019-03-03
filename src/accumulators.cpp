@@ -191,7 +191,7 @@ bool InitializeAccumulators(const int nHeight, int& nHeightCheckpoint, Accumulat
         mapAccumulators.Reset(Params().Zerocoin_Params(false));
 
         // 20 after v2 start is when the new checkpoints will be in the block, so don't need to load hard checkpoints
-        if (nHeight <= Params().Zerocoin_StartHeight() + 20) {
+        if (nHeight <= Params().Zerocoin_StartHeight() + 20 && Params().NetworkID() != CBaseChainParams::REGTEST) {
             //Load hard coded checkpointed value
             AccumulatorCheckpoints::Checkpoint checkpoint = AccumulatorCheckpoints::GetClosestCheckpoint(nHeight,
                                                                                                          nHeightCheckpoint);
@@ -650,8 +650,13 @@ bool GenerateAccumulatorWitness(
         //Get the accumulator that is right before the cluster of blocks containing our mint was added to the accumulator
         CBigNum bnAccValue = 0;
         if (GetAccumulatorValue(nHeightCheckpoint, coin.getDenomination(), bnAccValue)) {
-            accumulator.setValue(bnAccValue);
-            witness.resetValue(accumulator, coin);
+            if(!bnAccValue && Params().NetworkID() == CBaseChainParams::REGTEST){
+                accumulator.setInitialValue();
+                witness.resetValue(accumulator, coin);
+            }else {
+                accumulator.setValue(bnAccValue);
+                witness.resetValue(accumulator, coin);
+            }
         }
 
         //add the pubcoins from the blockchain up to the next checksum starting from the block
