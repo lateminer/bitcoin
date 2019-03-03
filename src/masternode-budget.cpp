@@ -923,7 +923,7 @@ CAmount CBudgetManager::GetTotalBudget(int nHeight)
     //get block value and calculate from that
     CAmount nSubsidy = 0;
     if (nHeight >= Params().NewRewardStructure_Height()) {
-        nSubsidy = 30 * COIN;
+        nSubsidy = 50 * COIN;
     }
 
     // Amount of blocks in a months period of time (using 1,5 minutes per) = (40*24*30)

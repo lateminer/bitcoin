@@ -1798,7 +1798,7 @@ int64_t GetBlockValue(int nHeight)
     } else if (nHeight < Params().NewRewardStructure_Height()) {
          nSubsidy = 30 * COIN;
     } else
-         nSubsidy = 22 * COIN;
+         nSubsidy = 25 * COIN;
 
     return nSubsidy;
 }
@@ -2011,7 +2011,7 @@ int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCou
     if (nHeight >= Params().NewRewardStructure_Height() && nHeight < Params().Zerocoin_StartHeight()) {
         return GetSeeSaw(blockValue, nMasternodeCount, nHeight);
     } else {
-        ret = 12 * COIN;
+        ret = 15 * COIN;
         if (isZPIVStake)
             ret = 10 * COIN;
     }
