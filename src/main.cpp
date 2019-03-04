@@ -83,10 +83,7 @@ bool fAlerts = DEFAULT_ALERTS;
 
 int64_t nReserveBalance = 0;
 
-/** Fees smaller than this (in upiv/ugrow) are considered zero fee (for relaying and mining)
- * We are ~100 times smaller then bitcoin now (2015-06-23), set minRelayTxFee only 10 times higher
- * so it's still 10 times lower comparing to bitcoin.
- */
+/** Fees smaller than this (in satoshi) are considered zero fee (for relaying, mining and transaction creation) */
 CFeeRate minRelayTxFee = CFeeRate(10000);
 
 CTxMemPool mempool(::minRelayTxFee);
@@ -110,7 +107,7 @@ static void CheckBlockIndex();
 /** Constant stuff for coinbase transactions we create: */
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "DarkNet Signed Message:\n";
+const string strMessageMagic = "GROW Signed Message:\n";
 
 // Internal stuff
 namespace
