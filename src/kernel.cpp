@@ -12,6 +12,7 @@
 #include "timedata.h"
 #include "util.h"
 #include "stakeinput.h"
+// #include "utilmoneystr.h"
 #include "zpivchain.h"
 
 using namespace std;
@@ -359,7 +360,7 @@ bool CheckStakeKernelHash(CStakeInput* stakeInput, unsigned int nBits, unsigned 
     bool fSuccess = false;
     unsigned int nTryTime = 0;
     int nHeightStart = chainActive.Height();
-    int nHashDrift = 30;
+    int nHashDrift = 300;
     CDataStream ssUniqueID = stakeInput->GetUniqueness();
 
     CBlockIndex *pindex = stakeInput->GetIndexFrom();
@@ -398,7 +399,7 @@ bool CheckStakeKernelHash(CStakeInput* stakeInput, unsigned int nBits, unsigned 
                 return error("failed to get kernel stake modifier");
 
             //hash this iteration
-            nTryTime = nTimeTx + nHashDrift - i;
+            nTryTime = nTimeTx + (nHashDrift/2) - i;
             if (!CheckStakeNewProtocol(ssUniqueID, nValueIn, nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake))
                 continue;
         } else {

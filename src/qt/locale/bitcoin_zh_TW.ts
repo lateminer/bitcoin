@@ -43,11 +43,11 @@
     </message>
     <message>
         <source>Choose the address to send coins to</source>
-        <translation>選擇要匯出PIVX幣的位址</translation>
+        <translation>選擇要匯出GROW幣的位址</translation>
     </message>
     <message>
         <source>Choose the address to receive coins with</source>
-        <translation>選擇要接收PIVX幣的位址</translation>
+        <translation>選擇要接收GROW幣的位址</translation>
     </message>
     <message>
         <source>C&amp;hoose</source>
@@ -566,7 +566,7 @@
     </message>
     <message>
         <source>Request payments (generates QR codes and grow: URIs)</source>
-        <translation>請求付款 (會產生 QR Code跟 pivx 位址)</translation>
+        <translation>請求付款 (會產生 QR Code跟 grow 位址)</translation>
     </message>
     <message>
         <source>&amp;Masternodes</source>
@@ -669,6 +669,9 @@
     <name>FreespaceChecker</name>
     </context>
 <context>
+    <name>GovernancePage</name>
+    </context>
+<context>
     <name>HelpMessageDialog</name>
     <message>
         <source>GROW Core</source>
@@ -749,7 +752,14 @@
     </message>
     </context>
 <context>
+    <name>ProposalFrame</name>
+    </context>
+<context>
     <name>QObject</name>
+    <message>
+        <source>GROW Core</source>
+        <translation>GROW Core</translation>
+    </message>
     </context>
 <context>
     <name>QRImageWidget</name>
@@ -780,6 +790,10 @@
     <message>
         <source>Label</source>
         <translation>標記</translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation>位址</translation>
     </message>
     <message>
         <source>(no label)</source>

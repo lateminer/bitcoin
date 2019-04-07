@@ -142,6 +142,12 @@ public:
         nNewRewardStructureHeight = std::numeric_limits<int>::max();
         nNewRewardStructureTime = std::numeric_limits<int>::max();
 
+        nBlockDoubleAccumulated = nZerocoinStartHeight;
+
+        // Fake Serial Attack
+        nFakeSerialBlockheightEnd = -1;
+        nSupplyBeforeFakeSerial = 0;   // zerocoin supply at block nFakeSerialBlockheightEnd
+
         /**
          * Build the genesis block. Note that the output of the genesis coinbase cannot
          * be spent as it did not originally exist in the database.
@@ -260,6 +266,10 @@ public:
         nNewRewardStructureHeight = std::numeric_limits<int>::max();
         nNewRewardStructureTime = std::numeric_limits<int>::max();
 
+        // Fake Serial Attack
+        nFakeSerialBlockheightEnd = -1;
+        nSupplyBeforeFakeSerial = 0;
+
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
         genesis.nNonce = 499515;
 
@@ -339,6 +349,9 @@ public:
         genesis.nTime = 1550741119;
         genesis.nBits = 0x1e0fffff;
         genesis.nNonce = 1;
+
+        // Fake Serial Attack
+        nFakeSerialBlockheightEnd = -1;
 
         hashGenesisBlock = genesis.GetHash();
         assert(hashGenesisBlock == uint256("0xc4e5324385e4f591d4c2f173aba2d59e2d5bf1aa06f3f7e6b7fabca5fc9d51f0"));
