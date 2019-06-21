@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_CHAIN_H
-#define FXTC_CHAIN_H
+#ifndef BITCORE_CHAIN_H
+#define BITCORE_CHAIN_H
 
 #include <arith_uint256.h>
 #include <consensus/params.h>
@@ -518,4 +518,4 @@ public:
     CBlockIndex* FindEarliestAtLeast(int64_t nTime) const;
 };
 
-#endif // FXTC_CHAIN_H
+#endif // BITCORE_CHAIN_H

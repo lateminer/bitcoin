@@ -5,8 +5,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_CRYPTO_X16R_H
-#define FXTC_CRYPTO_X16R_H
+#ifndef BITCORE_CRYPTO_X16R_H
+#define BITCORE_CRYPTO_X16R_H
 
 #include <uint256.h>
 
@@ -170,4 +170,4 @@ inline uint256 HashX16R(const T1 pbegin, const T1 pend, const uint256 PrevBlockH
     return hash[15].trim256();
 }
 
-#endif // FXTC_CRYPTO_X16R_H
+#endif // BITCORE_CRYPTO_X16R_H

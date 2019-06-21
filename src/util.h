@@ -2,6 +2,7 @@
 // Copyright (c) 2009-2018 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
 // Copyright (c) 2018 FXTC developers
+// Copyright (c) 2019 BitCore developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,8 +10,8 @@
  * Server/client environment: argument handling, config file parsing,
  * thread wrappers, startup time
  */
-#ifndef FXTC_UTIL_H
-#define FXTC_UTIL_H
+#ifndef BITCORE_UTIL_H
+#define BITCORE_UTIL_H
 
 #if defined(HAVE_CONFIG_H)
 #include <config/bitcoin-config.h>
@@ -357,7 +358,7 @@ void RenameThread(const char* name);
  */
 template <typename Callable> void TraceThread(const char* name,  Callable func)
 {
-    std::string s = strprintf("fxtc-%s", name);
+    std::string s = strprintf("bitcore-%s", name);
     RenameThread(s.c_str());
     try
     {
@@ -434,4 +435,4 @@ std::string IntVersionToString(uint32_t nVersion);
 std::string SafeIntVersionToString(uint32_t nVersion);
 //
 
-#endif // FXTC_UTIL_H
+#endif // BITCORE_UTIL_H

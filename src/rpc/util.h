@@ -1,9 +1,10 @@
 // Copyright (c) 2017-2018 The Bitcoin Core developers
+// Copyright (c) 2019 BitCore developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_RPC_UTIL_H
-#define FXTC_RPC_UTIL_H
+#ifndef BITCORE_RPC_UTIL_H
+#define BITCORE_RPC_UTIL_H
 
 #include <pubkey.h>
 #include <script/standard.h>
@@ -24,4 +25,4 @@ CScript CreateMultisigRedeemscript(const int required, const std::vector<CPubKey
 
 UniValue DescribeAddress(const CTxDestination& dest);
 
-#endif // FXTC_RPC_UTIL_H
+#endif // BITCORE_RPC_UTIL_H

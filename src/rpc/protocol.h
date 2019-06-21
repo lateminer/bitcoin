@@ -1,10 +1,11 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2019 BitCore developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_RPC_PROTOCOL_H
-#define FXTC_RPC_PROTOCOL_H
+#ifndef BITCORE_RPC_PROTOCOL_H
+#define BITCORE_RPC_PROTOCOL_H
 
 #include <fs.h>
 
@@ -106,4 +107,4 @@ void DeleteAuthCookie();
 /** Parse JSON-RPC batch reply into a vector */
 std::vector<UniValue> JSONRPCProcessBatchReply(const UniValue &in, size_t num);
 
-#endif // FXTC_RPC_PROTOCOL_H
+#endif // BITCORE_RPC_PROTOCOL_H

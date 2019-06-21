@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_GOVERNANCE_EXCEPTIONS_H
-#define FXTC_GOVERNANCE_EXCEPTIONS_H
+#ifndef BITCORE_GOVERNANCE_EXCEPTIONS_H
+#define BITCORE_GOVERNANCE_EXCEPTIONS_H
 
 #include <exception>
 #include <iostream>
@@ -97,4 +97,4 @@ public:
     }
 };
 
-#endif // FXTC_GOVERNANCE_EXCEPTIONS_H
+#endif // BITCORE_GOVERNANCE_EXCEPTIONS_H

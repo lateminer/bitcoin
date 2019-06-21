@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_CACHEMULTIMAP_H
-#define FXTC_CACHEMULTIMAP_H
+#ifndef BITCORE_CACHEMULTIMAP_H
+#define BITCORE_CACHEMULTIMAP_H
 
 #include <cstddef>
 #include <map>
@@ -260,4 +260,4 @@ private:
     }
 };
 
-#endif // FXTC_CACHEMULTIMAP_H
+#endif // BITCORE_CACHEMULTIMAP_H

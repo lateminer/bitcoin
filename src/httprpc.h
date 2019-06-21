@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_HTTPRPC_H
-#define FXTC_HTTPRPC_H
+#ifndef BITCORE_HTTPRPC_H
+#define BITCORE_HTTPRPC_H
 
 #include <string>
 #include <map>

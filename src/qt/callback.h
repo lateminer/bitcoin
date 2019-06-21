@@ -1,5 +1,9 @@
-#ifndef FXTC_QT_CALLBACK_H
-#define FXTC_QT_CALLBACK_H
+// Copyright (c) 2011-2018 The Bitcoin Core developers
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+#ifndef BITCORE_QT_CALLBACK_H
+#define BITCORE_QT_CALLBACK_H
 
 #include <QObject>
 
@@ -27,4 +31,4 @@ FunctionCallback<F>* makeCallback(F f)
     return new FunctionCallback<F>(std::move(f));
 }
 
-#endif // FXTC_QT_CALLBACK_H
+#endif // BITCORE_QT_CALLBACK_H

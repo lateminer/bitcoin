@@ -103,8 +103,8 @@ bool fLiteMode = false;
 int nWalletBackups = 10;
 //
 
-const char * const BITCOIN_CONF_FILENAME = "fxtc.conf";
-const char * const BITCOIN_PID_FILENAME = "fxtcd.pid";
+const char * const BITCOIN_CONF_FILENAME = "bitcore.conf";
+const char * const BITCOIN_PID_FILENAME = "bitcored.pid";
 
 const char * const MASTERNODE_CONF_FILENAME_ARG = "-mnconf";
 const char * const MASTERNODE_CONF_FILENAME = "masternode.conf";
@@ -313,7 +313,7 @@ public:
         std::pair<bool,std::string> found_result(false, std::string());
 
         // We pass "true" to GetArgHelper in order to return the last
-        // argument value seen from the command line (so "fxtcd -foo=bar
+        // argument value seen from the command line (so "bitcored -foo=bar
         // -foo=baz" gives GetArg(am,"foo")=={true,"baz"}
         found_result = GetArgHelper(am.m_override_args, arg, true);
         if (found_result.first) {

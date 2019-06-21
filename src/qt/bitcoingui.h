@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_QT_BITCOINGUI_H
-#define FXTC_QT_BITCOINGUI_H
+#ifndef BITCORE_QT_BITCOINGUI_H
+#define BITCORE_QT_BITCOINGUI_H
 
 #if defined(HAVE_CONFIG_H)
 #include <config/bitcoin-config.h>
@@ -135,6 +135,30 @@ private:
     //
     QAction* openAction = nullptr;
     QAction* showHelpMessageAction = nullptr;
+
+    // BitCore
+    QAction* openWebsite1 = nullptr;
+    QAction* openWebsite2 = nullptr;
+    QAction* openWebsite3 = nullptr;
+    QAction* openWebsite4 = nullptr;
+    QAction* openWebsite5 = nullptr;
+    QAction* openWebsite6 = nullptr;
+    QAction* openWebsite7 = nullptr;
+    QAction* openWebsite8 = nullptr;
+    QAction* openWebsite9 = nullptr;
+    QAction* openWebsite10 = nullptr;
+
+    QAction* Exchangesite1 = nullptr;
+    QAction* Exchangesite2 = nullptr;
+    QAction* Exchangesite3 = nullptr;
+    QAction* Exchangesite4 = nullptr;
+    QAction* Exchangesite5 = nullptr;
+    QAction* Exchangesite6 = nullptr;
+    QAction* Exchangesite7 = nullptr;
+    QAction* Exchangesite8 = nullptr;
+    QAction* Exchangesite9 = nullptr;
+    QAction* Exchangesite10 = nullptr;
+
     QAction* m_wallet_selector_label_action = nullptr;
     QAction* m_wallet_selector_action = nullptr;
 
@@ -345,4 +369,4 @@ private Q_SLOTS:
     void onMenuSelection(QAction* action);
 };
 
-#endif // FXTC_QT_BITCOINGUI_H
+#endif // BITCORE_QT_BITCOINGUI_H

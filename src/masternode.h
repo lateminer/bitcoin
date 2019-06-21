@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_MASTERNODE_H
-#define FXTC_MASTERNODE_H
+#ifndef BITCORE_MASTERNODE_H
+#define BITCORE_MASTERNODE_H
 
 #include <key.h>
 #include <validation.h>
@@ -414,4 +414,4 @@ public:
     }
 };
 
-#endif // FXTC_MASTERNODE_H
+#endif // BITCORE_MASTERNODE_H

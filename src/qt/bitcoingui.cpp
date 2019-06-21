@@ -1,6 +1,7 @@
 // Copyright (c) 2011-2018 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
 // Copyright (c) 2018 FXTC developers
+// Copyright (c) 2019 BitCore developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -79,6 +80,9 @@ BitcoinGUI::BitcoinGUI(interfaces::Node& node, const PlatformStyle *_platformSty
     m_node(node),
     platformStyle(_platformStyle)
 {
+    /* Open CSS when configured */
+    this->setStyleSheet(GUIUtil::loadStyleSheet());
+
     QSettings settings;
     if (!restoreGeometry(settings.value("MainWindowGeometry").toByteArray())) {
         // Restore failed (perhaps missing setting), center the window
@@ -201,6 +205,29 @@ BitcoinGUI::BitcoinGUI(interfaces::Node& node, const PlatformStyle *_platformSty
 
     connect(connectionsControl, SIGNAL(clicked(QPoint)), this, SLOT(toggleNetworkActive()));
 
+    // BitCore
+    connect(openWebsite1, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot1()));
+    connect(openWebsite2, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot2()));
+    connect(openWebsite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot3()));
+    connect(openWebsite4, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot4()));
+    connect(openWebsite5, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot5()));
+    connect(openWebsite6, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot6()));
+    connect(openWebsite7, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot7()));
+    connect(openWebsite8, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot8()));
+    connect(openWebsite9, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot9()));
+    connect(openWebsite10, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot10()));
+
+    connect(Exchangesite1, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot1()));
+    connect(Exchangesite2, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot2()));
+    connect(Exchangesite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot3()));
+    connect(Exchangesite4, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot4()));
+    connect(Exchangesite5, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot5()));
+    connect(Exchangesite6, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot6()));
+    connect(Exchangesite7, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot7()));
+    connect(Exchangesite8, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot8()));
+    connect(Exchangesite9, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot9()));
+    connect(Exchangesite10, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot10()));
+
     modalOverlay = new ModalOverlay(this->centralWidget());
 #ifdef ENABLE_WALLET
     if(enableWallet) {
@@ -240,7 +267,7 @@ void BitcoinGUI::createActions()
     tabGroup->addAction(overviewAction);
 
     sendCoinsAction = new QAction(platformStyle->SingleColorIcon(":/icons/send"), tr("&Send"), this);
-    sendCoinsAction->setStatusTip(tr("Send coins to a FxTCoin address"));
+    sendCoinsAction->setStatusTip(tr("Send coins to a BitCore address"));
     sendCoinsAction->setToolTip(sendCoinsAction->statusTip());
     sendCoinsAction->setCheckable(true);
     sendCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_2));
@@ -251,7 +278,7 @@ void BitcoinGUI::createActions()
     sendCoinsMenuAction->setToolTip(sendCoinsMenuAction->statusTip());
 
     receiveCoinsAction = new QAction(platformStyle->SingleColorIcon(":/icons/receiving_addresses"), tr("&Receive"), this);
-    receiveCoinsAction->setStatusTip(tr("Request payments (generates QR codes and fxtcoin: URIs)"));
+    receiveCoinsAction->setStatusTip(tr("Request payments (generates QR codes and bitcore: URIs)"));
     receiveCoinsAction->setToolTip(receiveCoinsAction->statusTip());
     receiveCoinsAction->setCheckable(true);
     receiveCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_3));
@@ -337,9 +364,9 @@ void BitcoinGUI::createActions()
     //
 
     signMessageAction = new QAction(platformStyle->TextColorIcon(":/icons/edit"), tr("Sign &message..."), this);
-    signMessageAction->setStatusTip(tr("Sign messages with your FxTCoin addresses to prove you own them"));
+    signMessageAction->setStatusTip(tr("Sign messages with your BitCore addresses to prove you own them"));
     verifyMessageAction = new QAction(platformStyle->TextColorIcon(":/icons/verify"), tr("&Verify message..."), this);
-    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified FxTCoin addresses"));
+    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified BitCore addresses"));
 
     // Dash
     // FXTC TODO: menu items
@@ -379,11 +406,11 @@ void BitcoinGUI::createActions()
     usedReceivingAddressesAction->setStatusTip(tr("Show the list of used receiving addresses and labels"));
 
     openAction = new QAction(platformStyle->TextColorIcon(":/icons/open"), tr("Open &URI..."), this);
-    openAction->setStatusTip(tr("Open a fxtcoin: URI or payment request"));
+    openAction->setStatusTip(tr("Open a bitcore: URI or payment request"));
 
     showHelpMessageAction = new QAction(platformStyle->TextColorIcon(":/icons/info"), tr("&Command-line options"), this);
     showHelpMessageAction->setMenuRole(QAction::NoRole);
-    showHelpMessageAction->setStatusTip(tr("Show the %1 help message to get a list with possible FxTCoin command-line options").arg(tr(PACKAGE_NAME)));
+    showHelpMessageAction->setStatusTip(tr("Show the %1 help message to get a list with possible BitCore command-line options").arg(tr(PACKAGE_NAME)));
 
     // Dash
     // FXTC TODO: menu items
@@ -425,6 +452,30 @@ void BitcoinGUI::createActions()
 
     // prevents an open debug window from becoming stuck/unusable on client shutdown
     connect(quitAction, SIGNAL(triggered()), rpcConsole, SLOT(hide()));
+
+    // BitCore
+    openWebsite1 = new QAction(QIcon(":/icons/bitcorecc"), tr("&Bitcore.cc"), this);
+    openWebsite2 = new QAction(QIcon(":/icons/telegram"), tr("&Telegram"), this);
+    openWebsite3 = new QAction(QIcon(":/icons/twitter"), tr("&Twitter"), this);
+    openWebsite4 = new QAction(QIcon(":/icons/bitcointalk"), tr("&Bitcointalk"), this);
+    openWebsite5 = new QAction(QIcon(":/icons/reddit"), tr("&Reddit"), this);
+    openWebsite6 = new QAction(QIcon(":/icons/facebook"), tr("&Facebook"), this);
+    openWebsite7 = new QAction(QIcon(":/icons/coinomi"), tr("&Coinomi"), this);
+    openWebsite8 = new QAction(QIcon(":/icons/github"), tr("&Github"), this);
+    openWebsite9 = new QAction(QIcon(":/icons/insightapi"), tr("&Explorer 1"), this);
+    openWebsite10 = new QAction(QIcon(":/icons/cryptoid"), tr("&Explorer 2"), this);
+
+    Exchangesite1 = new QAction(QIcon(":/icons/bitcorecc"), tr("&Ecosystem"), this);
+    Exchangesite2 = new QAction(QIcon(":/icons/bitz"), tr("&Bit-Z"), this);
+    Exchangesite3 = new QAction(QIcon(":/icons/coinexchange"), tr("&CoinExchange"), this);
+    Exchangesite4 = new QAction(QIcon(":/icons/info"), tr("&Crex24"), this);
+    Exchangesite5 = new QAction(QIcon(":/icons/cryptopia"), tr("&Cryptopia"), this);
+    Exchangesite6 = new QAction(QIcon(":/icons/info"), tr("&Bitexlive"), this);
+    Exchangesite7 = new QAction(QIcon(":/icons/hitbtc"), tr("&HitBTC"), this);
+    Exchangesite8 = new QAction(QIcon(":/icons/tradesat"), tr("&Trade Satoshi"), this);
+    Exchangesite9 = new QAction(QIcon(":/icons/info"), tr("&Mylocalcoin"), this);
+    Exchangesite10 = new QAction(QIcon(":/icons/cryptobridgeb"), tr("&CryptoBridge"), this);
+    Exchangesite10 = new QAction(QIcon(":/icons/info"), tr("&Novaexchange"), this);
 
 #ifdef ENABLE_WALLET
     if(walletFrame)
@@ -507,14 +558,53 @@ void BitcoinGUI::createMenuBar()
         //-//settings->addAction(lockWalletAction);
         //
 
+        // BitCore
+        // settings->addAction(unlockWalletAction);
+
         settings->addSeparator();
     }
     settings->addAction(optionsAction);
+
+    // BitCore
+     if (walletFrame) {
+        QMenu* hyperlinks = appMenuBar->addMenu(tr("&Links"));
+        hyperlinks->addAction(openWebsite1);
+        hyperlinks->addSeparator();
+        hyperlinks->addAction(openWebsite2);
+        hyperlinks->addAction(openWebsite3);
+        hyperlinks->addAction(openWebsite4);
+        hyperlinks->addAction(openWebsite5);
+        hyperlinks->addAction(openWebsite6);
+        hyperlinks->addSeparator();
+        hyperlinks->addAction(openWebsite7);
+        hyperlinks->addAction(openWebsite8);
+        hyperlinks->addAction(openWebsite9);
+        hyperlinks->addAction(openWebsite10);
+    }
+
+     if (walletFrame) {
+        QMenu* hyperlinks2 = appMenuBar->addMenu(tr("&Exchanges"));
+        hyperlinks2->addAction(Exchangesite1);
+        hyperlinks2->addSeparator();
+        hyperlinks2->addAction(Exchangesite2);
+        hyperlinks2->addAction(Exchangesite3);
+        hyperlinks2->addAction(Exchangesite4);
+        hyperlinks2->addAction(Exchangesite5);
+        hyperlinks2->addAction(Exchangesite6);
+        hyperlinks2->addAction(Exchangesite7);
+        hyperlinks2->addAction(Exchangesite8);
+        hyperlinks2->addAction(Exchangesite9);
+        hyperlinks2->addAction(Exchangesite10);
+    }
 
     QMenu *help = appMenuBar->addMenu(tr("&Help"));
     if(walletFrame)
     {
         help->addAction(openRPCConsoleAction);
+
+        // BitCore
+        // help->addSeparator();
+        // help->addAction(openRepairAction);
     }
     help->addAction(showHelpMessageAction);
     help->addSeparator();
@@ -915,7 +1005,7 @@ void BitcoinGUI::updateNetworkState()
     QString tooltip;
 
     if (m_node.getNetworkActive()) {
-        tooltip = tr("%n active connection(s) to FxTCoin network", "", count) + QString(".<br>") + tr("Click to disable network activity.");
+        tooltip = tr("%n active connection(s) to BitCore network", "", count) + QString(".<br>") + tr("Click to disable network activity.");
     } else {
         tooltip = tr("Network activity disabled.") + QString("<br>") + tr("Click to enable network activity again.");
         icon = ":/icons/network_disabled";
@@ -1125,7 +1215,7 @@ void BitcoinGUI::setAdditionalDataSyncProgress(double nSyncProgress)
 
 void BitcoinGUI::message(const QString &title, const QString &message, unsigned int style, bool *ret)
 {
-    QString strTitle = tr("FxTCoin"); // default title
+    QString strTitle = tr("BitCore"); // default title
     // Default to information icon
     int nMBoxIcon = QMessageBox::Information;
     int nNotifyIcon = Notificator::Information;

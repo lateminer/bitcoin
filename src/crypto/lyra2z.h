@@ -1,5 +1,5 @@
-#ifndef FXTC_CRYPTO_LYRA2Z_H
-#define FXTC_CRYPTO_LYRA2Z_H
+#ifndef BITCORE_CRYPTO_LYRA2Z_H
+#define BITCORE_CRYPTO_LYRA2Z_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -11,4 +11,4 @@ extern "C" {
 }
 #endif
 
-#endif // FXTC_CRYPTO_LYRA2Z_H
+#endif // BITCORE_CRYPTO_LYRA2Z_H

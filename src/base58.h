@@ -13,8 +13,8 @@
  * - E-mail usually won't line-break if there's no punctuation to break at.
  * - Double-clicking selects the whole string as one word if it's all alphanumeric.
  */
-#ifndef FXTC_BASE58_H
-#define FXTC_BASE58_H
+#ifndef BITCORE_BASE58_H
+#define BITCORE_BASE58_H
 
 #include <string>
 #include <vector>
@@ -60,4 +60,4 @@ bool DecodeBase58Check(const char* psz, std::vector<unsigned char>& vchRet);
  */
 bool DecodeBase58Check(const std::string& str, std::vector<unsigned char>& vchRet);
 
-#endif // FXTC_BASE58_H
+#endif // BITCORE_BASE58_H

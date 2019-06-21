@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_QT_SPLASHSCREEN_H
-#define FXTC_QT_SPLASHSCREEN_H
+#ifndef BITCORE_QT_SPLASHSCREEN_H
+#define BITCORE_QT_SPLASHSCREEN_H
 
 #include <functional>
 #include <QSplashScreen>
@@ -67,4 +67,4 @@ private:
     std::list<std::unique_ptr<interfaces::Handler>> m_connected_wallet_handlers;
 };
 
-#endif // FXTC_QT_SPLASHSCREEN_H
+#endif // BITCORE_QT_SPLASHSCREEN_H

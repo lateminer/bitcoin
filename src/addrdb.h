@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_ADDRDB_H
-#define FXTC_ADDRDB_H
+#ifndef BITCORE_ADDRDB_H
+#define BITCORE_ADDRDB_H
 
 #include <fs.h>
 #include <serialize.h>
@@ -99,4 +99,4 @@ public:
     bool Read(banmap_t& banSet);
 };
 
-#endif // FXTC_ADDRDB_H
+#endif // BITCORE_ADDRDB_H

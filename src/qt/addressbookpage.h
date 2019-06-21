@@ -1,9 +1,10 @@
 // Copyright (c) 2011-2018 The Bitcoin Core developers
+// Copyright (c) 2019 BitCore developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_QT_ADDRESSBOOKPAGE_H
-#define FXTC_QT_ADDRESSBOOKPAGE_H
+#ifndef BITCORE_QT_ADDRESSBOOKPAGE_H
+#define BITCORE_QT_ADDRESSBOOKPAGE_H
 
 #include <QDialog>
 
@@ -83,4 +84,4 @@ Q_SIGNALS:
     void sendCoins(QString addr);
 };
 
-#endif // FXTC_QT_ADDRESSBOOKPAGE_H
+#endif // BITCORE_QT_ADDRESSBOOKPAGE_H

@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_THREADSAFETY_H
-#define FXTC_THREADSAFETY_H
+#ifndef BITCORE_THREADSAFETY_H
+#define BITCORE_THREADSAFETY_H
 
 #ifdef __clang__
 // TL;DR Add GUARDED_BY(mutex) to member variables. The others are
@@ -54,4 +54,4 @@
 #define ASSERT_EXCLUSIVE_LOCK(...)
 #endif // __GNUC__
 
-#endif // FXTC_THREADSAFETY_H
+#endif // BITCORE_THREADSAFETY_H

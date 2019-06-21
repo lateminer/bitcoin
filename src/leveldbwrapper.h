@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_LEVELDBWRAPPER_H
-#define FXTC_LEVELDBWRAPPER_H
+#ifndef BITCORE_LEVELDBWRAPPER_H
+#define BITCORE_LEVELDBWRAPPER_H
 
 #include <clientversion.h>
 #include <serialize.h>
@@ -170,4 +170,4 @@ public:
     }
 };
 
-#endif // FXTC_LEVELDBWRAPPER_H
+#endif // BITCORE_LEVELDBWRAPPER_H

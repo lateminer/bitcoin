@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_QT_NOTIFICATOR_H
-#define FXTC_QT_NOTIFICATOR_H
+#ifndef BITCORE_QT_NOTIFICATOR_H
+#define BITCORE_QT_NOTIFICATOR_H
 
 #if defined(HAVE_CONFIG_H)
 #include <config/bitcoin-config.h>
@@ -74,4 +74,4 @@ private:
 #endif
 };
 
-#endif // FXTC_QT_NOTIFICATOR_H
+#endif // BITCORE_QT_NOTIFICATOR_H

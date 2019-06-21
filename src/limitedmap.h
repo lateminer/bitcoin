@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_LIMITEDMAP_H
-#define FXTC_LIMITEDMAP_H
+#ifndef BITCORE_LIMITEDMAP_H
+#define BITCORE_LIMITEDMAP_H
 
 #include <assert.h>
 #include <map>
@@ -97,4 +97,4 @@ public:
     }
 };
 
-#endif // FXTC_LIMITEDMAP_H
+#endif // BITCORE_LIMITEDMAP_H

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_INTERFACES_WALLET_H
-#define FXTC_INTERFACES_WALLET_H
+#ifndef BITCORE_INTERFACES_WALLET_H
+#define BITCORE_INTERFACES_WALLET_H
 
 #include <amount.h>                    // For CAmount
 #include <pubkey.h>                    // For CKeyID and CScriptID (definitions needed in CTxDestination instantiation)
@@ -401,4 +401,4 @@ std::unique_ptr<Wallet> MakeWallet(const std::shared_ptr<CWallet>& wallet);
 
 } // namespace interfaces
 
-#endif // FXTC_INTERFACES_WALLET_H
+#endif // BITCORE_INTERFACES_WALLET_H

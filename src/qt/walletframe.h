@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_QT_WALLETFRAME_H
-#define FXTC_QT_WALLETFRAME_H
+#ifndef BITCORE_QT_WALLETFRAME_H
+#define BITCORE_QT_WALLETFRAME_H
 
 #include <QFrame>
 #include <QMap>
@@ -102,4 +102,4 @@ public Q_SLOTS:
     void outOfSyncWarningClicked();
 };
 
-#endif // FXTC_QT_WALLETFRAME_H
+#endif // BITCORE_QT_WALLETFRAME_H

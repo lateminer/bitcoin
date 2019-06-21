@@ -4,8 +4,8 @@
 // Copyright (c) 2018 FXTC developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef FXTC_CRYPTO_NIST5_H
-#define FXTC_CRYPTO_NIST5_H
+#ifndef BITCORE_CRYPTO_NIST5_H
+#define BITCORE_CRYPTO_NIST5_H
 
 #include <uint256.h>
 
@@ -53,4 +53,4 @@ inline uint256 NIST5(const T1 pbegin, const T1 pend)
     return hash.trim256();
 }
 
-#endif // FXTC_CRYPTO_NIST5_H
+#endif // BITCORE_CRYPTO_NIST5_H

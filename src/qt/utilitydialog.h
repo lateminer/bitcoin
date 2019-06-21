@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_QT_UTILITYDIALOG_H
-#define FXTC_QT_UTILITYDIALOG_H
+#ifndef BITCORE_QT_UTILITYDIALOG_H
+#define BITCORE_QT_UTILITYDIALOG_H
 
 #include <QDialog>
 #include <QObject>
@@ -52,4 +52,4 @@ protected:
     void closeEvent(QCloseEvent *event);
 };
 
-#endif // FXTC_QT_UTILITYDIALOG_H
+#endif // BITCORE_QT_UTILITYDIALOG_H

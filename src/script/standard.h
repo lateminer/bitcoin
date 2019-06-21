@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_SCRIPT_STANDARD_H
-#define FXTC_SCRIPT_STANDARD_H
+#ifndef BITCORE_SCRIPT_STANDARD_H
+#define BITCORE_SCRIPT_STANDARD_H
 
 #include <script/interpreter.h>
 #include <uint256.h>
@@ -186,4 +186,4 @@ CScript GetScriptForMultisig(int nRequired, const std::vector<CPubKey>& keys);
  */
 CScript GetScriptForWitness(const CScript& redeemscript);
 
-#endif // FXTC_SCRIPT_STANDARD_H
+#endif // BITCORE_SCRIPT_STANDARD_H

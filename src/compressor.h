@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_COMPRESSOR_H
-#define FXTC_COMPRESSOR_H
+#ifndef BITCORE_COMPRESSOR_H
+#define BITCORE_COMPRESSOR_H
 
 #include <primitives/transaction.h>
 #include <script/script.h>
@@ -108,4 +108,4 @@ public:
     }
 };
 
-#endif // FXTC_COMPRESSOR_H
+#endif // BITCORE_COMPRESSOR_H

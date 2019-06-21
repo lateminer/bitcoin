@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_CUCKOOCACHE_H
-#define FXTC_CUCKOOCACHE_H
+#ifndef BITCORE_CUCKOOCACHE_H
+#define BITCORE_CUCKOOCACHE_H
 
 #include <array>
 #include <algorithm>
@@ -478,4 +478,4 @@ public:
 };
 } // namespace CuckooCache
 
-#endif // FXTC_CUCKOOCACHE_H
+#endif // BITCORE_CUCKOOCACHE_H

@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_SPORK_H
-#define FXTC_SPORK_H
+#ifndef BITCORE_SPORK_H
+#define BITCORE_SPORK_H
 
 #include <hash.h>
 #include <net.h>
@@ -167,4 +167,4 @@ public:
     bool SetPrivKey(std::string strPrivKey);
 };
 
-#endif // FXTC_SPORK_H
+#endif // BITCORE_SPORK_H

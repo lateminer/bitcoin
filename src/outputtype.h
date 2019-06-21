@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_OUTPUTTYPE_H
-#define FXTC_OUTPUTTYPE_H
+#ifndef BITCORE_OUTPUTTYPE_H
+#define BITCORE_OUTPUTTYPE_H
 
 #include <keystore.h>
 #include <script/standard.h>
@@ -45,5 +45,5 @@ std::vector<CTxDestination> GetAllDestinationsForKey(const CPubKey& key);
  */
 CTxDestination AddAndGetDestinationForScript(CKeyStore& keystore, const CScript& script, OutputType);
 
-#endif // FXTC_OUTPUTTYPE_H
+#endif // BITCORE_OUTPUTTYPE_H
 

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_PREVECTOR_H
-#define FXTC_PREVECTOR_H
+#ifndef BITCORE_PREVECTOR_H
+#define BITCORE_PREVECTOR_H
 
 #include <assert.h>
 #include <stdlib.h>
@@ -526,4 +526,4 @@ public:
 };
 #pragma pack(pop)
 
-#endif // FXTC_PREVECTOR_H
+#endif // BITCORE_PREVECTOR_H

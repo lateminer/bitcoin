@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_SCRIPT_BITCOINCONSENSUS_H
-#define FXTC_SCRIPT_BITCOINCONSENSUS_H
+#ifndef BITCORE_SCRIPT_BITCOINCONSENSUS_H
+#define BITCORE_SCRIPT_BITCOINCONSENSUS_H
 
 #include <stdint.h>
 
@@ -80,4 +80,4 @@ EXPORT_SYMBOL unsigned int bitcoinconsensus_version();
 
 #undef EXPORT_SYMBOL
 
-#endif // FXTC_SCRIPT_BITCOINCONSENSUS_H
+#endif // BITCORE_SCRIPT_BITCOINCONSENSUS_H

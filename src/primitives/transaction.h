@@ -5,8 +5,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_PRIMITIVES_TRANSACTION_H
-#define FXTC_PRIMITIVES_TRANSACTION_H
+#ifndef BITCORE_PRIMITIVES_TRANSACTION_H
+#define BITCORE_PRIMITIVES_TRANSACTION_H
 
 #include <stdint.h>
 #include <amount.h>
@@ -465,4 +465,4 @@ struct CompareOutputBIP69
     }
 };
 
-#endif // FXTC_PRIMITIVES_TRANSACTION_H
+#endif // BITCORE_PRIMITIVES_TRANSACTION_H

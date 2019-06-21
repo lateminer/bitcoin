@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_MASTERNODE_PAYMENTS_H
-#define FXTC_MASTERNODE_PAYMENTS_H
+#ifndef BITCORE_MASTERNODE_PAYMENTS_H
+#define BITCORE_MASTERNODE_PAYMENTS_H
 
 #include <util.h>
 #include <core_io.h>
@@ -224,4 +224,4 @@ public:
     void UpdatedBlockTip(const CBlockIndex *pindex, CConnman& connman);
 };
 
-#endif // FXTC_MASTERNODE-PAYMENTS_H
+#endif // BITCORE_MASTERNODE-PAYMENTS_H

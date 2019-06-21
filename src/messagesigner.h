@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_MESSAGESIGNER_H
-#define FXTC_MESSAGESIGNER_H
+#ifndef BITCORE_MESSAGESIGNER_H
+#define BITCORE_MESSAGESIGNER_H
 
 #include <key.h>
 
@@ -32,4 +32,4 @@ public:
     static bool VerifyHash(const uint256& hash, const CPubKey pubkey, const std::vector<unsigned char>& vchSig, std::string& strErrorRet);
 };
 
-#endif // FXTC_MESSAGESIGNER_H
+#endif // BITCORE_MESSAGESIGNER_H

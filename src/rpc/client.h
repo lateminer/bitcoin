@@ -1,10 +1,11 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2019 BitCore developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_RPC_CLIENT_H
-#define FXTC_RPC_CLIENT_H
+#ifndef BITCORE_RPC_CLIENT_H
+#define BITCORE_RPC_CLIENT_H
 
 #include <univalue.h>
 
@@ -19,4 +20,4 @@ UniValue RPCConvertNamedValues(const std::string& strMethod, const std::vector<s
  */
 UniValue ParseNonRFCJSONValue(const std::string& strVal);
 
-#endif // FXTC_RPC_CLIENT_H
+#endif // BITCORE_RPC_CLIENT_H

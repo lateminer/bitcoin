@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_QT_OPTIONSMODEL_H
-#define FXTC_QT_OPTIONSMODEL_H
+#ifndef BITCORE_QT_OPTIONSMODEL_H
+#define BITCORE_QT_OPTIONSMODEL_H
 
 #include <amount.h>
 
@@ -49,6 +49,7 @@ public:
         ProxyPortTor,           // int
         DisplayUnit,            // BitcoinUnits::Unit
         ThirdPartyTxUrls,       // QString
+        Theme,                  // QString
         Language,               // QString
         CoinControlFeatures,    // bool
         ThreadsScriptVerif,     // int
@@ -112,4 +113,4 @@ Q_SIGNALS:
     void hideTrayIconChanged(bool);
 };
 
-#endif // FXTC_QT_OPTIONSMODEL_H
+#endif // BITCORE_QT_OPTIONSMODEL_H

@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_ADDRMAN_H
-#define FXTC_ADDRMAN_H
+#ifndef BITCORE_ADDRMAN_H
+#define BITCORE_ADDRMAN_H
 
 #include <netaddress.h>
 #include <protocol.h>
@@ -638,4 +638,4 @@ public:
 
 };
 
-#endif // FXTC_ADDRMAN_H
+#endif // BITCORE_ADDRMAN_H

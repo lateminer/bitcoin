@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_BLOOM_H
-#define FXTC_BLOOM_H
+#ifndef BITCORE_BLOOM_H
+#define BITCORE_BLOOM_H
 
 #include <serialize.h>
 
@@ -140,4 +140,4 @@ private:
     int nHashFuncs;
 };
 
-#endif // FXTC_BLOOM_H
+#endif // BITCORE_BLOOM_H

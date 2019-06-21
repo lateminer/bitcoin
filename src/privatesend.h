@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_PRIVATESEND_H
-#define FXTC_PRIVATESEND_H
+#ifndef BITCORE_PRIVATESEND_H
+#define BITCORE_PRIVATESEND_H
 
 #include <chain.h>
 #include <chainparams.h>
@@ -359,4 +359,4 @@ public:
 
 void ThreadCheckPrivateSend(CConnman& connman);
 
-#endif // FXTC_PRIVATESEND_H
+#endif // BITCORE_PRIVATESEND_H

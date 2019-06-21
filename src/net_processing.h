@@ -5,8 +5,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_NET_PROCESSING_H
-#define FXTC_NET_PROCESSING_H
+#ifndef BITCORE_NET_PROCESSING_H
+#define BITCORE_NET_PROCESSING_H
 
 #include <net.h>
 // FXTC BEGIN
@@ -98,4 +98,4 @@ struct CNodeStateStats {
 /** Get statistics from node state */
 bool GetNodeStateStats(NodeId nodeid, CNodeStateStats &stats);
 
-#endif // FXTC_NET_PROCESSING_H
+#endif // BITCORE_NET_PROCESSING_H

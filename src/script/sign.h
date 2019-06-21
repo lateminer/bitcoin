@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_SCRIPT_SIGN_H
-#define FXTC_SCRIPT_SIGN_H
+#ifndef BITCORE_SCRIPT_SIGN_H
+#define BITCORE_SCRIPT_SIGN_H
 
 #include <boost/optional.hpp>
 #include <hash.h>
@@ -730,4 +730,4 @@ void UpdateInput(CTxIn& input, const SignatureData& data);
  * Solvability is unrelated to whether we consider this output to be ours. */
 bool IsSolvable(const SigningProvider& provider, const CScript& script);
 
-#endif // FXTC_SCRIPT_SIGN_H
+#endif // BITCORE_SCRIPT_SIGN_H

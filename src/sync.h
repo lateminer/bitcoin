@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_SYNC_H
-#define FXTC_SYNC_H
+#ifndef BITCORE_SYNC_H
+#define BITCORE_SYNC_H
 
 #include <threadsafety.h>
 
@@ -287,4 +287,4 @@ public:
     }
 };
 
-#endif // FXTC_SYNC_H
+#endif // BITCORE_SYNC_H

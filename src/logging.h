@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_LOGGING_H
-#define FXTC_LOGGING_H
+#ifndef BITCORE_LOGGING_H
+#define BITCORE_LOGGING_H
 
 #include <fs.h>
 #include <tinyformat.h>
@@ -175,4 +175,4 @@ template<typename T, typename... Args> static inline void MarkUsed(const T& t, c
 } while(0)
 #endif
 
-#endif // FXTC_LOGGING_H
+#endif // BITCORE_LOGGING_H

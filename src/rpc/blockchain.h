@@ -1,9 +1,10 @@
 // Copyright (c) 2017-2018 The Bitcoin Core developers
+// Copyright (c) 2019 BitCore developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_RPC_BLOCKCHAIN_H
-#define FXTC_RPC_BLOCKCHAIN_H
+#ifndef BITCORE_RPC_BLOCKCHAIN_H
+#define BITCORE_RPC_BLOCKCHAIN_H
 
 #include <vector>
 #include <stdint.h>

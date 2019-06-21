@@ -45,8 +45,8 @@
  * @author   Thomas Pornin <thomas.pornin@cryptolog.com>
  */
 
-#ifndef FXTC_CRYPTO_SPH_WHIRLPOOL_H
-#define FXTC_CRYPTO_SPH_WHIRLPOOL_H
+#ifndef BITCORE_CRYPTO_SPH_WHIRLPOOL_H
+#define BITCORE_CRYPTO_SPH_WHIRLPOOL_H
 
 #include <stddef.h>
 #include <crypto/sph_types.h>
@@ -215,4 +215,4 @@ void sph_whirlpool1_close(void *cc, void *dst);
 #ifdef __cplusplus
 }
 
-#endif // FXTC_CRYPTO_SPH_WHIRLPOOL_H
+#endif // BITCORE_CRYPTO_SPH_WHIRLPOOL_H

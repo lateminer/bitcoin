@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_GOVERNANCE_OBJECT_H
-#define FXTC_GOVERNANCE_OBJECT_H
+#ifndef BITCORE_GOVERNANCE_OBJECT_H
+#define BITCORE_GOVERNANCE_OBJECT_H
 
 //#define ENABLE_DASH_DEBUG
 
@@ -355,4 +355,4 @@ private:
 };
 
 
-#endif // FXTC_GOVERNANCE_OBJECT_H
+#endif // BITCORE_GOVERNANCE_OBJECT_H

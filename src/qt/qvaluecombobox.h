@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_QT_QVALUECOMBOBOX_H
-#define FXTC_QT_QVALUECOMBOBOX_H
+#ifndef BITCORE_QT_QVALUECOMBOBOX_H
+#define BITCORE_QT_QVALUECOMBOBOX_H
 
 #include <QComboBox>
 #include <QVariant>
@@ -34,4 +34,4 @@ private Q_SLOTS:
     void handleSelectionChanged(int idx);
 };
 
-#endif // FXTC_QT_QVALUECOMBOBOX_H
+#endif // BITCORE_QT_QVALUECOMBOBOX_H

@@ -35,8 +35,8 @@
  * @author   Thomas Pornin <thomas.pornin@cryptolog.com>
  */
 
-#ifndef FXTC_CRYPTO_SPH_SHAVITE_H
-#define FXTC_CRYPTO_SPH_SHAVITE_H
+#ifndef BITCORE_CRYPTO_SPH_SHAVITE_H
+#define BITCORE_CRYPTO_SPH_SHAVITE_H
 
 #include <stddef.h>
 #include <crypto/sph_types.h>
@@ -311,4 +311,4 @@ void sph_shavite512_addbits_and_close(
 }
 #endif
 
-#endif // FXTC_CRYPTO_SPH_SHAVITE_H
+#endif // BITCORE_CRYPTO_SPH_SHAVITE_H

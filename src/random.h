@@ -5,8 +5,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_RANDOM_H
-#define FXTC_RANDOM_H
+#ifndef BITCORE_RANDOM_H
+#define BITCORE_RANDOM_H
 
 #include <crypto/chacha20.h>
 #include <crypto/common.h>
@@ -202,4 +202,4 @@ public:
     }
 };
 
-#endif // FXTC_RANDOM_H
+#endif // BITCORE_RANDOM_H

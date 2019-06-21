@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_MASTERNODE_SYNC_H
-#define FXTC_MASTERNODE_SYNC_H
+#ifndef BITCORE_MASTERNODE_SYNC_H
+#define BITCORE_MASTERNODE_SYNC_H
 
 #include <chain.h>
 #include <net.h>
@@ -82,4 +82,4 @@ public:
     void UpdatedBlockTip(const CBlockIndex *pindexNew, bool fInitialDownload, CConnman& connman);
 };
 
-#endif // FXTC_MASTERNODE_SYNC_H
+#endif // BITCORE_MASTERNODE_SYNC_H

@@ -5,8 +5,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_SCRIPT_SCRIPT_H
-#define FXTC_SCRIPT_SCRIPT_H
+#ifndef BITCORE_SCRIPT_SCRIPT_H
+#define BITCORE_SCRIPT_SCRIPT_H
 
 #include <crypto/common.h>
 #include <prevector.h>
@@ -588,4 +588,4 @@ public:
     virtual ~CReserveScript() {}
 };
 
-#endif // FXTC_SCRIPT_SCRIPT_H
+#endif // BITCORE_SCRIPT_SCRIPT_H

@@ -1,62 +1,81 @@
-FxTC Core integration/staging tree
-==================================
-
-[![Build Status](https://travis-ci.org/fxtc/fxtc.svg?branch=0.17)](https://travis-ci.org/fxtc/fxtc)
-
-https://fixedtradecoin.org
-
-Linux Build Instructions and Notes
-==================================
-
-Dependencies
-----------------------
-1.  Update packages
-
-        sudo apt-get update
-
-2.  Install required packagages
-
-        sudo apt-get install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils libboost-all-dev
-
-3.  Install Berkeley DB 4.8
-
-        sudo apt-get install software-properties-common
-        sudo add-apt-repository ppa:bitcoin/bitcoin
-        sudo apt-get update
-        sudo apt-get install libdb4.8-dev libdb4.8++-dev
-
-4.  Install QT 5
-
-        sudo apt-get install libminiupnpc-dev libzmq3-dev
-        sudo apt-get install libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler libqrencode-dev
-
-Build
-----------------------
-1.  Clone the source:
-
-        git clone https://github.com/fxtc/fxtc.git
-
-2.  Build FxTC Core:
-
-    Configure and build the headless FxTC Core binaries as well as the GUI (if Qt is found).
-
-    You can disable the GUI build by passing `--without-gui` to configure.
-        
-        ./autogen.sh
-        ./configure
-        make
-
-3.  It is recommended to build and run the unit tests:
-
-        make check
-
-
-Mac OS X Build Instructions and Notes
+BitCore integration/staging tree
 =====================================
-See (doc/build-osx.md) for instructions on building on Mac OS X.
+
+[![Build Status](https://travis-ci.org/LIMXTEC/BitCore.svg?branch=0.15)](https://travis-ci.org/LIMXTEC/BitCore)
+
+https://bitcore.cc
+
+What is BitCore?
+----------------
+
+BitCore is an experimental digital currency that enables instant payments to
+anyone, anywhere in the world. BitCore uses peer-to-peer technology to operate
+with no central authority: managing transactions and issuing money are carried
+out collectively by the network. BitCore is also the name of open source
+software which enables the use of this currency.
+
+For more information, as well as an immediately useable, binary version of
+the BitCore software, see [https://bitcore.cc](https://bitcore.cc).
+
+License
+-------
+
+BitCore is released under the terms of the MIT license. See [COPYING](COPYING) for more
+information or see https://opensource.org/licenses/MIT.
 
 
 
-Windows (64/32 bit) Build Instructions and Notes
-=====================================
-See (doc/build-windows.md) for instructions on building on Windows 64/32 bit.
+Development Process
+-------------------
+
+The `master` branch is regularly built and tested, but is not guaranteed to be
+completely stable. [Tags](https://github.com/LIMXTEC/bitcore/tags) are created
+regularly to indicate new official, stable release versions of BitCore.
+
+The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
+
+The developer [mailing list](https://groups.google.com/forum/#!forum/bitcore-dev)
+should be used to discuss complicated or controversial changes before working
+on a patch set.
+
+Developer IRC can be found on Freenode at #bitcore-dev.
+
+Testing
+-------
+
+Testing and code review is the bottleneck for development; we get more pull
+requests than we can review and test on short notice. Please be patient and help out by testing
+other people's pull requests, and remember this is a security-critical project where any mistake might cost people
+lots of money.
+
+### Automated Testing
+
+Developers are strongly encouraged to write [unit tests](src/test/README.md) for new code, and to
+submit new unit tests for old code. Unit tests can be compiled and run
+(assuming they weren't disabled in configure) with: `make check`. Further details on running
+and extending unit tests can be found in [/src/test/README.md](/src/test/README.md).
+
+There are also [regression and integration tests](/test), written
+in Python, that are run automatically on the build server.
+These tests can be run (if the [test dependencies](/test) are installed) with: `test/functional/test_runner.py`
+
+The Travis CI system makes sure that every pull request is built for Windows, Linux, and OS X, and that unit/sanity tests are run automatically.
+
+### Manual Quality Assurance (QA) Testing
+
+Changes should be tested by somebody other than the developer who wrote the
+code. This is especially important for large or high-risk changes. It is useful
+to add a test plan to the pull request description if testing the changes is
+not straightforward.
+
+Translations
+------------
+
+We only accept translation fixes that are submitted through [Bitcoin Core's Transifex page](https://www.transifex.com/projects/p/bitcore/).
+Translations are converted to BitCore periodically.
+
+Translations are periodically pulled from Transifex and merged into the git repository. See the
+[translation process](doc/translation_process.md) for details on how this works.
+
+**Important**: We do not accept translation changes as GitHub pull requests because the next
+pull from Transifex would automatically overwrite them again.

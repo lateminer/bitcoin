@@ -6,8 +6,8 @@
 /**
  * Utilities for converting data from/to strings.
  */
-#ifndef FXTC_UTILSTRENCODINGS_H
-#define FXTC_UTILSTRENCODINGS_H
+#ifndef BITCORE_UTILSTRENCODINGS_H
+#define BITCORE_UTILSTRENCODINGS_H
 
 #include <stdint.h>
 #include <string>
@@ -184,4 +184,4 @@ bool ConvertBits(const O& outfn, I it, I end) {
     return true;
 }
 
-#endif // FXTC_UTILSTRENCODINGS_H
+#endif // BITCORE_UTILSTRENCODINGS_H

@@ -1,10 +1,11 @@
 // Copyright (c) 2011-2018 The Bitcoin Core developers
 // Copyright (c) 2018 FXTC developers
+// Copyright (c) 2019 BitCore developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_QT_GUICONSTANTS_H
-#define FXTC_QT_GUICONSTANTS_H
+#ifndef BITCORE_QT_GUICONSTANTS_H
+#define BITCORE_QT_GUICONSTANTS_H
 
 /* Milliseconds between model updates */
 static const int MODEL_UPDATE_DELAY = 250;
@@ -47,10 +48,10 @@ static const int MAX_URI_LENGTH = 255;
 /* Number of frames in spinner animation */
 #define SPINNER_FRAMES 36
 
-#define QAPP_ORG_NAME "FxTC"
-#define QAPP_ORG_DOMAIN "fixedtradecoin.org"
-#define QAPP_APP_NAME_DEFAULT "FxTC-Qt"
-#define QAPP_APP_NAME_TESTNET "FxTC-Qt-testnet"
-#define QAPP_APP_NAME_REGTEST "FxTC-Qt-regtest"
+#define QAPP_ORG_NAME "BitCore"
+#define QAPP_ORG_DOMAIN "bitcore.cc"
+#define QAPP_APP_NAME_DEFAULT "BitCore-Qt"
+#define QAPP_APP_NAME_TESTNET "BitCore-Qt-testnet"
+#define QAPP_APP_NAME_REGTEST "BitCore-Qt-regtest"
 
-#endif // FXTC_QT_GUICONSTANTS_H
+#endif // BITCORE_QT_GUICONSTANTS_H

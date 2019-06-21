@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_KEEPASS_H
-#define FXTC_KEEPASS_H
+#ifndef BITCORE_KEEPASS_H
+#define BITCORE_KEEPASS_H
 
 #include <support/allocators/secure.h>
 
@@ -131,4 +131,4 @@ public:
 
 };
 
-#endif // FXTC_KEEPASS_H
+#endif // BITCORE_KEEPASS_H

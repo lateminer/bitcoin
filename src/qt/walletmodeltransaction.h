@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_QT_WALLETMODELTRANSACTION_H
-#define FXTC_QT_WALLETMODELTRANSACTION_H
+#ifndef BITCORE_QT_WALLETMODELTRANSACTION_H
+#define BITCORE_QT_WALLETMODELTRANSACTION_H
 
 #include <qt/walletmodel.h>
 
@@ -42,4 +42,4 @@ private:
     CAmount fee;
 };
 
-#endif // FXTC_QT_WALLETMODELTRANSACTION_H
+#endif // BITCORE_QT_WALLETMODELTRANSACTION_H

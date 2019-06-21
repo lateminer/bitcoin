@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_FLAT_DATABASE_H
-#define FXTC_FLAT_DATABASE_H
+#ifndef BITCORE_FLAT_DATABASE_H
+#define BITCORE_FLAT_DATABASE_H
 
 #include <chainparams.h>
 #include <clientversion.h>
@@ -227,4 +227,4 @@ public:
 };
 
 
-#endif // FXTC_FLAT_DATABASE_H
+#endif // BITCORE_FLAT_DATABASE_H

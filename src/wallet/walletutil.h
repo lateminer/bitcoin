@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_WALLET_WALLETUTIL_H
-#define FXTC_WALLET_WALLETUTIL_H
+#ifndef BITCORE_WALLET_WALLETUTIL_H
+#define BITCORE_WALLET_WALLETUTIL_H
 
 #include <chainparamsbase.h>
 #include <util.h>
@@ -31,4 +31,4 @@ public:
     bool Exists() const;
 };
 
-#endif // FXTC_WALLET_WALLETUTIL_H
+#endif // BITCORE_WALLET_WALLETUTIL_H

@@ -5,8 +5,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_CONSENSUS_PARAMS_H
-#define FXTC_CONSENSUS_PARAMS_H
+#ifndef BITCORE_CONSENSUS_PARAMS_H
+#define BITCORE_CONSENSUS_PARAMS_H
 
 #include <amount.h>
 #include <uint256.h>
@@ -110,6 +110,7 @@ struct Params {
     bool fPowNoRetargeting;
     int64_t nPowTargetSpacing;
     int64_t nPowTargetTimespan;
+    int64_t nPowTargetTimespanV2; // BTX
     int64_t DifficultyAdjustmentInterval() const { return nPowTargetTimespan / nPowTargetSpacing; }
     uint256 nMinimumChainWork;
     uint256 defaultAssumeValid;
@@ -119,4 +120,4 @@ struct Params {
 };
 } // namespace Consensus
 
-#endif // FXTC_CONSENSUS_PARAMS_H
+#endif // BITCORE_CONSENSUS_PARAMS_H

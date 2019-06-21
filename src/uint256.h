@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_UINT256_H
-#define FXTC_UINT256_H
+#ifndef BITCORE_UINT256_H
+#define BITCORE_UINT256_H
 
 #include <assert.h>
 #include <cstring>
@@ -181,4 +181,4 @@ public:
     }
 };
 
-#endif // FXTC_UINT256_H
+#endif // BITCORE_UINT256_H

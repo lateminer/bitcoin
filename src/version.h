@@ -1,25 +1,24 @@
 // Copyright (c) 2012-2018 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
 // Copyright (c) 2018 FXTC developers
+// Copyright (c) 2019 BitCore developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_VERSION_H
-#define FXTC_VERSION_H
+#ifndef BITCORE_VERSION_H
+#define BITCORE_VERSION_H
 
 /**
  * network protocol versioning
  */
 
-//static const int PROTOCOL_VERSION = 70015;
-static const int PROTOCOL_VERSION = 70208;
+static const int PROTOCOL_VERSION = 80001;
 
 //! initial proto version, to be increased after version/verack negotiation
 static const int INIT_PROTO_VERSION = 209;
 
 //! In this version, 'getheaders' was introduced.
-//static const int GETHEADERS_VERSION = 31800;
-static const int GETHEADERS_VERSION = 70077;
+static const int GETHEADERS_VERSION = 70016;
 
 //! disconnect from peers older than this proto version
 static const int MIN_PEER_PROTO_VERSION = GETHEADERS_VERSION;
@@ -32,12 +31,10 @@ static const int CADDR_TIME_VERSION = 31402;
 static const int BIP0031_VERSION = 60000;
 
 //! "filter*" commands are disabled without NODE_BLOOM after and including this version
-//static const int NO_BLOOM_VERSION = 70011;
-static const int NO_BLOOM_VERSION = 70201;
+static const int NO_BLOOM_VERSION = 70011;
 
 //! "sendheaders" command and announcing blocks with headers starts with this version
-//static const int SENDHEADERS_VERSION = 70012;
-static const int SENDHEADERS_VERSION = 70201;
+static const int SENDHEADERS_VERSION = 70012;
 
 //! "feefilter" tells peers to filter invs to you by fee starts with this version
 static const int FEEFILTER_VERSION = 70013;
@@ -52,4 +49,4 @@ static const int INVALID_CB_NO_BAN_VERSION = 70015;
 //! DIP0001 was activated in this version
 //static const int DIP0001_PROTOCOL_VERSION = 70208;
 
-#endif // FXTC_VERSION_H
+#endif // BITCORE_VERSION_H

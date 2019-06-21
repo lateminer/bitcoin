@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_QT_TRANSACTIONTABLEMODEL_H
-#define FXTC_QT_TRANSACTIONTABLEMODEL_H
+#ifndef BITCORE_QT_TRANSACTIONTABLEMODEL_H
+#define BITCORE_QT_TRANSACTIONTABLEMODEL_H
 
 #include <qt/bitcoinunits.h>
 
@@ -120,4 +120,4 @@ public Q_SLOTS:
     friend class TransactionTablePriv;
 };
 
-#endif // FXTC_QT_TRANSACTIONTABLEMODEL_H
+#endif // BITCORE_QT_TRANSACTIONTABLEMODEL_H

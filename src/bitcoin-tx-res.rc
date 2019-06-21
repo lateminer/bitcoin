@@ -16,14 +16,14 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "FxTC"
-            VALUE "FileDescription",    "fxtc-tx (CLI FxTC transaction editor utility)"
+            VALUE "CompanyName",        "BitCore"
+            VALUE "FileDescription",    "bitcore-tx (CLI BitCore transaction editor utility)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
-            VALUE "InternalName",       "fxtc-tx"
+            VALUE "InternalName",       "bitcore-tx"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "fxtc-tx.exe"
-            VALUE "ProductName",        "fxtc-tx"
+            VALUE "OriginalFilename",   "bitcore-tx.exe"
+            VALUE "ProductName",        "bitcore-tx"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END

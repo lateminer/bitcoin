@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_QT_CSVMODELWRITER_H
-#define FXTC_QT_CSVMODELWRITER_H
+#ifndef BITCORE_QT_CSVMODELWRITER_H
+#define BITCORE_QT_CSVMODELWRITER_H
 
 #include <QList>
 #include <QObject>
@@ -43,4 +43,4 @@ private:
     QList<Column> columns;
 };
 
-#endif // FXTC_QT_CSVMODELWRITER_H
+#endif // BITCORE_QT_CSVMODELWRITER_H

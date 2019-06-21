@@ -5,8 +5,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_TXMEMPOOL_H
-#define FXTC_TXMEMPOOL_H
+#ifndef BITCORE_TXMEMPOOL_H
+#define BITCORE_TXMEMPOOL_H
 
 #include <memory>
 #include <set>
@@ -844,4 +844,4 @@ struct DisconnectedBlockTransactions {
     }
 };
 
-#endif // FXTC_TXMEMPOOL_H
+#endif // BITCORE_TXMEMPOOL_H

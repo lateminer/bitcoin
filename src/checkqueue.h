@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_CHECKQUEUE_H
-#define FXTC_CHECKQUEUE_H
+#ifndef BITCORE_CHECKQUEUE_H
+#define BITCORE_CHECKQUEUE_H
 
 #include <sync.h>
 
@@ -211,4 +211,4 @@ public:
     }
 };
 
-#endif // FXTC_CHECKQUEUE_H
+#endif // BITCORE_CHECKQUEUE_H

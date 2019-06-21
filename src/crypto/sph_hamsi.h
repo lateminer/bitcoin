@@ -32,8 +32,8 @@
  * @author   Thomas Pornin <thomas.pornin@cryptolog.com>
  */
 
-#ifndef FXTC_CRYPTO_SPH_HAMSI_H
-#define FXTC_CRYPTO_SPH_HAMSI_H
+#ifndef BITCORE_CRYPTO_SPH_HAMSI_H
+#define BITCORE_CRYPTO_SPH_HAMSI_H
 
 #include <stddef.h>
 #include <crypto/sph_types.h>
@@ -318,4 +318,4 @@ void sph_hamsi512_addbits_and_close(
 }
 #endif
 
-#endif // FXTC_CRYPTO_SPH_HAMSI_H
+#endif // BITCORE_CRYPTO_SPH_HAMSI_H

@@ -1,11 +1,12 @@
 // Copyright (c) 2009-2018 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
 // Copyright (c) 2018 FXTC developers
+// Copyright (c) 2019 BitCore developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_RPC_REGISTER_H
-#define FXTC_RPC_REGISTER_H
+#ifndef BITCORE_RPC_REGISTER_H
+#define BITCORE_RPC_REGISTER_H
 
 /** These are in one header file to avoid creating tons of single-function
  * headers for everything under src/rpc/ */
@@ -40,4 +41,4 @@ static inline void RegisterAllCoreRPCCommands(CRPCTable &t)
     RegisterDashGovernanceRPCCommands(t);
 }
 
-#endif // FXTC_RPC_REGISTER_H
+#endif // BITCORE_RPC_REGISTER_H

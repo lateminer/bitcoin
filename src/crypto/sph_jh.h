@@ -33,8 +33,8 @@
  * @author   Thomas Pornin <thomas.pornin@cryptolog.com>
  */
 
-#ifndef FXTC_CRYPTO_SPH_JH_H
-#define FXTC_CRYPTO_SPH_JH_H
+#ifndef BITCORE_CRYPTO_SPH_JH_H
+#define BITCORE_CRYPTO_SPH_JH_H
 
 #ifdef __cplusplus
 extern "C"{
@@ -295,4 +295,4 @@ void sph_jh512_addbits_and_close(
 }
 #endif
 
-#endif // FXTC_CRYPTO_SPH_JH_H
+#endif // BITCORE_CRYPTO_SPH_JH_H

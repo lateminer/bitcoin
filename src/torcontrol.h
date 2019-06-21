@@ -5,8 +5,8 @@
 /**
  * Functionality for communicating with Tor.
  */
-#ifndef FXTC_TORCONTROL_H
-#define FXTC_TORCONTROL_H
+#ifndef BITCORE_TORCONTROL_H
+#define BITCORE_TORCONTROL_H
 
 #include <scheduler.h>
 

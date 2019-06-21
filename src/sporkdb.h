@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_SPORKDB_H
-#define FXTC_SPORKDB_H
+#ifndef BITCORE_SPORKDB_H
+#define BITCORE_SPORKDB_H
 
 #include <boost/filesystem/path.hpp>
 #include <leveldbwrapper.h>
@@ -25,4 +25,4 @@ public:
 };
 
 
-#endif // FXTC_SPORKDB_H
+#endif // BITCORE_SPORKDB_H

@@ -5,8 +5,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_SERIALIZE_H
-#define FXTC_SERIALIZE_H
+#ifndef BITCORE_SERIALIZE_H
+#define BITCORE_SERIALIZE_H
 
 #include <compat/endian.h>
 
@@ -1034,4 +1034,4 @@ size_t GetSerializeSizeMany(const S& s, const T&... t)
     return sc.size();
 }
 
-#endif // FXTC_SERIALIZE_H
+#endif // BITCORE_SERIALIZE_H

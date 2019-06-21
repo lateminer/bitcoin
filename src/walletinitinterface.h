@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_WALLETINITINTERFACE_H
-#define FXTC_WALLETINITINTERFACE_H
+#ifndef BITCORE_WALLETINITINTERFACE_H
+#define BITCORE_WALLETINITINTERFACE_H
 
 #include <string>
 
@@ -34,4 +34,4 @@ public:
     virtual ~WalletInitInterface() {}
 };
 
-#endif // FXTC_WALLETINITINTERFACE_H
+#endif // BITCORE_WALLETINITINTERFACE_H

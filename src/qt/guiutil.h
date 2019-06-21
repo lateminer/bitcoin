@@ -1,11 +1,12 @@
 // Copyright (c) 2011-2018 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
 // Copyright (c) 2018 FXTC developers
+// Copyright (c) 2019 BitCore developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_QT_GUIUTIL_H
-#define FXTC_QT_GUIUTIL_H
+#ifndef BITCORE_QT_GUIUTIL_H
+#define BITCORE_QT_GUIUTIL_H
 
 #include <amount.h>
 #include <fs.h>
@@ -126,6 +127,30 @@ namespace GUIUtil
     // Open the config file
     bool openBitcoinConf();
 
+    // BitCore
+    // Functions for hyperlinks
+    void hyperlinks_slot1();
+    void hyperlinks_slot2();
+    void hyperlinks_slot3();
+    void hyperlinks_slot4();
+    void hyperlinks_slot5();
+    void hyperlinks_slot6();
+    void hyperlinks_slot7();
+    void hyperlinks_slot8();
+    void hyperlinks_slot9();
+    void hyperlinks_slot10();
+
+    void hyperlinks2_slot1();
+    void hyperlinks2_slot2();
+    void hyperlinks2_slot3();
+    void hyperlinks2_slot4();
+    void hyperlinks2_slot5();
+    void hyperlinks2_slot6();
+    void hyperlinks2_slot7();
+    void hyperlinks2_slot8();
+    void hyperlinks2_slot9();
+    void hyperlinks2_slot10();
+
     // Dash
     // Open masternode.conf
     void openMNConfigfile();
@@ -190,6 +215,9 @@ namespace GUIUtil
 
     bool GetStartOnSystemStartup();
     bool SetStartOnSystemStartup(bool fAutoStart);
+
+    /* Load global CSS theme */
+    QString loadStyleSheet();
 
     /* Convert QString to OS specific boost path through UTF-8 */
     fs::path qstringToBoostPath(const QString &path);
@@ -257,4 +285,4 @@ namespace GUIUtil
     };
 } // namespace GUIUtil
 
-#endif // FXTC_QT_GUIUTIL_H
+#endif // BITCORE_QT_GUIUTIL_H

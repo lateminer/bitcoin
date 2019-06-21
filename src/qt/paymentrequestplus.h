@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_QT_PAYMENTREQUESTPLUS_H
-#define FXTC_QT_PAYMENTREQUESTPLUS_H
+#ifndef BITCORE_QT_PAYMENTREQUESTPLUS_H
+#define BITCORE_QT_PAYMENTREQUESTPLUS_H
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
@@ -49,4 +49,4 @@ private:
     payments::PaymentDetails details;
 };
 
-#endif // FXTC_QT_PAYMENTREQUESTPLUS_H
+#endif // BITCORE_QT_PAYMENTREQUESTPLUS_H

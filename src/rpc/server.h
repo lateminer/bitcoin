@@ -1,10 +1,11 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2019 BitCore developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_RPC_SERVER_H
-#define FXTC_RPC_SERVER_H
+#ifndef BITCORE_RPC_SERVER_H
+#define BITCORE_RPC_SERVER_H
 
 #include <amount.h>
 #include <rpc/protocol.h>
@@ -206,4 +207,4 @@ std::string JSONRPCExecBatch(const JSONRPCRequest& jreq, const UniValue& vReq);
 // Retrieves any serialization flags requested in command line argument
 int RPCSerializationFlags();
 
-#endif // FXTC_RPC_SERVER_H
+#endif // BITCORE_RPC_SERVER_H

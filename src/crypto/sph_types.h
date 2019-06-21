@@ -44,8 +44,8 @@
  * @author   Thomas Pornin <thomas.pornin@cryptolog.com>
  */
 
-#ifndef FXTC_CRYPTO_SPH_TYPES_H
-#define FXTC_CRYPTO_SPH_TYPES_H
+#ifndef BITCORE_CRYPTO_SPH_TYPES_H
+#define BITCORE_CRYPTO_SPH_TYPES_H
 
 #include <limits.h>
 
@@ -1973,4 +1973,4 @@ sph_dec64le_aligned(const void *src)
 
 #endif /* Doxygen excluded block */
 
-#endif // FXTC_CRYPTO_SPH_TYPES_H
+#endif // BITCORE_CRYPTO_SPH_TYPES_H

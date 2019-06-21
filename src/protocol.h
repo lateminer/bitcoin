@@ -9,8 +9,8 @@
 #error This header can only be compiled as C++.
 #endif
 
-#ifndef FXTC_PROTOCOL_H
-#define FXTC_PROTOCOL_H
+#ifndef BITCORE_PROTOCOL_H
+#define BITCORE_PROTOCOL_H
 
 #include <netaddress.h>
 #include <serialize.h>
@@ -451,4 +451,4 @@ public:
     uint256 hash;
 };
 
-#endif // FXTC_PROTOCOL_H
+#endif // BITCORE_PROTOCOL_H

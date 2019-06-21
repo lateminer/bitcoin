@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_CRYPTO_SHA512_H
-#define FXTC_CRYPTO_SHA512_H
+#ifndef BITCORE_CRYPTO_SHA512_H
+#define BITCORE_CRYPTO_SHA512_H
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -25,4 +25,4 @@ public:
     CSHA512& Reset();
 };
 
-#endif // FXTC_CRYPTO_SHA512_H
+#endif // BITCORE_CRYPTO_SHA512_H

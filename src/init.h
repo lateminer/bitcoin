@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_INIT_H
-#define FXTC_INIT_H
+#ifndef BITCORE_INIT_H
+#define BITCORE_INIT_H
 
 #include <memory>
 #include <string>
@@ -67,4 +67,4 @@ void SetupServerArgs();
 /** Returns licensing information (for -version) */
 std::string LicenseInfo();
 
-#endif // FXTC_INIT_H
+#endif // BITCORE_INIT_H

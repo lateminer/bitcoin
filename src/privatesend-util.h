@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_PRIVATESEND_UTIL_H
-#define FXTC_PRIVATESEND_UTIL_H
+#ifndef BITCORE_PRIVATESEND_UTIL_H
+#define BITCORE_PRIVATESEND_UTIL_H
 
 #include <wallet/wallet.h>
 
@@ -37,4 +37,4 @@ public:
 
 };
 
-#endif // FXTC_PRIVATESEND_UTIL_H
+#endif // BITCORE_PRIVATESEND_UTIL_H

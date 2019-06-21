@@ -2,9 +2,9 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_NOUI_H
-#define FXTC_NOUI_H
+#ifndef BITCORE_NOUI_H
+#define BITCORE_NOUI_H
 
 extern void noui_connect();
 
-#endif // FXTC_NOUI_H
+#endif // BITCORE_NOUI_H
