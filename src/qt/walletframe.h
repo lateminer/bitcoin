@@ -14,6 +14,7 @@ class PlatformStyle;
 class SendCoinsRecipient;
 class WalletModel;
 class WalletView;
+class Config;
 
 QT_BEGIN_NAMESPACE
 class QStackedWidget;
@@ -24,7 +25,7 @@ class WalletFrame : public QFrame
     Q_OBJECT
 
 public:
-    explicit WalletFrame(const PlatformStyle *platformStyle, BitcoinGUI *_gui = 0);
+    explicit WalletFrame(const PlatformStyle *platformStyle, const Config *cfg, BitcoinGUI *_gui = 0);
     ~WalletFrame();
 
     void setClientModel(ClientModel *clientModel);
@@ -38,6 +39,10 @@ public:
 
     void showOutOfSyncWarning(bool fShow);
 
+Q_SIGNALS:
+    /** Notify that the user has requested more information about the out-of-sync warning */
+    void requestedSyncWarningInfo();
+
 private:
     QStackedWidget *walletStack;
     BitcoinGUI *gui;
@@ -47,6 +52,7 @@ private:
     bool bOutOfSync;
 
     const PlatformStyle *platformStyle;
+    const Config *cfg;
 
     WalletView *currentWalletView();
 
@@ -80,6 +86,8 @@ public Q_SLOTS:
     void usedSendingAddresses();
     /** Show used receiving addresses */
     void usedReceivingAddresses();
+    /** Pass on signal over requested out-of-sync-warning information */
+    void outOfSyncWarningClicked();
 };
 
 #endif // BITCOIN_QT_WALLETFRAME_H

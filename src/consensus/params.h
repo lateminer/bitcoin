@@ -16,6 +16,7 @@ enum DeploymentPos
 {
     DEPLOYMENT_TESTDUMMY,
     DEPLOYMENT_CSV, // Deployment of BIP68, BIP112, and BIP113.
+    // NOTE: Also add new deployments to VersionBitsDeploymentInfo in versionbits.cpp
     MAX_VERSION_BITS_DEPLOYMENTS
 };
 
@@ -57,6 +58,7 @@ struct Params {
     uint256 posLimit;
     bool fPowAllowMinDifficultyBlocks;
     bool fPowNoRetargeting;
+    bool fPoSNoRetargeting;
     int64_t nTargetSpacing;
     int64_t nTargetTimespan;
     int64_t DifficultyAdjustmentInterval() const { return nTargetTimespan / nTargetSpacing; }
@@ -64,8 +66,8 @@ struct Params {
     int nLastPOWBlock;
     int nStakeTimestampMask;
     int nCoinbaseMaturity;
-    int nStakeMinConfirmations;
     unsigned int nStakeMinAge;
+    uint256 nMinimumChainWork;
 };
 } // namespace Consensus
 

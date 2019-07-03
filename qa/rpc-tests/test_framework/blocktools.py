@@ -1,11 +1,11 @@
+#!/usr/bin/env python3
 # blocktools.py - utilities for manipulating blocks and transactions
-#
-# Distributed under the MIT/X11 software license, see the accompanying
+# Copyright (c) 2015-2016 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#
 
-from mininode import *
-from script import CScript, OP_TRUE, OP_CHECKSIG
+from .mininode import *
+from .script import CScript, OP_TRUE, OP_CHECKSIG, OP_RETURN
 
 # Create a block (with regtest difficulty)
 def create_block(hashprev, coinbase, nTime=None):
@@ -29,7 +29,7 @@ def serialize_script_num(value):
     neg = value < 0
     absvalue = -value if neg else value
     while (absvalue):
-        r.append(chr(absvalue & 0xff))
+        r.append(int(absvalue & 0xff))
         absvalue >>= 8
     if r[-1] & 0x80:
         r.append(0x80 if neg else 0)
@@ -45,7 +45,7 @@ def create_coinbase(height, pubkey = None):
     coinbase.vin.append(CTxIn(COutPoint(0, 0xffffffff), 
                 ser_string(serialize_script_num(height)), 0xffffffff))
     coinbaseoutput = CTxOut()
-    coinbaseoutput.nValue = 50*100000000
+    coinbaseoutput.nValue = 50 * COIN
     halvings = int(height/150) # regtest
     coinbaseoutput.nValue >>= halvings
     if (pubkey != None):
@@ -56,12 +56,27 @@ def create_coinbase(height, pubkey = None):
     coinbase.calc_sha256()
     return coinbase
 
-# Create a transaction with an anyone-can-spend output, that spends the
-# nth output of prevtx.
-def create_transaction(prevtx, n, sig, value):
+# Create a transaction.
+# If the scriptPubKey is not specified, make it anyone-can-spend.
+def create_transaction(prevtx, n, sig, value, scriptPubKey=CScript()):
     tx = CTransaction()
     assert(n < len(prevtx.vout))
     tx.vin.append(CTxIn(COutPoint(prevtx.sha256, n), sig, 0xffffffff))
-    tx.vout.append(CTxOut(value, ""))
+    tx.vout.append(CTxOut(value, scriptPubKey))
     tx.calc_sha256()
     return tx
+
+def get_legacy_sigopcount_block(block, fAccurate=True):
+    count = 0
+    for tx in block.vtx:
+        count += get_legacy_sigopcount_tx(tx, fAccurate)
+    return count
+
+def get_legacy_sigopcount_tx(tx, fAccurate=True):
+    count = 0
+    for i in tx.vout:
+        count += i.scriptPubKey.GetSigOpCount(fAccurate)
+    for j in tx.vin:
+        # scriptSig might be of type bytes, so convert to CScript for the moment
+        count += CScript(j.scriptSig).GetSigOpCount(fAccurate)
+    return count

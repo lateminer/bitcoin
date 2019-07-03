@@ -19,6 +19,8 @@
 
 class QValidatedLineEdit;
 class SendCoinsRecipient;
+class CChainParams;
+class Config;
 
 QT_BEGIN_NAMESPACE
 class QAbstractItemView;
@@ -40,14 +42,20 @@ namespace GUIUtil
     // Return a monospace font
     QFont fixedPitchFont();
 
+    // Generate an invalid, but convincing address.
+    std::string DummyAddress(const CChainParams &params, const Config &cfg);
+
     // Set up widgets for address and amounts
     void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent);
     void setupAmountWidget(QLineEdit *widget, QWidget *parent);
 
-    // Parse "bitcoin:" URI into recipient object, return true on successful parsing
-    bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out);
-    bool parseBitcoinURI(QString uri, SendCoinsRecipient *out);
-    QString formatBitcoinURI(const SendCoinsRecipient &info);
+    QString bitcoinURIScheme(const CChainParams &, bool useCashAddr);
+    QString bitcoinURIScheme(const Config &);
+    // Parse "blackcoin:" URI into recipient object, return true on successful
+    // parsing
+    bool parseBitcoinURI(const QString &scheme, const QUrl &uri, SendCoinsRecipient *out);
+    bool parseBitcoinURI(const QString &scheme, QString uri, SendCoinsRecipient *out);
+    QString formatBitcoinURI(const Config &cfg, const SendCoinsRecipient &info);
 
     // Returns true if given address+amount meets "dust" definition
     bool isDust(const QString& address, const CAmount& amount);
@@ -70,7 +78,7 @@ namespace GUIUtil
        @param[in] role    Data role to extract from the model
        @see  TransactionView::copyLabel, TransactionView::copyAmount, TransactionView::copyAddress
      */
-    QString getEntryData(QAbstractItemView *view, int column, int role);
+    QVariant getEntryData(QAbstractItemView *view, int column, int role);
 
     void setClipboard(const QString& str);
 
@@ -113,6 +121,9 @@ namespace GUIUtil
 
     // Open debug.log
     void openDebugLogfile();
+
+    // Open the config file
+    bool openBitcoinConf();
 
     // Replace invalid default fonts with known good ones
     void SubstituteFonts(const QString& language);
@@ -199,6 +210,8 @@ namespace GUIUtil
 
     /* Format a CNodeCombinedStats.nTimeOffset into a user-readable string. */
     QString formatTimeOffset(int64_t nTimeOffset);
+
+    QString formateNiceTimeOffset(qint64 secs);
 
 #if defined(Q_OS_MAC) && QT_VERSION >= 0x050000
     // workaround for Qt OSX Bug:

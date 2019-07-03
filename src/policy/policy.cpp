@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2015 The Bitcoin developers
+// Copyright (c) 2009-2016 The Bitcoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -23,9 +23,6 @@
      * 2. P2SH scripts with a crazy number of expensive
      *    CHECKSIG/CHECKMULTISIG operations
      *
-     * Check transaction inputs, and make sure any
-     * pay-to-script-hash transactions are evaluating IsStandard scripts
-     * 
      * Why bother? To avoid denial-of-service attacks; an attacker
      * can submit a standard HASH... OP_EQUAL transaction,
      * which will get accepted into blocks. The redemption
@@ -89,12 +86,12 @@ bool IsStandardTx(const CTransaction& tx, std::string& reason)
     BOOST_FOREACH(const CTxIn& txin, tx.vin)
     {
         // Biggest 'standard' txin is a 15-of-15 P2SH multisig with compressed
-        // keys. (remember the 520 byte limit on redeemScript size) That works
+        // keys (remember the 520 byte limit on redeemScript size). That works
         // out to a (15*(33+1))+3=513 byte redeemScript, 513+1+15*(73+1)+3=1627
         // bytes of scriptSig, which we round off to 1650 bytes for some minor
         // future-proofing. That's also enough to spend a 20-of-20
         // CHECKMULTISIG scriptPubKey, though such a scriptPubKey is not
-        // considered standard)
+        // considered standard.
         if (txin.scriptSig.size() > 1650) {
             reason = "scriptsig-size";
             return false;
@@ -175,3 +172,5 @@ bool AreInputsStandard(const CTransaction& tx, const CCoinsViewCache& mapInputs)
 
     return true;
 }
+
+unsigned int nBytesPerSigOp = DEFAULT_BYTES_PER_SIGOP;

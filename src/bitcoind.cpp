@@ -3,16 +3,21 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#if defined(HAVE_CONFIG_H)
+#include "config/bitcoin-config.h"
+#endif
+
 #include "chainparams.h"
 #include "clientversion.h"
-#include "rpcserver.h"
+#include "rpc/server.h"
+#include "config.h"
 #include "init.h"
 #include "noui.h"
 #include "scheduler.h"
 #include "util.h"
 #include "httpserver.h"
 #include "httprpc.h"
-#include "rpcserver.h"
+#include "utilstrencodings.h"
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/filesystem.hpp>
@@ -63,6 +68,8 @@ bool AppInit(int argc, char* argv[])
     boost::thread_group threadGroup;
     CScheduler scheduler;
 
+    auto &config = const_cast<Config &>(GetConfig());
+
     bool fRet = false;
 
     //
@@ -74,22 +81,22 @@ bool AppInit(int argc, char* argv[])
     // Process help and version before taking care about datadir
     if (mapArgs.count("-?") || mapArgs.count("-h") ||  mapArgs.count("-help") || mapArgs.count("-version"))
     {
-        std::string strUsage = _("Dopecoin Core Daemon") + " " + _("version") + " " + FormatFullVersion() + "\n";
+        std::string strUsage = strprintf(_("%s Daemon"), _(PACKAGE_NAME)) + " " + _("version") + " " + FormatFullVersion() + "\n";
 
         if (mapArgs.count("-version"))
         {
-            strUsage += LicenseInfo();
+            strUsage += FormatParagraph(LicenseInfo());
         }
         else
         {
             strUsage += "\n" + _("Usage:") + "\n" +
-                  "  dopecoind [options]                     " + _("Start Dopecoin Core Daemon") + "\n";
+                  "  dopecoind [options]                     " + strprintf(_("Start %s Daemon"), _(PACKAGE_NAME)) + "\n";
 
             strUsage += "\n" + HelpMessage(HMM_BITCOIND);
         }
 
         fprintf(stdout, "%s", strUsage.c_str());
-        return false;
+        return true;
     }
 
     try
@@ -123,7 +130,7 @@ bool AppInit(int argc, char* argv[])
         if (fCommandLine)
         {
             fprintf(stderr, "Error: There is no RPC client functionality in dopecoind anymore. Use the dopecoin-cli utility instead.\n");
-            exit(1);
+            exit(EXIT_FAILURE);
         }
 #ifndef WIN32
         fDaemon = GetBoolArg("-daemon", false);
@@ -154,7 +161,7 @@ bool AppInit(int argc, char* argv[])
         // Set this early so that parameter interactions go to console
         InitLogging();
         InitParameterInteraction();
-        fRet = AppInit2(threadGroup, scheduler);
+        fRet = AppInit2(config, threadGroup, scheduler);
     }
     catch (const std::exception& e) {
         PrintExceptionContinue(&e, "AppInit()");
@@ -183,5 +190,5 @@ int main(int argc, char* argv[])
     // Connect bitcoind signal handlers
     noui_connect();
 
-    return (AppInit(argc, argv) ? 0 : 1);
+    return (AppInit(argc, argv) ? EXIT_SUCCESS : EXIT_FAILURE);
 }

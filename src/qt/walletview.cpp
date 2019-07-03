@@ -29,11 +29,11 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 
-WalletView::WalletView(const PlatformStyle *platformStyle, QWidget *parent):
+WalletView::WalletView(const PlatformStyle *_platformStyle, const Config *cfg, QWidget *parent):
     QStackedWidget(parent),
     clientModel(0),
     walletModel(0),
-    platformStyle(platformStyle)
+    platformStyle(_platformStyle)
 {
     // Create tabs
     overviewPage = new OverviewPage(platformStyle);
@@ -53,7 +53,7 @@ WalletView::WalletView(const PlatformStyle *platformStyle, QWidget *parent):
     vbox->addLayout(hbox_buttons);
     transactionsPage->setLayout(vbox);
 
-    receiveCoinsPage = new ReceiveCoinsDialog(platformStyle);
+    receiveCoinsPage = new ReceiveCoinsDialog(platformStyle, cfg);
     sendCoinsPage = new SendCoinsDialog(platformStyle);
 
     usedSendingAddressesPage = new AddressBookPage(platformStyle, AddressBookPage::ForEditing, AddressBookPage::SendingTab, this);
@@ -66,6 +66,7 @@ WalletView::WalletView(const PlatformStyle *platformStyle, QWidget *parent):
 
     // Clicking on a transaction on the overview pre-selects the transaction on the transaction history page
     connect(overviewPage, SIGNAL(transactionClicked(QModelIndex)), transactionView, SLOT(focusTransaction(QModelIndex)));
+    connect(overviewPage, SIGNAL(outOfSyncWarningClicked()), this, SLOT(requestedSyncWarningInfo()));
 
     // Double-clicking on a transaction on the transaction history page shows details
     connect(transactionView, SIGNAL(doubleClicked(QModelIndex)), transactionView, SLOT(showDetails()));
@@ -331,4 +332,9 @@ void WalletView::showProgress(const QString &title, int nProgress)
     }
     else if (progressDialog)
         progressDialog->setValue(nProgress);
+}
+
+void WalletView::requestedSyncWarningInfo()
+{
+    Q_EMIT outOfSyncWarningClicked();
 }

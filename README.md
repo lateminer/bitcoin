@@ -10,13 +10,38 @@ Dopecoin is a digital currency, similar to Bitcoin, that was developed for marij
 The currency was created in January 2014 and relaunched as DopeCoinGold in January 2017.
 
 Dopecoin Core is the name of open source software which enables the use of this currency.
-It is based on Bitcoin Core 0.12.1 with some features backported from Bitcoin Core 0.13.x and 0.14.0.
+It is based on Bitcoin Core 0.13.2 with some with some patches from newer versions.
 
 Our mission is to provide this billion dollar industry with alternative payment and advertising resources.
 Thank you for joining us on the Dopecoin adventure!
 
 For more information, as well as an immediately useable, binary version of
 the Dopecoin Core software, see [website](https://dopecoin.com) or visit [forum](https://bitcointalk.org/index.php?topic=467641.0).
+
+Coin Specifications
+----------------
+
+- Total: 200,000,000 DOPE
+- Algorithm: POSV3
+- POS reward: 30 DOPE
+- Block time: 90 seconds
+- P2P port: 40420
+- RPC port: 40421
+
+Builds
+----------------
+
+v.4.2.0.0:
+
+- Updated to Blackcoin More 2.13.2.3 (c7eef36834)
+
+v.4.1.0.0:
+
+- Rebased to Bitcoin Core 0.12.1
+- BIP32 HD wallet support
+- Added autocomplete to Dopecoin-Qt console window
+- Added toggle for unmasking password
+- Block hash changed back to SHA256D
 
 License
 -------
@@ -32,23 +57,31 @@ The `master` branch is regularly built and tested and is meant to be stable. Dev
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Coin Specifications
-----------------
+The best place to get started is to join Dopecoin channel on Discord.
 
-- Total: 200,000,000 DOPE
-- Algorithm: POSV3
-- POS reward: 30 DOPE
-- Block time: 90 seconds
-- P2P port: 40420
-- RPC port: 40421
+Testing
+-------
 
-Builds
-----------------
+Testing and code review is the bottleneck for development; we get more pull
+requests than we can review and test on short notice. Please be patient and help out by testing
+other people's pull requests, and remember this is a security-critical project where any mistake might cost people
+lots of money.
 
-v.4.1.0.0:
+### Automated Testing
 
-- Rebased to Bitcoin Core 0.12.1
-- BIP32 HD wallet support
-- Added autocomplete to Dopecoin-Qt console window
-- Added toggle for unmasking password
-- Block hash changed back to SHA256D
+Developers are strongly encouraged to write [unit tests](/doc/unit-tests.md) for new code, and to
+submit new unit tests for old code. Unit tests can be compiled and run
+(assuming they weren't disabled in configure) with: `make check`
+
+There are also [regression and integration tests](/qa) of the RPC interface, written
+in Python, that are run automatically on the build server.
+These tests can be run (if the [test dependencies](/qa) are installed) with: `qa/pull-tester/rpc-tests.py`
+
+The Travis CI system makes sure that every pull request is built for Windows, Linux, and OS X, and that unit/sanity tests are run automatically.
+
+### Manual Quality Assurance (QA) Testing
+
+Changes should be tested by somebody other than the developer who wrote the
+code. This is especially important for large or high-risk changes. It is useful
+to add a test plan to the pull request description if testing the changes is
+not straightforward.

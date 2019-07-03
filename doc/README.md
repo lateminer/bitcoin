@@ -1,45 +1,43 @@
-Bitcoin Core 0.12.1
-=====================
+Dopecoin Core
+=============
 
 Setup
 ---------------------
-[Bitcoin Core](http://bitcoin.org/en/download) is the original Bitcoin client and it builds the backbone of the network. However, it downloads and stores the entire history of Bitcoin transactions (which is currently several GBs); depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
+Dopecoin Core is experimental Dopecoin client and it builds the backbone of the network. However, it downloads and stores the entire history of Dopecoin transactions (which is currently several GBs); depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
+
+To download Dopecoin Core, visit [dopecoin.com](https://dopecoin.com).
 
 Running
 ---------------------
-The following are some helpful notes on how to run Bitcoin on your native platform.
+The following are some helpful notes on how to run Dopecoin on your native platform.
 
 ### Unix
 
-You need the Qt4 run-time libraries to run Bitcoin-Qt. On Debian or Ubuntu:
-
-	sudo apt-get install libqtgui4
-
 Unpack the files into a directory and run:
 
-- bin/32/bitcoin-qt (GUI, 32-bit) or bin/32/bitcoind (headless, 32-bit)
-- bin/64/bitcoin-qt (GUI, 64-bit) or bin/64/bitcoind (headless, 64-bit)
-
-
+- `bin/dopecoin-qt` (GUI) or
+- `bin/dopecoind` (headless)
 
 ### Windows
 
-Unpack the files into a directory, and then run bitcoin-qt.exe.
+Unpack the files into a directory, and then run dopecoin-qt.exe.
 
 ### OS X
 
-Drag Bitcoin-Core to your applications folder, and then run Bitcoin-Core.
+Drag Dopecoin-Core to your applications folder, and then run Dopecoin-Core.
 
 ### Need Help?
 
 * See the documentation at the [Bitcoin Wiki](https://en.bitcoin.it/wiki/Main_Page)
 for help and more information.
-* Ask for help on [#bitcoin](http://webchat.freenode.net?channels=bitcoin) on Freenode. If you don't have an IRC client use [webchat here](http://webchat.freenode.net?channels=bitcoin).
-* Ask for help on the [BitcoinTalk](https://bitcointalk.org/) forums, in the [Technical Support board](https://bitcointalk.org/index.php?board=4.0).
+* Ask for help on [#dopecoin](http://webchat.freenode.net?channels=dopecoin) on Freenode. If you don't have an IRC client use [webchat here](http://webchat.freenode.net?channels=dopecoin).
+* Ask for help in Dopecoin room on Discord.
+* Ask for help in [/r/dopecoin/](https://nm.reddit.com/r/dopecoin/) on Reddit.
+* Ask for help on the [BitcoinTalk](https://bitcointalk.org/) forums, in the [Dopecoin topic](https://bitcointalk.org/index.php?topic=467641.new#new).
 
 Building
 ---------------------
-The following are developer notes on how to build Bitcoin on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
+The following are developer notes on how to build Dopecoin on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
 
 - [OS X Build Notes](build-osx.md)
 - [Unix Build Notes](build-unix.md)
@@ -49,7 +47,7 @@ The following are developer notes on how to build Bitcoin on your native platfor
 
 Development
 ---------------------
-The Bitcoin repo's [root README](/README.md) contains relevant information on the development process and automated testing.
+The Dopecoin repo's [root README](/README.md) contains relevant information on the development process and automated testing.
 
 - [Developer Notes](developer-notes.md)
 - [Multiwallet Qt Development](multiwallet-qt.md)
@@ -63,11 +61,10 @@ The Bitcoin repo's [root README](/README.md) contains relevant information on th
 - [Shared Libraries](shared-libraries.md)
 - [BIPS](bips.md)
 - [Dnsseed Policy](dnsseed-policy.md)
+- [Benchmarking](benchmarking.md)
 
 ### Resources
-* Discuss on the [BitcoinTalk](https://bitcointalk.org/) forums, in the [Development & Technical Discussion board](https://bitcointalk.org/index.php?board=6.0).
-* Discuss project-specific development on #bitcoin-core-dev on Freenode. If you don't have an IRC client use [webchat here](http://webchat.freenode.net/?channels=bitcoin-core-dev).
-* Discuss general Bitcoin development on #bitcoin-dev on Freenode. If you don't have an IRC client use [webchat here](http://webchat.freenode.net/?channels=bitcoin-dev).
+* Discuss on the [BitcoinTalk](https://bitcointalk.org/) forums, in the [Dopecoin topic](https://bitcointalk.org/index.php?topic=467641.new#new).
 
 ### Miscellaneous
 - [Assets Attribution](assets-attribution.md)

@@ -7,6 +7,7 @@
 
 #include "addressbookpage.h"
 #include "addresstablemodel.h"
+#include "config.h"
 #include "guiutil.h"
 #include "optionsmodel.h"
 #include "platformstyle.h"
@@ -29,6 +30,11 @@ SendCoinsEntry::SendCoinsEntry(const PlatformStyle *platformStyle, QWidget *pare
     ui->deleteButton_is->setIcon(platformStyle->SingleColorIcon(":/icons/remove"));
     ui->deleteButton_s->setIcon(platformStyle->SingleColorIcon(":/icons/remove"));
 
+    ui->messageTextLabel->setToolTip(tr("A message that was attached to the %1 URI which will be"
+                                        " stored with the transaction for your reference. Note: "
+                                        "This message will not be sent over the Bitcoin network.")
+                                         .arg(GUIUtil::bitcoinURIScheme(GetConfig())));
+
     setCurrentWidget(ui->SendCoins);
 
     if (platformStyle->getUseExtraSpacing())
@@ -48,6 +54,7 @@ SendCoinsEntry::SendCoinsEntry(const PlatformStyle *platformStyle, QWidget *pare
     connect(ui->deleteButton, SIGNAL(clicked()), this, SLOT(deleteClicked()));
     connect(ui->deleteButton_is, SIGNAL(clicked()), this, SLOT(deleteClicked()));
     connect(ui->deleteButton_s, SIGNAL(clicked()), this, SLOT(deleteClicked()));
+    connect(ui->useAvailableBalanceButton, SIGNAL(clicked()), this, SLOT(useAvailableBalanceClicked()));
 }
 
 SendCoinsEntry::~SendCoinsEntry()
@@ -112,9 +119,19 @@ void SendCoinsEntry::clear()
     updateDisplayUnit();
 }
 
+void SendCoinsEntry::checkSubtractFeeFromAmount()
+{
+    ui->checkboxSubtractFeeFromAmount->setChecked(true);
+}
+
 void SendCoinsEntry::deleteClicked()
 {
     Q_EMIT removeEntry(this);
+}
+
+void SendCoinsEntry::useAvailableBalanceClicked()
+{
+    Q_EMIT useAvailableBalance(this);
 }
 
 bool SendCoinsEntry::validate()
@@ -226,6 +243,11 @@ void SendCoinsEntry::setAddress(const QString &address)
 {
     ui->payTo->setText(address);
     ui->payAmount->setFocus();
+}
+
+void SendCoinsEntry::setAmount(const CAmount &amount)
+{
+    ui->payAmount->setValue(amount);
 }
 
 bool SendCoinsEntry::isClear()

@@ -29,7 +29,9 @@ class UnitDisplayStatusBarControl;
 class WalletFrame;
 class WalletModel;
 class HelpMessageDialog;
+class ModalOverlay;
 
+class Config;
 class CWallet;
 
 QT_BEGIN_NAMESPACE
@@ -50,7 +52,10 @@ public:
     static const QString DEFAULT_WALLET;
     static const std::string DEFAULT_UIPLATFORM;
 
-    explicit BitcoinGUI(const PlatformStyle *platformStyle, const NetworkStyle *networkStyle, QWidget *parent = 0);
+    explicit BitcoinGUI(const Config *,
+        const PlatformStyle *platformStyle,
+        const NetworkStyle *networkStyle,
+        QWidget *parent = 0);
     ~BitcoinGUI();
 
     /** Set the client model.
@@ -121,6 +126,7 @@ private:
     Notificator *notificator;
     RPCConsole *rpcConsole;
     HelpMessageDialog *helpMessageDialog;
+    ModalOverlay *modalOverlay;
 
     /** Keep track of previous number of blocks, to detect progress */
     int prevBlocks;
@@ -129,6 +135,7 @@ private:
     uint64_t nWeight;
 
     const PlatformStyle *platformStyle;
+    const Config *cfg;
 
     /** Create the main UI actions. */
     void createActions();
@@ -149,6 +156,8 @@ private:
     /** Disconnect core signals from GUI client */
     void unsubscribeFromCoreSignals();
 
+    void updateHeadersSyncProgressLabel();
+
 Q_SIGNALS:
     /** Signal raised when a URI was entered or dragged to the GUI */
     void receivedURI(const QString &uri);
@@ -157,7 +166,7 @@ public Q_SLOTS:
     /** Set number of connections shown in the UI */
     void setNumConnections(int count);
     /** Set number of blocks and last block date shown in the UI */
-    void setNumBlocks(int count, const QDateTime& blockDate, double nVerificationProgress);
+    void setNumBlocks(int count, const QDateTime& blockDate, double nVerificationProgress, bool headers);
 
     /** Notify the user of an event from the core network or transaction handling code.
        @param[in] title     the message box / notification title
@@ -238,6 +247,8 @@ private Q_SLOTS:
     
     /** When hideTrayIcon setting is changed in OptionsModel hide or show the icon accordingly. */
     void setTrayIconVisible(bool);
+
+    void showModalOverlay();
 };
 
 class UnitDisplayStatusBarControl : public QLabel

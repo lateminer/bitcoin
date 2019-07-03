@@ -5,6 +5,7 @@
 #include "base58.h"
 
 #include "hash.h"
+#include "script/script.h"
 #include "uint256.h"
 
 #include <assert.h>
@@ -68,26 +69,31 @@ std::string EncodeBase58(const unsigned char* pbegin, const unsigned char* pend)
 {
     // Skip & count leading zeroes.
     int zeroes = 0;
+    int length = 0;
     while (pbegin != pend && *pbegin == 0) {
         pbegin++;
         zeroes++;
     }
     // Allocate enough space in big-endian base58 representation.
-    std::vector<unsigned char> b58((pend - pbegin) * 138 / 100 + 1); // log(256) / log(58), rounded up.
+    int size = (pend - pbegin) * 138 / 100 + 1; // log(256) / log(58), rounded up.
+    std::vector<unsigned char> b58(size);
     // Process the bytes.
     while (pbegin != pend) {
         int carry = *pbegin;
+        int i = 0;
         // Apply "b58 = b58 * 256 + ch".
-        for (std::vector<unsigned char>::reverse_iterator it = b58.rbegin(); it != b58.rend(); it++) {
+        for (std::vector<unsigned char>::reverse_iterator it = b58.rbegin(); (carry != 0 || i < length) && (it != b58.rend()); it++, i++) {
             carry += 256 * (*it);
             *it = carry % 58;
             carry /= 58;
         }
+
         assert(carry == 0);
+        length = i;
         pbegin++;
     }
     // Skip leading zeroes in base58 result.
-    std::vector<unsigned char>::iterator it = b58.begin();
+    std::vector<unsigned char>::iterator it = b58.begin() + (size - length);
     while (it != b58.end() && *it == 0)
         it++;
     // Translate the result into a string.
@@ -172,7 +178,7 @@ bool CBase58Data::SetString(const char* psz, unsigned int nVersionBytes)
     vchData.resize(vchTemp.size() - nVersionBytes);
     if (!vchData.empty())
         memcpy(&vchData[0], &vchTemp[nVersionBytes], vchData.size());
-    memory_cleanse(&vchTemp[0], vchData.size());
+    memory_cleanse(&vchTemp[0], vchTemp.size());
     return true;
 }
 
@@ -200,6 +206,59 @@ int CBase58Data::CompareTo(const CBase58Data& b58) const
         return 1;
     return 0;
 }
+
+namespace
+{
+class DestinationEncoder : public boost::static_visitor<std::string>
+{
+private:
+    const CChainParams &m_params;
+
+public:
+    DestinationEncoder(const CChainParams &params) : m_params(params) {}
+    std::string operator()(const CKeyID &id) const
+    {
+        std::vector<uint8_t> data = m_params.Base58Prefix(CChainParams::PUBKEY_ADDRESS);
+        data.insert(data.end(), id.begin(), id.end());
+        return EncodeBase58Check(data);
+    }
+
+    std::string operator()(const CScriptID &id) const
+    {
+        std::vector<uint8_t> data = m_params.Base58Prefix(CChainParams::SCRIPT_ADDRESS);
+        data.insert(data.end(), id.begin(), id.end());
+        return EncodeBase58Check(data);
+    }
+
+    std::string operator()(const CNoDestination &no) const { return ""; }
+};
+
+CTxDestination DecodeDestination(const std::string &str, const CChainParams &params)
+{
+    std::vector<uint8_t> data;
+    uint160 hash;
+    if (!DecodeBase58Check(str, data))
+    {
+        return CNoDestination();
+    }
+    // Base58Check decoding
+    const std::vector<uint8_t> &pubkey_prefix = params.Base58Prefix(CChainParams::PUBKEY_ADDRESS);
+    if (data.size() == 20 + pubkey_prefix.size() &&
+        std::equal(pubkey_prefix.begin(), pubkey_prefix.end(), data.begin()))
+    {
+        memcpy(hash.begin(), &data[pubkey_prefix.size()], 20);
+        return CKeyID(hash);
+    }
+    const std::vector<uint8_t> &script_prefix = params.Base58Prefix(CChainParams::SCRIPT_ADDRESS);
+    if (data.size() == 20 + script_prefix.size() &&
+        std::equal(script_prefix.begin(), script_prefix.end(), data.begin()))
+    {
+        memcpy(hash.begin(), &data[script_prefix.size()], 20);
+        return CScriptID(hash);
+    }
+    return CNoDestination();
+}
+} // namespace
 
 namespace
 {
@@ -262,23 +321,6 @@ CTxDestination CBitcoinAddress::Get() const
         return CNoDestination();
 }
 
-bool CBitcoinAddress::GetIndexKey(uint160& hashBytes, int& type) const
-{
-    if (!IsValid()) {
-        return false;
-    } else if (vchVersion == Params().Base58Prefix(CChainParams::PUBKEY_ADDRESS)) {
-        memcpy(&hashBytes, &vchData[0], 20);
-        type = 1;
-        return true;
-    } else if (vchVersion == Params().Base58Prefix(CChainParams::SCRIPT_ADDRESS)) {
-        memcpy(&hashBytes, &vchData[0], 20);
-        type = 2;
-        return true;
-    }
-
-    return false;
-}
-
 bool CBitcoinAddress::GetKeyID(CKeyID& keyID) const
 {
     if (!IsValid() || vchVersion != Params().Base58Prefix(CChainParams::PUBKEY_ADDRESS))
@@ -317,12 +359,14 @@ bool CBitcoinSecret::IsValid() const
     return fExpectedFormat && fCorrectVersion;
 }
 
-bool CBitcoinSecret::SetString(const char* pszSecret)
+bool CBitcoinSecret::SetString(const char *pszSecret) { return CBase58Data::SetString(pszSecret) && IsValid(); }
+bool CBitcoinSecret::SetString(const std::string &strSecret) { return SetString(strSecret.c_str()); }
+std::string EncodeLegacyAddr(const CTxDestination &dest, const CChainParams &params)
 {
-    return CBase58Data::SetString(pszSecret) && IsValid();
+    return boost::apply_visitor(DestinationEncoder(params), dest);
 }
 
-bool CBitcoinSecret::SetString(const std::string& strSecret)
+CTxDestination DecodeLegacyAddr(const std::string &str, const CChainParams &params)
 {
-    return SetString(strSecret.c_str());
+    return DecodeDestination(str, params);
 }

@@ -43,12 +43,12 @@ static const int TOOLTIP_WRAP_THRESHOLD = 80;
 static const int MAX_URI_LENGTH = 255;
 
 /* QRCodeDialog -- size of exported QR Code image */
-#define QR_IMAGE_SIZE 300
+#define QR_IMAGE_SIZE 350
 
 /* Number of frames in spinner animation */
 #define SPINNER_FRAMES 36
 
-#define QAPP_ORG_NAME "Dopecoin"
+#define QAPP_ORG_NAME "Dopecoin Core"
 #define QAPP_ORG_DOMAIN "dopecoin.com"
 #define QAPP_APP_NAME_DEFAULT "Dopecoin-Qt"
 #define QAPP_APP_NAME_TESTNET "Dopecoin-Qt-testnet"

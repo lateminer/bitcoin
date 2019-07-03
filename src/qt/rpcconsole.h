@@ -12,6 +12,7 @@
 
 #include <QWidget>
 #include <QCompleter>
+#include <QThread>
 
 class ClientModel;
 class PlatformStyle;
@@ -34,6 +35,8 @@ class RPCConsole: public QWidget
 public:
     explicit RPCConsole(const PlatformStyle *platformStyle, QWidget *parent);
     ~RPCConsole();
+
+    static bool RPCExecuteCommandLine(std::string &strResult, const std::string &strCommand);
 
     void setClientModel(ClientModel *model);
 
@@ -87,7 +90,7 @@ public Q_SLOTS:
     /** Set number of connections shown in the UI */
     void setNumConnections(int count);
     /** Set number of blocks and last block date shown in the UI */
-    void setNumBlocks(int count, const QDateTime& blockDate, double nVerificationProgress);
+    void setNumBlocks(int count, const QDateTime& blockDate, double nVerificationProgress, bool headers);
     /** Set size (number of transactions and memory usage) of the mempool in the UI */
     void setMempoolSize(long numberOfTxs, size_t dynUsage);
     /** Go forward or back in history */
@@ -140,6 +143,7 @@ private:
     QMenu *banTableContextMenu;
     int consoleFontSize;
     QCompleter *autoCompleter;
+    QThread thread;
 };
 
 #endif // BITCOIN_QT_RPCCONSOLE_H
