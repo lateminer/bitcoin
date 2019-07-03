@@ -426,7 +426,7 @@ dopecoin_cli_LDADD = \
 
 dopecoin_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 
-# blackmore-tx binary #
+# dopecoin-tx binary #
 dopecoin_tx_SOURCES = bitcoin-tx.cpp
 dopecoin_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 dopecoin_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)

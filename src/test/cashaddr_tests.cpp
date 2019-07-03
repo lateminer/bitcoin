@@ -46,8 +46,8 @@ bool CaseInsensitiveEqual(const std::string &s1, const std::string &s2)
 BOOST_AUTO_TEST_CASE(cashaddr_testvectors_valid)
 {
     static const std::string CASES[] = {
-        "prefix:x64nx6hz", "PREFIX:X64NX6HZ", "p:gpf8m4h7", "blackcoin:qpzry9x8gf2tvdw0s3jn54khce6mua7lcw20ayyn",
-        "blktest:testnetaddress4d6njnut", "blkreg:555555555555555555555555555555555555555555555udxmlmrz",
+        "prefix:x64nx6hz", "PREFIX:X64NX6HZ", "p:gpf8m4h7", "dopecoin:qpzry9x8gf2tvdw0s3jn54khce6mua7lcw20ayyn",
+        "dopetest:testnetaddress4d6njnut", "dopereg:555555555555555555555555555555555555555555555udxmlmrz",
     };
 
     for (const std::string &str : CASES)
@@ -64,8 +64,8 @@ BOOST_AUTO_TEST_CASE(cashaddr_testvectors_invalid)
 {
     static const std::string CASES[] = {
         "prefix:x32nx6hz", "prEfix:x64nx6hz", "prefix:x64nx6Hz", "pref1x:6m8cxv73", "prefix:", ":u9wsx07j",
-        "blkreg:555555555555555555x55555555555555555555555555udxmlmrz",
-        "blkreg:555555555555555555555555555555551555555555555udxmlmrz", "pre:fix:x32nx6hz", "prefixx64nx6hz",
+        "dopereg:555555555555555555x55555555555555555555555555udxmlmrz",
+        "dopereg:555555555555555555555555555555551555555555555udxmlmrz", "pre:fix:x32nx6hz", "prefixx64nx6hz",
     };
 
     for (const std::string &str : CASES)
@@ -94,9 +94,9 @@ BOOST_AUTO_TEST_CASE(cashaddr_rawencode)
 BOOST_AUTO_TEST_CASE(cashaddr_testvectors_noprefix)
 {
     static const std::pair<std::string, std::string> CASES[] = {
-        {"blackcoin", "qpzry9x8gf2tvdw0s3jn54khce6mua7lcw20ayyn"}, {"prefix", "x64nx6hz"}, {"PREFIX", "X64NX6HZ"},
-        {"p", "gpf8m4h7"}, {"blackcoin", "qpzry9x8gf2tvdw0s3jn54khce6mua7lcw20ayyn"},
-        {"blktest", "testnetaddress4d6njnut"}, {"blkreg", "555555555555555555555555555555555555555555555udxmlmrz"},
+        {"dopecoin", "qpzry9x8gf2tvdw0s3jn54khce6mua7lcw20ayyn"}, {"prefix", "x64nx6hz"}, {"PREFIX", "X64NX6HZ"},
+        {"p", "gpf8m4h7"}, {"dopecoin", "qpzry9x8gf2tvdw0s3jn54khce6mua7lcw20ayyn"},
+        {"dopetest", "testnetaddress4d6njnut"}, {"dopereg", "555555555555555555555555555555555555555555555udxmlmrz"},
     };
 
     for (const std::pair<std::string, std::string> &c : CASES)
