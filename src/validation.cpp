@@ -1232,7 +1232,48 @@ double ConvertBitsToDouble(unsigned int nBits)
 
 CAmount GetBlockSubsidy(int nHeight, CBlockHeader pblock, const Consensus::Params& consensusParams, bool fSuperblockPartOnly)
 {
-    int halvings = nHeight / consensusParams.nSubsidyHalvingInterval;
+    bool fSuperblockPartOnly = false;
+	
+	//int halvings = nHeight / consensusParams.nSubsidyHalvingInterval;
+    // Force block reward to zero when right shift is undefined.
+	CAmount nSubsidy = 12.5 * COIN;
+
+	if(nHeight == 1) { nSubsidy = 16287337.5 * COIN; return nSubsidy;} //23.04.2017 BTC  Block #462987 https://blockchain.info/block/000000000000000001ff610d63a4feabb7e734d03d8fe2d357574d4f54e0967a
+	// Premine for Swap
+    //210000 = 10500000 Coin (50 Coin)
+    //210000 =  5250000 Coin (25 Coin)
+    // 42987 =  537337,5 Coin (12.5 Coin)
+    //462987 = 1628733,5 Coin Limx Dev 23.04.2017
+	int fork1 = 10000;
+    int	block_reward_change_f4 = 4;
+	int BTXFullblock = (42987 + fork1)*4;
+	// 42987 blocks from BTC done with 12.5 BTC, 10000 blocks from prefork with 12.5 BTX
+	if(nHeight <= fork1)
+	    {
+        return nSubsidy;
+	    }
+	else
+	    {
+	    // Our Goal is to have the same amount how BTC
+	    int nSubsidyHalvingInterval2 = 840000;
+	    nSubsidy /= block_reward_change_f4;
+	    int halvings = (nHeight+BTXFullblock) / nSubsidyHalvingInterval2;
+	    if (halvings >= 256) return 0; //if (halvings >= 64) Bitcoin _ We have more blocks factor 4
+	    nSubsidy >>= halvings;
+		
+		// Bitcore 1.00
+        // Hard fork to reduce the block reward by 10 extra percent (allowing budget/superblocks)
+		if (nHeight >= consensusParams.nBudgetPaymentsStartBlock && sporkManager.GetSporkValue(SPORK_FXTC_03_BLOCK_REWARD_PERCENT_START))
+		{ 
+			int nSubsidySuperblockPercent = 10;
+			CAmount nSuperblockPart = (nSubsidy / 100) * nSubsidySuperblockPercent;
+			return nSubsidy - nSuperblockPart;
+		// Bitcore 1.00
+	    return nSubsidy;
+    }
+	
+	/*
+	int halvings = nHeight / consensusParams.nSubsidyHalvingInterval;
     // Force block reward to zero when right shift is undefined.
     if (halvings >= 64)
         return 0;
@@ -1253,7 +1294,7 @@ CAmount GetBlockSubsidy(int nHeight, CBlockHeader pblock, const Consensus::Param
     // Subsidy is cut in half every 865,000 blocks which will occur approximately every 3 years.
     nSubsidy >>= halvings;
     // Make halvings linear since start block defined in spork
-    if (nHeight >= sporkManager.GetSporkValue(SPORK_FXTC_03_BLOCK_REWARD_SMOOTH_HALVING_START)) {
+    if (nHeight >= sporkManager.GetSporkValue(SPORK_FXTC_03_BLOCK_REWARD_PERCENT_START)) {
         nSubsidy -= ((nSubsidy >> 1) * (nHeight % consensusParams.nSubsidyHalvingInterval)) / consensusParams.nSubsidyHalvingInterval;
     }
     // Force minimum subsidy allowed
@@ -1266,6 +1307,7 @@ CAmount GetBlockSubsidy(int nHeight, CBlockHeader pblock, const Consensus::Param
     CAmount nSuperblockPart = (nHeight >= consensusParams.nBudgetPaymentsStartBlock) ? nSubsidy/10 : 0;
 
     return fSuperblockPartOnly ? nSuperblockPart : nSubsidy - nSuperblockPart;
+	*/
 }
 
 //FXTC BEGIN
@@ -1285,12 +1327,13 @@ CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
 
 CAmount GetFounderReward(int nHeight, CAmount blockValue)
 {
-        CAmount ret = 0;
-
-        if (nHeight >= 5) ret = blockValue * 0.01;
-
-        //if (nHeight >= nEndOfFounderReward.WeDontKnowYet) ret = 0;
-
+        //Brainstorming Part !! 
+		CAmount ret = 0;
+        if (sporkManager.GetSporkValue(SPORK_FXTC_03_FUNDRAISING_START))
+		{
+		if(nHeight > 500000 && nHeight > 1000000)
+        ret = blockValue * 0.1;
+        }
         return ret;
 }
 //FXTC END

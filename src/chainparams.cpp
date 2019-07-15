@@ -182,7 +182,8 @@ public:
         // BTX prefix 's'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,125);
         // BTX prefix 's'
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,125);
+        //base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,125); //s 34 letters
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,128);
         // BIP32 prefixes
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x88, 0xB2, 0x1E};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x88, 0xAD, 0xE4};
