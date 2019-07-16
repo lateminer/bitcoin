@@ -122,7 +122,7 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Pa
     {
     LogPrintf("Prediff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str());
     LogPrintf("Vordiff %d \n", nLongTimeLimit);
-    LogPrintf(" %d Block \n", BlockReading->nHeight );
+    LogPrintf(" %d Block", BlockReading->nHeight );
     }
 
     if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit)  //block.nTime
