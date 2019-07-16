@@ -1230,7 +1230,7 @@ double ConvertBitsToDouble(unsigned int nBits)
 }
 //FXTC END
 
-CAmount GetBlockSubsidy(int nHeight, CBlockHeader pblock, const Consensus::Params& consensusParams, bool fSuperblockPartOnly)
+CAmount GetBlockSubsidy(int nHeight, CBlockHeader pblock, const Consensus::Params& consensusParams)
 {
     bool fSuperblockPartOnly = false;
 	
@@ -1263,13 +1263,14 @@ CAmount GetBlockSubsidy(int nHeight, CBlockHeader pblock, const Consensus::Param
 		
 		// Bitcore 1.00
         // Hard fork to reduce the block reward by 10 extra percent (allowing budget/superblocks)
-		if (nHeight >= consensusParams.nBudgetPaymentsStartBlock && sporkManager.GetSporkValue(SPORK_FXTC_03_BLOCK_REWARD_PERCENT_START))
+		if (nHeight >= consensusParams.nBudgetPaymentsStartBlock && sporkManager.GetSporkValue(SPORK_BTX_03_BLOCK_REWARD_PERCENT_START))
 		{ 
 			int nSubsidySuperblockPercent = 10;
 			CAmount nSuperblockPart = (nSubsidy / 100) * nSubsidySuperblockPercent;
 			return nSubsidy - nSuperblockPart;
 		// Bitcore 1.00
 	    return nSubsidy;
+        }
     }
 	
 	/*
@@ -1294,7 +1295,7 @@ CAmount GetBlockSubsidy(int nHeight, CBlockHeader pblock, const Consensus::Param
     // Subsidy is cut in half every 865,000 blocks which will occur approximately every 3 years.
     nSubsidy >>= halvings;
     // Make halvings linear since start block defined in spork
-    if (nHeight >= sporkManager.GetSporkValue(SPORK_FXTC_03_BLOCK_REWARD_PERCENT_START)) {
+    if (nHeight >= sporkManager.GetSporkValue(SPORK_BTX_03_BLOCK_REWARD_PERCENT_START)) {
         nSubsidy -= ((nSubsidy >> 1) * (nHeight % consensusParams.nSubsidyHalvingInterval)) / consensusParams.nSubsidyHalvingInterval;
     }
     // Force minimum subsidy allowed
@@ -1329,7 +1330,7 @@ CAmount GetFounderReward(int nHeight, CAmount blockValue)
 {
         //Brainstorming Part !! 
 		CAmount ret = 0;
-        if (sporkManager.GetSporkValue(SPORK_FXTC_03_FUNDRAISING_START))
+        if (sporkManager.GetSporkValue(SPORK_BTX_03_FUNDRAISING_START))
 		{
 		if(nHeight > 500000 && nHeight > 1000000)
         ret = blockValue * 0.1;
@@ -2230,7 +2231,7 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
     LogPrint(BCLog::BENCH, "      - Connect %u transactions: %.2fms (%.3fms/tx, %.3fms/txin) [%.2fs (%.2fms/blk)]\n", (unsigned)block.vtx.size(), MILLI * (nTime3 - nTime2), MILLI * (nTime3 - nTime2) / block.vtx.size(), nInputs <= 1 ? 0 : MILLI * (nTime3 - nTime2) / (nInputs-1), nTimeConnect * MICRO, nTimeConnect * MILLI / nBlocksTotal);
 
     CAmount blockReward = nFees + GetBlockSubsidy(pindex->nHeight, pindex->GetBlockHeader(), chainparams.GetConsensus());
-    if (block.vtx[0]->GetValueOut() > blockReward * (!sporkManager.IsSporkActive(SPORK_FXTC_02_IGNORE_SLIGHTLY_HIGHER_COINBASE) ? 1 : 2))
+    if (block.vtx[0]->GetValueOut() > blockReward * (!sporkManager.IsSporkActive(SPORK_BTX_02_IGNORE_SLIGHTLY_HIGHER_COINBASE) ? 1 : 2))
         return state.DoS(100,
                          error("ConnectBlock(): coinbase pays too much (actual=%d vs limit=%d)",
                                block.vtx[0]->GetValueOut(), blockReward),
@@ -2238,14 +2239,14 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
 
     // FXTC BEGIN
     CAmount founderReward = GetFounderReward(pindex->nHeight, block.vtx[0]->GetValueOut());
-    if (!sporkManager.IsSporkActive(SPORK_FXTC_02_IGNORE_FOUNDER_REWARD_CHECK) && founderReward > 0) {
+    if (!sporkManager.IsSporkActive(SPORK_BTX_02_IGNORE_FOUNDER_REWARD_CHECK) && founderReward > 0) {
         CTxDestination destination = DecodeDestination(Params().FounderAddress());
         if (IsValidDestination(destination)) {
             CScript FOUNDER_SCRIPT = GetScriptForDestination(destination);
             bool FounderPaid = false;
 
             for (const auto& output : block.vtx[0]->vout) {
-                if (output.scriptPubKey == FOUNDER_SCRIPT && ((output.nValue == founderReward) || sporkManager.IsSporkActive(SPORK_FXTC_02_IGNORE_FOUNDER_REWARD_VALUE))) {
+                if (output.scriptPubKey == FOUNDER_SCRIPT && ((output.nValue == founderReward) || sporkManager.IsSporkActive(SPORK_BTX_02_IGNORE_FOUNDER_REWARD_VALUE))) {
                     FounderPaid = true;
                     break;
                 }
@@ -2270,11 +2271,11 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
     // TODO: resync data (both ways?) and try to reprocess this block later.
     //CAmount blockReward = nFees + GetBlockSubsidy(pindex->nHeight, pindex->GetBlockHeader(), chainparams.GetConsensus());
     std::string strError = "";
-    if (!sporkManager.IsSporkActive(SPORK_FXTC_02_IGNORE_MASTERNODE_REWARD_VALUE) && !IsBlockValueValid(block, pindex->nHeight, block.vtx[0]->GetValueOut(), strError)) {
+    if (!sporkManager.IsSporkActive(SPORK_BTX_02_IGNORE_MASTERNODE_REWARD_VALUE) && !IsBlockValueValid(block, pindex->nHeight, block.vtx[0]->GetValueOut(), strError)) {
         return state.DoS(0, error("ConnectBlock(DASH): %s", strError), REJECT_INVALID, "bad-cb-amount");
     }
 
-    if (!sporkManager.IsSporkActive(SPORK_FXTC_02_IGNORE_MASTERNODE_REWARD_PAYEE) && !IsBlockPayeeValid(block.vtx[0], pindex->nHeight, block.vtx[0]->GetValueOut(), pindex->GetBlockHeader())) {
+    if (!sporkManager.IsSporkActive(SPORK_BTX_02_IGNORE_MASTERNODE_REWARD_PAYEE) && !IsBlockPayeeValid(block.vtx[0], pindex->nHeight, block.vtx[0]->GetValueOut(), pindex->GetBlockHeader())) {
         mapRejectedBlocks.insert(make_pair(block.GetHash(), GetTime()));
         return state.DoS(0, error("ConnectBlock(DASH): couldn't find masternode or superblock payments"),
                                 REJECT_INVALID, "bad-cb-payee");
