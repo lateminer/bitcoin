@@ -341,10 +341,10 @@ UniValue verifymessage(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 3)
         throw runtime_error(
-            "verifymessage \"dopecoinaddress\" \"signature\" \"message\"\n"
+            "verifymessage \"digigreenaddress\" \"signature\" \"message\"\n"
             "\nVerify a signed message\n"
             "\nArguments:\n"
-            "1. \"dopecoinaddress\"  (string, required) The dopecoin address to use for the signature.\n"
+            "1. \"digigreenaddress\"  (string, required) The digigreen address to use for the signature.\n"
             "2. \"signature\"       (string, required) The signature provided by the signer in base 64 encoding (see signmessage).\n"
             "3. \"message\"         (string, required) The message that was signed.\n"
             "\nResult:\n"

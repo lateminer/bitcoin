@@ -48,9 +48,9 @@ static const int MAX_URI_LENGTH = 255;
 /* Number of frames in spinner animation */
 #define SPINNER_FRAMES 36
 
-#define QAPP_ORG_NAME "Dopecoin Core"
+#define QAPP_ORG_NAME "DigiGreen Core"
 #define QAPP_ORG_DOMAIN "dopecoin.com"
-#define QAPP_APP_NAME_DEFAULT "Dopecoin-Qt"
-#define QAPP_APP_NAME_TESTNET "Dopecoin-Qt-testnet"
+#define QAPP_APP_NAME_DEFAULT "DigiGreen-Qt"
+#define QAPP_APP_NAME_TESTNET "DigiGreen-Qt-testnet"
 
 #endif // BITCOIN_QT_GUICONSTANTS_H

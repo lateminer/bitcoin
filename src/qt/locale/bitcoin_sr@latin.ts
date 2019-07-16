@@ -159,7 +159,7 @@
     </message>
     <message>
         <source>Send coins to a Bitcoin address</source>
-        <translation>Pošalji novčiće na Dopecoin adresu</translation>
+        <translation>Pošalji novčiće na DigiGreen adresu</translation>
     </message>
     <message>
         <source>&amp;Verify message...</source>
@@ -167,7 +167,7 @@
     </message>
     <message>
         <source>Bitcoin</source>
-        <translation>Dopecoin</translation>
+        <translation>DigiGreen</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -407,7 +407,7 @@
     <name>bitcoin-core</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Dopecoin More</translation>
+        <translation>DigiGreen More</translation>
     </message>
     <message>
         <source>Information</source>

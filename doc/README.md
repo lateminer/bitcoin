@@ -1,43 +1,43 @@
-Dopecoin Core
+DigiGreen Core
 =============
 
 Setup
 ---------------------
-Dopecoin Core is experimental Dopecoin client and it builds the backbone of the network. However, it downloads and stores the entire history of Dopecoin transactions (which is currently several GBs); depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
+DigiGreen Core is experimental DigiGreen client and it builds the backbone of the network. However, it downloads and stores the entire history of DigiGreen transactions (which is currently several GBs); depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
 
-To download Dopecoin Core, visit [dopecoin.com](https://dopecoin.com).
+To download DigiGreen Core, visit [dopecoin.com](https://dopecoin.com).
 
 Running
 ---------------------
-The following are some helpful notes on how to run Dopecoin on your native platform.
+The following are some helpful notes on how to run DigiGreen on your native platform.
 
 ### Unix
 
 Unpack the files into a directory and run:
 
-- `bin/dopecoin-qt` (GUI) or
-- `bin/dopecoind` (headless)
+- `bin/digigreen-qt` (GUI) or
+- `bin/digigreend` (headless)
 
 ### Windows
 
-Unpack the files into a directory, and then run dopecoin-qt.exe.
+Unpack the files into a directory, and then run digigreen-qt.exe.
 
 ### OS X
 
-Drag Dopecoin-Core to your applications folder, and then run Dopecoin-Core.
+Drag DigiGreen-Core to your applications folder, and then run DigiGreen-Core.
 
 ### Need Help?
 
 * See the documentation at the [Bitcoin Wiki](https://en.bitcoin.it/wiki/Main_Page)
 for help and more information.
-* Ask for help on [#dopecoin](http://webchat.freenode.net?channels=dopecoin) on Freenode. If you don't have an IRC client use [webchat here](http://webchat.freenode.net?channels=dopecoin).
-* Ask for help in Dopecoin room on Discord.
-* Ask for help in [/r/dopecoin/](https://nm.reddit.com/r/dopecoin/) on Reddit.
-* Ask for help on the [BitcoinTalk](https://bitcointalk.org/) forums, in the [Dopecoin topic](https://bitcointalk.org/index.php?topic=467641.new#new).
+* Ask for help on [#digigreen](http://webchat.freenode.net?channels=digigreen) on Freenode. If you don't have an IRC client use [webchat here](http://webchat.freenode.net?channels=digigreen).
+* Ask for help in DigiGreen room on Discord.
+* Ask for help in [/r/digigreen/](https://nm.reddit.com/r/digigreen/) on Reddit.
+* Ask for help on the [BitcoinTalk](https://bitcointalk.org/) forums, in the [DigiGreen topic](https://bitcointalk.org/index.php?topic=467641.new#new).
 
 Building
 ---------------------
-The following are developer notes on how to build Dopecoin on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
+The following are developer notes on how to build DigiGreen on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
 
 - [OS X Build Notes](build-osx.md)
 - [Unix Build Notes](build-unix.md)
@@ -47,7 +47,7 @@ The following are developer notes on how to build Dopecoin on your native platfo
 
 Development
 ---------------------
-The Dopecoin repo's [root README](/README.md) contains relevant information on the development process and automated testing.
+The DigiGreen repo's [root README](/README.md) contains relevant information on the development process and automated testing.
 
 - [Developer Notes](developer-notes.md)
 - [Multiwallet Qt Development](multiwallet-qt.md)
@@ -64,7 +64,7 @@ The Dopecoin repo's [root README](/README.md) contains relevant information on t
 - [Benchmarking](benchmarking.md)
 
 ### Resources
-* Discuss on the [BitcoinTalk](https://bitcointalk.org/) forums, in the [Dopecoin topic](https://bitcointalk.org/index.php?topic=467641.new#new).
+* Discuss on the [BitcoinTalk](https://bitcointalk.org/) forums, in the [DigiGreen topic](https://bitcointalk.org/index.php?topic=467641.new#new).
 
 ### Miscellaneous
 - [Assets Attribution](assets-attribution.md)

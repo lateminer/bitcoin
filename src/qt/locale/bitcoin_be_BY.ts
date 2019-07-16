@@ -1259,7 +1259,7 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Dopecoin More</translation>
+        <translation>DigiGreen More</translation>
     </message>
     <message>
         <source>Do you want to rebuild the block database now?</source>

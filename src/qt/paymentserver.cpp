@@ -48,14 +48,14 @@
 #endif
 
 const int BITCOIN_IPC_CONNECT_TIMEOUT = 1000; // milliseconds
-const QString BITCOIN_IPC_PREFIX("dopecoin:");
+const QString BITCOIN_IPC_PREFIX("digigreen:");
 // BIP70 payment protocol messages
 const char* BIP70_MESSAGE_PAYMENTACK = "PaymentACK";
 const char* BIP70_MESSAGE_PAYMENTREQUEST = "PaymentRequest";
 // BIP71 payment protocol media types
-const char* BIP71_MIMETYPE_PAYMENT = "application/dopecoin-payment";
-const char* BIP71_MIMETYPE_PAYMENTACK = "application/dopecoin-paymentack";
-const char* BIP71_MIMETYPE_PAYMENTREQUEST = "application/dopecoin-paymentrequest";
+const char* BIP71_MIMETYPE_PAYMENT = "application/digigreen-payment";
+const char* BIP71_MIMETYPE_PAYMENTACK = "application/digigreen-paymentack";
+const char* BIP71_MIMETYPE_PAYMENTREQUEST = "application/digigreen-paymentrequest";
 // BIP70 max payment request size in bytes (DoS protection)
 const qint64 BIP70_MAX_PAYMENTREQUEST_SIZE = 50000;
 
@@ -360,7 +360,7 @@ PaymentServer::PaymentServer(QObject* parent, bool startLocalServer) :
     GOOGLE_PROTOBUF_VERIFY_VERSION;
 
     // Install global event filter to catch QFileOpenEvents
-    // on Mac: sent when you click dopecoin: links
+    // on Mac: sent when you click digigreen: links
     // other OSes: helpful when dealing with payment request files
     if (parent)
         parent->installEventFilter(this);
@@ -393,7 +393,7 @@ PaymentServer::~PaymentServer()
 }
 
 //
-// OSX-specific way of handling dopecoin: URIs and PaymentRequest mime types.
+// OSX-specific way of handling digigreen: URIs and PaymentRequest mime types.
 // Also used by paymentservertests.cpp and when opening a payment request file
 // via "Open URI..." menu entry.
 //
@@ -419,7 +419,7 @@ void PaymentServer::initNetManager()
     if (netManager != NULL)
         delete netManager;
 
-    // netManager is used to fetch paymentrequests given in dopecoin: URIs
+    // netManager is used to fetch paymentrequests given in digigreen: URIs
     netManager = new QNetworkAccessManager(this);
 
     QNetworkProxy proxy;
@@ -517,14 +517,14 @@ void PaymentServer::handleURIOrFile(const QString &s)
         return;
     }
 
-    // dopecoin: CashAddr URI
+    // digigreen: CashAddr URI
     QString schemeCash = GUIUtil::bitcoinURIScheme(Params(), true);
     if (handleURI(schemeCash, s))
     {
         return;
     }
 
-    // dopecoin: Legacy URI
+    // digigreen: Legacy URI
     QString schemeLegacy = GUIUtil::bitcoinURIScheme(Params(), false);
     if (handleURI(schemeLegacy, s))
     {

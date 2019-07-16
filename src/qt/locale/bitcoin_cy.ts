@@ -115,7 +115,7 @@
     </message>
     <message>
         <source>Bitcoin</source>
-        <translation>Dopecoin</translation>
+        <translation>DigiGreen</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -485,7 +485,7 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Dopecoin More</translation>
+        <translation>DigiGreen More</translation>
     </message>
     <message>
         <source>Information</source>

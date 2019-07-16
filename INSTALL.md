@@ -1,5 +1,5 @@
-Building Dopecoin
+Building DigiGreen
 ================
 
 See doc/build-*.md for instructions on building the various
-elements of the Dopecoin Core reference implementation of Dopecoin.
+elements of the DigiGreen Core reference implementation of DigiGreen.

@@ -549,11 +549,11 @@ UniValue dumpprivkey(const UniValue& params, bool fHelp)
     
     if (fHelp || params.size() != 1)
         throw runtime_error(
-            "dumpprivkey \"dopecoinaddress\"\n"
-            "\nReveals the private key corresponding to 'dopecoinaddress'.\n"
+            "dumpprivkey \"digigreenaddress\"\n"
+            "\nReveals the private key corresponding to 'digigreenaddress'.\n"
             "Then the importprivkey can be used with this output\n"
             "\nArguments:\n"
-            "1. \"dopecoinaddress\"   (string, required) The dopecoin address for the private key\n"
+            "1. \"digigreenaddress\"   (string, required) The digigreen address for the private key\n"
             "\nResult:\n"
             "\"key\"                (string) The private key\n"
             "\nExamples:\n"
@@ -570,7 +570,7 @@ UniValue dumpprivkey(const UniValue& params, bool fHelp)
     CTxDestination dest = DecodeDestination(strAddress);
     if (!IsValidDestination(dest)) {
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY,
-                           "Invalid Dopecoin address");
+                           "Invalid DigiGreen address");
     }
     if (fWalletUnlockStakingOnly)
     	throw JSONRPCError(RPC_WALLET_UNLOCK_NEEDED, "Wallet is unlocked for staking only.");

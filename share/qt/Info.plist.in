@@ -29,16 +29,16 @@
   <string>????</string>
 
   <key>CFBundleExecutable</key>
-  <string>Dopecoin-Qt</string>
+  <string>DigiGreen-Qt</string>
   
   <key>CFBundleName</key>
-  <string>Dopecoin-Qt</string>
+  <string>DigiGreen-Qt</string>
 
   <key>LSHasLocalizedDisplayName</key>
   <true/>
 
   <key>CFBundleIdentifier</key>
-  <string>org.dopecoin.Dopecoin-Qt</string>
+  <string>org.digigreen.DigiGreen-Qt</string>
 
   <key>CFBundleURLTypes</key>
   <array>

@@ -838,10 +838,10 @@ UniValue checkkernel(const UniValue& params, bool fHelp)
         bool fCreateBlockTemplate = params.size() > 1 ? params[1].get_bool() : false;
 
         if (vNodes.empty())
-            throw JSONRPCError(-9, "Dopecoin is not connected!");
+            throw JSONRPCError(-9, "DigiGreen is not connected!");
 
         if (IsInitialBlockDownload())
-            throw JSONRPCError(-10, "Dopecoin is downloading blocks...");
+            throw JSONRPCError(-10, "DigiGreen is downloading blocks...");
 
         COutPoint kernel;
         CBlockIndex* pindexPrev = chainActive.Tip();

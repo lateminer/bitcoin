@@ -54,7 +54,7 @@ private:
 };
 
 /**
- * Model for list of recently generated payment requests / dopecoin: URIs.
+ * Model for list of recently generated payment requests / digigreen: URIs.
  * Part of wallet model.
  */
 class RecentRequestsTableModel: public QAbstractTableModel

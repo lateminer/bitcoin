@@ -65,11 +65,11 @@ TESTS =
 BENCHMARKS =
 
 if BUILD_BITCOIND
-  bin_PROGRAMS += dopecoind
+  bin_PROGRAMS += digigreend
 endif
 
 if BUILD_BITCOIN_UTILS
-  bin_PROGRAMS += dopecoin-cli dopecoin-tx
+  bin_PROGRAMS += digigreen-cli digigreen-tx
 endif
 
 .PHONY: FORCE check-symbols check-security
@@ -383,17 +383,17 @@ libbitcoin_cli_a_SOURCES = \
 nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
-# dopecoind binary #
-dopecoind_SOURCES = bitcoind.cpp
-dopecoind_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-dopecoind_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-dopecoind_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# digigreend binary #
+digigreend_SOURCES = bitcoind.cpp
+digigreend_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+digigreend_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+digigreend_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-dopecoind_SOURCES += bitcoind-res.rc
+digigreend_SOURCES += bitcoind-res.rc
 endif
 
-dopecoind_LDADD = \
+digigreend_LDADD = \
   $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_COMMON) \
   $(LIBUNIVALUE) \
@@ -406,37 +406,37 @@ dopecoind_LDADD = \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
   
-dopecoind_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
+digigreend_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 
-# dopecoin_cli binary #
-dopecoin_cli_SOURCES = bitcoin-cli.cpp
-dopecoin_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
-dopecoin_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-dopecoin_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# digigreen_cli binary #
+digigreen_cli_SOURCES = bitcoin-cli.cpp
+digigreen_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
+digigreen_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+digigreen_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-dopecoin_cli_SOURCES += bitcoin-cli-res.rc
+digigreen_cli_SOURCES += bitcoin-cli-res.rc
 endif
 
-dopecoin_cli_LDADD = \
+digigreen_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_UTIL) \
   $(LIBBITCOIN_CRYPTO)
 
-dopecoin_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
+digigreen_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 
-# dopecoin-tx binary #
-dopecoin_tx_SOURCES = bitcoin-tx.cpp
-dopecoin_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-dopecoin_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-dopecoin_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# digigreen-tx binary #
+digigreen_tx_SOURCES = bitcoin-tx.cpp
+digigreen_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+digigreen_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+digigreen_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-dopecoin_tx_SOURCES += bitcoin-tx-res.rc
+digigreen_tx_SOURCES += bitcoin-tx-res.rc
 endif
 
-dopecoin_tx_LDADD = \
+digigreen_tx_LDADD = \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
@@ -444,7 +444,7 @@ dopecoin_tx_LDADD = \
   $(LIBBITCOIN_CRYPTO) \
   $(LIBSECP256K1)
 
-dopecoin_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+digigreen_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
 # bitcoinconsensus library #

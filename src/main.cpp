@@ -67,7 +67,7 @@
 using namespace std;
 
 #if defined(NDEBUG)
-# error "Dopecoin cannot be compiled without assertions."
+# error "DigiGreen cannot be compiled without assertions."
 #endif
 
 /**
@@ -131,7 +131,7 @@ static void CheckBlockIndex(const Consensus::Params& consensusParams);
 /** Constant stuff for coinbase transactions we create: */
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "Dopecoin Signed Message:\n";
+const string strMessageMagic = "DigiGreen Signed Message:\n";
 
 // Internal stuff
 namespace {
@@ -2274,7 +2274,7 @@ bool DisconnectBlock(const CBlock& block, CValidationState& state, const CBlockI
         if (outsBlock.nVersion < 0)
             outs->nVersion = outsBlock.nVersion;
 
-        // Dopecoin: skip check
+        // DigiGreen: skip check
         /*
         if (*outs != outsBlock)
             fClean = fClean && error("DisconnectBlock(): added transaction mismatch? database corrupted");
@@ -2498,9 +2498,9 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
 
     // BIP66 is always active
     flags |= SCRIPT_VERIFY_DERSIG;
-    // Dopecoin also requires DER encoding of pubkeys
+    // DigiGreen also requires DER encoding of pubkeys
     flags |= SCRIPT_VERIFY_DERKEY;
-    // Dopecoin also requires low S in sigs
+    // DigiGreen also requires low S in sigs
     flags |= SCRIPT_VERIFY_LOW_S;
 
     // Start enforcing CHECKLOCKTIMEVERIFY, (BIP65) since POS

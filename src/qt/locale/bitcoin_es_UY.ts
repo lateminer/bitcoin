@@ -111,7 +111,7 @@
     </message>
     <message>
         <source>Send coins to a Bitcoin address</source>
-        <translation>Enviar monedas a una dirección Dopecoin</translation>
+        <translation>Enviar monedas a una dirección DigiGreen</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>
@@ -119,7 +119,7 @@
     </message>
     <message>
         <source>Bitcoin</source>
-        <translation>Dopecoin</translation>
+        <translation>DigiGreen</translation>
     </message>
     <message>
         <source>Wallet</source>

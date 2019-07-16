@@ -219,7 +219,7 @@
     </message>
     <message>
         <source>Send coins to a Bitcoin address</source>
-        <translation>Envoyer des pièces à une adresse Dopecoin</translation>
+        <translation>Envoyer des pièces à une adresse DigiGreen</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -243,7 +243,7 @@
     </message>
     <message>
         <source>Bitcoin</source>
-        <translation>Dopecoin</translation>
+        <translation>DigiGreen</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -271,7 +271,7 @@
     </message>
     <message>
         <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Signer vos messages avec vos adresses Dopecoin pour prouver que vous les détenez</translation>
+        <translation>Signer vos messages avec vos adresses DigiGreen pour prouver que vous les détenez</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -291,7 +291,7 @@
     </message>
     <message>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>Demander des paiements (générer QR codes et dopecoin: URIs)</translation>
+        <translation>Demander des paiements (générer QR codes et digigreen: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -299,7 +299,7 @@
     </message>
     <message>
         <source>Open a bitcoin: URI or payment request</source>
-        <translation>Ouvrir un dopecoin: URI ou demande de paiement</translation>
+        <translation>Ouvrir un digigreen: URI ou demande de paiement</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
@@ -307,7 +307,7 @@
     </message>
     <message numerus="yes">
         <source>%n active connection(s) to Bitcoin network</source>
-        <translation><numerusform>%n connexion active au réseau Dopecoin</numerusform><numerusform>%n connexions actives au réseau Dopecoin</numerusform></translation>
+        <translation><numerusform>%n connexion active au réseau DigiGreen</numerusform><numerusform>%n connexions actives au réseau DigiGreen</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -685,7 +685,7 @@
     </message>
     <message>
         <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Ouvrir le port du client Dopecoin automatiquement sur le routeur. Cela ne fonctionne que si votre routeur supporte l'UPnP et si la fonctionnalité est activée.</translation>
+        <translation>Ouvrir le port du client DigiGreen automatiquement sur le routeur. Cela ne fonctionne que si votre routeur supporte l'UPnP et si la fonctionnalité est activée.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -845,7 +845,7 @@
     </message>
     <message>
         <source>Enter a Bitcoin address (e.g. %1)</source>
-        <translation>Entrer une adresse Dopecoin (e.g. %1)</translation>
+        <translation>Entrer une adresse DigiGreen (e.g. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1663,7 +1663,7 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Dopecoin More</translation>
+        <translation>DigiGreen More</translation>
     </message>
     <message>
         <source>&lt;category&gt; can be:</source>

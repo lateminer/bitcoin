@@ -115,7 +115,7 @@
     </message>
     <message>
         <source>Send coins to a Bitcoin address</source>
-        <translation>Enviar monedas a una dirección Dopecoin</translation>
+        <translation>Enviar monedas a una dirección DigiGreen</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -131,7 +131,7 @@
     </message>
     <message>
         <source>Bitcoin</source>
-        <translation>Dopecoin</translation>
+        <translation>DigiGreen</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -159,11 +159,11 @@
     </message>
     <message>
         <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Firma mensajes con tus direcciones Dopecoin para probar que eres dueño de ellas</translation>
+        <translation>Firma mensajes con tus direcciones DigiGreen para probar que eres dueño de ellas</translation>
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>Verificar mensajes para asegurar que estaban firmados con direcciones Dopecoin especificas</translation>
+        <translation>Verificar mensajes para asegurar que estaban firmados con direcciones DigiGreen especificas</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -609,7 +609,7 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Dopecoin More</translation>
+        <translation>DigiGreen More</translation>
     </message>
     <message>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>

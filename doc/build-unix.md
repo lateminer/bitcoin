@@ -1,12 +1,12 @@
 UNIX BUILD NOTES
 ====================
-Some notes on how to build Dopecoin Core in Unix.
+Some notes on how to build DigiGreen Core in Unix.
 
 (for OpenBSD specific instructions, see [build-openbsd.md](build-openbsd.md))
 
 Note
 ---------------------
-Always use absolute paths to configure and compile Dopecoin and the dependencies,
+Always use absolute paths to configure and compile DigiGreen and the dependencies,
 for example, when specifying the path of the dependency:
 
 	../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX
@@ -24,7 +24,7 @@ make
 make install # optional
 ```
 
-This will build dopecoin-qt as well if the dependencies are met.
+This will build digigreen-qt as well if the dependencies are met.
 
 Dependencies
 ---------------------
@@ -55,7 +55,7 @@ Memory Requirements
 --------------------
 
 C++ compilers are memory-hungry. It is recommended to have at least 1.5 GB of
-memory available when compiling Dopecoin Core. On systems with less, gcc can be
+memory available when compiling DigiGreen Core. On systems with less, gcc can be
 tuned to conserve memory with additional CXXFLAGS:
 
 
@@ -86,7 +86,7 @@ BerkeleyDB 5.1, which break binary wallet compatibility with the distributed exe
 are based on BerkeleyDB 6.2. If you do not care about wallet compatibility,
 pass `--with-incompatible-bdb` to configure.
 
-See the section "Disable-wallet mode" to build Dopecoin Core without wallet.
+See the section "Disable-wallet mode" to build DigiGreen Core without wallet.
 
 Optional:
 
@@ -99,7 +99,7 @@ ZMQ dependencies:
 Dependencies for the GUI: Ubuntu & Debian
 -----------------------------------------
 
-If you want to build Dopecoin-Qt, make sure that the required packages for Qt development
+If you want to build DigiGreen-Qt, make sure that the required packages for Qt development
 are installed. Either Qt 5 or Qt 4 are necessary to build the GUI.
 If both Qt 4 and Qt 5 are installed, Qt 5 will be used. Pass `--with-gui=qt4` to configure to choose Qt4.
 To build without GUI pass `--without-gui`.
@@ -116,7 +116,7 @@ libqrencode (optional) can be installed with:
 
     sudo apt-get install libqrencode-dev
 
-Once these are installed, they will be found by configure and a dopecoin-qt executable will be
+Once these are installed, they will be found by configure and a digigreen-qt executable will be
 built by default.
 
 Dependency Build Instructions: Fedora
@@ -139,7 +139,7 @@ libqrencode (optional) can be installed with:
 
 Notes
 -----
-The release is built with GCC and then "strip dopecoind" to strip the debug
+The release is built with GCC and then "strip digigreend" to strip the debug
 symbols, which reduces the executable size by about 90%.
 
 
@@ -162,7 +162,7 @@ It is recommended to use Berkeley DB 6.2. If you have to build it yourself:
 ```bash
 BITCOIN_ROOT=$(pwd)
 
-# Pick some path to install BDB to, here we create a directory within the dopecoin directory
+# Pick some path to install BDB to, here we create a directory within the digigreen directory
 BDB_PREFIX="${BITCOIN_ROOT}/build"
 mkdir -p $BDB_PREFIX
 
@@ -178,7 +178,7 @@ cd db-6.2.32/build_unix/
 ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX
 make install
 
-# Configure Dopecoin Core to use our own-built instance of BDB
+# Configure DigiGreen Core to use our own-built instance of BDB
 cd $BITCOIN_ROOT
 ./autogen.sh
 ./configure LDFLAGS="-L${BDB_PREFIX}/lib/" CPPFLAGS="-I${BDB_PREFIX}/include/" # (other args...)
@@ -197,7 +197,7 @@ If you need to build Boost yourself:
 
 Security
 --------
-To help make your dopecoin installation more secure by making certain attacks impossible to
+To help make your digigreen installation more secure by making certain attacks impossible to
 exploit even if a vulnerability is found, binaries are hardened by default.
 This can be disabled with:
 
@@ -221,7 +221,7 @@ Hardening enables the following features:
 
     To test that you have built PIE executable, install scanelf, part of paxutils, and use:
 
-    	scanelf -e ./dopecoin
+    	scanelf -e ./digigreen
 
     The output should contain:
 
@@ -230,13 +230,13 @@ Hardening enables the following features:
 
 * Non-executable Stack
     If the stack is executable then trivial stack based buffer overflow exploits are possible if
-    vulnerable buffers are found. By default, Dopecoin should be built with a non-executable stack
+    vulnerable buffers are found. By default, DigiGreen should be built with a non-executable stack
     but if one of the libraries it uses asks for an executable stack or someone makes a mistake
     and uses a compiler extension which requires an executable stack, it will silently build an
     executable without the non-executable stack protection.
 
     To verify that the stack is non-executable after compiling use:
-    `scanelf -e ./dopecoin`
+    `scanelf -e ./digigreen`
 
     the output should contain:
 	STK/REL/PTL
@@ -246,7 +246,7 @@ Hardening enables the following features:
 
 Disable-wallet mode
 --------------------
-When the intention is to run only a P2P node without a wallet, Dopecoin may be compiled in
+When the intention is to run only a P2P node without a wallet, DigiGreen may be compiled in
 disable-wallet mode with:
 
     ./configure --disable-wallet
@@ -277,7 +277,7 @@ This example lists the steps necessary to setup and build a command line only, n
 Note:
 Enabling wallet support requires either compiling against a Berkeley DB newer than 6.2 (package `db`) using `--with-incompatible-bdb`,
 or building and depending on a local version of Berkeley DB 6.2.
-As mentioned above, when maintaining portability of the wallet between the standard Dopecoin Core distributions and independently built
+As mentioned above, when maintaining portability of the wallet between the standard DigiGreen Core distributions and independently built
 node software is desired, Berkeley DB 6.2 must be used.
 
 

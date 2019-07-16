@@ -147,7 +147,7 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
 #if QT_VERSION >= 0x040700
     // We don't want translators to use own addresses in translations
     // and this is the only place, where this address is supplied.
-    widget->setPlaceholderText(QObject::tr("Enter a Dopecoin address (e.g. %1)")
+    widget->setPlaceholderText(QObject::tr("Enter a DigiGreen address (e.g. %1)")
                                    .arg(QString::fromStdString(DummyAddress(params, GetConfig()))));
 #endif
     widget->setValidator(new BitcoinAddressEntryValidator(params.CashAddrPrefix(), parent));
@@ -167,7 +167,7 @@ QString bitcoinURIScheme(const CChainParams &params, bool useCashAddr)
 {
     if (!useCashAddr)
     {
-        return "dopecoin";
+        return "digigreen";
     }
     return QString::fromStdString(params.CashAddrPrefix());
 }
@@ -259,7 +259,7 @@ bool parseBitcoinURI(const QString &scheme, const QUrl &uri, SendCoinsRecipient 
 bool parseBitcoinURI(const QString &scheme, QString uri, SendCoinsRecipient *out)
 {
     //
-    //    Cannot handle this later, because dopecoin://
+    //    Cannot handle this later, because digigreen://
     //    will cause Qt to see the part after // as host,
     //    which will lower-case it (and thus invalidate the address).
     if (uri.startsWith(scheme + "://", Qt::CaseInsensitive))

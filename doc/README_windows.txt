@@ -1,9 +1,9 @@
-Dopecoin Core
+DigiGreen Core
 =============
 
 Intro
 -----
-Dopecoin is a free open source peer-to-peer electronic cash system that is
+DigiGreen is a free open source peer-to-peer electronic cash system that is
 completely decentralized, without the need for a central server or trusted
 parties.  Users hold the crypto keys to their own money and transact directly
 with each other, with the help of a P2P network to check for double-spending.
@@ -11,11 +11,11 @@ with each other, with the help of a P2P network to check for double-spending.
 
 Setup
 -----
-Unpack the files into a directory and run dopecoin-qt.exe.
+Unpack the files into a directory and run digigreen-qt.exe.
 
-Dopecoin Core is the original Dopecoin client and it builds the backbone of the network.
-However, it downloads and stores the entire history of Dopecoin transactions;
+DigiGreen Core is the original DigiGreen client and it builds the backbone of the network.
+However, it downloads and stores the entire history of DigiGreen transactions;
 depending on the speed of your computer and network connection, the synchronization
 process can take anywhere from a few hours to a day or more.
 
-See the Dopecoin Core website at https://dopecoin.com for more help and information.
+See the DigiGreen Core website at https://dopecoin.com for more help and information.

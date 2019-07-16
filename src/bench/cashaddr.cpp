@@ -14,17 +14,17 @@ static void CashAddrEncode(benchmark::State &state) {
                                    139, 2,  215, 100, 91,  38,  11,  141,
                                    253, 40, 117, 21,  16,  90,  200, 24};
     while (state.KeepRunning()) {
-        cashaddr::Encode("dopecoin", buffer);
+        cashaddr::Encode("digigreen", buffer);
     }
 }
 
 static void CashAddrDecode(benchmark::State &state) {
     const char *addrWithPrefix =
-        "dopecoin:qprnwmr02d7ky9m693qufj5mgkpf4wvssv0w86tkjd";
+        "digigreen:qprnwmr02d7ky9m693qufj5mgkpf4wvssv0w86tkjd";
     const char *addrNoPrefix = "qprnwmr02d7ky9m693qufj5mgkpf4wvssv0w86tkjd";
     while (state.KeepRunning()) {
-        cashaddr::Decode(addrWithPrefix, "dopecoin");
-        cashaddr::Decode(addrNoPrefix, "dopecoin");
+        cashaddr::Decode(addrWithPrefix, "digigreen");
+        cashaddr::Decode(addrNoPrefix, "digigreen");
     }
 }
 

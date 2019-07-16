@@ -98,8 +98,8 @@ const int64_t nStartupTime = GetTime();
 
 using namespace std;
 
-const char * const BITCOIN_CONF_FILENAME = "dopecoin.conf";
-const char * const BITCOIN_PID_FILENAME = "dopecoind.pid";
+const char * const BITCOIN_CONF_FILENAME = "digigreen.conf";
+const char * const BITCOIN_PID_FILENAME = "digigreend.pid";
 
 map<string, string> mapArgs;
 map<string, vector<string> > mapMultiArgs;
@@ -434,7 +434,7 @@ static std::string FormatException(const std::exception* pex, const char* pszThr
     char pszModule[MAX_PATH] = "";
     GetModuleFileNameA(NULL, pszModule, sizeof(pszModule));
 #else
-    const char* pszModule = "dopecoin";
+    const char* pszModule = "digigreen";
 #endif
     if (pex)
         return strprintf(
@@ -454,13 +454,13 @@ void PrintExceptionContinue(const std::exception* pex, const char* pszThread)
 boost::filesystem::path GetDefaultDataDir()
 {
     namespace fs = boost::filesystem;
-    // Windows < Vista: C:\Documents and Settings\Username\Application Data\dopecoin
-    // Windows >= Vista: C:\Users\Username\AppData\Roaming\dopecoin
-    // Mac: ~/Library/Application Support/dopecoin
-    // Unix: ~/.dopecoin
+    // Windows < Vista: C:\Documents and Settings\Username\Application Data\digigreen
+    // Windows >= Vista: C:\Users\Username\AppData\Roaming\digigreen
+    // Mac: ~/Library/Application Support/digigreen
+    // Unix: ~/.digigreen
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "dopecoin";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "digigreen";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -470,10 +470,10 @@ boost::filesystem::path GetDefaultDataDir()
         pathRet = fs::path(pszHome);
 #ifdef MAC_OSX
     // Mac
-    return pathRet / "Library/Application Support/dopecoin";
+    return pathRet / "Library/Application Support/digigreen";
 #else
     // Unix
-    return pathRet / ".dopecoin";
+    return pathRet / ".digigreen";
 #endif
 #endif
 }
@@ -817,7 +817,7 @@ std::string CopyrightHolders(const std::string& strPrefix)
         strPrefix + "The Bitcoin Core developers" +
         "\n" + strPrefix + "The Blackcoin developers" +
         "\n" + strPrefix + "The Blackcoin More developers" +
-        "\n" + strPrefix + "The Dopecoin developers";
+        "\n" + strPrefix + "The DigiGreen developers";
 
     return strCopyrightHolders;
 }

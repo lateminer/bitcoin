@@ -577,7 +577,7 @@ void ThreadStakeMiner(CWallet *pwallet, const CChainParams& chainparams)
     LogPrintf("Staking started\n");
 
     // Make this thread recognisable as the mining thread
-    RenameThread("dopecoin-miner");
+    RenameThread("digigreen-miner");
 
     CReserveKey reservekey(pwallet);
 

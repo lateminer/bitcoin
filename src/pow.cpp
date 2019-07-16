@@ -88,7 +88,7 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params&
         return false;
 
     // Check proof of work matches claimed amount
-    // Dopecoin: skip genesis block check
+    // DigiGreen: skip genesis block check
     if (UintToArith256(hash) > bnTarget && hash != params.hashGenesisBlock)
         return false;
 

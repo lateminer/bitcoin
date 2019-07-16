@@ -55,7 +55,7 @@ bool IsStandard(const CScript& scriptPubKey, txnouttype& whichType)
 
 int64_t FutureDrift(int64_t nTime)
 {
-    // Dopecoin: skip some more blocks after nLastPOWBlock
+    // DigiGreen: skip some more blocks after nLastPOWBlock
     // loose policy for FutureDrift in regtest mode
     if (Params().GetConsensus().fPowNoRetargeting && chainActive.Height() <= (Params().GetConsensus().nLastPOWBlock + DEFAULT_CHECKBLOCKS)) {
              return nTime + 24 * 60 * 60;

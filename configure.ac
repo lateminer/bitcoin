@@ -7,17 +7,17 @@ define(_CLIENT_VERSION_BUILD, 0)
 define(_CLIENT_VERSION_IS_RELEASE, true)
 define(_COPYRIGHT_YEAR, 2019)
 define(_COPYRIGHT_HOLDERS,[The %s developers])
-define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[Dopecoin Core]])
-AC_INIT([Dopecoin Core],[_CLIENT_VERSION_MAJOR._CLIENT_VERSION_MINOR._CLIENT_VERSION_REVISION],[https://github.com/dopecoin-dev/dopecoin-core],[dopecoin-core])
+define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[DigiGreen Core]])
+AC_INIT([DigiGreen Core],[_CLIENT_VERSION_MAJOR._CLIENT_VERSION_MINOR._CLIENT_VERSION_REVISION],[https://github.com/dopecoin-dev/dopecoin-core],[dopecoin-core])
 AC_CONFIG_SRCDIR([src/main.cpp])
 AC_CONFIG_HEADERS([src/config/bitcoin-config.h])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([build-aux/m4])
 
-BITCOIN_DAEMON_NAME=dopecoind
-BITCOIN_GUI_NAME=dopecoin-qt
-BITCOIN_CLI_NAME=dopecoin-cli
-BITCOIN_TX_NAME=dopecoin-tx
+BITCOIN_DAEMON_NAME=digigreend
+BITCOIN_GUI_NAME=digigreen-qt
+BITCOIN_CLI_NAME=digigreen-cli
+BITCOIN_TX_NAME=digigreen-tx
 
 AC_CANONICAL_HOST
 
