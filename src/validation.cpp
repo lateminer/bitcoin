@@ -1232,7 +1232,7 @@ double ConvertBitsToDouble(unsigned int nBits)
 
 CAmount GetBlockSubsidy(int nHeight, CBlockHeader pblock, const Consensus::Params& consensusParams)
 {
-    bool fSuperblockPartOnly = false;
+    //bool fSuperblockPartOnly = false;
 	
 	//int halvings = nHeight / consensusParams.nSubsidyHalvingInterval;
     // Force block reward to zero when right shift is undefined.

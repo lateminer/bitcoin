@@ -63,8 +63,23 @@ static UniValue GetNetworkHashPS(int lookup, int height, int32_t nAlgo) {
         return 0;
 
     // If lookup is -1, then use blocks since last difficulty change.
-    if (lookup <= 0)
+    /*
+	if (lookup <= 0)
         lookup = pb->nHeight % Params().GetConsensus().DifficultyAdjustmentInterval() + 1;
+	*/
+	
+	//Bitcore
+	
+	if (height <= 21000) 
+	{
+        if (lookup <= 0)
+            lookup = pb->nHeight % Params().GetConsensus().DifficultyAdjustmentInterval() + 1;
+    }
+    else 
+	{
+        if (lookup <= 0)
+            lookup = pb->nHeight % Params().GetConsensus().DifficultyAdjustmentIntervalV2() + 1;
+    }
 
     // If lookup is larger than chain, then set it to chain length.
     if (lookup > pb->nHeight)
