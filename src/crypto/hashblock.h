@@ -1,5 +1,5 @@
-#ifndef BITCORE_HASHBLOCK_H
-#define BITCORE_HASHBLOCK_H
+#ifndef BITCORE_CRYPTO_HASHBLOCK_H
+#define BITCORE_CRYPTO_HASHBLOCK_H
 
 #include "arith_uint256.h"
 #include "sph_blake.h"
@@ -197,4 +197,4 @@ inline uint256 HashTimeTravel(const T1 pbegin, const T1 pend, uint32_t timestamp
 
 }
 
-#endif // BITCORE_HASHBLOCK_H
+#endif // BITCORE_CRYPTO_HASHBLOCK_H
