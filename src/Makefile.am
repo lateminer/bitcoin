@@ -392,6 +392,7 @@ crypto_libbitcoin_crypto_base_a_SOURCES += \
   crypto/cubehash.c \
   crypto/echo.c \
   crypto/groestl.c \
+  crypto/hashblock.h \
   crypto/jh.c \
   crypto/keccak.c \
   crypto/luffa.c \
