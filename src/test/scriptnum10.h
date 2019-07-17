@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_TEST_SCRIPTNUM10_H
-#define FXTC_TEST_SCRIPTNUM10_H
+#ifndef BTX_TEST_SCRIPTNUM10_H
+#define BTX_TEST_SCRIPTNUM10_H
 
 #include <algorithm>
 #include <limits>
@@ -180,4 +180,4 @@ private:
 };
 
 
-#endif // FXTC_TEST_BIGNUM_H
+#endif // BTX_TEST_BIGNUM_H

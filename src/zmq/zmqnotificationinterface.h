@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_ZMQ_ZMQNOTIFICATIONINTERFACE_H
-#define FXTC_ZMQ_ZMQNOTIFICATIONINTERFACE_H
+#ifndef BTX_ZMQ_ZMQNOTIFICATIONINTERFACE_H
+#define BTX_ZMQ_ZMQNOTIFICATIONINTERFACE_H
 
 #include <validationinterface.h>
 #include <string>
@@ -41,4 +41,4 @@ private:
 
 extern CZMQNotificationInterface* g_zmq_notification_interface;
 
-#endif // FXTC_ZMQ_ZMQNOTIFICATIONINTERFACE_H
+#endif // BTX_ZMQ_ZMQNOTIFICATIONINTERFACE_H

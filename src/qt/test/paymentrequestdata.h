@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_QT_TEST_PAYMENTREQUESTDATA_H
-#define FXTC_QT_TEST_PAYMENTREQUESTDATA_H
+#ifndef BTX_QT_TEST_PAYMENTREQUESTDATA_H
+#define BTX_QT_TEST_PAYMENTREQUESTDATA_H
 
 //
 // Data for paymentservertests.cpp
@@ -462,4 +462,4 @@ XR2T3Gy2LzRvhVA25QgGqpz0/juS2BtmNbsZPkN9gMMwKimgzc+PuCzmEKwPK9cQ\
 YQ==\
 ";
 
-#endif // FXTC_QT_TEST_PAYMENTREQUESTDATA_H
+#endif // BTX_QT_TEST_PAYMENTREQUESTDATA_H
