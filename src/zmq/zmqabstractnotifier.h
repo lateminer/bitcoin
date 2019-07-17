@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BTX_ZMQ_ZMQABSTRACTNOTIFIER_H
-#define BTX_ZMQ_ZMQABSTRACTNOTIFIER_H
+#ifndef BITCORE_ZMQ_ZMQABSTRACTNOTIFIER_H
+#define BITCORE_ZMQ_ZMQABSTRACTNOTIFIER_H
 
 #include <zmq/zmqconfig.h>
 
@@ -41,4 +41,4 @@ protected:
     std::string address;
 };
 
-#endif // BTX_ZMQ_ZMQABSTRACTNOTIFIER_H
+#endif // BITCORE_ZMQ_ZMQABSTRACTNOTIFIER_H

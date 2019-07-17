@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BTX_SUPPORT_LOCKEDPOOL_H
-#define BTX_SUPPORT_LOCKEDPOOL_H
+#ifndef BITCORE_SUPPORT_LOCKEDPOOL_H
+#define BITCORE_SUPPORT_LOCKEDPOOL_H
 
 #include <stdint.h>
 #include <list>
@@ -237,4 +237,4 @@ private:
     static std::once_flag init_flag;
 };
 
-#endif // BTX_SUPPORT_LOCKEDPOOL_H
+#endif // BITCORE_SUPPORT_LOCKEDPOOL_H
