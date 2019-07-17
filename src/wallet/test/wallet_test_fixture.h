@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BTX_WALLET_TEST_WALLET_TEST_FIXTURE_H
-#define BTX_WALLET_TEST_WALLET_TEST_FIXTURE_H
+#ifndef BITCORE_WALLET_TEST_WALLET_TEST_FIXTURE_H
+#define BITCORE_WALLET_TEST_WALLET_TEST_FIXTURE_H
 
 #include <test/test_bitcoin.h>
 
@@ -20,4 +20,4 @@ struct WalletTestingSetup: public TestingSetup {
     CWallet m_wallet;
 };
 
-#endif // BTX_WALLET_TEST_WALLET_TEST_FIXTURE_H
+#endif // BITCORE_WALLET_TEST_WALLET_TEST_FIXTURE_H
