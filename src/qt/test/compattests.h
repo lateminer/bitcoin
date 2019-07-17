@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BTX_QT_TEST_COMPATTESTS_H
-#define BTX_QT_TEST_COMPATTESTS_H
+#ifndef BITCORE_QT_TEST_COMPATTESTS_H
+#define BITCORE_QT_TEST_COMPATTESTS_H
 
 #include <QObject>
 #include <QTest>
@@ -16,4 +16,4 @@ private Q_SLOTS:
     void bswapTests();
 };
 
-#endif // BTX_QT_TEST_COMPATTESTS_H
+#endif // BITCORE_QT_TEST_COMPATTESTS_H

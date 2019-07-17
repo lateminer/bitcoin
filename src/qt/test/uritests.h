@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BTX_QT_TEST_URITESTS_H
-#define BTX_QT_TEST_URITESTS_H
+#ifndef BITCORE_QT_TEST_URITESTS_H
+#define BITCORE_QT_TEST_URITESTS_H
 
 #include <QObject>
 #include <QTest>
@@ -16,4 +16,4 @@ private Q_SLOTS:
     void uriTests();
 };
 
-#endif // BTX_QT_TEST_URITESTS_H
+#endif // BITCORE_QT_TEST_URITESTS_H

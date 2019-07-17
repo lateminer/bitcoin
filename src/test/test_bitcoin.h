@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BTX_TEST_TEST_BITCOIN_H
-#define BTX_TEST_TEST_BITCOIN_H
+#ifndef BITCORE_TEST_TEST_BITCOIN_H
+#define BITCORE_TEST_TEST_BITCOIN_H
 
 #include <chainparamsbase.h>
 #include <fs.h>

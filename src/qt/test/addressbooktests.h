@@ -1,5 +1,5 @@
-#ifndef BTX_QT_TEST_ADDRESSBOOKTESTS_H
-#define BTX_QT_TEST_ADDRESSBOOKTESTS_H
+#ifndef BITCORE_QT_TEST_ADDRESSBOOKTESTS_H
+#define BITCORE_QT_TEST_ADDRESSBOOKTESTS_H
 
 #include <QObject>
 #include <QTest>
@@ -12,4 +12,4 @@ private Q_SLOTS:
     void addressBookTests();
 };
 
-#endif // BTX_QT_TEST_ADDRESSBOOKTESTS_H
+#endif // BITCORE_QT_TEST_ADDRESSBOOKTESTS_H

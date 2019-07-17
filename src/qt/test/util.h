@@ -1,5 +1,5 @@
-#ifndef BTX_QT_TEST_UTIL_H
-#define BTX_QT_TEST_UTIL_H
+#ifndef BITCORE_QT_TEST_UTIL_H
+#define BITCORE_QT_TEST_UTIL_H
 
 /**
  * Press "Ok" button in message box dialog.
@@ -9,4 +9,4 @@
  */
 void ConfirmMessage(QString* text = nullptr, int msec = 0);
 
-#endif // BTX_QT_TEST_UTIL_H
+#endif // BITCORE_QT_TEST_UTIL_H
