@@ -16,7 +16,8 @@
 #include <util.h>
 #include <math.h>
 
-unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Params& params, const CBlockHeader *pblock) {
+unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params ) 
+{
     // current difficulty formula, ERC3 - DUAL_KGW3, written by Bitcoin Talk Limx Dev
     // BitSend and Europecoin Developer
     const CBlockIndex *BlockLastSolved = pindexLast;
@@ -122,7 +123,7 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Pa
     {
     LogPrintf("Prediff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str());
     LogPrintf("Vordiff %d \n", nLongTimeLimit);
-    LogPrintf(" %d Block \n", BlockReading->nHeight );
+    LogPrintf(" %d Block", BlockReading->nHeight );
     }
 
     if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit)  //block.nTime
@@ -136,6 +137,7 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Pa
     }
     return bnNew.GetCompact();
 }
+
 
 unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params) {
     if (params.fPowNoRetargeting)
