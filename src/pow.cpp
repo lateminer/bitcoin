@@ -334,7 +334,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     int fork2 = 21000;
 
     if (pindexLast->nHeight+1 <= fork1) {
-        return KimotoGravityWell(pindexLast, pblock, params);
+        return DUAL_KGW3(pindexLast, pblock, params);
     }
 
     unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
