@@ -27,19 +27,19 @@ uint256 CBlockHeader::GetPoWHash() const
 {
     uint256 powHash = uint256S("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
     //BitCore
-	
-	if(GetBlockTime() >= 1493124696) //Human time (GMT): Tue, 25 Apr 2017 12:51:36 GMT
-		{
-				return HashTimeTravel(BEGIN(nVersion), END(nNonce), GetBlockTime()); // BitCore TimeTravel
-		}
-		else
-		{
-				uint256 thash;
-				scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash)); // BitCore Scrypt
-				return thash;
-		}
-		
-	//Brainstormingpart
+    
+    if(GetBlockTime() >= 1493124696) //Human time (GMT): Tue, 25 Apr 2017 12:51:36 GMT
+        {
+                return HashTimeTravel(BEGIN(nVersion), END(nNonce), GetBlockTime()); // BitCore TimeTravel
+        }
+        else
+        {
+                uint256 thash;
+                scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash)); // BitCore Scrypt
+                return thash;
+        }
+        
+    //Brainstormingpart
     switch (nVersion & ALGO_VERSION_MASK)
     {
         case ALGO_SHA256D: powHash = GetHash(); break;
