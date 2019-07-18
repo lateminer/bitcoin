@@ -26,8 +26,9 @@ uint256 CBlockHeader::GetHash() const
 uint256 CBlockHeader::GetPoWHash() const
 {
     uint256 powHash = uint256S("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+
     //BitCore
-    
+
     if(GetBlockTime() >= 1493124696) //Human time (GMT): Tue, 25 Apr 2017 12:51:36 GMT
         {
                 return HashTimeTravel(BEGIN(nVersion), END(nNonce), GetBlockTime()); // BitCore TimeTravel
@@ -38,7 +39,7 @@ uint256 CBlockHeader::GetPoWHash() const
                 scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash)); // BitCore Scrypt
                 return thash;
         }
-        
+
     //Brainstormingpart
     switch (nVersion & ALGO_VERSION_MASK)
     {
