@@ -325,17 +325,21 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     assert(pindexFirst);
 
     return CalculateNextWorkRequired(pindexLast, pindexFirst->GetBlockTime(), params);
-	*/
-	
-	// Bitcore
+    */
+
+    // Bitcore
     assert(pindexLast != nullptr);
 
     int fork1 = 1000000;
     int fork2 = 21000;
 
     if (pindexLast->nHeight+1 <= fork1) {
-        return DUAL_KGW3(pindexLast, pblock, params);
+        //Core 0.15
+        //return DUAL_KGW3(pindexLast, pblock, params);
+        //Core 0.15
+        unsigned int nBits = DUAL_KGW3(pindexLast, pblock, params);
     }
+
 
     unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
     if (pindexLast->nHeight+1 <= fork2)
