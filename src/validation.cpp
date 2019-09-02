@@ -2561,8 +2561,8 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
     int nHeight = pindexPrev->nHeight+1;
 
     // Check proof of work
-    if (block.nBits != GetNextTargetRequired(pindexPrev, &block, consensusParams, block.IsProofOfStake()))
-        return state.DoS(100, false, REJECT_INVALID, "bad-diffbits", false, "incorrect difficulty value");
+    //if (block.nBits != GetNextTargetRequired(pindexPrev, &block, consensusParams, block.IsProofOfStake()))
+    //    return state.DoS(100, false, REJECT_INVALID, "bad-diffbits", false, "incorrect difficulty value");
 
     // Check against checkpoints
     if (fCheckpointsEnabled) {
@@ -2575,12 +2575,12 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
     } 
 
     // Check timestamp against prev
-    if (pindexPrev && block.IsProofOfStake() && block.GetBlockTime() <= pindexPrev->GetPastTimeLimit())
+    if (pindexPrev && /*block.IsProofOfStake() &&*/ block.GetBlockTime() <= pindexPrev->GetPastTimeLimit())
         return state.Invalid(error("%s: block's timestamp is too early", __func__),
                              REJECT_INVALID, "time-too-old");
 
     // Check timestamp
-    if (block.IsProofOfStake() && block.GetBlockTime() > FutureDrift(nAdjustedTime))
+    if (/*block.IsProofOfStake() &&*/ block.GetBlockTime() > FutureDrift(nAdjustedTime))
         return state.DoS(50, error("%s: block timestamp too far in the future", __func__),
                              REJECT_INVALID, "time-too-new");
 
