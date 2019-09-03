@@ -91,11 +91,6 @@ template<typename Stream> inline void ser_writedata32(Stream &s, uint32_t obj)
     obj = htole32(obj);
     s.write((char*)&obj, 4);
 }
-template<typename Stream> inline void ser_writedata32be(Stream &s, uint32_t obj)
-{
-    obj = htobe32(obj);
-    s.write((char*)&obj, 4);
-}
 template<typename Stream> inline void ser_writedata64(Stream &s, uint64_t obj)
 {
     obj = htole64(obj);
@@ -118,12 +113,6 @@ template<typename Stream> inline uint32_t ser_readdata32(Stream &s)
     uint32_t obj;
     s.read((char*)&obj, 4);
     return le32toh(obj);
-}
-template<typename Stream> inline uint32_t ser_readdata32be(Stream &s)
-{
-    uint32_t obj;
-    s.read((char*)&obj, 4);
-    return be32toh(obj);
 }
 template<typename Stream> inline uint64_t ser_readdata64(Stream &s)
 {
@@ -333,8 +322,8 @@ uint64_t ReadCompactSize(Stream& is)
  * 0:         [0x00]  256:        [0x81 0x00]
  * 1:         [0x01]  16383:      [0xFE 0x7F]
  * 127:       [0x7F]  16384:      [0xFF 0x00]
- * 128:  [0x80 0x00]  16511: [0x80 0xFF 0x7F]
- * 255:  [0x80 0x7F]  65535: [0x82 0xFD 0x7F]
+ * 128:  [0x80 0x00]  16511:      [0xFF 0x7F]
+ * 255:  [0x80 0x7F]  65535: [0x82 0xFE 0x7F]
  * 2^32:           [0x8E 0xFE 0xFE 0xFF 0x00]
  */
 
@@ -384,7 +373,10 @@ I ReadVarInt(Stream& is)
 
 #define FLATDATA(obj) REF(CFlatData((char*)&(obj), (char*)&(obj) + sizeof(obj)))
 #define VARINT(obj) REF(WrapVarInt(REF(obj)))
+/*
+// Disable BIP152
 #define COMPACTSIZE(obj) REF(CCompactSize(REF(obj)))
+*/
 #define LIMITED_STRING(obj,n) REF(LimitedString< n >(REF(obj)))
 
 /** 
@@ -455,6 +447,8 @@ public:
     }
 };
 
+/*
+// Disable BIP152
 class CCompactSize
 {
 protected:
@@ -476,6 +470,7 @@ public:
         n = ReadCompactSize<Stream>(s);
     }
 };
+*/
 
 template<size_t Limit>
 class LimitedString

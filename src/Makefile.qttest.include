@@ -1,9 +1,15 @@
+# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 bin_PROGRAMS += qt/test/test_bitcoin-qt
 TESTS += qt/test/test_bitcoin-qt
 
 TEST_QT_MOC_CPP = \
   qt/test/moc_bitcoinaddressvalidatortests.cpp \
+  qt/test/moc_compattests.cpp \
   qt/test/moc_guiutiltests.cpp \
+  qt/test/moc_rpcnestedtests.cpp \
   qt/test/moc_uritests.cpp
 
 if ENABLE_WALLET
@@ -12,7 +18,9 @@ endif
 
 TEST_QT_H = \
   qt/test/bitcoinaddressvalidatortests.h \
+  qt/test/compattests.h \
   qt/test/guiutiltests.h \
+  qt/test/rpcnestedtests.h \
   qt/test/uritests.h \
   qt/test/paymentrequestdata.h \
   qt/test/paymentservertests.h
@@ -22,7 +30,9 @@ qt_test_test_bitcoin_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_
 
 qt_test_test_bitcoin_qt_SOURCES = \
   qt/test/bitcoinaddressvalidatortests.cpp \
+  qt/test/compattests.cpp \
   qt/test/guiutiltests.cpp \
+  qt/test/rpcnestedtests.cpp \
   qt/test/test_main.cpp \
   qt/test/uritests.cpp \
   $(TEST_QT_H)
@@ -40,7 +50,7 @@ endif
 if ENABLE_ZMQ
 qt_test_test_bitcoin_qt_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
 endif
-qt_test_test_bitcoin_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) \
+qt_test_test_bitcoin_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CONSENSUS) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) \
   $(LIBMEMENV) $(BOOST_LIBS) $(QT_DBUS_LIBS) $(QT_TEST_LIBS) $(QT_LIBS) \
   $(QR_LIBS) $(PROTOBUF_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
   $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)

@@ -3,6 +3,10 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#if defined(HAVE_CONFIG_H)
+#include "config/bitcoin-config.h"
+#endif
+
 #include "chainparamsbase.h"
 #include "clientversion.h"
 #include "rpc/client.h"
@@ -24,6 +28,7 @@ using namespace std;
 
 static const char DEFAULT_RPCCONNECT[] = "127.0.0.1";
 static const int DEFAULT_HTTP_CLIENT_TIMEOUT=900;
+static const int CONTINUE_EXECUTION=-1;
 
 std::string HelpMessageCli()
 {
@@ -63,17 +68,21 @@ public:
 
 };
 
-static bool AppInitRPC(int argc, char* argv[])
+//
+// This function returns either one of EXIT_ codes when it's expected to stop the process or
+// CONTINUE_EXECUTION when it's expected to continue further.
+//
+static int AppInitRPC(int argc, char* argv[])
 {
     //
     // Parameters
     //
     ParseParameters(argc, argv);
     if (argc<2 || mapArgs.count("-?") || mapArgs.count("-h") || mapArgs.count("-help") || mapArgs.count("-version")) {
-        std::string strUsage = _("Bitcoin Core RPC client version") + " " + FormatFullVersion() + "\n";
+        std::string strUsage = strprintf(_("%s RPC client version"), _(PACKAGE_NAME)) + " " + FormatFullVersion() + "\n";
         if (!mapArgs.count("-version")) {
             strUsage += "\n" + _("Usage:") + "\n" +
-                  "  bitcoin-cli [options] <command> [params]  " + _("Send command to Bitcoin Core") + "\n" +
+                  "  bitcoin-cli [options] <command> [params]  " + strprintf(_("Send command to %s"), _(PACKAGE_NAME)) + "\n" +
                   "  bitcoin-cli [options] help                " + _("List commands") + "\n" +
                   "  bitcoin-cli [options] help <command>      " + _("Get help for a command") + "\n";
 
@@ -81,31 +90,35 @@ static bool AppInitRPC(int argc, char* argv[])
         }
 
         fprintf(stdout, "%s", strUsage.c_str());
-        return false;
+        if (argc < 2) {
+            fprintf(stderr, "Error: too few parameters\n");
+            return EXIT_FAILURE;
+        }
+        return EXIT_SUCCESS;
     }
     if (!boost::filesystem::is_directory(GetDataDir(false))) {
         fprintf(stderr, "Error: Specified data directory \"%s\" does not exist.\n", mapArgs["-datadir"].c_str());
-        return false;
+        return EXIT_FAILURE;
     }
     try {
         ReadConfigFile(mapArgs, mapMultiArgs);
     } catch (const std::exception& e) {
         fprintf(stderr,"Error reading configuration file: %s\n", e.what());
-        return false;
+        return EXIT_FAILURE;
     }
     // Check for -testnet or -regtest parameter (BaseParams() calls are only valid after this clause)
     try {
         SelectBaseParams(ChainNameFromCommandLine());
     } catch (const std::exception& e) {
         fprintf(stderr, "Error: %s\n", e.what());
-        return false;
+        return EXIT_FAILURE;
     }
     if (GetBoolArg("-rpcssl", false))
     {
         fprintf(stderr, "Error: SSL mode for RPC (-rpcssl) is no longer supported.\n");
-        return false;
+        return EXIT_FAILURE;
     }
-    return true;
+    return CONTINUE_EXECUTION;
 }
 
 
@@ -310,12 +323,13 @@ int main(int argc, char* argv[])
     SetupEnvironment();
     if (!SetupNetworking()) {
         fprintf(stderr, "Error: Initializing networking failed\n");
-        exit(1);
+        return EXIT_FAILURE;
     }
 
     try {
-        if(!AppInitRPC(argc, argv))
-            return EXIT_FAILURE;
+        int ret = AppInitRPC(argc, argv);
+        if (ret != CONTINUE_EXECUTION)
+            return ret;
     }
     catch (const std::exception& e) {
         PrintExceptionContinue(&e, "AppInitRPC()");

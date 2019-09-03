@@ -51,7 +51,8 @@ public:
     //! Return number of connections, default is in- and outbound (total)
     int getNumConnections(unsigned int flags = CONNECTIONS_ALL) const;
     int getNumBlocks() const;
-
+    int getHeaderTipHeight() const;
+    int64_t getHeaderTipTime() const;
     //! Return number of transactions in the mempool
     long getMempoolSize() const;
     //! Return the dynamic memory usage of the mempool
@@ -65,7 +66,7 @@ public:
 
     //! Return true if core is doing initial block download
     bool inInitialBlockDownload() const;
-    //! Return true if core is importing blocks
+    //! Returns enum BlockSource of the current importing/syncing state
     enum BlockSource getBlockSource() const;
     //! Return warnings to be displayed in status bar
     QString getStatusBarWarnings() const;
@@ -102,7 +103,7 @@ Q_SIGNALS:
 public Q_SLOTS:
     void updateTimer();
     void updateNumConnections(int numConnections);
-    void updateAlert(const QString &hash, int status);
+    void updateAlert();
     void updateBanlist();
 };
 

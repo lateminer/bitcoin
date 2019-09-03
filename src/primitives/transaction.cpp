@@ -57,7 +57,7 @@ uint256 CTxOut::GetHash() const
 
 std::string CTxOut::ToString() const
 {
-	if (IsEmpty()) return "CTxOut(empty)";
+    if (IsEmpty()) return "CTxOut(empty)";
     return strprintf("CTxOut(nValue=%d.%08d, scriptPubKey=%s)", nValue / COIN, nValue % COIN, HexStr(scriptPubKey).substr(0, 30));
 }
 
@@ -71,7 +71,7 @@ uint256 CMutableTransaction::GetHash() const
 
 uint256 CMutableTransaction::GetNormalizedHash() const
 {
-    return SignatureHash(CScript(), *this, 0, SIGHASH_ALL);
+    return SignatureHash(CScript(), *this, 0, SIGHASH_ALL, 0);
 }
 
 void CTransaction::UpdateHash() const
@@ -95,15 +95,6 @@ CTransaction& CTransaction::operator=(const CTransaction &tx) {
     return *this;
 }
 
-bool CTransaction::IsEquivalentTo(const CTransaction& tx) const
-{
-    CMutableTransaction tx1 = *this;
-    CMutableTransaction tx2 = tx;
-    for (unsigned int i = 0; i < tx1.vin.size(); i++) tx1.vin[i].scriptSig = CScript();
-    for (unsigned int i = 0; i < tx2.vin.size(); i++) tx2.vin[i].scriptSig = CScript();
-    return CTransaction(tx1) == CTransaction(tx2);
-}
-
 CAmount CTransaction::GetValueOut() const
 {
     CAmount nValueOut = 0;
@@ -111,9 +102,14 @@ CAmount CTransaction::GetValueOut() const
     {
         nValueOut += it->nValue;
         if (!MoneyRange(it->nValue) || !MoneyRange(nValueOut))
-            throw std::runtime_error("CTransaction::GetValueOut(): value out of range");
+            throw std::runtime_error(std::string(__func__) + ": value out of range");
     }
     return nValueOut;
+}
+
+unsigned int CTransaction::GetTotalSize() const
+{
+    return ::GetSerializeSize(*this, SER_NETWORK, PROTOCOL_VERSION);
 }
 
 double CTransaction::ComputePriority(double dPriorityInputs, unsigned int nTxSize) const
@@ -148,7 +144,7 @@ std::string CTransaction::ToString() const
     str += strprintf("CTransaction(hash=%s, ver=%d, nTime=%d, vin.size=%u, vout.size=%u, nLockTime=%u)\n",
         GetHash().ToString().substr(0,10),
         nVersion,
-		nTime,
+        nTime,
         vin.size(),
         vout.size(),
         nLockTime);

@@ -33,10 +33,6 @@ static const bool DEFAULT_SPLASHSCREEN = true;
 #define COLOR_TX_STATUS_DANGER QColor(200, 100, 100)
 /* Transaction list -- TX status decoration - default color */
 #define COLOR_BLACK QColor(0, 0, 0)
-/* Transaction list -- has conflicting transactions */
-#define COLOR_HASCONFLICTING QColor(255, 255, 255)
-/* Transaction list -- has conflicting transactions - background */
-#define COLOR_HASCONFLICTING_BG QColor(192, 0, 0)
 
 /* Tooltips longer than this (in characters) are converted into rich text,
    so that they can be word-wrapped.
@@ -52,8 +48,8 @@ static const int MAX_URI_LENGTH = 255;
 /* Number of frames in spinner animation */
 #define SPINNER_FRAMES 36
 
-#define QAPP_ORG_NAME "Potcoin-Core"
-#define QAPP_ORG_DOMAIN "Potcoin.com"
+#define QAPP_ORG_NAME "Potcoin Core"
+#define QAPP_ORG_DOMAIN "potcoin.com"
 #define QAPP_APP_NAME_DEFAULT "Potcoin-Qt"
 #define QAPP_APP_NAME_TESTNET "Potcoin-Qt-testnet"
 

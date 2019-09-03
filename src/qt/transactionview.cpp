@@ -37,7 +37,7 @@
 
 TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *parent) :
     QWidget(parent), model(0), transactionProxyModel(0),
-    transactionView(0), abandonAction(0)
+    transactionView(0), abandonAction(0), columnResizingFixer(0)
 {
     // Build filter row
     setContentsMargins(0,0,0,0);
@@ -365,6 +365,8 @@ void TransactionView::contextualMenu(const QPoint &point)
 {
     QModelIndex index = transactionView->indexAt(point);
     QModelIndexList selection = transactionView->selectionModel()->selectedRows(0);
+    if (selection.empty())
+        return;
 
     // check if transaction can be abandoned, disable context menu action in case it doesn't
     uint256 hash;

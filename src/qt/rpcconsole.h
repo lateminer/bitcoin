@@ -12,6 +12,7 @@
 
 #include <QWidget>
 #include <QCompleter>
+#include <QThread>
 
 class ClientModel;
 class PlatformStyle;
@@ -34,6 +35,8 @@ class RPCConsole: public QWidget
 public:
     explicit RPCConsole(const PlatformStyle *platformStyle, QWidget *parent);
     ~RPCConsole();
+
+    static bool RPCExecuteCommandLine(std::string &strResult, const std::string &strCommand);
 
     void setClientModel(ClientModel *model);
 
@@ -140,6 +143,7 @@ private:
     QMenu *banTableContextMenu;
     int consoleFontSize;
     QCompleter *autoCompleter;
+    QThread thread;
 };
 
 #endif // BITCOIN_QT_RPCCONSOLE_H

@@ -155,7 +155,7 @@ class FrameworkInfo(object):
 class ApplicationBundleInfo(object):
     def __init__(self, path):
         self.path = path
-        appName = "Lore-Qt"
+        appName = "Potcoin-Qt"
         self.binaryPath = os.path.join(path, "Contents", "MacOS", appName)
         if not os.path.exists(self.binaryPath):
             raise RuntimeError("Could not find bundle binary for " + path)
@@ -597,7 +597,14 @@ if os.path.exists("dist"):
 
 # ------------------------------------------------
 
-target = os.path.join("dist", "Lore-Qt.app")
+if len(config.volname) == 1:
+    volname = config.volname[0]
+else:
+    volname = app_bundle_name
+
+# ------------------------------------------------
+
+target = os.path.join("dist", "Potcoin-Qt.app")
 
 if verbose >= 2:
     print("+ Copying source bundle +")
@@ -758,7 +765,7 @@ if config.dmg is not None:
     
     if fancy is None:
         try:
-            runHDIUtil("create", dmg_name, srcfolder="dist", format="UDBZ", volname="Potcoin-Core", ov=True)
+            runHDIUtil("create", dmg_name, srcfolder="dist", format="UDBZ", volname=volname, ov=True)
         except subprocess.CalledProcessError as e:
             sys.exit(e.returncode)
     else:
@@ -773,7 +780,7 @@ if config.dmg is not None:
         if verbose >= 3:
             print("Creating temp image for modification...")
         try:
-            runHDIUtil("create", dmg_name + ".temp", srcfolder="dist", format="UDRW", size=size, volname="Potcoin-Core", ov=True)
+            runHDIUtil("create", dmg_name + ".temp", srcfolder="dist", format="UDRW", size=size, volname=volname, ov=True)
         except subprocess.CalledProcessError as e:
             sys.exit(e.returncode)
         
@@ -784,7 +791,7 @@ if config.dmg is not None:
         except subprocess.CalledProcessError as e:
             sys.exit(e.returncode)
         
-        m = re.search("/Volumes/(.+$)", output)
+        m = re.search("/Volumes/(.+$)", output.decode())
         disk_root = m.group(0)
         disk_name = m.group(1)
         
@@ -838,14 +845,14 @@ if config.dmg is not None:
                 items_positions.append(itemscript.substitute(params))
 
         params = {
-            "disk" : "Potcoin-Core",
+            "disk" : volname,
             "window_bounds" : "300,300,800,620",
             "icon_size" : "96",
             "background_commands" : "",
             "items_positions" : "\n                   ".join(items_positions)
             }
         if "window_bounds" in fancy:
-            params["window.bounds"] = ",".join([str(p) for p in fancy["window_bounds"]])
+            params["window_bounds"] = ",".join([str(p) for p in fancy["window_bounds"]])
         if "icon_size" in fancy:
             params["icon_size"] = str(fancy["icon_size"])
         if bg_path is not None:
@@ -861,7 +868,7 @@ if config.dmg is not None:
             print(s)
 
         p = subprocess.Popen(['osascript', '-'], stdin=subprocess.PIPE)
-        p.communicate(input=s)
+        p.communicate(input=s.encode('utf-8'))
         if p.returncode:
             print("Error running osascript.")
 

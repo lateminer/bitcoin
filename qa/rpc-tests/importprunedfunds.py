@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -9,21 +9,19 @@ import decimal
 
 class ImportPrunedFundsTest(BitcoinTestFramework):
 
-    def setup_chain(self):
-        print("Initializing test directory "+self.options.tmpdir)
-        initialize_chain_clean(self.options.tmpdir, 4)
+    def __init__(self):
+        super().__init__()
+        self.setup_clean_chain = True
+        self.num_nodes = 2
 
     def setup_network(self, split=False):
-        self.nodes = start_nodes(2, self.options.tmpdir)
+        self.nodes = start_nodes(self.num_nodes, self.options.tmpdir)
         connect_nodes_bi(self.nodes,0,1)
         self.is_network_split=False
         self.sync_all()
 
-    def run_test (self):
-        import time
-        begintime = int(time.time())
-
-        print "Mining blocks..."
+    def run_test(self):
+        print("Mining blocks...")
         self.nodes[0].generate(101)
 
         self.sync_all()
@@ -80,10 +78,10 @@ class ImportPrunedFundsTest(BitcoinTestFramework):
         #Import with no affiliated address
         try:
             self.nodes[1].importprunedfunds(rawtxn1, proof1)
-        except JSONRPCException,e:
-            errorString = e.error['message']
-
-        assert('No addresses' in errorString)
+        except JSONRPCException as e:
+            assert('No addresses' in e.error['message'])
+        else:
+            assert(False)
 
         balance1 = self.nodes[1].getbalance("", 0, True)
         assert_equal(balance1, Decimal(0))
@@ -116,14 +114,13 @@ class ImportPrunedFundsTest(BitcoinTestFramework):
         #Remove transactions
         try:
             self.nodes[1].removeprunedfunds(txnid1)
-        except JSONRPCException,e:
-            errorString = e.error['message']
-
-        assert('does not exist' in errorString)
+        except JSONRPCException as e:
+            assert('does not exist' in e.error['message'])
+        else:
+            assert(False)
 
         balance1 = self.nodes[1].getbalance("*", 0, True)
         assert_equal(balance1, Decimal('0.075'))
-
 
         self.nodes[1].removeprunedfunds(txnid2)
         balance2 = self.nodes[1].getbalance("*", 0, True)

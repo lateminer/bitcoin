@@ -79,8 +79,20 @@ bool IsCompressedOrUncompressedPubKey(const vector<unsigned char> &vchPubKey) {
             return false;
         }
     } else {
-          //  Non-canonical public key: neither compressed nor uncompressed
-          return false;
+        //  Non-canonical public key: neither compressed nor uncompressed
+        return false;
+    }
+    return true;
+}
+
+bool static IsCompressedPubKey(const valtype &vchPubKey) {
+    if (vchPubKey.size() != 33) {
+        //  Non-canonical public key: invalid length for compressed key
+        return false;
+    }
+    if (vchPubKey[0] != 0x02 && vchPubKey[0] != 0x03) {
+        //  Non-canonical public key: invalid prefix for compressed key
+        return false;
     }
     return true;
 }
@@ -164,28 +176,19 @@ bool IsLowDERSignature(const valtype &vchSig, ScriptError* serror, bool haveHash
     if (!IsValidSignatureEncoding(vchSig, haveHashType)) {
         return set_error(serror, SCRIPT_ERR_SIG_DER);
     }
-    unsigned int nLenR = vchSig[3];
-    unsigned int nLenS = vchSig[5+nLenR];
-    const unsigned char *S = &vchSig[6+nLenR];
-    // If the S value is above the order of the curve divided by two, its
-    // complement modulo the order could have been used instead, which is
-    // one byte shorter when encoded correctly.
-    if (!CPubKey::CheckSignatureElement(S, nLenS, true))
+    std::vector<unsigned char> vchSigCopy(vchSig.begin(), vchSig.begin() + vchSig.size() - (haveHashType ? 1 : 0));
+    if (!CPubKey::CheckLowS(vchSigCopy)) {
         return set_error(serror, SCRIPT_ERR_SIG_HIGH_S);
-
+    }
     return true;
 }
 
-//bool IsLowDERSignature(const valtype &vchSig, ScriptError* serror) {
-//    if (!IsValidSignatureEncoding(vchSig)) {
-//        return set_error(serror, SCRIPT_ERR_SIG_DER);
-//    }
-//    std::vector<unsigned char> vchSigCopy(vchSig.begin(), vchSig.begin() + vchSig.size() - 1);
-//    if (!CPubKey::CheckLowS(vchSigCopy)) {
-//        return set_error(serror, SCRIPT_ERR_SIG_HIGH_S);
-//    }
-//    return true;
-//}
+bool IsDERSignature(const valtype &vchSig, ScriptError* serror, bool haveHashType) {
+    if (!IsValidSignatureEncoding(vchSig, haveHashType)) {
+        return set_error(serror, SCRIPT_ERR_SIG_DER);
+    }
+    return true;
+}
 
 bool static IsDefinedHashtypeSignature(const valtype &vchSig) {
     if (vchSig.size() == 0) {
@@ -426,48 +429,7 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                     break;
                 }
 
-				case OP_COUNT_ACKS:
-				{
-					if (SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_NOPS) {
-                                           return set_error(serror, SCRIPT_ERR_DISCOURAGE_UPGRADABLE_NOPS);
-                                       }
-
-
-					if (SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_NOPS) {
-					    return set_error(serror, SCRIPT_ERR_DISCOURAGE_UPGRADABLE_NOPS);
-					}
-
-					// (secondary_chain_id ack_period liveness_period -- )
-					if (stack.size() < 3)
-						return set_error(serror, SCRIPT_ERR_INVALID_STACK_OPERATION);
-
-					valtype& secondaryChainId = stacktop(-3);
-					if (secondaryChainId.size() < 1 || secondaryChainId.size() > MAX_CHAIN_ID_LENGTH)
-						return set_error(serror, SCRIPT_ERR_COUNT_ACKS_INVALID_PARAM);
-
-					CScriptNum periodAck(stacktop(-2), fRequireMinimal);
-					if (periodAck < 1 || periodAck > MAX_ACK_PERIOD)
-						return set_error(serror, SCRIPT_ERR_COUNT_ACKS_INVALID_PARAM);
-
-					CScriptNum periodLiveness(stacktop(-1), fRequireMinimal);
-					if (periodLiveness < MIN_LIVENESS_PERIOD || periodLiveness > MAX_LIVENESS_PERIOD)
-						return set_error(serror, SCRIPT_ERR_COUNT_ACKS_INVALID_PARAM);
-
-					int positiveAcks, negativeAcks;
-					if (checker.CountAcks(secondaryChainId, periodAck.getint(), periodLiveness.getint(), positiveAcks, negativeAcks)) {
-						popstack(stack);
-						popstack(stack);
-						popstack(stack);
-						stack.push_back(CScriptNum(positiveAcks).getvch());
-						stack.push_back(CScriptNum(negativeAcks).getvch());
-					} else {
-						return set_error(serror, SCRIPT_ERR_COUNT_ACKS_INVALID_PARAM);
-					}
-
-					break;
-				}
-
-                case OP_NOP1: case OP_NOP5:
+                case OP_NOP1: case OP_NOP4: case OP_NOP5:
                 case OP_NOP6: case OP_NOP7: case OP_NOP8: case OP_NOP9: case OP_NOP10:
                 {
                     if (flags & SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_NOPS)
@@ -485,6 +447,12 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                         if (stack.size() < 1)
                             return set_error(serror, SCRIPT_ERR_UNBALANCED_CONDITIONAL);
                         valtype& vch = stacktop(-1);
+                        if (flags & SCRIPT_VERIFY_MINIMALIF) {
+                            if (vch.size() > 1)
+                                return set_error(serror, SCRIPT_ERR_MINIMALIF);
+                            if (vch.size() == 1 && vch[0] != 1)
+                                return set_error(serror, SCRIPT_ERR_MINIMALIF);
+                        }
                         fValue = CastToBool(vch);
                         if (opcode == OP_NOTIF)
                             fValue = !fValue;
@@ -1084,12 +1052,12 @@ namespace {
  */
 class CTransactionSignatureSerializer {
 private:
-    const CTransaction &txTo;  //! reference to the spending transaction (the one being serialized)
-    const CScript &scriptCode; //! output script being consumed
-    const unsigned int nIn;    //! input index of txTo being signed
-    const bool fAnyoneCanPay;  //! whether the hashtype has the SIGHASH_ANYONECANPAY flag set
-    const bool fHashSingle;    //! whether the hashtype is SIGHASH_SINGLE
-    const bool fHashNone;      //! whether the hashtype is SIGHASH_NONE
+    const CTransaction& txTo;  //!< reference to the spending transaction (the one being serialized)
+    const CScript& scriptCode; //!< output script being consumed
+    const unsigned int nIn;    //!< input index of txTo being signed
+    const bool fAnyoneCanPay;  //!< whether the hashtype has the SIGHASH_ANYONECANPAY flag set
+    const bool fHashSingle;    //!< whether the hashtype is SIGHASH_SINGLE
+    const bool fHashNone;      //!< whether the hashtype is SIGHASH_NONE
 
 public:
     CTransactionSignatureSerializer(const CTransaction &txToIn, const CScript &scriptCodeIn, unsigned int nInIn, int nHashTypeIn) :
@@ -1175,9 +1143,40 @@ public:
     }
 };
 
+uint256 GetPrevoutHash(const CTransaction& txTo) {
+    CHashWriter ss(SER_GETHASH, 0);
+    for (unsigned int n = 0; n < txTo.vin.size(); n++) {
+        ss << txTo.vin[n].prevout;
+    }
+    return ss.GetHash();
+}
+
+uint256 GetSequenceHash(const CTransaction& txTo) {
+    CHashWriter ss(SER_GETHASH, 0);
+    for (unsigned int n = 0; n < txTo.vin.size(); n++) {
+        ss << txTo.vin[n].nSequence;
+    }
+    return ss.GetHash();
+}
+
+uint256 GetOutputsHash(const CTransaction& txTo) {
+    CHashWriter ss(SER_GETHASH, 0);
+    for (unsigned int n = 0; n < txTo.vout.size(); n++) {
+        ss << txTo.vout[n];
+    }
+    return ss.GetHash();
+}
+
 } // anon namespace
 
-uint256 SignatureHash(const CScript& scriptCode, const CTransaction& txTo, unsigned int nIn, int nHashType)
+PrecomputedTransactionData::PrecomputedTransactionData(const CTransaction& txTo)
+{
+    hashPrevouts = GetPrevoutHash(txTo);
+    hashSequence = GetSequenceHash(txTo);
+    hashOutputs = GetOutputsHash(txTo);
+}
+
+uint256 SignatureHash(const CScript& scriptCode, const CTransaction& txTo, unsigned int nIn, int nHashType, const CAmount& amount, const PrecomputedTransactionData* cache)
 {
     static const uint256 one(uint256S("0000000000000000000000000000000000000000000000000000000000000001"));
     if (nIn >= txTo.vin.size()) {
@@ -1220,7 +1219,7 @@ bool TransactionSignatureChecker::CheckSig(const vector<unsigned char>& vchSigIn
     int nHashType = vchSig.back();
     vchSig.pop_back();
 
-    uint256 sighash = SignatureHash(scriptCode, *txTo, nIn, nHashType);
+    uint256 sighash = SignatureHash(scriptCode, *txTo, nIn, nHashType, amount, this->txdata);
 
     if (!VerifySignature(vchSig, pubkey, sighash))
         return false;

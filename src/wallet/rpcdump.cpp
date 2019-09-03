@@ -155,6 +155,29 @@ UniValue importprivkey(const UniValue& params, bool fHelp)
     return NullUniValue;
 }
 
+UniValue abortrescan(const UniValue& params, bool fHelp)
+{
+    if (!EnsureWalletIsAvailable(fHelp))
+        return NullUniValue;
+
+    if (fHelp || params.size() > 0)
+        throw runtime_error(
+            "abortrescan\n"
+            "\nStops current wallet rescan triggered e.g. by an importprivkey call.\n"
+            "\nExamples:\n"
+            "\nImport a private key\n"
+            + HelpExampleCli("importprivkey", "\"mykey\"") +
+            "\nAbort the running wallet rescan\n"
+            + HelpExampleCli("abortrescan", "") +
+            "\nAs a JSON-RPC call\n"
+            + HelpExampleRpc("abortrescan", "")
+        );
+
+    if (!pwalletMain->IsScanning() || pwalletMain->IsAbortingRescan()) return false;
+    pwalletMain->AbortRescan();
+    return true;
+}
+
 void ImportAddress(const CTxDestination& dest, const string& strLabel);
 void ImportScript(const CScript& script, const string& strLabel, bool isRedeemScript)
 {
@@ -526,11 +549,11 @@ UniValue dumpprivkey(const UniValue& params, bool fHelp)
     
     if (fHelp || params.size() != 1)
         throw runtime_error(
-            "dumpprivkey \"bitcoinaddress\"\n"
-            "\nReveals the private key corresponding to 'bitcoinaddress'.\n"
+            "dumpprivkey \"potcoinaddress\"\n"
+            "\nReveals the private key corresponding to 'potcoinaddress'.\n"
             "Then the importprivkey can be used with this output\n"
             "\nArguments:\n"
-            "1. \"bitcoinaddress\"   (string, required) The bitcoin address for the private key\n"
+            "1. \"potcoinaddress\"   (string, required) The potcoin address for the private key\n"
             "\nResult:\n"
             "\"key\"                (string) The private key\n"
             "\nExamples:\n"

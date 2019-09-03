@@ -18,8 +18,8 @@ using namespace std;
 class CRPCConvertParam
 {
 public:
-    std::string methodName;            //! method whose params want conversion
-    int paramIdx;                      //! 0-based idx of param to convert
+    std::string methodName; //!< method whose params want conversion
+    int paramIdx;           //!< 0-based idx of param to convert
 };
 
 static const CRPCConvertParam vRPCConvertParams[] =
@@ -27,9 +27,10 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "stop", 0 },
     { "setmocktime", 0 },
     { "getaddednodeinfo", 0 },
-    { "setgenerate", 0 },
-    { "setgenerate", 1 },
     { "generate", 0 },
+    { "generate", 1 },
+    { "generatetoaddress", 0 },
+    { "generatetoaddress", 2 },
     { "getnetworkhashps", 0 },
     { "getnetworkhashps", 1 },
     { "sendtoaddress", 1 },
@@ -56,7 +57,7 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "listaccounts", 0 },
     { "listaccounts", 1 },
     { "walletpassphrase", 1 },
-	{ "walletpassphrase", 2 },
+    { "walletpassphrase", 2 },
     { "getblocktemplate", 0 },
     { "listsinceblock", 1 },
     { "listsinceblock", 2 },
@@ -102,15 +103,10 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "prioritisetransaction", 2 },
     { "setban", 2 },
     { "setban", 3 },
-    { "getblockhashes", 0 },
-    { "getblockhashes", 1 },
-    { "getblockhashes", 2 },
-    { "getspentinfo", 0},
-    { "getaddresstxids", 0},
-    { "getaddressbalance", 0},
-    { "getaddressdeltas", 0},
-    { "getaddressutxos", 0},
-    { "getaddressmempool", 0},
+    { "getmempoolancestors", 1 },
+    { "getmempooldescendants", 1 },
+    { "reservebalance", 0},
+    { "reservebalance", 1},
 };
 
 class CRPCConvertTable
@@ -170,4 +166,3 @@ UniValue RPCConvertValues(const std::string &strMethod, const std::vector<std::s
 
     return params;
 }
-

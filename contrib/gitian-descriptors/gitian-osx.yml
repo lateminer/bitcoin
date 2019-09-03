@@ -1,39 +1,46 @@
 ---
-name: "bitcoin-osx-0.12"
+name: "bitcoin-osx-0.14"
 enable_cache: true
 suites:
 - "trusty"
 architectures:
 - "amd64"
 packages:
+- "ca-certificates"
 - "curl"
 - "g++"
 - "git-core"
 - "pkg-config"
 - "autoconf"
+- "librsvg2-bin"
+- "libtiff-tools"
 - "libtool"
 - "automake"
 - "faketime"
 - "bsdmainutils"
 - "cmake"
+- "imagemagick"
 - "libcap-dev"
 - "libz-dev"
 - "libbz2-dev"
-- "ca-certificates"
 - "python"
+- "python-dev"
+- "python-setuptools"
+- "fonts-tuffy"
 remotes:
 - "url": "https://github.com/bitcoin/bitcoin.git"
   "dir": "bitcoin"
 files:
-- "MacOSX10.9.sdk.tar.gz"
+- "MacOSX10.11.sdk.tar.gz"
 script: |
   WRAP_DIR=$HOME/wrapped
-  HOSTS="x86_64-apple-darwin11"
-  CONFIGFLAGS="--enable-upnp-default --enable-reduce-exports --disable-bench --disable-gui-tests GENISOIMAGE=$WRAP_DIR/genisoimage"
+  HOSTS="x86_64-apple-darwin14"
+  CONFIGFLAGS="--enable-reduce-exports --disable-bench --disable-gui-tests GENISOIMAGE=$WRAP_DIR/genisoimage"
   FAKETIME_HOST_PROGS=""
   FAKETIME_PROGS="ar ranlib date dmg genisoimage"
 
   export QT_RCC_TEST=1
+  export QT_RCC_SOURCE_DATE_OVERRIDE=1
   export GZIP="-9n"
   export TAR_OPTIONS="--mtime="$REFERENCE_DATE\\\ $REFERENCE_TIME""
   export TZ="UTC"
@@ -81,7 +88,7 @@ script: |
   BASEPREFIX=`pwd`/depends
 
   mkdir -p ${BASEPREFIX}/SDKs
-  tar -C ${BASEPREFIX}/SDKs -xf ${BUILD_DIR}/MacOSX10.9.sdk.tar.gz
+  tar -C ${BASEPREFIX}/SDKs -xf ${BUILD_DIR}/MacOSX10.11.sdk.tar.gz
 
   # Build dependencies for each host
   for i in $HOSTS; do
@@ -122,8 +129,11 @@ script: |
     make ${MAKEOPTS}
     make install-strip DESTDIR=${INSTALLPATH}
 
+    make osx_volname
     make deploydir
+    OSX_VOLNAME="$(cat osx_volname)"
     mkdir -p unsigned-app-${i}
+    cp osx_volname unsigned-app-${i}/
     cp contrib/macdeploy/detached-sig-apply.sh unsigned-app-${i}
     cp contrib/macdeploy/detached-sig-create.sh unsigned-app-${i}
     cp ${BASEPREFIX}/${i}/native/bin/dmg ${BASEPREFIX}/${i}/native/bin/genisoimage unsigned-app-${i}
@@ -135,7 +145,7 @@ script: |
     popd
 
     make deploy
-    ${WRAP_DIR}/dmg dmg Bitcoin-Core.dmg ${OUTDIR}/${DISTNAME}-osx-unsigned.dmg
+    ${WRAP_DIR}/dmg dmg "${OSX_VOLNAME}.dmg" ${OUTDIR}/${DISTNAME}-osx-unsigned.dmg
 
     cd installed
     find . -name "lib*.la" -delete

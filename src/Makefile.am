@@ -1,7 +1,11 @@
+# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 DIST_SUBDIRS = secp256k1 univalue
 
 AM_LDFLAGS = $(PTHREAD_CFLAGS) $(LIBTOOL_LDFLAGS) $(HARDENED_LDFLAGS)
-AM_CXXFLAGS = $(HARDENED_CXXFLAGS)
+AM_CXXFLAGS = $(HARDENED_CXXFLAGS) $(ERROR_CXXFLAGS)
 AM_CPPFLAGS = $(HARDENED_CPPFLAGS)
 EXTRA_LIBRARIES =
 
@@ -21,8 +25,8 @@ BITCOIN_INCLUDES += -I$(srcdir)/secp256k1/include
 BITCOIN_INCLUDES += $(UNIVALUE_CFLAGS)
 
 LIBBITCOIN_SERVER=libbitcoin_server.a
-
 LIBBITCOIN_COMMON=libbitcoin_common.a
+LIBBITCOIN_CONSENSUS=libbitcoin_consensus.a
 LIBBITCOIN_CLI=libbitcoin_cli.a
 LIBBITCOIN_UTIL=libbitcoin_util.a
 LIBBITCOIN_CRYPTO=crypto/libbitcoin_crypto.a
@@ -66,18 +70,16 @@ endif
 
 if BUILD_BITCOIN_UTILS
   bin_PROGRAMS += potcoin-cli potcoin-tx
-if ENABLE_WALLET
-  bin_PROGRAMS += wallet-utility
-endif
 endif
 
 .PHONY: FORCE check-symbols check-security
 # bitcoin core #
+
+# Disable BIP152
+# blockencodings.h
 BITCOIN_CORE_H = \
-  addressindex.h \
-  spentindex.h \
+  addrdb.h \
   addrman.h \
-  alert.h \
   amount.h \
   arith_uint256.h \
   base58.h \
@@ -105,10 +107,12 @@ BITCOIN_CORE_H = \
   consensus/validation.h \
   core_io.h \
   core_memusage.h \
-  hash.h \
   dstencode.h \
+  hash.h \
+  cuckoocache.h \
   httprpc.h \
   httpserver.h \
+  indirectmap.h \
   init.h \
   key.h \
   keystore.h \
@@ -119,11 +123,11 @@ BITCOIN_CORE_H = \
   merkleblock.h \
   miner.h \
   net.h \
+  netaddress.h \
   netbase.h \
   noui.h \
   policy/fees.h \
   policy/policy.h \
-  policy/rbf.h \
   pos.h \
   pow.h \
   prevector.h \
@@ -188,9 +192,12 @@ libbitcoin_util_a-clientversion.$(OBJEXT): obj/build.h
 # server: shared between bitcoind and bitcoin-qt
 libbitcoin_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
 libbitcoin_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+
+# Disable BIP152
+# blockencodings.cpp
 libbitcoin_server_a_SOURCES = \
   addrman.cpp \
-  alert.cpp \
+  addrdb.cpp \
   bloom.cpp \
   chain.cpp \
   checkpoints.cpp \
@@ -216,8 +223,6 @@ libbitcoin_server_a_SOURCES = \
   rpc/server.cpp \
   script/sigcache.cpp \
   script/ismine.cpp \
-  script/drivechain.cpp \
-  script/drivechain.h \
   timedata.cpp \
   torcontrol.cpp \
   txdb.cpp \
@@ -248,7 +253,6 @@ libbitcoin_wallet_a_SOURCES = \
   wallet/rpcwallet.cpp \
   wallet/wallet.cpp \
   wallet/walletdb.cpp \
-  policy/rbf.cpp \
   $(BITCOIN_CORE_H)
 
 # crypto primitives library
@@ -321,13 +325,14 @@ libbitcoin_common_a_SOURCES = \
   coins.cpp \
   compressor.cpp \
   consensus/merkle.cpp \
+  config.cpp \
   core_read.cpp \
   core_write.cpp \
   hash.cpp \
-  config.cpp \
   dstencode.cpp \
   key.cpp \
   keystore.cpp \
+  netaddress.cpp \
   netbase.cpp \
   primitives/block.cpp \
   primitives/transaction.cpp \
@@ -409,14 +414,6 @@ potcoin_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
 potcoin_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 potcoin_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
-# wallet-utility binary #
-if ENABLE_WALLET
-wallet_utility_SOURCES = wallet-utility.cpp
-wallet_utility_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAG)
-wallet_utility_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-wallet_utility_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
-endif
-
 if TARGET_WINDOWS
 potcoin_cli_SOURCES += bitcoin-cli-res.rc
 endif
@@ -428,11 +425,6 @@ potcoin_cli_LDADD = \
   $(LIBBITCOIN_CRYPTO)
 
 potcoin_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
-if ENABLE_WALLET
-wallet_utility_LDADD = libbitcoin_wallet.a $(LIBBITCOIN_COMMON) $(LIBBITCOIN_CRYPTO) $(LIBSECP256K1) $(LIBBITCOIN_UTIL) $(BOOST_LIBS) $(BDB_LIBS) $(CRYPTO_LIBS)
-endif
-
-#
 
 # potcoin-tx binary #
 potcoin_tx_SOURCES = bitcoin-tx.cpp
@@ -448,6 +440,7 @@ potcoin_tx_LDADD = \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
+  $(LIBBITCOIN_CONSENSUS) \
   $(LIBBITCOIN_CRYPTO) \
   $(LIBSECP256K1)
 
@@ -504,11 +497,8 @@ clean-local:
 
 .rc.o:
 	@test -f $(WINDRES)
-	$(AM_V_GEN) $(WINDRES) -DWINDRES_PREPROC -i $< -o $@
-
-.mm.o:
-	$(AM_V_CXX) $(OBJCXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
-	  $(CPPFLAGS) $(AM_CXXFLAGS) $(QT_INCLUDES) $(AM_CXXFLAGS) $(PIE_FLAGS) $(CXXFLAGS) -c -o $@ $<
+	## FIXME: How to get the appropriate modulename_CPPFLAGS in here?
+	$(AM_V_GEN) $(WINDRES) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(CPPFLAGS) -DWINDRES_PREPROC -i $< -o $@
 
 check-symbols: $(bin_PROGRAMS)
 if GLIBC_BACK_COMPAT

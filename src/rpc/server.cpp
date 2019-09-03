@@ -96,7 +96,7 @@ void RPCTypeCheckObj(const UniValue& o,
         if (!fAllowNull && v.isNull())
             throw JSONRPCError(RPC_TYPE_ERROR, strprintf("Missing %s", t.first));
 
-        if (!(t.second.typeAny || (v.type() == t.second.type) || (fAllowNull && (v.isNull())))) {
+        if (!(t.second.typeAny || v.type() == t.second.type || (fAllowNull && v.isNull()))) {
             string err = strprintf("Expected type %s for %s, got %s",
                 uvTypeName(t.second.type), t.first, uvTypeName(v.type()));
             throw JSONRPCError(RPC_TYPE_ERROR, err);
@@ -273,6 +273,22 @@ UniValue stop(const UniValue& params, bool fHelp)
     return "Potcoin server stopping";
 }
 
+UniValue uptime(const UniValue& params, bool fHelp)
+{
+    if (fHelp || params.size() > 1)
+        throw runtime_error(
+                "uptime\n"
+                        "\nReturns the total uptime of the server.\n"
+                        "\nResult:\n"
+                        "ttt        (numeric) The number of seconds that the server has been running\n"
+                        "\nExamples:\n"
+                + HelpExampleCli("uptime", "")
+                + HelpExampleRpc("uptime", "")
+        );
+
+    return GetTime() - GetStartupTime();
+}
+
 /**
  * Call Table
  */
@@ -282,6 +298,7 @@ static const CRPCCommand vRPCCommands[] =
     /* Overall control/query calls */
     { "control",            "help",                   &help,                   true  },
     { "control",            "stop",                   &stop,                   true  },
+    { "control",            "uptime",                 &uptime,                 true, },
 };
 
 CRPCTable::CRPCTable()
@@ -504,6 +521,11 @@ void RPCRunLater(const std::string& name, boost::function<void(void)> func, int6
     deadlineTimers.erase(name);
     LogPrint("rpc", "queue run of timer %s in %i seconds (using %s)\n", name, nSeconds, timerInterface->Name());
     deadlineTimers.insert(std::make_pair(name, std::shared_ptr<RPCTimerBase>(timerInterface->NewTimer(func, nSeconds*1000))));
+}
+
+int RPCSerializationFlags()
+{
+    return 0;
 }
 
 CRPCTable tableRPC;

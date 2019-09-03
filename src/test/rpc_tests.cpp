@@ -11,6 +11,7 @@
 #include "test/test_bitcoin.h"
 
 #include <boost/algorithm/string.hpp>
+#include <boost/assign/list_of.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <univalue.h>
@@ -237,7 +238,7 @@ BOOST_AUTO_TEST_CASE(rpc_ban)
     UniValue o1 = ar[0].get_obj();
     UniValue adr = find_value(o1, "address");
     BOOST_CHECK_EQUAL(adr.get_str(), "127.0.0.0/32");
-    BOOST_CHECK_NO_THROW(CallRPC(string("setban 127.0.0.0 remove")));;
+    BOOST_CHECK_NO_THROW(CallRPC(string("setban 127.0.0.0 remove")));
     BOOST_CHECK_NO_THROW(r = CallRPC(string("listbanned")));
     ar = r.get_array();
     BOOST_CHECK_EQUAL(ar.size(), 0);
@@ -267,7 +268,7 @@ BOOST_AUTO_TEST_CASE(rpc_ban)
     // must throw an exception because 127.0.0.1 is in already banned suubnet range
     BOOST_CHECK_THROW(r = CallRPC(string("setban 127.0.0.1 add")), runtime_error);
 
-    BOOST_CHECK_NO_THROW(CallRPC(string("setban 127.0.0.0/24 remove")));;
+    BOOST_CHECK_NO_THROW(CallRPC(string("setban 127.0.0.0/24 remove")));
     BOOST_CHECK_NO_THROW(r = CallRPC(string("listbanned")));
     ar = r.get_array();
     BOOST_CHECK_EQUAL(ar.size(), 0);
@@ -306,6 +307,29 @@ BOOST_AUTO_TEST_CASE(rpc_ban)
     o1 = ar[0].get_obj();
     adr = find_value(o1, "address");
     BOOST_CHECK_EQUAL(adr.get_str(), "2001:4d48:ac57:400:cacf:e9ff:fe1d:9c63/128");
+}
+
+BOOST_AUTO_TEST_CASE(rpc_convert_values_generatetoaddress)
+{
+    UniValue result;
+
+    BOOST_CHECK_NO_THROW(result = RPCConvertValues("generatetoaddress", boost::assign::list_of("101")("mkESjLZW66TmHhiFX8MCaBjrhZ543PPh9a")));
+    BOOST_CHECK_EQUAL(result[0].get_int(), 101);
+    BOOST_CHECK_EQUAL(result[1].get_str(), "mkESjLZW66TmHhiFX8MCaBjrhZ543PPh9a");
+
+    BOOST_CHECK_NO_THROW(result = RPCConvertValues("generatetoaddress", boost::assign::list_of("101")("mhMbmE2tE9xzJYCV9aNC8jKWN31vtGrguU")));
+    BOOST_CHECK_EQUAL(result[0].get_int(), 101);
+    BOOST_CHECK_EQUAL(result[1].get_str(), "mhMbmE2tE9xzJYCV9aNC8jKWN31vtGrguU");
+
+    BOOST_CHECK_NO_THROW(result = RPCConvertValues("generatetoaddress", boost::assign::list_of("1")("mkESjLZW66TmHhiFX8MCaBjrhZ543PPh9a")("9")));
+    BOOST_CHECK_EQUAL(result[0].get_int(), 1);
+    BOOST_CHECK_EQUAL(result[1].get_str(), "mkESjLZW66TmHhiFX8MCaBjrhZ543PPh9a");
+    BOOST_CHECK_EQUAL(result[2].get_int(), 9);
+
+    BOOST_CHECK_NO_THROW(result = RPCConvertValues("generatetoaddress", boost::assign::list_of("1")("mhMbmE2tE9xzJYCV9aNC8jKWN31vtGrguU")("9")));
+    BOOST_CHECK_EQUAL(result[0].get_int(), 1);
+    BOOST_CHECK_EQUAL(result[1].get_str(), "mhMbmE2tE9xzJYCV9aNC8jKWN31vtGrguU");
+    BOOST_CHECK_EQUAL(result[2].get_int(), 9);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

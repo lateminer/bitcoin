@@ -19,6 +19,8 @@
 
 #include <univalue.h>
 
+static const unsigned int DEFAULT_RPC_SERIALIZE_VERSION = 1;
+
 class CRPCCommand;
 
 namespace RPCServer
@@ -160,7 +162,6 @@ public:
     */
     std::vector<std::string> listCommands() const;
 
-    
     /**
      * Appends a CRPCCommand to the dispatch table.
      * Returns false if RPC server is already running (dump concurrency protection).
@@ -195,5 +196,8 @@ bool StartRPC();
 void InterruptRPC();
 void StopRPC();
 std::string JSONRPCExecBatch(const UniValue& vReq);
+
+// Retrieves any serialization flags requested in command line argument
+int RPCSerializationFlags();
 
 #endif // BITCOIN_RPCSERVER_H

@@ -1,8 +1,7 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # Copyright (c) 2016 The Bitcoin Core developers
-# Distributed under the MIT/X11 software license, see the accompanying
+# Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#
 
 from test_framework.mininode import *
 from test_framework.test_framework import BitcoinTestFramework
@@ -65,13 +64,15 @@ class TestNode(NodeConnCB):
 
 
 class VersionBitsWarningTest(BitcoinTestFramework):
-    def setup_chain(self):
-        initialize_chain_clean(self.options.tmpdir, 1)
+    def __init__(self):
+        super().__init__()
+        self.setup_clean_chain = True
+        self.num_nodes = 1
 
     def setup_network(self):
         self.alert_filename = os.path.join(self.options.tmpdir, "alert.txt")
         # Open and close to create zero-length file
-        with open(self.alert_filename, 'w') as _:
+        with open(self.alert_filename, 'w', encoding='utf8') as _:
             pass
         self.extra_args = [["-debug", "-logtimemicros=1", "-alertnotify=echo %s >> \"" + self.alert_filename + "\""]]
         self.nodes = start_nodes(self.num_nodes, self.options.tmpdir, self.extra_args)
@@ -94,7 +95,7 @@ class VersionBitsWarningTest(BitcoinTestFramework):
         peer.sync_with_ping()
 
     def test_versionbits_in_alert_file(self):
-        with open(self.alert_filename, 'r') as f:
+        with open(self.alert_filename, 'r', encoding='utf8') as f:
             alert_text = f.read()
         assert(VB_PATTERN.match(alert_text))
 
@@ -143,10 +144,9 @@ class VersionBitsWarningTest(BitcoinTestFramework):
         # is cleared, and restart the node. This should move the versionbit state
         # to ACTIVE.
         self.nodes[0].generate(VB_PERIOD)
-        stop_node(self.nodes[0], 0)
-        wait_bitcoinds()
+        stop_nodes(self.nodes)
         # Empty out the alert file
-        with open(self.alert_filename, 'w') as _:
+        with open(self.alert_filename, 'w', encoding='utf8') as _:
             pass
         self.nodes = start_nodes(self.num_nodes, self.options.tmpdir, self.extra_args)
 
@@ -155,8 +155,7 @@ class VersionBitsWarningTest(BitcoinTestFramework):
         assert(WARN_UNKNOWN_RULES_ACTIVE in self.nodes[0].getinfo()["errors"])
         assert(WARN_UNKNOWN_RULES_ACTIVE in self.nodes[0].getmininginfo()["errors"])
         assert(WARN_UNKNOWN_RULES_ACTIVE in self.nodes[0].getnetworkinfo()["warnings"])
-        stop_node(self.nodes[0], 0)
-        wait_bitcoinds()
+        stop_nodes(self.nodes)
         self.test_versionbits_in_alert_file()
 
         # Test framework expects the node to still be running...

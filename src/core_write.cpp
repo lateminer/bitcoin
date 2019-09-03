@@ -35,7 +35,7 @@ string FormatScript(const CScript& script)
             } else if ((op >= OP_1 && op <= OP_16) || op == OP_1NEGATE) {
                 ret += strprintf("%i ", op - OP_1NEGATE - 1);
                 continue;
-            } else if (op >= OP_NOP && op <= OP_CHECKMULTISIGVERIFY) {
+            } else if (op >= OP_NOP && op <= OP_NOP10) {
                 string str(GetOpName(op));
                 if (str.substr(0, 3) == string("OP_")) {
                     ret += str.substr(3, string::npos) + " ";
@@ -45,7 +45,7 @@ string FormatScript(const CScript& script)
             if (vch.size() > 0) {
                 ret += strprintf("0x%x 0x%x ", HexStr(it2, it - vch.size()), HexStr(it - vch.size(), it));
             } else {
-                ret += strprintf("0x%x", HexStr(it2, it));
+                ret += strprintf("0x%x ", HexStr(it2, it));
             }
             continue;
         }
@@ -116,9 +116,9 @@ string ScriptToAsmStr(const CScript& script, const bool fAttemptSighashDecode)
     return str;
 }
 
-string EncodeHexTx(const CTransaction& tx)
+string EncodeHexTx(const CTransaction& tx, const int serialFlags)
 {
-    CDataStream ssTx(SER_NETWORK, PROTOCOL_VERSION);
+    CDataStream ssTx(SER_NETWORK, PROTOCOL_VERSION | serialFlags);
     ssTx << tx;
     return HexStr(ssTx.begin(), ssTx.end());
 }
@@ -157,7 +157,8 @@ void TxToUniv(const CTransaction& tx, const uint256& hashBlock, UniValue& entry)
     entry.pushKV("locktime", (int64_t)tx.nLockTime);
 
     UniValue vin(UniValue::VARR);
-    BOOST_FOREACH(const CTxIn& txin, tx.vin) {
+    for (unsigned int i = 0; i < tx.vin.size(); i++) {
+        const CTxIn& txin = tx.vin[i];
         UniValue in(UniValue::VOBJ);
         if (tx.IsCoinBase())
             in.pushKV("coinbase", HexStr(txin.scriptSig.begin(), txin.scriptSig.end()));
