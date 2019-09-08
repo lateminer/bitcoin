@@ -58,7 +58,6 @@ struct Params {
     uint256 posLimit;
     uint256 posLimitV2;
     bool fPowAllowMinDifficultyBlocks;
-    int64_t nTargetSpacingV1;
     bool fPowNoRetargeting;
     bool fPoSNoRetargeting;
     int64_t nTargetSpacing;
