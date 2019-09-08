@@ -54,6 +54,7 @@ bool IsStandard(const CScript& scriptPubKey, txnouttype& whichType);
      */
 
 int64_t FutureDrift(int64_t nTime);
+int64_t PastDrift(int64_t nTime);
 
 bool IsStandardTx(const CTransaction& tx, std::string& reason);
     /**

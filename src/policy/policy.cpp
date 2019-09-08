@@ -62,6 +62,15 @@ int64_t FutureDrift(int64_t nTime)
     return Params().GetConsensus().IsProtocolV2(nTime) ? nTime + 15 : nTime + 10 * 60;
 }
 
+int64_t PastDrift(int64_t nTime)
+{
+	// loose policy for PastDrift in regtest mode
+	if (Params().GetConsensus().fPowNoRetargeting && chainActive.Height() <= Params().GetConsensus().nLastPOWBlock) {
+	         return nTime - 24 * 60 * 60;
+	}
+    return nTime - 10 * 60;
+}
+
 bool IsStandardTx(const CTransaction& tx, std::string& reason)
 {
     if (tx.nVersion > CTransaction::MAX_STANDARD_VERSION || tx.nVersion < 1) {
