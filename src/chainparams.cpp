@@ -103,7 +103,8 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
         */
 
-        consensus.nCoinbaseMaturitySwitch = 280000;     
+        consensus.nCoinbaseMaturitySwitch = 280000;   
+        consensus.nCheckPOWFromnTime = 1414964233;
         consensus.nProtocolV1RetargetingFixedTime = 1395631999;
         consensus.nProtocolV2Time = 1407053625;
         consensus.nProtocolV3Time = 1444028400;
@@ -209,6 +210,7 @@ public:
         */
 
         consensus.nCoinbaseMaturitySwitch = -1;
+        consensus.nCheckPOWFromnTime = 1414964233;
         consensus.nProtocolV1RetargetingFixedTime = 1577836800;
         consensus.nProtocolV2Time = 1577836800;
         consensus.nProtocolV3Time = 1577836800;
@@ -361,6 +363,7 @@ public:
         */
 
         consensus.nCoinbaseMaturitySwitch = -1;
+        consensus.nCheckPOWFromnTime = 1414964233;
         consensus.nProtocolV1RetargetingFixedTime = 1395631999;
         consensus.nProtocolV2Time = 1407053625;
         consensus.nProtocolV3Time = 1444028400;
