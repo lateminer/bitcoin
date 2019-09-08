@@ -3535,7 +3535,7 @@ static bool CheckBlockSignature(const CBlock& block)
 bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, const Consensus::Params& consensusParams, bool fCheckPOW)
 {
     // Check block version
-    if (block.nVersion < 7 && consensusParams.IsProtocolV2(block.GetBlockTime()))
+    if (block.nVersion < 7 && consensusParams.IsProtocolV3(block.GetBlockTime()))
         return state.DoS(100, false, REJECT_OBSOLETE, "bad-version", false, strprintf("rejected nVersion=%d block", block.nVersion));
 
     // Check proof of work hash

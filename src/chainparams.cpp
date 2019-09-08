@@ -107,8 +107,6 @@ public:
         consensus.nDifficultyDigiShield = 280000; 
         consensus.nCoinbaseMaturitySwitch = 280000;
         consensus.nCheckPOWFromnTime = 1414964233;
-        consensus.nProtocolV1RetargetingFixedTime = 1395631999;
-        consensus.nProtocolV2Time = 1407053625;
         consensus.nProtocolV3Time = 1444028400;
 
         consensus.nLastPOWBlock = 974999;
@@ -216,8 +214,6 @@ public:
         consensus.nDifficultyDigiShield = 10; 
         consensus.nCoinbaseMaturitySwitch = -1;
         consensus.nCheckPOWFromnTime = 1414964233;
-        consensus.nProtocolV1RetargetingFixedTime = 1577836800;
-        consensus.nProtocolV2Time = 1577836800;
         consensus.nProtocolV3Time = 1577836800;
 
         consensus.nLastPOWBlock = 1000;
@@ -372,8 +368,6 @@ public:
         consensus.nDifficultyDigiShield = 10; 
         consensus.nCoinbaseMaturitySwitch = -1;
         consensus.nCheckPOWFromnTime = 1414964233;
-        consensus.nProtocolV1RetargetingFixedTime = 1395631999;
-        consensus.nProtocolV2Time = 1407053625;
         consensus.nProtocolV3Time = 1444028400;
 
         consensus.nLastPOWBlock = 1000;

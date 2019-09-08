@@ -17,7 +17,7 @@ static arith_uint256 GetTargetLimit(int64_t nTime, const Consensus::Params& para
     uint256 nLimit;
 
     if (fProofOfStake) {
-        if (params.IsProtocolV2(nTime))
+        if (params.IsProtocolV3(nTime))
             nLimit = params.posLimitV2;
         else
             nLimit = params.posLimit;
@@ -61,8 +61,6 @@ unsigned int CalculateNextTargetRequired(const CBlockIndex* pindexLast, int64_t 
     int64_t nActualSpacing = pindexLast->GetBlockTime() - nFirstBlockTime;
 
     // Limit adjustment step
-    if (params.IsProtocolV1RetargetingFixed(pindexLast->GetBlockTime()) && nActualSpacing < 0)
-        nActualSpacing = nTargetSpacing;
     if (params.IsProtocolV3(pindexLast->GetBlockTime()) && nActualSpacing > nTargetSpacing*10)
         nActualSpacing = nTargetSpacing*10;
 
