@@ -82,7 +82,8 @@ public:
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.posLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.posLimitV2 = uint256S("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.nTargetTimespan = 16 * 60; // 16 mins
+        consensus.nTargetTimespan = 108 * 40; // Potcoin: 3.5 days
+        consensus.nTargetTimespanNEW = 40; // Potcoin: 40 seconds
         consensus.nTargetSpacing = 40; // Potcoin: 40 seconds
         consensus.BIP34Height = -1;
         consensus.BIP34Hash = uint256();
@@ -184,7 +185,8 @@ public:
         consensus.powLimit = uint256S("0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.posLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.posLimitV2 = uint256S("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.nTargetTimespan = 16 * 60; // 16 mins
+        consensus.nTargetTimespan = 40;
+        consensus.nTargetTimespanNEW = 40;
         consensus.nTargetSpacing = 40;
         consensus.BIP34Height = -1;
         consensus.BIP34Hash = uint256();
@@ -329,7 +331,8 @@ public:
         consensus.powLimit = uint256S("0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.posLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.posLimitV2 = uint256S("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.nTargetTimespan = 16 * 60; // 16 mins
+        consensus.nTargetTimespan = 40;
+        consensus.nTargetTimespanNEW = 40;
         consensus.nTargetSpacing = 40;
         consensus.BIP34Height = -1; // BIP34 has not necessarily activated on regtest
         consensus.BIP34Hash = uint256();
