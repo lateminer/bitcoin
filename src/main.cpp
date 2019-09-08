@@ -1767,9 +1767,31 @@ bool ReadBlockFromDisk(CBlock& block, const CBlockIndex* pindex, const Consensus
     return true;
 }
 
-CAmount GetProofOfWorkSubsidy()
+CAmount GetProofOfWorkSubsidy(int nHeight, const Consensus::Params& consensusParams)
 {
-    return 420 * COIN;
+    CAmount nSubsidy = 420 * COIN;
+
+    if (nHeight > 920000) {
+        nSubsidy = 50 * COIN;
+
+	    // Hyper halving for POSv transition
+	    if (nHeight > 930800) {
+            nSubsidy = 25 * COIN;
+        }
+	    if (nHeight > 941600) {
+            nSubsidy = 12 * COIN;
+        }
+        if (nHeight > 952400) {
+            nSubsidy = 6 * COIN;
+        }
+        if (nHeight > 963200) {
+            nSubsidy = 3 * COIN;
+        }
+	} else {
+	    // Subsidy is cut in half every 280000 blocks, which will occur approximately every 4 months
+        nSubsidy >>= (nHeight / consensusParams.nDifficultyDigiShield); // Potcoin: 280k blocks in ~4 months
+    }
+    return nSubsidy;
 }
 
 CAmount GetProofOfStakeSubsidy()
