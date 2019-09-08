@@ -143,7 +143,11 @@ CBlockTemplate* BlockAssembler::CreateNewBlock(const CScript& scriptPubKeyIn, in
     if (chainparams.MineBlocksOnDemand())
         pblock->nVersion = GetArg("-blockversion", pblock->nVersion);
 
-    nLockTimeCutoff = pblock->GetBlockTime();
+    const int64_t nMedianTimePast = pindexPrev->GetPastTimeLimit();
+
+    nLockTimeCutoff = (STANDARD_LOCKTIME_VERIFY_FLAGS & LOCKTIME_MEDIAN_TIME_PAST)
+                       ? nMedianTimePast
+                       : pblock->GetBlockTime();
 
     addPriorityTxs(pblock->GetBlockTime(), fProofOfStake);
     addPackageTxs();

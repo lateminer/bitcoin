@@ -13,7 +13,11 @@ static const unsigned int MAX_BLOCK_SIGOPS = MAX_BLOCK_SIZE/50;
 
 /** Flags for nSequence and nLockTime locks */
 enum {
+    /* Interpret sequence numbers as relative lock-time constraints. */
+    LOCKTIME_VERIFY_SEQUENCE = (1 << 0),
 
+    /* Use GetMedianTimePast() instead of nTime for end point timestamp. */
+    LOCKTIME_MEDIAN_TIME_PAST = (1 << 1),
 };
 
 #endif // BITCOIN_CONSENSUS_CONSENSUS_H

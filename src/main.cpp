@@ -939,7 +939,9 @@ bool CheckFinalTx(const CTransaction &tx, int flags)
     // When the next block is created its previous block will be the current
     // chain tip, so we use that to calculate the median time passed to
     // IsFinalTx() if LOCKTIME_MEDIAN_TIME_PAST is set.
-    const int64_t nBlockTime = GetAdjustedTime();
+    const int64_t nBlockTime = (flags & LOCKTIME_MEDIAN_TIME_PAST)
+                             ? chainActive.Tip()->GetPastTimeLimit()
+                             : GetAdjustedTime();
 
     return IsFinalTx(tx, nBlockHeight, nBlockTime);
 }
@@ -965,11 +967,8 @@ static std::pair<int, int64_t> CalculateSequenceLocks(const CTransaction &tx, in
     // tx.nVersion is signed integer so requires cast to unsigned otherwise
     // we would be doing a signed comparison and half the range of nVersion
     // wouldn't support BIP 68.
-    bool fEnforceBIP68 = false;
-    /*
-    bool fEnforceBIP68 = static_cast<uint32_t>(tx.nVersion) >= 2
+    bool fEnforceBIP68 = static_cast<uint32_t>(tx.nVersion) >= 5
                       && flags & LOCKTIME_VERIFY_SEQUENCE;
-    */
 
     // Do not enforce sequence numbers as a relative lock time
     // unless we have been instructed to
@@ -2512,26 +2511,17 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
 
     unsigned int flags = fStrictPayToScriptHash ? SCRIPT_VERIFY_P2SH : SCRIPT_VERIFY_NONE;
 
-    // BIP66 is always active
-    flags |= SCRIPT_VERIFY_DERSIG;
-    // Potcoin also requires DER encoding of pubkeys
-    flags |= SCRIPT_VERIFY_DERKEY;
-    // Potcoin also requires low S in sigs
-    flags |= SCRIPT_VERIFY_LOW_S;
-
-    // Start enforcing CHECKLOCKTIMEVERIFY, (BIP65) since protocol v3
+    // Potcoin: enforce CLTV (BIP65), DERSIG (BIP66), CSV (BIP68, BIP112) since PoSV3
+    int nLockTimeFlags = 0;
     if (chainparams.GetConsensus().IsProtocolV3(block.GetBlockTime())) {
         flags |= SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY;
         flags |= SCRIPT_VERIFY_NULLDUMMY;
-    }
-
-    /*
-    Start enforcing BIP68 (sequence locks) and BIP112 (CHECKSEQUENCEVERIFY) using versionbits logic.
-    int nLockTimeFlags = 0;
-    if (VersionBitsState(pindex->pprev, chainparams.GetConsensus(), Consensus::DEPLOYMENT_CSV, versionbitscache) == THRESHOLD_ACTIVE) {
+        flags |= SCRIPT_VERIFY_DERSIG;
+        flags |= SCRIPT_VERIFY_DERKEY;
+        flags |= SCRIPT_VERIFY_LOW_S;
         flags |= SCRIPT_VERIFY_CHECKSEQUENCEVERIFY;
+        nLockTimeFlags |= LOCKTIME_VERIFY_SEQUENCE;
     }
-    */
 
     int64_t nTime2 = GetTimeMicros(); nTimeForks += nTime2 - nTime1;
     LogPrint("bench", "    - Fork checks: %.2fms [%.2fs]\n", 0.001 * (nTime2 - nTime1), nTimeForks * 0.000001);
@@ -2564,6 +2554,14 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                 return state.DoS(100, error("ConnectBlock(): inputs missing/spent"),
                                  REJECT_INVALID, "bad-txns-inputs-missingorspent");
 
+            // Check that transaction is BIP68 final
+            // BIP68 lock checks (as opposed to nLockTime checks) must
+            // be in ConnectBlock because they require the UTXO set
+            prevheights.resize(tx.vin.size());
+            for (size_t j = 0; j < tx.vin.size(); j++) {
+                prevheights[j] = view.AccessCoins(tx.vin[j].prevout.hash)->nHeight;
+            }
+
             // Which orphan pool entries must we evict?
             for (size_t j = 0; j < tx.vin.size(); j++) {
                 auto itByPrev = mapOrphanTransactionsByPrev.find(tx.vin[j].prevout);
@@ -2573,6 +2571,11 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                     const uint256& orphanHash = orphanTx.GetHash();
                     vOrphanErase.push_back(orphanHash);
                 }
+            }
+
+            if (!SequenceLocks(tx, nLockTimeFlags, &prevheights, *pindex)) {
+                return state.DoS(100, error("%s: contains a non-BIP68-final transaction", __func__),
+                                 REJECT_INVALID, "bad-txns-nonfinal");
             }
         }
 
@@ -3703,14 +3706,15 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIn
 {
     const int nHeight = pindexPrev == NULL ? 0 : pindexPrev->nHeight + 1;
 
-    /*
-    const Consensus::Params& consensusParams = Params().GetConsensus();
-
-    // Start enforcing BIP113 (Median Time Past) using versionbits logic.
+    // Potcoin: enforce BIP113 (Median Time Past) since PoSV3
     int nLockTimeFlags = 0;
-    */
+    if (chainparams.GetConsensus().IsProtocolV3(block.GetBlockTime())) {
+        nLockTimeFlags |= LOCKTIME_MEDIAN_TIME_PAST;
+    }
 
-    int64_t nLockTimeCutoff = block.GetBlockTime();
+    int64_t nLockTimeCutoff = (nLockTimeFlags & LOCKTIME_MEDIAN_TIME_PAST)
+                              ? pindexPrev->GetPastTimeLimit()
+                              : block.GetBlockTime();
 
     // Check that all transactions are finalized
     BOOST_FOREACH(const CTransaction& tx, block.vtx) {

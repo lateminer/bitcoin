@@ -398,6 +398,7 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
 
     // non-final txs in mempool
     SetMockTime(chainActive.Tip()->GetPastTimeLimit()+1);
+    // int flags = LOCKTIME_VERIFY_SEQUENCE|LOCKTIME_MEDIAN_TIME_PAST;
     // height map
     std::vector<int> prevheights;
 
