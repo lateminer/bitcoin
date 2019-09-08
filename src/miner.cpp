@@ -130,13 +130,18 @@ CBlockTemplate* BlockAssembler::CreateNewBlock(const CScript& scriptPubKeyIn, in
     CBlockIndex* pindexPrev = chainActive.Tip();
     nHeight = pindexPrev->nHeight + 1;
 
-    pblock->nVersion = ComputeBlockVersion(pindexPrev, chainparams.GetConsensus());
+    pblock->nTime = GetAdjustedTime();
+
+    // Potcoin: use block version 3 until PoSV3
+    if (chainparams.GetConsensus().IsProtocolV3(pblock->GetBlockTime()))
+        pblock->nVersion = ComputeBlockVersion(pindexPrev, chainparams.GetConsensus());
+    else
+        pblock->nVersion = 3;
+    
     // -regtest only: allow overriding block.nVersion with
     // -blockversion=N to test forking scenarios
     if (chainparams.MineBlocksOnDemand())
         pblock->nVersion = GetArg("-blockversion", pblock->nVersion);
-
-    pblock->nTime = GetAdjustedTime();
 
     nLockTimeCutoff = pblock->GetBlockTime();
 

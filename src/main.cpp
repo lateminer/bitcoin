@@ -1252,12 +1252,16 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
     if (tx.IsCoinStake())
         return state.DoS(100, false, REJECT_INVALID, "coinstake");
 
-    // Don't relay version 2 transactions until CSV is active, and we can be
+    // Potcoin: refuse transactions with old versions
+    if (chainActive.Height() >= chainparams.GetConsensus().nLastPOWBlock && tx.nVersion <= 3)
+        return state.DoS(100, false, REJECT_INVALID, "old-pre-PoSV-version-tx");
+
+    // Don't relay version 5 transactions until CSV is active, and we can be
     // sure that such transactions will be mined (unless we're on
     // -testnet/-regtest).
     const CChainParams& chainparams = Params();
-    if (fRequireStandard && tx.nVersion >= 2 && VersionBitsTipState(chainparams.GetConsensus(), Consensus::DEPLOYMENT_CSV) != THRESHOLD_ACTIVE) {
-        return state.DoS(0, false, REJECT_NONSTANDARD, "premature-version2-tx");
+    if (fRequireStandard && tx.nVersion >= 5 && VersionBitsTipState(chainparams.GetConsensus(), Consensus::DEPLOYMENT_CSV) != THRESHOLD_ACTIVE) {
+        return state.DoS(0, false, REJECT_NONSTANDARD, "premature-version5-tx");
     }
 
     // Rather not work on nonstandard transactions (unless -testnet/-regtest)

@@ -102,7 +102,9 @@ public:
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(*(CBlockHeader*)this);
         READWRITE(vtx);
-        READWRITE(vchBlockSig);
+        // Potcoin
+        if (this->nVersion > 2)
+            READWRITE(vchBlockSig);
     }
 
     void SetNull()
