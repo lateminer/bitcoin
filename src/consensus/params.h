@@ -64,6 +64,8 @@ struct Params {
     int64_t nTargetTimespan;
     int64_t nTargetTimespanNEW;
     int64_t DifficultyAdjustmentInterval() const { return nTargetTimespan / nTargetSpacing; }
+    int nDifficultyKGW;
+    int nDifficultyDigiShield;
     int nCoinbaseMaturitySwitch;
     int64_t nCheckPOWFromnTime;
     int64_t nProtocolV1RetargetingFixedTime;

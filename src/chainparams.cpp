@@ -103,7 +103,9 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
         */
 
-        consensus.nCoinbaseMaturitySwitch = 280000;   
+        consensus.nDifficultyKGW = 61798;
+        consensus.nDifficultyDigiShield = 280000; 
+        consensus.nCoinbaseMaturitySwitch = 280000;
         consensus.nCheckPOWFromnTime = 1414964233;
         consensus.nProtocolV1RetargetingFixedTime = 1395631999;
         consensus.nProtocolV2Time = 1407053625;
@@ -210,6 +212,8 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
         */
 
+        consensus.nDifficultyKGW = 5;
+        consensus.nDifficultyDigiShield = 10; 
         consensus.nCoinbaseMaturitySwitch = -1;
         consensus.nCheckPOWFromnTime = 1414964233;
         consensus.nProtocolV1RetargetingFixedTime = 1577836800;
@@ -364,6 +368,8 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
         */
 
+        consensus.nDifficultyKGW = 5;
+        consensus.nDifficultyDigiShield = 10; 
         consensus.nCoinbaseMaturitySwitch = -1;
         consensus.nCheckPOWFromnTime = 1414964233;
         consensus.nProtocolV1RetargetingFixedTime = 1395631999;
