@@ -113,7 +113,8 @@ public:
         consensus.nStakeTimestampMask = 0xf; // 15
         consensus.nCoinbaseMaturity = 30; // Potcoin: 30 blocks
         consensus.nCoinbaseMaturityNEW = 60 * 4; // Potcoin: coinbase maturity after block 145000 - 240 blocks
-        consensus.nStakeMinAge = 8 * 60 * 60; // 8 hours
+        consensus.nStakeMinAge = 8 * 60 * 60; // Potcoin: 8 hours
+        consensus.nStakeMaxAge = 365 * 24 * 60 * 60; // Potcoin: 365 days
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000001f61a372a08476c5a2e");
@@ -220,6 +221,7 @@ public:
         consensus.nCoinbaseMaturity = 10;
         consensus.nCoinbaseMaturityNEW = 10;
         consensus.nStakeMinAge = 1 * 60 * 60;
+        consensus.nStakeMaxAge = 365 * 24 * 60 * 60;
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
@@ -373,6 +375,7 @@ public:
         consensus.nCoinbaseMaturity = 10;
         consensus.nCoinbaseMaturityNEW = 10;
         consensus.nStakeMinAge = 1 * 60 * 60;
+        consensus.nStakeMaxAge = 365 * 24 * 60 * 60;
 
         pchMessageStart[0] = 0x70;
         pchMessageStart[1] = 0x35;

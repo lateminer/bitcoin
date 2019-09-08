@@ -78,6 +78,7 @@ struct Params {
     int nCoinbaseMaturity;
     int nCoinbaseMaturityNEW;
     unsigned int nStakeMinAge;
+    unsigned int nStakeMaxAge;
     uint256 nMinimumChainWork;
 };
 } // namespace Consensus
