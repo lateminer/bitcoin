@@ -103,12 +103,15 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
         */
 
+        consensus.nCoinbaseMaturitySwitch = 280000;     
         consensus.nProtocolV1RetargetingFixedTime = 1395631999;
         consensus.nProtocolV2Time = 1407053625;
         consensus.nProtocolV3Time = 1444028400;
+
         consensus.nLastPOWBlock = 974999;
         consensus.nStakeTimestampMask = 0xf; // 15
-        consensus.nCoinbaseMaturity = 500;
+        consensus.nCoinbaseMaturity = 30; // Potcoin: 30 blocks
+        consensus.nCoinbaseMaturityNEW = 60 * 4; // Potcoin: coinbase maturity after block 145000 - 240 blocks
         consensus.nStakeMinAge = 8 * 60 * 60; // 8 hours
 
         // The best chain should have at least this much work.
@@ -205,12 +208,15 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
         */
 
+        consensus.nCoinbaseMaturitySwitch = -1;
         consensus.nProtocolV1RetargetingFixedTime = 1577836800;
         consensus.nProtocolV2Time = 1577836800;
         consensus.nProtocolV3Time = 1577836800;
+
         consensus.nLastPOWBlock = 1000;
         consensus.nStakeTimestampMask = 0xf;
         consensus.nCoinbaseMaturity = 10;
+        consensus.nCoinbaseMaturityNEW = 10;
         consensus.nStakeMinAge = 1 * 60 * 60;
 
         // The best chain should have at least this much work.
@@ -354,12 +360,15 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
         */
 
+        consensus.nCoinbaseMaturitySwitch = -1;
         consensus.nProtocolV1RetargetingFixedTime = 1395631999;
         consensus.nProtocolV2Time = 1407053625;
         consensus.nProtocolV3Time = 1444028400;
+
         consensus.nLastPOWBlock = 1000;
         consensus.nStakeTimestampMask = 0xf;
         consensus.nCoinbaseMaturity = 10;
+        consensus.nCoinbaseMaturityNEW = 10;
         consensus.nStakeMinAge = 1 * 60 * 60;
 
         pchMessageStart[0] = 0x70;

@@ -64,6 +64,7 @@ struct Params {
     int64_t nTargetTimespan;
     int64_t nTargetTimespanNEW;
     int64_t DifficultyAdjustmentInterval() const { return nTargetTimespan / nTargetSpacing; }
+    int nCoinbaseMaturitySwitch;
     int64_t nProtocolV1RetargetingFixedTime;
     int64_t nProtocolV2Time;
     int64_t nProtocolV3Time;
@@ -74,6 +75,7 @@ struct Params {
     int nLastPOWBlock;
     int nStakeTimestampMask;
     int nCoinbaseMaturity;
+    int nCoinbaseMaturityNEW;
     unsigned int nStakeMinAge;
     uint256 nMinimumChainWork;
 };

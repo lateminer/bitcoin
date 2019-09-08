@@ -4061,7 +4061,12 @@ int CMerkleTx::GetBlocksToMaturity() const
 {
     if (!(IsCoinBase() || IsCoinStake()))
         return 0;
-    return max(0, (Params().GetConsensus().nCoinbaseMaturity+1) - GetDepthInMainChain());
+
+    // Potcoin
+    if (GetHeightInMainChain() >= Params().GetConsensus().nCoinbaseMaturitySwitch)
+        return max(0, (Params().GetConsensus().nCoinbaseMaturityNEW + 20) - GetDepthInMainChain());
+    else
+        return max(0, (Params().GetConsensus().nCoinbaseMaturity + 20) - GetDepthInMainChain());
 }
 
 
