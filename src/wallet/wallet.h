@@ -212,6 +212,8 @@ public:
      *  0  : in memory pool, waiting to be included in a block
      * >=1 : this many blocks deep in the main chain
      */
+    int GetHeightInMainChain(const CBlockIndex* &pindexRet) const;
+    int GetHeightInMainChain() const { const CBlockIndex *pindexRet; return GetHeightInMainChain(pindexRet); }
     int GetDepthInMainChain(const CBlockIndex* &pindexRet) const;
     int GetDepthInMainChain() const { const CBlockIndex *pindexRet; return GetDepthInMainChain(pindexRet); }
     bool IsInMainChain() const { const CBlockIndex *pindexRet; return GetDepthInMainChain(pindexRet) > 0; }

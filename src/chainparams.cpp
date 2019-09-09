@@ -111,7 +111,7 @@ public:
         consensus.nStakeMaxAge = 365 * 24 * 60 * 60; // Potcoin: 365 days
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000001f61a372a08476c5a2e");
+        consensus.nMinimumChainWork = uint256S("0x00");
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.

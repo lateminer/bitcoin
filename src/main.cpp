@@ -1252,14 +1252,14 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
         return state.DoS(100, false, REJECT_INVALID, "coinstake");
 
     // Potcoin: refuse transactions with old versions
+    const CChainParams& chainparams = Params();
     if (chainActive.Height() >= chainparams.GetConsensus().nLastPOWBlock && tx.nVersion <= 3)
         return state.DoS(100, false, REJECT_INVALID, "old-pre-PoSV-version-tx");
 
     // Don't relay version 5 transactions until CSV is active, and we can be
     // sure that such transactions will be mined (unless we're on
     // -testnet/-regtest).
-    const CChainParams& chainparams = Params();
-    if (fRequireStandard && tx.nVersion >= 5 && !(chainparams.GetConsensus().IsProtocolV3(chainActive.Tip()->GetBlockTime())) {
+    if (fRequireStandard && tx.nVersion >= 5 && !(chainparams.GetConsensus().IsProtocolV3(chainActive.Tip()->GetBlockTime()))) {
         return state.DoS(0, false, REJECT_NONSTANDARD, "premature-version5-tx");
     }
 
@@ -2617,7 +2617,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     LogPrint("bench", "      - Connect %u transactions: %.2fms (%.3fms/tx, %.3fms/txin) [%.2fs]\n", (unsigned)block.vtx.size(), 0.001 * (nTime3 - nTime2), 0.001 * (nTime3 - nTime2) / block.vtx.size(), nInputs <= 1 ? 0 : 0.001 * (nTime3 - nTime2) / (nInputs-1), nTimeConnect * 0.000001);
 
     if (block.IsProofOfWork()) {
-            CAmount blockReward = nFees + GetProofOfWorkSubsidy();
+            CAmount blockReward = nFees + GetProofOfWorkSubsidy(pindex->nHeight, chainparams.GetConsensus());
             if (block.vtx[0].GetValueOut() > blockReward)
                 return state.DoS(100,
                                  error("ConnectBlock(): coinbase pays too much (actual=%d vs limit=%d)",
@@ -3708,7 +3708,7 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIn
 
     // Potcoin: enforce BIP113 (Median Time Past) since PoSV3
     int nLockTimeFlags = 0;
-    if (chainparams.GetConsensus().IsProtocolV3(block.GetBlockTime())) {
+    if (Params().GetConsensus().IsProtocolV3(block.GetBlockTime())) {
         nLockTimeFlags |= LOCKTIME_MEDIAN_TIME_PAST;
     }
 
