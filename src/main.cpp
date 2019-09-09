@@ -1259,7 +1259,7 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
     // sure that such transactions will be mined (unless we're on
     // -testnet/-regtest).
     const CChainParams& chainparams = Params();
-    if (fRequireStandard && tx.nVersion >= 5 && VersionBitsTipState(chainparams.GetConsensus(), Consensus::DEPLOYMENT_CSV) != THRESHOLD_ACTIVE) {
+    if (fRequireStandard && tx.nVersion >= 5 && !(chainparams.GetConsensus().IsProtocolV3(chainActive.Tip()->GetBlockTime())) {
         return state.DoS(0, false, REJECT_NONSTANDARD, "premature-version5-tx");
     }
 

@@ -97,13 +97,6 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
 
-        /*
-        Deployment of BIP68, BIP112, and BIP113.
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 999999999999ULL; // never
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
-        */
-
         consensus.nDifficultyKGW = 61798;
         consensus.nDifficultyDigiShield = 280000; 
         consensus.nCoinbaseMaturitySwitch = 280000;
@@ -205,12 +198,6 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
-
-        /*
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 999999999999ULL; // never
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
-        */
 
         consensus.nDifficultyKGW = 5;
         consensus.nDifficultyDigiShield = 10; 
@@ -360,12 +347,6 @@ public:
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
-
-        /*
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 999999999999ULL; // never
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
-        */
 
         consensus.nDifficultyKGW = 5;
         consensus.nDifficultyDigiShield = 10; 
