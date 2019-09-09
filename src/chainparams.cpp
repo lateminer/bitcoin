@@ -85,6 +85,7 @@ public:
         consensus.nTargetTimespan = 108 * 40; // Potcoin: 3.5 days
         consensus.nTargetTimespanNEW = 40; // Potcoin: 40 seconds
         consensus.nTargetSpacing = 40; // Potcoin: 40 seconds
+        consensus.nTargetSpacingNEW = 48; // Potcoin: 48 seconds
         consensus.BIP34Height = -1;
         consensus.BIP34Hash = uint256();
         consensus.fPowAllowMinDifficultyBlocks = false;
@@ -193,6 +194,7 @@ public:
         consensus.nTargetTimespan = 40;
         consensus.nTargetTimespanNEW = 40;
         consensus.nTargetSpacing = 40;
+        consensus.nTargetSpacingNEW = 48;
         consensus.BIP34Height = -1;
         consensus.BIP34Hash = uint256();
         consensus.fPowAllowMinDifficultyBlocks = true;
@@ -344,6 +346,7 @@ public:
         consensus.nTargetTimespan = 40;
         consensus.nTargetTimespanNEW = 40;
         consensus.nTargetSpacing = 40;
+        consensus.nTargetSpacingNEW = 48;
         consensus.BIP34Height = -1; // BIP34 has not necessarily activated on regtest
         consensus.BIP34Hash = uint256();
         consensus.fPowAllowMinDifficultyBlocks = true;

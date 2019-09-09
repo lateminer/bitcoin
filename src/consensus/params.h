@@ -61,6 +61,7 @@ struct Params {
     bool fPowNoRetargeting;
     bool fPoSNoRetargeting;
     int64_t nTargetSpacing;
+    int64_t nTargetSpacingNEW;
     int64_t nTargetTimespan;
     int64_t nTargetTimespanNEW;
     int64_t DifficultyAdjustmentInterval() const { return nTargetTimespan / nTargetSpacing; }
