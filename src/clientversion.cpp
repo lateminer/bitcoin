@@ -18,7 +18,7 @@ const std::string CLIENT_NAME("DigiGreen Core");
 /**
  * Client version number
  */
-#define CLIENT_VERSION_SUFFIX "-dope"
+#define CLIENT_VERSION_SUFFIX ""
 
 
 /**
