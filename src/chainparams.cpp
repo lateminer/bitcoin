@@ -112,7 +112,6 @@ public:
         pchMessageStart[2] = 0x13;
         pchMessageStart[3] = 0xf8;
         nDefaultPort = 40420;
-        nMaxTipAge = 24 * 60 * 60;
         nPruneAfterHeight = 100000;
         
         genesis = CreateGenesisBlock(1480636800, 499515, 0x1e0fffff, 1, 0);
@@ -201,7 +200,6 @@ public:
         pchMessageStart[2] = 0xc0;
         pchMessageStart[3] = 0xef;
         nDefaultPort = 30420;
-        nMaxTipAge = 0x7fffffff;
         nPruneAfterHeight = 1000;
 
         // The best chain should have at least this much work.
@@ -287,7 +285,6 @@ public:
         pchMessageStart[2] = 0xb5;
         pchMessageStart[3] = 0xda;
         nDefaultPort = 20420;
-        nMaxTipAge = 0x7fffffff;
         nPruneAfterHeight = 100000;
 
         genesis = CreateGenesisBlock(1512432000, 1, 0x1e0fffff, 1, 0);
