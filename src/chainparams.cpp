@@ -222,47 +222,16 @@ public:
         nDefaultPort = 14200;
         nPruneAfterHeight = 1000;
 
-        // const char* pszTimestamp = "Banks Aren't Accepting Legal Marijuana Money. Here's Why";
-        // CMutableTransaction txNew;
-        // txNew.nTime = 1548266025;
-        // txNew.vin.resize(1);
-        // txNew.vout.resize(1);
-        // txNew.vin[0].scriptSig = CScript() << 0 << CScriptNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-        // txNew.vout[0].SetEmpty();
-        // genesis.vtx.push_back(txNew);
-        // genesis.hashPrevBlock.SetNull();
-        // genesis.nVersion = 1;
-        // genesis.nTime    = 1548266025;
-        // genesis.nBits    = 0x1e0ffff0;
-        // //genesis.nNonce = 2084769027;
-        // genesis.nNonce = 1;
-        // genesis.hashMerkleRoot = BlockMerkleRoot(genesis);
-
-        // Uncomment the following block of code if you want to create a genesis block by running ./bitcoind.
-        // Make sure to set your nonce to 0 before compiling, also comment out the assert lines below this block!
-        // printf("Calculate new genesis block\n");
-        // printf("hashMerkleRoot %s\n", genesis.hashMerkleRoot.ToString().c_str());
-        // printf("powLimit 0x%x\n", consensus.powLimit);
-        // printf("genesis.nBits 0x%x\n", genesis.nBits);
-        // for (genesis.nNonce = 0; ; genesis.nNonce++) {
-        //   consensus.hashGenesisBlock = genesis.GetHash();
-        //   printf("consensus.hashGenesisBlock 0x%x\n", consensus.hashGenesisBlock);
-        //   if (consensus.hashGenesisBlock < consensus.powLimit) break;
-        // }
-        // printf("consensus.hashGenesisBlock %s\n", consensus.hashGenesisBlock.ToString().c_str());
-        // printf("genesis.nNonce %d\n", genesis.nNonce); 
-        // printf("genesis.nTime %d\n", genesis.nTime);
-
+        /*
         uint32_t nTimestamp = 1548795387;
         uint256 hashGenesisBlock = uint256S("0000528be56515b134dbd94bf0122808c39abc5fb0b7d51f510c85193c403cfb");
         uint256 hashMerkleRoot = uint256S("b3f600f3271af244dffbd32692690f8c1d4827173be50fb27e55e3eb902aa327");
         uint32_t nNonce = 203645;
 
-        //genesis = CreateGenesisBlock(1548183491, 2084769027, 0x1f00ffff, 1, 420 * COIN);
         genesis = CreateGenesisBlockTestnet(nTimestamp, nNonce, 0x1f00ffff, 1, 0);
         consensus.hashGenesisBlock = genesis.GetHash();
 
-         if (true && (genesis.GetHash() != hashGenesisBlock || genesis.hashMerkleRoot != hashMerkleRoot))
+        if (true && (genesis.GetHash() != hashGenesisBlock || genesis.hashMerkleRoot != hashMerkleRoot))
         {
             printf("recalculating params for testnet.\n");
             printf("old testnet genesis nonce: %d\n", genesis.nNonce);
@@ -273,16 +242,15 @@ public:
             printf("new testnet genesis nonce: %d\n", genesis.nNonce);
             printf("new testnet genesis hash: %s\n", genesis.GetHash().ToString().c_str());
         }
-
         assert(consensus.hashGenesisBlock == hashGenesisBlock);
         assert(genesis.hashMerkleRoot == hashMerkleRoot);
+        */
 
-        // std::cout << genesis.ToString();
-        // printf ("Bitcoin testnet hashGenesisBlock: %s \n", consensus.hashGenesisBlock.ToString().c_str());
-        // printf ("Bitcoin testnet hashMerkleRoot: %s \n", genesis.hashMerkleRoot.ToString().c_str());
-        // assert(consensus.hashGenesisBlock == uint256S("0xa52b24891756af34d415268c675895c8399b3740633cbd815e8bfc96a3fabe69"));
-        // assert(genesis.hashMerkleRoot == uint256S("0x851d98e776092bfcfe4a9403b2430492f39cd36c037488134144adfe41430fbc"));
+        genesis = CreateGenesisBlockTestnet(1548795387, 205655, 0x1f00ffff, 1, 0);
+        consensus.hashGenesisBlock = genesis.GetHash();
 
+        assert(consensus.hashGenesisBlock == uint256S("0x0000b573f1d00d1ec5673c55a53c7897ec6dac787ddcc67ae6c26cd0c04f32e9"));
+        assert(genesis.hashMerkleRoot == uint256S("0x15d1b22c75054f04486de21455b82b20f3d5c5ec68f783399cd4728ac395518d"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
