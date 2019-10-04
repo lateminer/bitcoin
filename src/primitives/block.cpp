@@ -16,7 +16,7 @@ uint256 CBlockHeader::GetHash() const
     // Potcoin: scrypt hashing until block version 4
     if (nVersion > 3)
             return SerializeHash(*this);
-        return GetPoWHash();
+        return Hash(BEGIN(nVersion), END(nNonce));
 }
 
 uint256 CBlockHeader::GetPoWHash() const
