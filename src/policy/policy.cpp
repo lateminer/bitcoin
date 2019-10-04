@@ -59,7 +59,8 @@ int64_t FutureDrift(int64_t nTime)
 	if (Params().GetConsensus().fPowNoRetargeting && chainActive.Height() <= Params().GetConsensus().nLastPOWBlock) {
 	         return nTime + 24 * 60 * 60;
 	}
-    return Params().GetConsensus().IsProtocolV3(nTime) ? nTime + 15 : nTime + 10 * 60;
+    // Potcoin: actually, disable FutureDrift check until PoSV3
+    return Params().GetConsensus().IsProtocolV3(nTime) ? nTime + 15 : std::numeric_limits<int64_t>::max();
 }
 
 int64_t PastDrift(int64_t nTime)
