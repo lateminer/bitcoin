@@ -8,7 +8,7 @@ What is DigiGreen?
 
 Dopecoin is a digital currency, similar to Bitcoin, that was developed for marijuana enthusiasts.
 The currency was created in January 2014 and relaunched as DopeCoinGold in January 2017. Rebranded as
-DigiGreen in August 2018.
+DigiGreen in 2019.
 
 DigiGreen Core is the name of open source software which enables the use of this currency.
 It is based on Bitcoin Core 0.13.2 with some with some patches from newer versions.
@@ -23,7 +23,7 @@ Coin Specifications
 ----------------
 
 - Total: 200,000,000 DGN
-- Algorithm: POSV3
+- Algorithm: PoSV3
 - POS reward: 30 DGN
 - Block time: 90 seconds
 - P2P port: 40420
@@ -32,16 +32,16 @@ Coin Specifications
 Builds
 ----------------
 
-v.4.2.0.0:
+v4.2.0.0:
 
 - Rebranded as DigiGreen
-- Updated to Blackcoin More 2.13.2.3 (c7eef36834)
+- Updated to Blackcoin More v2.13.2.3-c7eef36834
 
-v.4.1.0.0:
+v4.1.0.0:
 
-- Rebased to Bitcoin Core 0.12.1
+- Rebased to Bitcoin Core v0.12.1
 - BIP32 HD wallet support
-- Added autocomplete to DigiGreen-Qt console window
+- Added autocomplete to Dopecoin-Qt console window
 - Added toggle for unmasking password
 - Block hash changed back to SHA256D
 
@@ -59,7 +59,7 @@ The `master` branch is regularly built and tested and is meant to be stable. Dev
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-The best place to get started is to join DigiGreen channel on Discord.
+The best place to get started is to join DopeCoin channel on Discord.
 
 Testing
 -------
