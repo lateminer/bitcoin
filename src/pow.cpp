@@ -410,9 +410,9 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     int fork2 = 21000;
 
     // Megacoin Miningalgo switch
-	//10/21/2019 @ 12:00am (UTC) Mainet
+	// 1571832146 Wednesday, 23. October 2019 12:02:26
 	// please check also block.cpp:L62
-    if(pblock->GetBlockTime() >= 1571616000 && pindexLast->GetBlockTime() <= 1571616000 + 86400) // We have a timerange from 24 hours  to find a new block
+    if(pblock->GetBlockTime() >= 1571832146 && pindexLast->GetBlockTime() <= 1571832146 + 86400) // We have a timerange from 24 hours  to find a new block
     {
         if (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing*24) 
             {
