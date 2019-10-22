@@ -484,12 +484,14 @@ bool CWallet::Unlock(const SecureString& strWalletPassphrase, bool fForMixingOnl
             if (!crypter.Decrypt(pMasterKey.second.vchCryptedKey, _vMasterKey))
                 continue; // try another master key
             if (CCryptoKeyStore::Unlock(_vMasterKey, fForMixingOnly))
+            {
                 // Dash
                 if(nWalletBackups == -2) {
                     TopUpKeyPool();
                     LogPrintf("Keypool replenished, re-initializing automatic backups.\n");
                     nWalletBackups = gArgs.GetArg("-createwalletbackups", 10);
                 }
+            }
                 //
                 return true;
         }
