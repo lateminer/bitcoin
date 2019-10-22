@@ -54,7 +54,9 @@ uint256 CBlockHeader::GetPoWHash() const
     if(GetBlockTime() >= 1493124696) { //Human time (GMT): Tue, 25 Apr 2017 12:51:36 GMT
         return HashTimeTravel(BEGIN(nVersion), END(nNonce), GetBlockTime()); // MegaCoin TimeTravel
     }
-    else {
+    else 
+    {
+    }
     */
     
     uint256 thash;
