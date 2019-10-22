@@ -82,8 +82,8 @@ public:
         consensus.nMinimumSubsidy = 0.00100000 * COIN;
 
         consensus.nMasternodeMinimumConfirmations = 15;
-        consensus.nMasternodePaymentsStartBlock = 50;
-        consensus.nMasternodePaymentsIncreaseBlock = 50;
+        consensus.nMasternodePaymentsStartBlock = 1200000;
+        consensus.nMasternodePaymentsIncreaseBlock = 50; //not used
         consensus.nMasternodePaymentsIncreasePeriod = 365 * 1440; // 1 common year
         consensus.nMasternodeCollateralMinimum = 21000; // starting MN collateral
         consensus.nMasternodeCollateralMaximum = 210000; // MN collateral at infinity

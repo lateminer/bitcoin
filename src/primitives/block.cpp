@@ -54,13 +54,14 @@ uint256 CBlockHeader::GetPoWHash() const
     if(GetBlockTime() >= 1493124696) { //Human time (GMT): Tue, 25 Apr 2017 12:51:36 GMT
         return HashTimeTravel(BEGIN(nVersion), END(nNonce), GetBlockTime()); // MegaCoin TimeTravel
     }
-    else {
+    else 
+    {
     */
     
     uint256 thash;
     // please check also pow.cpp:L414
 	//10/21/2019 @ 12:00am (UTC)
-    if(GetBlockTime() >= 1571616000) //10/21/2019 @ 12:00am (UTC)
+    if(GetBlockTime() >= 1571832146) //Wednesday, 23. October 2019 12:02:26
     {
         thash = HashX16R(BEGIN(nVersion), END(nNonce), hashPrevBlock);
     } //10/21/2019 @ 12:00am (UTC)
@@ -69,6 +70,7 @@ uint256 CBlockHeader::GetPoWHash() const
         scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
         return thash;
     }
+    return thash;
 }
 
 /*
