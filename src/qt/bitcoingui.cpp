@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2018 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
-// Copyright (c) 2018 FXTC developers
+// Copyright (c) 2019 Limxtec developers
 // Copyright (c) 2019 BitCore developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -363,10 +363,15 @@ void BitcoinGUI::createActions()
     //-//lockWalletAction = new QAction(tr("&Lock Wallet"), this);
     //
 
+    // Megacoin
+    unlockWalletAction = new QAction(platformStyle->TextColorIcon(":/icons/lock_open"), tr("&Unlock Wallet..."), this);
+    unlockWalletAction->setStatusTip(tr("Unlock encrypted wallet for further transactions."));
     signMessageAction = new QAction(platformStyle->TextColorIcon(":/icons/edit"), tr("Sign &message..."), this);
     signMessageAction->setStatusTip(tr("Sign messages with your BitCore addresses to prove you own them"));
     verifyMessageAction = new QAction(platformStyle->TextColorIcon(":/icons/verify"), tr("&Verify message..."), this);
-    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified BitCore addresses"));
+    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified Megacoin addresses"));
+    openRepairAction = new QAction(QIcon(":/icons/verify"), tr("Wallet &Repair"), this);
+    openRepairAction->setStatusTip(tr("Show wallet repair options"));
 
     // Dash
     // FXTC TODO: menu items

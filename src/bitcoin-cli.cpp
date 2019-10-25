@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2018 The Bitcoin Core developers
-// Copyright (c) 2018 FXTC developers
+// Copyright (c) 2019 Limxtec developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -108,10 +108,10 @@ static int AppInitRPC(int argc, char* argv[])
         std::string strUsage = PACKAGE_NAME " RPC client version " + FormatFullVersion() + "\n";
         if (!gArgs.IsArgSet("-version")) {
             strUsage += "\n"
-                "Usage:  fxtc-cli [options] <command> [params]  Send command to " PACKAGE_NAME "\n"
-                "or:     fxtc-cli [options] -named <command> [name=value]...  Send command to " PACKAGE_NAME " (with named arguments)\n"
-                "or:     fxtc-cli [options] help                List commands\n"
-                "or:     fxtc-cli [options] help <command>      Get help for a command\n";
+                "Usage:  bitcore-cli [options] <command> [params]  Send command to " PACKAGE_NAME "\n"
+                "or:     bitcore-cli [options] -named <command> [name=value]...  Send command to " PACKAGE_NAME " (with named arguments)\n"
+                "or:     bitcore-cli [options] help                List commands\n"
+                "or:     bitcore-cli [options] help <command>      Get help for a command\n";
             strUsage += "\n" + gArgs.GetHelpMessage();
         }
 
@@ -471,7 +471,7 @@ static int CommandLineRPC(int argc, char *argv[])
                             strPrint += "error message:\n"+errMsg.get_str();
 
                         if (errCode.isNum() && errCode.get_int() == RPC_WALLET_NOT_SPECIFIED) {
-                            strPrint += "\nTry adding \"-rpcwallet=<filename>\" option to fxtc-cli command line.";
+                            strPrint += "\nTry adding \"-rpcwallet=<filename>\" option to bitcore-cli command line.";
                         }
                     }
                 } else {

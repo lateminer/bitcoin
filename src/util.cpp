@@ -725,7 +725,7 @@ static std::string FormatException(const std::exception* pex, const char* pszThr
     char pszModule[MAX_PATH] = "";
     GetModuleFileNameA(nullptr, pszModule, sizeof(pszModule));
 #else
-    const char* pszModule = "fxtc";
+    const char* pszModule = "bitcore";
 #endif
     if (pex)
         return strprintf(
@@ -747,7 +747,7 @@ fs::path GetDefaultDataDir()
     // Windows < Vista: C:\Documents and Settings\Username\Application Data\FxTC
     // Windows >= Vista: C:\Users\Username\AppData\Roaming\FxTC
     // Mac: ~/Library/Application Support/FxTC
-    // Unix: ~/.fxtc
+    // Unix: ~/.bitcore
 #ifdef WIN32
     // Windows
     return GetSpecialFolderPath(CSIDL_APPDATA) / "FxTC";
@@ -763,7 +763,7 @@ fs::path GetDefaultDataDir()
     return pathRet / "Library/Application Support/FxTC";
 #else
     // Unix
-    return pathRet / ".fxtc";
+    return pathRet / ".bitcore";
 #endif
 #endif
 }
