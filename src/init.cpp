@@ -581,8 +581,9 @@ void SetupServerArgs()
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/fxtc/fxtc>";
-    const std::string URL_WEBSITE = "<https://fixedtradecoin.org>";
+    // Megacoin
+    const std::string URL_SOURCE_CODE = "<https://github.com/LIMXTEC/BITCORE>";
+    const std::string URL_WEBSITE = "<https://bitcore.cc>";
 
     // FXTC BEGIN
     //return CopyrightHolders(strprintf(_("Copyright (C) %i-%i"), 2009, COPYRIGHT_YEAR) + " ") + "\n" +
@@ -1230,6 +1231,7 @@ bool AppInitParameterInteraction()
         }
     }
 
+    /*
     // algo switch
     std::string strAlgo = gArgs.GetArg("-algo","sha256d");
     transform(strAlgo.begin(), strAlgo.end(), strAlgo.begin(), ::tolower);
@@ -1247,6 +1249,7 @@ bool AppInitParameterInteraction()
          miningAlgo = ALGO_X16R;
     else
          miningAlgo = ALGO_SHA256D; // FXTC TODO: we should not be here
+    */
 
     return true;
 }

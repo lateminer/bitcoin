@@ -170,6 +170,7 @@ const CBlockIndex* LastCommonAncestor(const CBlockIndex* pa, const CBlockIndex* 
     return pa;
 }
 
+/*
 std::string GetAlgoName(int32_t nAlgo)
 {
     switch (nAlgo)
@@ -201,3 +202,4 @@ int32_t GetAlgoId(std::string strAlgo)
 
     return miningAlgo;
 }
+*/

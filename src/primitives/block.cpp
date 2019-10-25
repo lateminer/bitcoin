@@ -18,7 +18,11 @@
 #include <crypto/x11.h>
 #include <crypto/x16r.h>
 */
+
+// BTX BEGINN
 #include <crypto/hashblock.h> // BitCore TimeTravel
+#include "crypto/scrypt.h"
+// BTX END
 
 uint256 CBlockHeader::GetHash() const
 {
@@ -27,7 +31,7 @@ uint256 CBlockHeader::GetHash() const
 
 uint256 CBlockHeader::GetPoWHash() const
 {
-    uint256 powHash = uint256S("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+    //uint256 powHash = uint256S("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); not used
 
     //BitCore
 
@@ -59,13 +63,12 @@ uint256 CBlockHeader::GetPoWHash() const
 */
 /*
 // Megacoin
-    /*
+    
     if(GetBlockTime() >= 1493124696) { //Human time (GMT): Tue, 25 Apr 2017 12:51:36 GMT
         return HashTimeTravel(BEGIN(nVersion), END(nNonce), GetBlockTime()); // MegaCoin TimeTravel
     }
     else 
     {
-    */
     
     uint256 thash;
     // please check also pow.cpp:L414
@@ -80,8 +83,9 @@ uint256 CBlockHeader::GetPoWHash() const
         return thash;
     }
     return thash;
-}
 */
+}
+
 
 /*
 unsigned int CBlockHeader::GetAlgoEfficiency(int nBlockHeight) const

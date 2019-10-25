@@ -100,6 +100,8 @@ static UniValue GetNetworkHashPS(int lookup, int height, int32_t nAlgo) {
         return 0;
 
     arith_uint256 workDiff = pb->nChainWork - pb0->nChainWork;
+    
+    /*
     // FXTC BEGIN
     switch (nAlgo)
     {
@@ -123,6 +125,8 @@ static UniValue GetNetworkHashPS(int lookup, int height, int32_t nAlgo) {
             break;
     }
     // FXTC END
+    */
+
     int64_t timeDiff = maxTime - minTime;
 
     return workDiff.getdouble() / timeDiff;
@@ -264,7 +268,7 @@ static UniValue getmininginfo(const JSONRPCRequest& request)
     obj.pushKV("currentblockweight", (uint64_t)nLastBlockWeight);
     obj.pushKV("currentblocktx",   (uint64_t)nLastBlockTx);
     obj.pushKV("difficulty",       (double)GetDifficulty(chainActive.Tip()));
-    obj.pushKV("algo",             GetAlgoName(miningAlgo));
+    //obj.pushKV("algo",             GetAlgoName(miningAlgo));
     obj.pushKV("networkhashps",    getnetworkhashps(request));
     obj.pushKV("pooledtx",         (uint64_t)mempool.size());
     obj.pushKV("chain",            Params().NetworkIDString());

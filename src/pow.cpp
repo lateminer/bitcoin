@@ -141,7 +141,7 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const CBlockHeader 
     return bnNew.GetCompact();
 }
 
-
+/*
 unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params) {
     if (params.fPowNoRetargeting)
         return pindexLast->nBits;
@@ -295,10 +295,11 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockH
 
     return bnNew.GetCompact();
 }
-
+*/
+/*
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
-    /*assert(pindexLast != nullptr);
+    assert(pindexLast != nullptr);
     unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
 
     // Only change once per difficulty adjustment interval
@@ -642,7 +643,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
         return CalculateNextWorkRequired(pindexLast, pindexFirst->GetBlockTime(), params);
     }
 }
-
+/*
 unsigned int GetNextWorkRequiredFXTC(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
     unsigned int nBits = DarkGravityWave(pindexLast, pblock, params);
@@ -669,6 +670,7 @@ unsigned int GetNextWorkRequiredFXTC(const CBlockIndex* pindexLast, const CBlock
 
     return nBits;
 }
+*/
 
 unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)
 {

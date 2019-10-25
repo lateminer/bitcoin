@@ -1270,9 +1270,9 @@ CAmount GetBlockSubsidy(int nHeight, CBlockHeader pblock, const Consensus::Param
 			return nSubsidy - nSuperblockPart;
 		// Bitcore 1.00
 	    return nSubsidy;
-        }
+        }   
     }
-	
+	return nSubsidy; // We should never here
 	/*
 	int halvings = nHeight / consensusParams.nSubsidyHalvingInterval;
     // Force block reward to zero when right shift is undefined.
