@@ -46,7 +46,7 @@
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>CFBundleURLName</key>
-      <string>org.bitcoreoin.FxTCoinPayment</string>
+      <string>org.bitcoreoin.BitcorePayment</string>
       <key>CFBundleURLSchemes</key>
       <array>
         <string>bitcoreoin</string>
@@ -60,7 +60,7 @@
       <key>UTTypeIdentifier</key>
       <string>org.bitcoreoin.paymentrequest</string>
       <key>UTTypeDescription</key>
-      <string>FxTCoin payment request</string>
+      <string>Bitcore payment request</string>
       <key>UTTypeConformsTo</key>
       <array>
         <string>public.data</string>

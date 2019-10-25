@@ -1246,7 +1246,7 @@ void BitcoinGUI::message(const QString &title, const QString &message, unsigned 
             break;
         }
     }
-    // Append title to "FxTCoin - "
+    // Append title to "Bitcore - "
     if (!msgType.isEmpty())
         strTitle += " - " + msgType;
 
