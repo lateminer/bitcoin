@@ -11,11 +11,13 @@
 #include <utilstrencodings.h>
 #include <crypto/common.h>
 
+/*
 #include <crypto/lyra2z.h>
 #include <crypto/nist5.h>
 #include <crypto/scrypt.h>
 #include <crypto/x11.h>
 #include <crypto/x16r.h>
+*/
 #include <crypto/hashblock.h> // BitCore TimeTravel
 
 uint256 CBlockHeader::GetHash() const
@@ -41,6 +43,7 @@ uint256 CBlockHeader::GetPoWHash() const
         }
 
     //Brainstormingpart
+/*
     switch (nVersion & ALGO_VERSION_MASK)
     {
         case ALGO_SHA256D: powHash = GetHash(); break;
@@ -53,8 +56,34 @@ uint256 CBlockHeader::GetPoWHash() const
     }
 
     return powHash;
+*/
+/*
+// Megacoin
+    /*
+    if(GetBlockTime() >= 1493124696) { //Human time (GMT): Tue, 25 Apr 2017 12:51:36 GMT
+        return HashTimeTravel(BEGIN(nVersion), END(nNonce), GetBlockTime()); // MegaCoin TimeTravel
+    }
+    else 
+    {
+    */
+    
+    uint256 thash;
+    // please check also pow.cpp:L414
+	//10/21/2019 @ 12:00am (UTC)
+    if(GetBlockTime() >= 1571832146) //Wednesday, 23. October 2019 12:02:26
+    {
+        thash = HashX16R(BEGIN(nVersion), END(nNonce), hashPrevBlock);
+    } //10/21/2019 @ 12:00am (UTC)
+    else 
+    {
+        scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
+        return thash;
+    }
+    return thash;
 }
+*/
 
+/*
 unsigned int CBlockHeader::GetAlgoEfficiency(int nBlockHeight) const
 {
     switch (nVersion & ALGO_VERSION_MASK)
@@ -70,6 +99,7 @@ unsigned int CBlockHeader::GetAlgoEfficiency(int nBlockHeight) const
 
     return 1; // FXTC TODO: we should not be here
 }
+*/
 
 std::string CBlock::ToString() const
 {

@@ -12,6 +12,7 @@
 #include <serialize.h>
 #include <uint256.h>
 
+/*
 // Algo number in nVersion
 enum {
     ALGO_VERSION_MASK    = (255 << 8),
@@ -27,6 +28,7 @@ enum {
 };
 
 const unsigned int ALGO_ACTIVE_COUNT = 5;
+*/
 
 /** Nodes collect new transactions into a block, hash them into a hash tree,
  * and scan through nonce values to make the block's hash satisfy proof-of-work

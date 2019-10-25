@@ -1314,6 +1314,7 @@ CAmount GetBlockSubsidy(int nHeight, CBlockHeader pblock, const Consensus::Param
 //FXTC BEGIN
 CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
 {
+    /*
     CAmount ret = blockValue * 0.00;
 
     int nMNPIBlock = Params().GetConsensus().nMasternodePaymentsIncreaseBlock;
@@ -1322,19 +1323,47 @@ CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
     // Doubled initial reward as compensation for blockchain restart
     //if(nHeight >= nMNPIBlock) ret = (0.25 - 0.24 * (100.00 * nMNPIPeriod / (1.00 * nHeight + 100.00 * nMNPIPeriod ))) * blockValue; // Increase smoothly from 1% up to 25% in infinity
     if(nHeight >= nMNPIBlock) ret = (0.25 - 0.23 * (100.00 * nMNPIPeriod / (1.00 * nHeight + 100.00 * nMNPIPeriod ))) * blockValue; // Increase smoothly from 2% up to 25% in infinity
-
+    */
+    CAmount ret = blockValue / 2; // 50 % for masternodes
+    
     return ret;
+    
+   // To Do Create a masternodeamount from 20% to 80% with the COLLATERALamount 21000 - 100000 COIN
+   /*CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outpoint, int& nHeightRet)
+    {
+    AssertLockHeld(cs_main);
+
+    Coin coin;
+    if(!GetUTXOCoin(outpoint, coin)) {
+        return COLLATERAL_UTXO_NOT_FOUND;
+    }
+
+    // FXTC BEGIN
+    nHeightRet = coin.nHeight;
+
+    CMasternode cm;
+    //if(coin.out.nValue != 1000 * COIN) {
+    if(!cm.CollateralValueCheck(coin.nHeight,coin.out.nValue)) {
+    // FXTC END
+        return COLLATERAL_INVALID_AMOUNT;
+    }
+
+    nHeightRet = coin.nHeight;
+    return COLLATERAL_OK;
+    }
+    */
 }
 
 CAmount GetFounderReward(int nHeight, CAmount blockValue)
 {
-        //Brainstorming Part !! 
-		CAmount ret = 0;
-        if (sporkManager.GetSporkValue(SPORK_BTX_03_FUNDRAISING_START))
-		{
-		if(nHeight > 500000 && nHeight > 1000000)
-        ret = blockValue * 0.1;
-        }
+        CAmount ret = 0;
+        /*
+        int nMNFirstBlock = Params().GetConsensus().nFirstMasternodeBlockHeight;
+
+        if (nHeight >= nMNFirstBlock) ret = blockValue / 10; // 10% for the community
+
+        //if (nHeight >= nEndOfFounderReward.WeDontKnowYet) ret = 0;
+        */
         return ret;
 }
 //FXTC END
@@ -2490,7 +2519,8 @@ void static UpdateTip(const CBlockIndex *pindexNew, const CChainParams& chainPar
         for (int i = 0; i < 100 && pindex != nullptr; i++)
         {
             int32_t nExpectedVersion = ComputeBlockVersion(pindex->pprev, chainParams.GetConsensus());
-            if ((pindex->nVersion & ~ALGO_VERSION_MASK) > VERSIONBITS_LAST_OLD_BLOCK_VERSION && (pindex->nVersion & ~nExpectedVersion & ~ALGO_VERSION_MASK) != 0)
+            // if ((pindex->nVersion & ~ALGO_VERSION_MASK) > VERSIONBITS_LAST_OLD_BLOCK_VERSION && (pindex->nVersion & ~nExpectedVersion & ~ALGO_VERSION_MASK) != 0)
+            if (pindex->nVersion > VERSIONBITS_LAST_OLD_BLOCK_VERSION && (pindex->nVersion & ~nExpectedVersion) != 0)
                 ++nUpgraded;
             pindex = pindex->pprev;
         }
@@ -3207,6 +3237,7 @@ CBlockIndex* CChainState::AddToBlockIndex(const CBlockHeader& block)
     }
     pindexNew->nTimeMax = (pindexNew->pprev ? std::max(pindexNew->pprev->nTimeMax, pindexNew->nTime) : pindexNew->nTime);
     pindexNew->nChainWork = (pindexNew->pprev ? pindexNew->pprev->nChainWork : 0) + GetBlockProof(*pindexNew);
+    /*
     // FXTC BEGIN
     pindexNew->nChainWorkSha256d = (pindexNew->pprev ? pindexNew->pprev->nChainWorkSha256d : 0) + (((pindexNew->nVersion & ALGO_VERSION_MASK) == ALGO_SHA256D) ? GetBlockProof(*pindexNew) : 0);
     pindexNew->nChainWorkScrypt = (pindexNew->pprev ? pindexNew->pprev->nChainWorkScrypt : 0) + (((pindexNew->nVersion & ALGO_VERSION_MASK) == ALGO_SCRYPT) ? GetBlockProof(*pindexNew) : 0);
@@ -3215,6 +3246,7 @@ CBlockIndex* CChainState::AddToBlockIndex(const CBlockHeader& block)
     pindexNew->nChainWorkX11 = (pindexNew->pprev ? pindexNew->pprev->nChainWorkX11 : 0) + (((pindexNew->nVersion & ALGO_VERSION_MASK) == ALGO_X11) ? GetBlockProof(*pindexNew) : 0);
     pindexNew->nChainWorkX16R = (pindexNew->pprev ? pindexNew->pprev->nChainWorkX16R : 0) + (((pindexNew->nVersion & ALGO_VERSION_MASK) == ALGO_X16R) ? GetBlockProof(*pindexNew) : 0);
     // FXTC END
+    */
     pindexNew->RaiseValidity(BLOCK_VALID_TREE);
     if (pindexBestHeader == nullptr || pindexBestHeader->nChainWork < pindexNew->nChainWork)
         pindexBestHeader = pindexNew;
@@ -3601,8 +3633,15 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
             // The malleation check is ignored; as the transaction tree itself
             // already does not permit it, it is impossible to trigger in the
             // witness tree.
-            if (block.vtx[0]->vin[0].scriptWitness.stack.size() != 1 || block.vtx[0]->vin[0].scriptWitness.stack[0].size() != 32) {
-                return state.DoS(100, false, REJECT_INVALID, "bad-witness-nonce-size", true, strprintf("%s : invalid witness reserved value size", __func__));
+            if(nHeight > 25000) {
+                if (block.vtx[0]->vin[0].scriptWitness.stack.size() != 1 || block.vtx[0]->vin[0].scriptWitness.stack[0].size() != 32) {
+                    return state.DoS(100, false, REJECT_INVALID, "bad-witness-nonce-size", true, strprintf("%s : invalid witness reserved value size", __func__));
+                }
+                CHash256().Write(hashWitness.begin(), 32).Write(&block.vtx[0]->vin[0].scriptWitness.stack[0][0], 32).Finalize(hashWitness.begin());
+                if (memcmp(hashWitness.begin(), &block.vtx[0]->vout[commitpos].scriptPubKey[6], 32)) {
+                    return state.DoS(100, false, REJECT_INVALID, "bad-witness-merkle-match", true, strprintf("%s : witness merkle commitment mismatch", __func__));
+                }
+                fHaveWitness = true;
             }
             CHash256().Write(hashWitness.begin(), 32).Write(&block.vtx[0]->vin[0].scriptWitness.stack[0][0], 32).Finalize(hashWitness.begin());
             if (memcmp(hashWitness.begin(), &block.vtx[0]->vout[commitpos].scriptPubKey[6], 32)) {
@@ -3613,10 +3652,12 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
     }
 
     // No witness data is allowed in blocks that don't commit to witness data, as this would otherwise leave room for spam
-    if (!fHaveWitness) {
-      for (const auto& tx : block.vtx) {
-            if (tx->HasWitness()) {
-                return state.DoS(100, false, REJECT_INVALID, "unexpected-witness", true, strprintf("%s : unexpected witness data found", __func__));
+    if(nHeight > 25000) {
+        if (!fHaveWitness) {
+          for (const auto& tx : block.vtx) {
+                if (tx->HasWitness()) {
+                    return state.DoS(100, false, REJECT_INVALID, "unexpected-witness", true, strprintf("%s : unexpected witness data found", __func__));
+                }
             }
         }
     }
@@ -4129,6 +4170,7 @@ bool CChainState::LoadBlockIndex(const Consensus::Params& consensus_params, CBlo
     {
         CBlockIndex* pindex = item.second;
         pindex->nChainWork = (pindex->pprev ? pindex->pprev->nChainWork : 0) + GetBlockProof(*pindex);
+        /*
         // FXTC BEGIN
         pindex->nChainWorkSha256d = (pindex->pprev ? pindex->pprev->nChainWorkSha256d : 0) + (((pindex->nVersion & ALGO_VERSION_MASK) == ALGO_SHA256D) ? GetBlockProof(*pindex) : 0);
         pindex->nChainWorkScrypt = (pindex->pprev ? pindex->pprev->nChainWorkScrypt : 0) + (((pindex->nVersion & ALGO_VERSION_MASK) == ALGO_SCRYPT) ? GetBlockProof(*pindex) : 0);
@@ -4137,6 +4179,7 @@ bool CChainState::LoadBlockIndex(const Consensus::Params& consensus_params, CBlo
         pindex->nChainWorkX11 = (pindex->pprev ? pindex->pprev->nChainWorkX11 : 0) + (((pindex->nVersion & ALGO_VERSION_MASK) == ALGO_X11) ? GetBlockProof(*pindex) : 0);
         pindex->nChainWorkX16R = (pindex->pprev ? pindex->pprev->nChainWorkX16R : 0) + (((pindex->nVersion & ALGO_VERSION_MASK) == ALGO_X16R) ? GetBlockProof(*pindex) : 0);
         // FXTC END
+        */
         pindex->nTimeMax = (pindex->pprev ? std::max(pindex->pprev->nTimeMax, pindex->nTime) : pindex->nTime);
         // We can link the chain of blocks for which we've received transactions at some point.
         // Pruned nodes may have deleted the block.
