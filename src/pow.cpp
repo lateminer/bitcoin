@@ -529,9 +529,18 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     // Megacoin
     assert(pindexLast != nullptr);
     unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
+    if (params.fPowNoRetargeting && params.fPowAllowMinDifficultyBlocks )
+    {
+        return nProofOfWorkLimit;
+    }
 
-    int fork1 = 1000000;
+    int fork1 = 10000;
     int fork2 = 21000;
+    
+    if (pindexLast->nHeight+1 <= fork1)
+    {
+    return DUAL_KGW3(pindexLast, pblock, params);
+    }
 /*
     // Megacoin Miningalgo switch
 	// 1571832146 Wednesday, 23. October 2019 12:02:26
@@ -547,14 +556,6 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
             }
     }
 */
-
-    if (pindexLast->nHeight+1 <= fork1) {
-        //Core 0.15
-        //return DUAL_KGW3(pindexLast, pblock, params);
-        //Core 0.15
-        unsigned int nBits = DUAL_KGW3(pindexLast, pblock, params);
-    }
-
 
 
     if (pindexLast->nHeight+1 <= fork2)
@@ -674,29 +675,6 @@ unsigned int GetNextWorkRequiredFXTC(const CBlockIndex* pindexLast, const CBlock
 
 unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)
 {
-    /*if (params.fPowNoRetargeting)
-        return pindexLast->nBits;
-
-    // Limit adjustment step
-    int64_t nActualTimespan = pindexLast->GetBlockTime() - nFirstBlockTime;
-    if (nActualTimespan < params.nPowTargetTimespan/4)
-        nActualTimespan = params.nPowTargetTimespan/4;
-    if (nActualTimespan > params.nPowTargetTimespan*4)
-        nActualTimespan = params.nPowTargetTimespan*4;
-
-    // Retarget
-    const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
-    arith_uint256 bnNew;
-    bnNew.SetCompact(pindexLast->nBits);
-    bnNew *= nActualTimespan;
-    bnNew /= params.nPowTargetTimespan;
-
-    if (bnNew > bnPowLimit)
-        bnNew = bnPowLimit;
-
-    return bnNew.GetCompact();
-	*/
-	
 	// Bitcore
     int fork2 = 21000;
     if (params.fPowNoRetargeting)
