@@ -85,8 +85,8 @@ public:
         consensus.nMasternodePaymentsStartBlock = 50;
         consensus.nMasternodePaymentsIncreaseBlock = 50;
         consensus.nMasternodePaymentsIncreasePeriod = 365 * 1440; // 1 common year
-        consensus.nMasternodeCollateralMinimum = 1000; // starting MN collateral
-        consensus.nMasternodeCollateralMaximum = 100000; // MN collateral at infinity
+        consensus.nMasternodeCollateralMinimum = 2100; // starting MN collateral
+        consensus.nMasternodeCollateralMaximum = 10000; // MN collateral at infinity
 
         consensus.nInstantSendKeepLock = 24;
 
@@ -198,9 +198,9 @@ public:
 
         nPoolMaxTransactions = 3;
         nFulfilledRequestExpireTime = 60*60; // fulfilled requests expire in 1 hour
-        strSporkPubKey = "04491f11731dd8c8a6f6418e69d01cf35a93327971c3c207dde66b58fc2e7e5c9510b5a80a61bc4982fea1533e96f25a1319cd602e14edd1702d652cd3da367bcb";
+        strSporkPubKey = "04C94699010E62A7A67E30C64BB61F53E93D03A668E19176563260A6167AB102B605E071CDB52C488E6F3F4AB284391539A917B3017581DA37097694EC176DCB36";
 
-        founderAddress = "fXdevXfLwHZ4TLya3enVvg8BJXPRKqFBrR";
+        founderAddress = "2S5FDKVg7tj3LYC5UQkoYF4BXkjoHm72Ta";
 
         // BTX
         checkpointData = {
@@ -352,9 +352,9 @@ public:
 
         nPoolMaxTransactions = 3;
         nFulfilledRequestExpireTime = 5*60; // fulfilled requests expire in 5 minutes
-        strSporkPubKey = "04c7cfbb6d4e912aa67acd1ccb997425211376f480d45c1850d70ef3dbfbc6ed663429dc73b67fa8b8c8cb49dac68903929879090a34937bc2b65db6003cbbfed4";
+        strSporkPubKey = "04C637C5DBCA831BF02266B23E0F271B2689A5754A83BBE00B901C821D567AD23343007E21DA062F2D1C9231B23FDE29D34C7FC8F58292735CBB348F48F768C6F3";
 
-        founderAddress = "tXdevXRj7MeN6GF68NVwqsHonLYeS8GPzV";
+        founderAddress = "mv5hH1xC3KQJr4ATDr1yQLmFhRYgVmjua6";
 
         // BTX
         checkpointData = {
