@@ -364,12 +364,12 @@ void BitcoinGUI::createActions()
     //
 
     // Megacoin
-    unlockWalletAction = new QAction(platformStyle->TextColorIcon(":/icons/lock_open"), tr("&Unlock Wallet..."), this);
-    unlockWalletAction->setStatusTip(tr("Unlock encrypted wallet for further transactions."));
+    //unlockWalletAction = new QAction(platformStyle->TextColorIcon(":/icons/lock_open"), tr("&Unlock Wallet..."), this);
+    //unlockWalletAction->setStatusTip(tr("Unlock encrypted wallet for further transactions."));
     signMessageAction = new QAction(platformStyle->TextColorIcon(":/icons/edit"), tr("Sign &message..."), this);
     signMessageAction->setStatusTip(tr("Sign messages with your BitCore addresses to prove you own them"));
     verifyMessageAction = new QAction(platformStyle->TextColorIcon(":/icons/verify"), tr("&Verify message..."), this);
-    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified Megacoin addresses"));
+    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified Bitcore addresses"));
     //openRepairAction = new QAction(QIcon(":/icons/verify"), tr("Wallet &Repair"), this);
     //openRepairAction->setStatusTip(tr("Show wallet repair options"));
 
