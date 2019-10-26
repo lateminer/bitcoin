@@ -31,7 +31,7 @@ uint256 CBlockHeader::GetHash() const
 
 uint256 CBlockHeader::GetPoWHash() const
 {
-    //uint256 powHash = uint256S("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); not used
+    uint256 powHash = uint256S("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
 
     //BitCore
 
@@ -41,10 +41,11 @@ uint256 CBlockHeader::GetPoWHash() const
         }
         else
         {
-                uint256 thash;
-                scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash)); // BitCore Scrypt
-                return thash;
+
+                scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(powHash)); // BitCore Scrypt
+                return powHash;
         }
+        return powHash;
 
     //Brainstormingpart
 /*

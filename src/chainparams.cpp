@@ -216,7 +216,7 @@ public:
             }
         };
         // FXTC BEGIN
-        consensus.nlastValidPowHashHeight = 384650;
+        consensus.nlastValidPowHashHeight = 999999999;
         // FXTC
 
         chainTxData = ChainTxData{
@@ -363,7 +363,7 @@ public:
             }
         };
         // FXTC BEGIN
-        consensus.nlastValidPowHashHeight = 5;
+        consensus.nlastValidPowHashHeight = 99999999;;
         // FXTC
 
         chainTxData = ChainTxData{
@@ -481,7 +481,7 @@ public:
             }
         };
         // FXTC BEGIN
-        consensus.nlastValidPowHashHeight = 0;
+        consensus.nlastValidPowHashHeight = 99999999;;
         // FXTC
 
         chainTxData = ChainTxData{
