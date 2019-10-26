@@ -370,8 +370,8 @@ void BitcoinGUI::createActions()
     signMessageAction->setStatusTip(tr("Sign messages with your BitCore addresses to prove you own them"));
     verifyMessageAction = new QAction(platformStyle->TextColorIcon(":/icons/verify"), tr("&Verify message..."), this);
     verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified Megacoin addresses"));
-    openRepairAction = new QAction(QIcon(":/icons/verify"), tr("Wallet &Repair"), this);
-    openRepairAction->setStatusTip(tr("Show wallet repair options"));
+    //openRepairAction = new QAction(QIcon(":/icons/verify"), tr("Wallet &Repair"), this);
+    //openRepairAction->setStatusTip(tr("Show wallet repair options"));
 
     // Dash
     // FXTC TODO: menu items
