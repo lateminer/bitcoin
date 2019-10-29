@@ -31,7 +31,7 @@ static arith_uint256 GetTargetLimit(int64_t nTime, const Consensus::Params& para
 unsigned int static GetNextWorkRequired_V1(const CBlockIndex* pindexLast, const Consensus::Params& params, const CBlockHeader *pblock)
 {
     const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
-    int64_t retargetTimespan = params.nTargetTimespanNEW;
+    int64_t retargetTimespan = params.nTargetTimespan;
     int64_t retargetSpacing = params.nTargetSpacing;
     int64_t retargetInterval = retargetTimespan / retargetSpacing;
 
@@ -307,11 +307,12 @@ unsigned int CalculateNextTargetRequired(const CBlockIndex* pindexLast, int64_t 
 
 unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params, bool fProofOfStake)
 {
-    unsigned int nTargetLimit = GetTargetLimit(pindexLast->GetBlockTime(), params, fProofOfStake).GetCompact();
-
     // Genesis block
     if (pindexLast == NULL)
         return UintToArith256(params.powLimit).GetCompact();
+
+    /*
+    unsigned int nTargetLimit = GetTargetLimit(pindexLast->GetBlockTime(), params, fProofOfStake).GetCompact();
 
     const CBlockIndex* pindexPrev = GetLastBlockIndex(pindexLast, fProofOfStake);
 
@@ -320,6 +321,10 @@ unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, const CBlockHe
     const CBlockIndex* pindexPrevPrev = GetLastBlockIndex(pindexPrev->pprev, fProofOfStake);
     if (pindexPrevPrev->pprev == NULL)
         return nTargetLimit; // second block
+    */
+
+    const CBlockIndex* pindexPrev = GetLastBlockIndex(pindexLast, fProofOfStake);
+    const CBlockIndex* pindexPrevPrev = GetLastBlockIndex(pindexPrev->pprev, fProofOfStake);
 
     // No retargeting
     if (fProofOfStake) {
