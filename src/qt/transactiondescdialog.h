@@ -1,15 +1,21 @@
-#ifndef TRANSACTIONDESCDIALOG_H
-#define TRANSACTIONDESCDIALOG_H
+// Copyright (c) 2011-2014 The Bitcoin Core developers
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+#ifndef BITCOIN_QT_TRANSACTIONDESCDIALOG_H
+#define BITCOIN_QT_TRANSACTIONDESCDIALOG_H
 
 #include <QDialog>
 
 namespace Ui {
     class TransactionDescDialog;
 }
+
 QT_BEGIN_NAMESPACE
 class QModelIndex;
 QT_END_NAMESPACE
 
+/** Dialog showing transaction details. */
 class TransactionDescDialog : public QDialog
 {
     Q_OBJECT
@@ -22,4 +28,4 @@ private:
     Ui::TransactionDescDialog *ui;
 };
 
-#endif // TRANSACTIONDESCDIALOG_H
+#endif // BITCOIN_QT_TRANSACTIONDESCDIALOG_H

@@ -1,3 +1,7 @@
+// Copyright (c) 2011-2014 The Bitcoin Core developers
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include "csvmodelwriter.h"
 
 #include <QAbstractItemModel>
@@ -6,7 +10,7 @@
 
 CSVModelWriter::CSVModelWriter(const QString &filename, QObject *parent) :
     QObject(parent),
-    filename(filename)
+    filename(filename), model(0)
 {
 }
 
@@ -27,8 +31,9 @@ void CSVModelWriter::addColumn(const QString &title, int column, int role)
 
 static void writeValue(QTextStream &f, const QString &value)
 {
-    // TODO: quoting if " or \n in string
-    f << "\"" << value << "\"";
+    QString escaped = value;
+    escaped.replace('"', "\"\"");
+    f << "\"" << escaped << "\"";
 }
 
 static void writeSep(QTextStream &f)
@@ -48,7 +53,11 @@ bool CSVModelWriter::write()
         return false;
     QTextStream out(&file);
 
-    int numRows = model->rowCount();
+    int numRows = 0;
+    if(model)
+    {
+        numRows = model->rowCount();
+    }
 
     // Header row
     for(int i=0; i<columns.size(); ++i)
@@ -80,4 +89,3 @@ bool CSVModelWriter::write()
 
     return file.error() == QFile::NoError;
 }
-
