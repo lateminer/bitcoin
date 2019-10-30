@@ -29,7 +29,7 @@ Build DigiGreen Core
 
 1. Clone the DigiGreen source code and cd into `dopecoin-core`
 
-        git clone https://github.com/dopecoin-dev/dopecoin-core/
+        git clone https://github.com/DigiGreenCoin/digigreen-core/
         cd dopecoin-core
 
 2.  Build dopecoin-core:

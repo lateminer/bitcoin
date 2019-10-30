@@ -55,7 +55,7 @@ Development Process
 -------------------
 
 The `master` branch is regularly built and tested and is meant to be stable. Development is normally done in separate branches.
-[Tags](https://github.com/dopecoin-dev/dopecoin-core/tags) are created regularly to indicate new official, stable release versions of DigiGreen Core.
+[Tags](https://github.com/DigiGreenCoin/digigreen-core/tags) are created regularly to indicate new official, stable release versions of DigiGreen Core.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
 

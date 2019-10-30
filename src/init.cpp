@@ -489,7 +489,7 @@ std::string HelpMessage(HelpMessageMode mode)
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/dopecoin-dev/dopecoin-core>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/DigiGreenCoin/digigreen-core>";
     const std::string URL_WEBSITE = "<https://dopecoin.com>";
     // todo: remove urls from translations on next change
 
