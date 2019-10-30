@@ -2347,7 +2347,7 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>DigiGreen More</translation>
+        <translation>DigiGreen Core</translation>
     </message>
     <message>
         <source>&lt;category&gt; can be:</source>

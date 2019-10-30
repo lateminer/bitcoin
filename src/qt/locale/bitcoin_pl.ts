@@ -2488,7 +2488,7 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>DigiGreen More</translation>
+        <translation>DigiGreen Core</translation>
     </message>
     <message>
         <source>The %s developers</source>

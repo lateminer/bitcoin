@@ -1379,7 +1379,7 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>DigiGreen More</translation>
+        <translation>DigiGreen Core</translation>
     </message>
     <message>
         <source>Execute command when a wallet transaction changes (%s in cmd is replaced by TxID)</source>

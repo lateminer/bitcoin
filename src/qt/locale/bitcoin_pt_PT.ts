@@ -2184,7 +2184,7 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>DigiGreen More</translation>
+        <translation>DigiGreen Core</translation>
     </message>
     <message>
         <source>A fee rate (in %s/kB) that will be used when fee estimation has insufficient data (default: %s)</source>

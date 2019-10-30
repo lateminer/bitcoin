@@ -3954,7 +3954,7 @@
     <message>
         <location line="-360"/>
         <source>Bitcoin Core</source>
-        <translation type="unfinished">DigiGreen More</translation>
+        <translation type="unfinished">DigiGreen Core</translation>
     </message>
     <message>
         <location line="+1"/>

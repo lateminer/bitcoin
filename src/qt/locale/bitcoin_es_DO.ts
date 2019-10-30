@@ -1124,7 +1124,7 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>DigiGreen More</translation>
+        <translation>DigiGreen Core</translation>
     </message>
     <message>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>
