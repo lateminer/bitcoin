@@ -490,7 +490,7 @@ std::string HelpMessage(HelpMessageMode mode)
 std::string LicenseInfo()
 {
     const std::string URL_SOURCE_CODE = "<https://github.com/DigiGreenCoin/digigreen-core>";
-    const std::string URL_WEBSITE = "<https://dopecoin.com>";
+    const std::string URL_WEBSITE = "<https://digigreencoin.com>";
     // todo: remove urls from translations on next change
 
     // return FormatParagraph(strprintf(_("Copyright (C) %i-%i %s"), 2009, COPYRIGHT_YEAR, CopyrightHolders())) + "\n" +
