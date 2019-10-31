@@ -1,5 +1,4 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
-// Copyright (c) 2017-2018 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -37,13 +36,10 @@ public:
     /**
      * Determine data directory. Let the user choose if the current one doesn't exist.
      *
-     * @returns true if a data directory was selected, false if the user cancelled the selection
-     * dialog.
-     *
      * @note do NOT call global GetDataDir() before calling this function, this
      * will cause the wrong path to be cached.
      */
-    static bool pickDataDirectory();
+    static void pickDataDirectory();
 
     /**
      * Determine default data directory for operating system.
@@ -73,7 +69,6 @@ private:
     void startThread();
     void checkPath(const QString& dataDir);
     QString getPathToCheck();
-    void updateDataDirStatus(bool enabled);
 
     friend class FreespaceChecker;
 };

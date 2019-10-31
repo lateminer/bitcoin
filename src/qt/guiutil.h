@@ -1,5 +1,4 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
-// Copyright (c) 2017-2018 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,7 +6,6 @@
 #define BITCOIN_QT_GUIUTIL_H
 
 #include "amount.h"
-#include "askpassphrasedialog.h"
 
 #include <QEvent>
 #include <QHeaderView>
@@ -32,32 +30,22 @@ class QUrl;
 class QWidget;
 QT_END_NAMESPACE
 
-/** Utility functions used by the PIVX Qt UI.
+/** Utility functions used by the BTDX Qt UI.
  */
 namespace GUIUtil
 {
 // Create human-readable string from date
 QString dateTimeStr(const QDateTime& datetime);
-QString dateTimeStrWithSeconds(const QDateTime& date);
 QString dateTimeStr(qint64 nTime);
 
-// Render PIVX addresses in monospace font
+// Render BTDX addresses in monospace font
 QFont bitcoinAddressFont();
-
-// Parse string into a CAmount value
-CAmount parseValue(const QString& text, int displayUnit, bool* valid_out = 0);
-
-// Format an amount
-QString formatBalance(CAmount amount, int nDisplayUnit = 0, bool isZpiv = false);
-
-// Request wallet unlock
-bool requestUnlock(WalletModel* walletModel, AskPassphraseDialog::Context context, bool relock);
 
 // Set up widgets for address and amounts
 void setupAddressWidget(QValidatedLineEdit* widget, QWidget* parent);
 void setupAmountWidget(QLineEdit* widget, QWidget* parent);
 
-// Parse "pivx:" URI into recipient object, return true on successful parsing
+// Parse "bitcloud:" URI into recipient object, return true on successful parsing
 bool parseBitcoinURI(const QUrl& uri, SendCoinsRecipient* out);
 bool parseBitcoinURI(QString uri, SendCoinsRecipient* out);
 QString formatBitcoinURI(const SendCoinsRecipient& info);
@@ -76,14 +64,6 @@ QString HtmlEscape(const std::string& str, bool fMultiLine = false);
        @see  TransactionView::copyLabel, TransactionView::copyAmount, TransactionView::copyAddress
      */
 void copyEntryData(QAbstractItemView* view, int column, int role = Qt::EditRole);
-
-/** Return a field of the currently selected entry as a QString. Does nothing if nothing
-        is selected.
-       @param[in] column  Data column to extract from the model
-       @param[in] role    Data role to extract from the model
-       @see  TransactionView::copyLabel, TransactionView::copyAmount, TransactionView::copyAddress
-     */
-QString getEntryData(QAbstractItemView *view, int column, int role);
 
 void setClipboard(const QString& str);
 
@@ -121,19 +101,41 @@ Qt::ConnectionType blockingGUIThreadConnection();
 bool isObscured(QWidget* w);
 
 // Open debug.log
-bool openDebugLogfile();
+void openDebugLogfile();
 
-// Open pivx.conf
-bool openConfigfile();
+// Open bitcloud.conf
+void openConfigfile();
 
 // Open masternode.conf
-bool openMNConfigfile();
+void openMNConfigfile();
 
 // Browse backup folder
-bool showBackups();
+void showBackups();
 
 // Replace invalid default fonts with known good ones
 void SubstituteFonts(const QString& language);
+
+    // CCCC
+    // Function for Hyperlinks
+    void hyperlinks_slot1();
+    void hyperlinks_slot2();
+    void hyperlinks_slot3();
+    void hyperlinks_slot4();
+    void hyperlinks_slot5();
+    void hyperlinks_slot6();
+    void hyperlinks_slot7();
+    void hyperlinks_slot8();
+    void hyperlinks_slot9();
+    void hyperlinks_slot10();
+
+    void hyperlinks2_slot1();
+    void hyperlinks2_slot2();
+    void hyperlinks2_slot3();
+    void hyperlinks2_slot4();
+	
+	void hyperlinks3_slot1();
+    void hyperlinks3_slot2();
+    void hyperlinks3_slot3();
 
 /** Qt event filter that intercepts ToolTipChange events, and replaces the tooltip with a rich text
       representation if needed. This assures that Qt can word-wrap long tooltip messages.
@@ -236,21 +238,19 @@ QString formatServicesStr(quint64 mask);
 /* Format a CNodeCombinedStats.dPingTime into a user-readable string or display N/A, if 0*/
 QString formatPingTime(double dPingTime);
 
-/* Format a CNodeCombinedStats.nTimeOffset into a user-readable string. */
-QString formatTimeOffset(int64_t nTimeOffset);
-
-#if defined(Q_OS_MAC)
-    // workaround for Qt OSX Bug:
-    // https://bugreports.qt-project.org/browse/QTBUG-15631
-    // QProgressBar uses around 10% CPU even when app is in background
-    class ProgressBar : public QProgressBar
+#if defined(Q_OS_MAC) && QT_VERSION >= 0x050000
+// workaround for Qt OSX Bug:
+// https://bugreports.qt-project.org/browse/QTBUG-15631
+// QProgressBar uses around 10% CPU even when app is in background
+class ProgressBar : public QProgressBar
+{
+    bool event(QEvent* e)
     {
-        bool event(QEvent *e) {
-            return (e->type() != QEvent::StyleAnimationUpdate) ? QProgressBar::event(e) : false;
-        }
-    };
+        return (e->type() != QEvent::StyleAnimationUpdate) ? QProgressBar::event(e) : false;
+    }
+};
 #else
-    typedef QProgressBar ProgressBar;
+typedef QProgressBar ProgressBar;
 #endif
 
 } // namespace GUIUtil

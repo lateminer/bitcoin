@@ -16,12 +16,11 @@
 #include "serialize.h"
 #include "util.h"
 
-#include "test/test_pivx.h"
-
 #include <stdint.h>
 
 #include <boost/assign/list_of.hpp> // for 'map_list_of()'
 #include <boost/date_time/posix_time/posix_time_types.hpp>
+#include <boost/foreach.hpp>
 #include <boost/test/unit_test.hpp>
 
 // Tests this internal-to-main.cpp method:
@@ -42,7 +41,7 @@ CService ip(uint32_t i)
     return CService(CNetAddr(s), Params().GetDefaultPort());
 }
 
-BOOST_FIXTURE_TEST_SUITE(DoS_tests, TestingSetup)
+BOOST_AUTO_TEST_SUITE(DoS_tests)
 
 BOOST_AUTO_TEST_CASE(DoS_banning)
 {
@@ -110,7 +109,7 @@ BOOST_AUTO_TEST_CASE(DoS_bantime)
 CTransaction RandomOrphan()
 {
     std::map<uint256, COrphanTx>::iterator it;
-    it = mapOrphanTransactions.lower_bound(InsecureRand256());
+    it = mapOrphanTransactions.lower_bound(GetRandHash());
     if (it == mapOrphanTransactions.end())
         it = mapOrphanTransactions.begin();
     return it->second.tx;
@@ -129,7 +128,7 @@ BOOST_AUTO_TEST_CASE(DoS_mapOrphans)
         CMutableTransaction tx;
         tx.vin.resize(1);
         tx.vin[0].prevout.n = 0;
-        tx.vin[0].prevout.hash = InsecureRand256();
+        tx.vin[0].prevout.hash = GetRandHash();
         tx.vin[0].scriptSig << OP_1;
         tx.vout.resize(1);
         tx.vout[0].nValue = 1*CENT;

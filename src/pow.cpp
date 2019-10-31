@@ -1,7 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2018 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -19,10 +17,7 @@
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader* pblock)
 {
-    if (Params().NetworkID() == CBaseChainParams::REGTEST)
-        return pindexLast->nBits;
-
-    /* current difficulty formula, pivx - DarkGravity v3, written by Evan Duffield - evan@dashpay.io */
+    /* current difficulty formula, bitcloud - DarkGravity v3, written by Evan Duffield - evan@dashpay.io */
     const CBlockIndex* BlockLastSolved = pindexLast;
     const CBlockIndex* BlockReading = pindexLast;
     int64_t nActualTimespan = 0;
@@ -37,11 +32,12 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
         return Params().ProofOfWorkLimit().GetCompact();
     }
 
-    if (pindexLast->nHeight >= Params().LAST_POW_BLOCK()) {
-        uint256 bnTargetLimit = (~uint256(0) >> 24);
-        int64_t nTargetSpacing = 60;
-        int64_t nTargetTimespan = 60 * 40;
-
+    if (pindexLast->nHeight > Params().LAST_POW_BLOCK()) {
+        uint256 bnTargetLimit = (~uint256(0) >> 20);
+		
+        int64_t nTargetSpacing = Params().TargetSpacing();
+        int64_t nTargetTimespan = Params().TargetTimespan()*40;
+ 
         int64_t nActualSpacing = 0;
         if (pindexLast->nHeight != 0)
             nActualSpacing = pindexLast->GetBlockTime() - pindexLast->pprev->GetBlockTime();
@@ -53,14 +49,14 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
         // ppcoin: retarget with exponential moving toward target spacing
         uint256 bnNew;
         bnNew.SetCompact(pindexLast->nBits);
-
+		
         int64_t nInterval = nTargetTimespan / nTargetSpacing;
         bnNew *= ((nInterval - 1) * nTargetSpacing + nActualSpacing + nActualSpacing);
         bnNew /= ((nInterval + 1) * nTargetSpacing);
-
+		
+		if (pindexLast->nHeight == Params().LAST_POW_BLOCK() || pindexLast->nHeight <= Params().LAST_POW_BLOCK() +2 ) bnNew = bnTargetLimit;
         if (bnNew <= 0 || bnNew > bnTargetLimit)
             bnNew = bnTargetLimit;
-
         return bnNew.GetCompact();
     }
 
@@ -104,7 +100,11 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     // Retarget
     bnNew *= nActualTimespan;
     bnNew /= _nTargetTimespan;
-
+	
+	
+	// Set the Diff Down for POS LimxDev 02-07-2017
+	if (pindexLast->nHeight <= Params().LAST_POW_BLOCK()) bnNew = Params().ProofOfWorkLimit();
+	
     if (bnNew > Params().ProofOfWorkLimit()) {
         bnNew = Params().ProofOfWorkLimit();
     }
@@ -128,13 +128,12 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
         return error("CheckProofOfWork() : nBits below minimum work");
 
     // Check proof of work matches claimed amount
-    if (hash > bnTarget) {
-        if (Params().MineBlocksOnDemand())
-            return false;
-        else
-            return error("CheckProofOfWork() : hash doesn't match nBits");
-    }
-
+	// if (hash > bnTarget && hash != Params().HashGenesisBlock())
+    if (hash > bnTarget)
+	{
+	LogPrintf("CheckProofOfWork() : hash is %s  \ntarget: %s\nBits is %d", hash.GetHex(), bnTarget.GetHex(), nBits);
+	return error("CheckProofOfWork() : hash doesn't match nBits");
+	}
     return true;
 }
 

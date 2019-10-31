@@ -1,5 +1,4 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
-// Copyright (c) 2017-2018 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -12,10 +11,14 @@
 
 #include <stdexcept>
 
+#include <openssl/x509.h>
+#include <openssl/x509_vfy.h>
+
 #include <QDateTime>
 #include <QDebug>
 #include <QSslCertificate>
 
+using namespace std;
 
 class SSLVerifyError : public std::runtime_error
 {
@@ -44,7 +47,7 @@ bool PaymentRequestPlus::parse(const QByteArray& data)
     return true;
 }
 
-bool PaymentRequestPlus::SerializeToString(std::string* output) const
+bool PaymentRequestPlus::SerializeToString(string* output) const
 {
     return paymentRequest.SerializeToString(output);
 }
@@ -97,12 +100,14 @@ bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) c
             qWarning() << "PaymentRequestPlus::getMerchant : Payment request: certificate expired or not yet active: " << qCert;
             return false;
         }
+#if QT_VERSION >= 0x050000
         if (qCert.isBlacklisted()) {
             qWarning() << "PaymentRequestPlus::getMerchant : Payment request: certificate blacklisted: " << qCert;
             return false;
         }
-        const unsigned char *data = (const unsigned char *)certChain.certificate(i).data();
-        X509 *cert = d2i_X509(nullptr, &data, certChain.certificate(i).size());
+#endif
+        const unsigned char* data = (const unsigned char*)certChain.certificate(i).data();
+        X509* cert = d2i_X509(NULL, &data, certChain.certificate(i).size());
         if (cert)
             certs.push_back(cert);
     }
@@ -149,16 +154,13 @@ bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) c
         std::string data_to_verify; // Everything but the signature
         rcopy.SerializeToString(&data_to_verify);
 
-#if OPENSSL_VERSION_NUMBER >= 0x10100000L
-        EVP_MD_CTX *ctx = EVP_MD_CTX_new();
-        if (!ctx) throw SSLVerifyError("Error allocating OpenSSL context.");
-#else
-        EVP_MD_CTX _ctx;
-        EVP_MD_CTX *ctx;
-        ctx = &_ctx;
-#endif
+        EVP_MD_CTX* ctx;
         EVP_PKEY* pubkey = X509_get_pubkey(signing_cert);
+#if OPENSSL_VERSION_NUMBER >= 0x10100000L
+        ctx = EVP_MD_CTX_new();
+#else
         EVP_MD_CTX_init(ctx);
+#endif
         if (!EVP_VerifyInit_ex(ctx, digestAlgorithm, NULL) ||
             !EVP_VerifyUpdate(ctx, data_to_verify.data(), data_to_verify.size()) ||
             !EVP_VerifyFinal(ctx, (const unsigned char*)paymentRequest.signature().data(), paymentRequest.signature().size(), pubkey)) {
@@ -177,7 +179,7 @@ bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) c
             throw SSLVerifyError("Bad certificate, missing common name.");
         }
         // TODO: detect EV certificates and set merchant = business name instead of unfriendly NID_commonName ?
-    } catch (const SSLVerifyError& err) {
+    } catch (SSLVerifyError& err) {
         fResult = false;
         qWarning() << "PaymentRequestPlus::getMerchant : SSL error: " << err.what();
     }
@@ -198,7 +200,7 @@ QList<std::pair<CScript, CAmount> > PaymentRequestPlus::getPayTo() const
         const unsigned char* scriptStr = (const unsigned char*)details.outputs(i).script().data();
         CScript s(scriptStr, scriptStr + details.outputs(i).script().size());
 
-        result.append(std::make_pair(s, details.outputs(i).amount()));
+        result.append(make_pair(s, details.outputs(i).amount()));
     }
     return result;
 }

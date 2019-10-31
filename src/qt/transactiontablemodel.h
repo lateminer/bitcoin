@@ -64,22 +64,15 @@ public:
         /** Formatted amount, without brackets when unconfirmed */
         FormattedAmountRole,
         /** Transaction status (TransactionRecord::Status) */
-        StatusRole,
-        /** Transaction size in bytes */
-        SizeRole
+        StatusRole
     };
 
     int rowCount(const QModelIndex& parent) const;
     int columnCount(const QModelIndex& parent) const;
-    int size() const;
-    bool hasZcTxes();
     QVariant data(const QModelIndex& index, int role) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
     QModelIndex index(int row, int column, const QModelIndex& parent = QModelIndex()) const;
     bool processingQueuedTransactions() { return fProcessingQueuedTransactions; }
-
-signals:
-    void txArrived(const QString& hash);
 
 private:
     CWallet* wallet;
