@@ -1116,6 +1116,8 @@ void BitcoinGUI::toggleHidden()
 
 void BitcoinGUI::updateWeight()
 {
+#ifdef ENABLE_WALLET
+	
     if(!pwalletMain)
         return;
 
@@ -1127,7 +1129,6 @@ void BitcoinGUI::updateWeight()
     if (!lockWallet)
         return;
 
-#ifdef ENABLE_WALLET
     if (pwalletMain)
     nWeight = pwalletMain->GetStakeWeight();
 #endif
@@ -1170,6 +1171,8 @@ void BitcoinGUI::updateStakingIcon()
     else
     {
         labelStakingIcon->setPixmap(platformStyle->SingleColorIcon(":/icons/staking_off").pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
+#ifdef ENABLE_WALLET
+
         if (vNodes.empty())
             labelStakingIcon->setToolTip(tr("Not staking because wallet is offline"));
         else if (IsInitialBlockDownload())
@@ -1180,6 +1183,7 @@ void BitcoinGUI::updateStakingIcon()
             labelStakingIcon->setToolTip(tr("Not staking because wallet is locked"));
         else
             labelStakingIcon->setToolTip(tr("Not staking"));
+#endif
     }
 }
 

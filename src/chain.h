@@ -145,9 +145,6 @@ enum BlockStatus: uint32_t {
     BLOCK_FAILED_VALID       =   32, //!< stage after last reached validness failed
     BLOCK_FAILED_CHILD       =   64, //!< descends from failed block
     BLOCK_FAILED_MASK        =   BLOCK_FAILED_VALID | BLOCK_FAILED_CHILD,
-    BLOCK_PROOF_OF_STAKE     =   128, //! is proof-of-stake block
-    BLOCK_STAKE_ENTROPY      =   256,
-    BLOCK_STAKE_MODIFIER     =   512,
 
 };
 
@@ -195,8 +192,21 @@ public:
     //! Verification status of this block. See enum BlockStatus
     unsigned int nStatus;
 
-    //! hash modifier of proof-of-stake
-    uint256 nStakeModifier;
+    // peercoin: proof-of-stake related block index fields
+    unsigned int nFlags;  // peercoin: block index flags
+    enum
+    {
+        BLOCK_PROOF_OF_STAKE = (1 << 0), // is proof-of-stake block
+        BLOCK_STAKE_ENTROPY  = (1 << 1), // entropy bit for stake modifier
+        BLOCK_STAKE_MODIFIER = (1 << 2), // regenerated stake modifier
+    };
+
+    // hash modifier for proof-of-stake
+    uint64_t nStakeModifier;
+    uint256 nStakeModifierV2;
+    COutPoint prevoutStake;
+    unsigned int nStakeTime;
+    uint256 hashProofOfStake;
 
     //! block header
     int nVersion;
@@ -221,7 +231,6 @@ public:
         nTx = 0;
         nChainTx = 0;
         nStatus = 0;
-        nStakeModifier = uint256();
         nSequenceId = 0;
 
         nVersion       = 0;
@@ -229,6 +238,14 @@ public:
         nTime          = 0;
         nBits          = 0;
         nNonce         = 0;
+
+        // peercoin:
+        nFlags = 0;
+        nStakeModifier = 0;
+        nStakeModifierV2 = uint256();
+        hashProofOfStake = uint256();
+        prevoutStake.SetNull();
+        nStakeTime = 0;
     }
 
     CBlockIndex()
@@ -236,9 +253,23 @@ public:
         SetNull();
     }
 
-    CBlockIndex(const CBlockHeader& block)
+    CBlockIndex(const CBlock& block)
     {
         SetNull();
+
+        /*
+        if (block.IsProofOfStake())
+        {
+            SetProofOfStake();
+            prevoutStake = block.vtx[1].vin[0].prevout;
+            nStakeTime = block.vtx[1].nTime;
+        }
+        else
+        {
+            prevoutStake.SetNull();
+            nStakeTime = 0;
+        }
+        */
 
         nVersion       = block.nVersion;
         hashMerkleRoot = block.hashMerkleRoot;
@@ -319,17 +350,42 @@ public:
 
     bool IsProofOfWork() const
     {
-        return !IsProofOfStake();
+        return !(nFlags & BLOCK_PROOF_OF_STAKE);
     }
 
     bool IsProofOfStake() const
     {
-        return (nStatus & BLOCK_PROOF_OF_STAKE);
+        return (nFlags & BLOCK_PROOF_OF_STAKE);
     }
 
     void SetProofOfStake()
     {
-        nStatus |= BLOCK_PROOF_OF_STAKE;
+        nFlags |= BLOCK_PROOF_OF_STAKE;
+    }
+
+    unsigned int GetStakeEntropyBit() const
+    {
+        return ((nFlags & BLOCK_STAKE_ENTROPY) >> 1);
+    }
+
+    bool SetStakeEntropyBit(unsigned int nEntropyBit)
+    {
+        if (nEntropyBit > 1)
+            return false;
+        nFlags |= (nEntropyBit? BLOCK_STAKE_ENTROPY : 0);
+        return true;
+    }
+
+    bool GeneratedStakeModifier() const
+    {
+        return (nFlags & BLOCK_STAKE_MODIFIER);
+    }
+
+    void SetStakeModifier(uint64_t nModifier, bool fGeneratedStakeModifier)
+    {
+        nStakeModifier = nModifier;
+        if (fGeneratedStakeModifier)
+            nFlags |= BLOCK_STAKE_MODIFIER;
     }
 
     std::string ToString() const
@@ -400,15 +456,32 @@ public:
 
         READWRITE(VARINT(nHeight));
         READWRITE(VARINT(nStatus));
-        READWRITE(nStakeModifier);
-        READWRITE(nHashBlock);
         READWRITE(VARINT(nTx));
+
         if (nStatus & (BLOCK_HAVE_DATA | BLOCK_HAVE_UNDO))
             READWRITE(VARINT(nFile));
         if (nStatus & BLOCK_HAVE_DATA)
             READWRITE(VARINT(nDataPos));
         if (nStatus & BLOCK_HAVE_UNDO)
             READWRITE(VARINT(nUndoPos));
+
+        READWRITE(nHashBlock);
+
+        READWRITE(nFlags);
+        READWRITE(nStakeModifier);
+        READWRITE(nStakeModifierV2);
+        if (IsProofOfStake())
+        {
+            READWRITE(prevoutStake);
+            READWRITE(nStakeTime);
+            READWRITE(hashProofOfStake);
+        }
+        else if (ser_action.ForRead())
+        {
+            const_cast<CDiskBlockIndex*>(this)->prevoutStake.SetNull();
+            const_cast<CDiskBlockIndex*>(this)->nStakeTime = 0;
+            const_cast<CDiskBlockIndex*>(this)->hashProofOfStake = uint256();
+        }
 
         // block header
         READWRITE(this->nVersion);
@@ -423,7 +496,6 @@ public:
     {
     	return nHashBlock;
     }
-
 
     std::string ToString() const
     {

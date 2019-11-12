@@ -63,6 +63,7 @@ struct Params {
     int64_t nTargetSpacingNEW;
     int64_t nTargetTimespan;
     int64_t nTargetTimespanNEW;
+    unsigned int nModifierInterval;
     int64_t DifficultyAdjustmentInterval() const { return nTargetTimespan / nTargetSpacing; }
     int nDifficultyKGW;
     int nDifficultyDigiShield;

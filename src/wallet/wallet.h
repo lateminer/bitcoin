@@ -578,8 +578,6 @@ private:
     int64_t nLastResend;
     bool fBroadcastTransactions;
 
-    std::map<COutPoint, CStakeCache> stakeCache;
-
     /**
      * Used to keep track of spent outpoints, and
      * detect and report conflicts (double-spends or

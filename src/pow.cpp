@@ -11,6 +11,7 @@
 #include "uint256.h"
 #include "util.h"
 #include <stdio.h>
+#include <cmath>
 
 static arith_uint256 GetTargetLimit(int64_t nTime, const Consensus::Params& params, bool fProofOfStake)
 {
@@ -154,7 +155,7 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const Conse
         if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) {
             PastRateAdjustmentRatio = double(PastRateTargetSeconds) / double(PastRateActualSeconds);
         }
-        EventHorizonDeviation = 1 + (0.7084 * pow((double(PastBlocksMass)/double(144)), -1.228));
+        EventHorizonDeviation = 1 + (0.7084 * std::pow((double(PastBlocksMass)/double(144)), -1.228));
         EventHorizonDeviationFast = EventHorizonDeviation;
         EventHorizonDeviationSlow  = 1 / EventHorizonDeviation;
 
@@ -336,12 +337,12 @@ unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, const CBlockHe
     }
 
     // Newest mode for PoSV3
-	if (params.IsProtocolV3(pindexLast->GetBlockTime()))
-		return CalculateNextTargetRequired(pindexPrev, pindexPrevPrev->GetBlockTime(), params, fProofOfStake);
+    if (params.IsProtocolV3(pindexLast->GetBlockTime()))
+        return CalculateNextTargetRequired(pindexPrev, pindexPrevPrev->GetBlockTime(), params, fProofOfStake);
 
-	// New mode for PoS
-	if (pindexLast->nHeight >= params.nLastPOWBlock)
-		return GetPoSV1Difficulty(pindexLast, params, pblock); 
+    // New mode for PoS
+    if (pindexLast->nHeight >= params.nLastPOWBlock)
+        return GetPoSV1Difficulty(pindexLast, params, pblock); 
 
     int DiffMode = 1;
     if (pindexLast->nHeight + 1 >= params.nDifficultyKGW)

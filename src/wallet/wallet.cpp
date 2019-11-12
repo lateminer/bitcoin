@@ -3,9 +3,6 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-// Stake cache by Qtum
-// Copyright (c) 2016-2018 The Qtum developers
-
 #include "wallet/wallet.h"
 
 #include "chain.h"
@@ -47,7 +44,8 @@ bool fSendFreeTransactions = DEFAULT_SEND_FREE_TRANSACTIONS;
 const char * DEFAULT_WALLET_DAT = "wallet.dat";
 const uint32_t BIP32_HARDENED_KEY_LIMIT = 0x80000000;
 
-static int64_t GetStakeCombineThreshold() { return 2000000 * COIN; } // Potcoin
+static unsigned int nStakeSplitAge = 45 * 24 * 60 * 60; // 45 days
+static int64_t GetStakeCombineThreshold() { return 2000000 * COIN; }
 static int64_t GetStakeSplitThreshold() { return 2 * GetStakeCombineThreshold(); }
 
 /**
@@ -603,7 +601,8 @@ void CWallet::AvailableCoinsForStaking(std::vector<COutput>& vCoins) const
             if (nDepth < 1)
                 continue;
 
-            if (nDepth < Params().GetConsensus().nCoinbaseMaturity)
+            // Potcoin
+            if (nDepth < Params().GetConsensus().nCoinbaseMaturity + 20)
                 continue;
 
             if (pcoin->GetBlocksToMaturity() > 0)
@@ -703,27 +702,30 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     if (setCoins.empty())
         return false;
 
-    if (stakeCache.size() > setCoins.size() + 100){
-        //Determining if the cache is still valid is harder than just clearing it when it gets too big, so instead just clear it
-        //when it has more than 100 entries more than the actual setCoins.
-        stakeCache.clear();
-    }
-
-    if (GetBoolArg("-stakecache", DEFAULT_STAKE_CACHE)) {
-        BOOST_FOREACH(const PAIRTYPE(const CWalletTx*, unsigned int)& pcoin, setCoins)
-        {
-            boost::this_thread::interruption_point();
-            COutPoint prevoutStake = COutPoint(pcoin.first->GetHash(), pcoin.second);
-            CacheKernel(stakeCache, prevoutStake, pindexPrev); //this will do a 2 disk loads per op
-        }
-
-    }
-
     int64_t nCredit = 0;
     CScript scriptPubKeyKernel;
-    BOOST_FOREACH(const PAIRTYPE(const CWalletTx*, unsigned int)& pcoin, setCoins)
+    for (const auto& pcoin : setCoins)
     {
+        CDiskTxPos postx;
+        if (!pblocktree->ReadTxIndex(pcoin.first->GetHash(), postx))
+            continue;
+
+        // Read block header
+        CAutoFile file(OpenBlockFile(postx, true), SER_DISK, CLIENT_VERSION);
+        CBlockHeader header;
+        CTransaction tx;
+        try {
+            file >> header;
+            fseek(file.Get(), postx.nTxOffset, SEEK_CUR);
+            file >> tx;
+        } catch (std::exception &e) {
+            return error("%s() : deserialize or I/O error in CreateCoinStake()", __PRETTY_FUNCTION__);
+        }
+
         static int nMaxStakeSearchInterval = 60;
+        if (header.GetBlockTime() + Params().GetConsensus().nStakeMinAge > txNew.nTime - nMaxStakeSearchInterval)
+            continue; // only count coins meeting min age requirement
+
         bool fKernelFound = false;
         for (unsigned int n=0; n<min(nSearchInterval,(int64_t)nMaxStakeSearchInterval) && !fKernelFound && pindexPrev == pindexBestHeader; n++)
         {
@@ -731,7 +733,8 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
             // Search backward in time from the given txNew timestamp
             // Search nSearchInterval seconds back up to nMaxStakeSearchInterval
             COutPoint prevoutStake = COutPoint(pcoin.first->GetHash(), pcoin.second);
-            if (CheckKernel(pindexPrev, nBits, txNew.nTime - n, prevoutStake, stakeCache))
+            int64_t nBlockTime;
+            if (CheckKernel(pindexPrev, nBits, txNew.nTime - n, prevoutStake, &nBlockTime))
             {
                 // Found a kernel
                 LogPrint("coinstake", "CreateCoinStake : kernel found\n");
@@ -785,6 +788,9 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                 vwtxPrev.push_back(pcoin.first);
                 txNew.vout.push_back(CTxOut(0, scriptPubKeyOut));
 
+                if (GetCoinAgeWeight(header.GetBlockTime(), (int64_t)txNew.nTime) < nStakeSplitAge && nCredit >= GetStakeCombineThreshold())
+                    txNew.vout.push_back(CTxOut(0, scriptPubKeyOut)); //split stake
+
                 LogPrint("coinstake", "CreateCoinStake : added kernel type=%d\n", whichType);
                 fKernelFound = true;
                 break;
@@ -798,8 +804,24 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     if (nCredit == 0 || nCredit > nBalance - nReserveBalance)
         return false;
 
-    BOOST_FOREACH(const PAIRTYPE(const CWalletTx*, unsigned int)& pcoin, setCoins)
+    for (const auto& pcoin : setCoins)
     {
+        CDiskTxPos postx;
+        if (!pblocktree->ReadTxIndex(pcoin.first->GetHash(), postx))
+            continue;
+
+        // Read block header
+        CAutoFile file(OpenBlockFile(postx, true), SER_DISK, CLIENT_VERSION);
+        CBlockHeader header;
+        CTransaction tx;
+        try {
+            file >> header;
+            fseek(file.Get(), postx.nTxOffset, SEEK_CUR);
+            file >> tx;
+        } catch (std::exception &e) {
+            return error("%s() : deserialize or I/O error in CreateCoinStake()", __PRETTY_FUNCTION__);
+        }
+
         // Attempt to add more inputs
         // Only add coins of the same key/address as kernel
         if (txNew.vout.size() == 2 && ((pcoin.first->vout[pcoin.second].scriptPubKey == scriptPubKeyKernel || pcoin.first->vout[pcoin.second].scriptPubKey == txNew.vout[1].scriptPubKey))
@@ -818,6 +840,13 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
             if (pcoin.first->vout[pcoin.second].nValue >= GetStakeCombineThreshold())
                 continue;
 
+            // Deal with transaction timestamp
+            unsigned int nTimeTx = tx.nTime ? tx.nTime : header.GetBlockTime();
+
+            // Do not add input that is still too young
+            if (!GetCoinAgeWeight((int64_t)nTimeTx, (int64_t)txNew.nTime))
+                continue;
+
             txNew.vin.push_back(CTxIn(pcoin.first->GetHash(), pcoin.second));
             nCredit += pcoin.first->vout[pcoin.second].nValue;
             vwtxPrev.push_back(pcoin.first);
@@ -826,7 +855,13 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
 
     // Calculate reward
     {
-        int64_t nReward = nFees + GetProofOfStakeSubsidy();
+        uint64_t nCoinAge;
+        CTransaction ptxNew = CTransaction(txNew);
+        if (!GetCoinAge(ptxNew, nCoinAge))
+            return error("CreateCoinStake : failed to calculate coin age");
+
+        int64_t nReward = GetProofOfStakeSubsidy(pindexPrev->nHeight + 1, nCoinAge, nFees, Params().GetConsensus().IsProtocolV3(GetAdjustedTime()));
+
         if (nReward < 0)
            return false;
 
@@ -1128,6 +1163,10 @@ bool CWallet::AddToWallet(const CWalletTx& wtxIn, bool fFromLoadWallet, CWalletD
 
                     int64_t blocktime = mapBlockIndex[wtxIn.hashBlock]->GetBlockTime();
                     wtx.nTimeSmart = std::max(latestEntry, std::min(blocktime, latestNow));
+
+                    // PoSV: for old transactions, set the nTime to block time
+                    if (wtx.nTime == 0)
+                        wtx.nTime = blocktime;
                 }
                 else
                     LogPrintf("AddToWallet(): found %s in block %s not in index\n",
@@ -3559,16 +3598,58 @@ uint64_t CWallet::GetStakeWeight() const
     if (setCoins.empty())
         return 0;
 
-    uint64_t nWeight = 0;
+    // PoSV3
+    // uint64_t nWeight = 0;
+    uint64_t nAverageWeight = 0;
+    uint64_t nTotalWeight = 0;
+    uint64_t nWeightCount = 0;
 
     LOCK2(cs_main, cs_wallet);
-    BOOST_FOREACH(PAIRTYPE(const CWalletTx*, unsigned int) pcoin, setCoins)
+    for (const auto& pcoin : setCoins)
     {
+        CDiskTxPos postx;
+        if (!pblocktree->ReadTxIndex(pcoin.first->GetHash(), postx))
+            continue;
+
+        // Read block header
+        CAutoFile file(OpenBlockFile(postx, true), SER_DISK, CLIENT_VERSION);
+        CBlockHeader header;
+        CTransaction tx;
+        try {
+            file >> header;
+            fseek(file.Get(), postx.nTxOffset, SEEK_CUR);
+            file >> tx;
+        } catch (std::exception &e) {
+            return error("%s() : deserialize or I/O error in CreateCoinStake()", __PRETTY_FUNCTION__);
+        }
+
+        // Deal with transaction timestmap
+        unsigned int nTimeTx = tx.nTime ? tx.nTime : header.GetBlockTime();
+
+        int64_t nTimeWeight = GetCoinAgeWeight((int64_t)nTimeTx, (int64_t)GetTime());
+        arith_uint256 bnCoinDayWeight = arith_uint256(pcoin.first->vout[pcoin.second].nValue) * nTimeWeight / COIN / (24 * 60 * 60);
+
+        // Weight is greater than zero
+        if (nTimeWeight > 0)
+        {
+            nTotalWeight += bnCoinDayWeight.GetLow64();
+            nWeightCount++;
+        }
+
+        /*
+        // PoSV3
 		if (pcoin.first->GetDepthInMainChain() >= Params().GetConsensus().nCoinbaseMaturity)
 			nWeight += pcoin.first->vout[pcoin.second].nValue;
+        */
     }
 
-    return nWeight;
+    if (nWeightCount > 0)
+        nAverageWeight = nTotalWeight / nWeightCount;
+
+    return nAverageWeight;
+
+    // PoSV3
+    // return nWeight;
 }
 
 /** @} */ // end of Actions
@@ -4071,10 +4152,11 @@ int CMerkleTx::GetBlocksToMaturity() const
         return 0;
 
     // Potcoin
-    if (GetHeightInMainChain() >= Params().GetConsensus().nCoinbaseMaturitySwitch)
-        return max(0, (Params().GetConsensus().nCoinbaseMaturityNEW + 20) - GetDepthInMainChain());
+    const Consensus::Params& consensusParams = Params().GetConsensus();
+    if (GetHeightInMainChain() >= consensusParams.nCoinbaseMaturitySwitch)
+        return max(0, (consensusParams.nCoinbaseMaturityNEW + 20) - GetDepthInMainChain());
     else
-        return max(0, (Params().GetConsensus().nCoinbaseMaturity + 20) - GetDepthInMainChain());
+        return max(0, (consensusParams.nCoinbaseMaturity + 20) - GetDepthInMainChain());
 }
 
 

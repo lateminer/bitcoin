@@ -267,9 +267,11 @@ UniValue getstakinginfo(const UniValue& params, bool fHelp)
             "Returns an object containing staking-related information.");
 
     uint64_t nWeight = 0;
+#ifdef ENABLE_WALLET
+    
     if (pwalletMain)
         nWeight = pwalletMain->GetStakeWeight();
-
+#endif
     uint64_t nNetworkWeight = GetPoSKernelPS();
     bool staking = nLastCoinStakeSearchInterval && nWeight;
     uint64_t nExpectedTime = staking ? 1.0455 * 64 * nNetworkWeight / nWeight : 0;
@@ -295,6 +297,29 @@ UniValue getstakinginfo(const UniValue& params, bool fHelp)
     return obj;
 }
 
+UniValue getstakesubsidy(const UniValue& params, bool fHelp)
+{
+    if (fHelp || params.size() != 1)
+        throw runtime_error(
+            "getstakesubsidy <hex string>\n"
+            "Returns proof-of-stake subsidy value for the specified coinstake.");
+
+    vector<unsigned char> txData(ParseHex(params[0].get_str()));
+    CDataStream ssData(txData, SER_NETWORK, PROTOCOL_VERSION);
+    CTransaction tx;
+    try {
+        ssData >> tx;
+    }
+    catch (std::exception &e) {
+        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "POT decode failed");
+    }
+
+    uint64_t nCoinAge;
+    if (!GetCoinAge(tx, nCoinAge))
+        throw JSONRPCError(RPC_MISC_ERROR, "GetCoinAge failed");
+
+    return (uint64_t)GetProofOfStakeSubsidy(pindexBestHeader->nHeight, nCoinAge, 0, pindexBestHeader);
+} 
 
 // NOTE: Unlike wallet RPC (which use BTC values), mining RPCs follow GBT (BIP 22) in using satoshi amounts
 UniValue prioritisetransaction(const UniValue& params, bool fHelp)
@@ -890,6 +915,7 @@ UniValue checkkernel(const UniValue& params, bool fHelp)
 
         if (!fCreateBlockTemplate)
             return result;
+#ifdef ENABLE_WALLET
 
         int64_t nFees;
         if (!pwalletMain->IsLocked())
@@ -914,7 +940,7 @@ UniValue checkkernel(const UniValue& params, bool fHelp)
             throw JSONRPCError(RPC_MISC_ERROR, "GetReservedKey failed");
 
         result.push_back(Pair("blocktemplatesignkey", HexStr(pubkey)));
-
+#endif
         return result;
 }
 
@@ -1027,6 +1053,7 @@ static const CRPCCommand commands[] =
     { "mining",             "submitblock",            &submitblock,            true  },
     { "mining",             "checkkernel",            &checkkernel,            true  },
     { "mining",             "getstakinginfo",         &getstakinginfo,         true  },
+    { "mining",             "getstakesubsidy",        &getstakesubsidy,        true  },
 
     { "generating",         "generate",               &generate,               true  },
     { "generating",         "generatetoaddress",      &generatetoaddress,      true  },

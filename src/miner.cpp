@@ -183,8 +183,11 @@ CBlockTemplate* BlockAssembler::CreateNewBlock(const CScript& scriptPubKeyIn, in
     // Fill in header
     pblock->hashPrevBlock  = pindexPrev->GetBlockHash();
     pblock->nTime = max(pindexPrev->GetPastTimeLimit()+1, GetMaxTransactionTime(pblock));
-    if (!fProofOfStake)
+    // Potcoin: only for PoW and PoSV
+    if (!chainparams.GetConsensus().IsProtocolV3(pblock->GetBlockTime())) {
+        pblock->nTime = max(pblock->GetBlockTime(), PastDrift(pindexPrev->GetBlockTime()));
         UpdateTime(pblock, chainparams.GetConsensus(), pindexPrev);
+    }
     pblock->nBits          = GetNextTargetRequired(pindexPrev, pblock, chainparams.GetConsensus(), fProofOfStake);
     pblock->nNonce         = 0;
     pblocktemplate->vTxSigOpsCost[0] = GetSigOpCountWithoutP2SH(pblock->vtx[0]);
@@ -587,7 +590,7 @@ void ThreadStakeMiner(CWallet *pwallet, const CChainParams& chainparams)
 
     // Make this thread recognisable as the mining thread
     RenameThread("potcoin-miner");
-
+#ifdef ENABLE_WALLET
     CReserveKey reservekey(pwallet);
 
     bool fTryToSync = true;
@@ -625,6 +628,8 @@ void ThreadStakeMiner(CWallet *pwallet, const CChainParams& chainparams)
         //
         // Create new block
         //
+
+
         if (pwallet->HaveAvailableCoinsForStaking()) {
             int64_t nFees = 0;
             // First just create an empty block. No need to process transactions until we know we can create a block
@@ -644,7 +649,8 @@ void ThreadStakeMiner(CWallet *pwallet, const CChainParams& chainparams)
                 SetThreadPriority(THREAD_PRIORITY_LOWEST);
                 MilliSleep(500);
             }
-        }
+        }       
         MilliSleep(nMinerSleep);
     }
+#endif 
 }
