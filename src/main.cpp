@@ -2475,8 +2475,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     pindex->nStakeModifierV2 = ComputeStakeModifierV2(pindex->pprev, block.IsProofOfStake() ? block.vtx[1].vin[0].prevout.hash : block.GetHash());
 
     // Check difficulty
-    // Potcoin ToDo: do not skip PoW difficulty checks
-    if (chainActive.Height() > chainparams.GetConsensus().nLastPOWBlock && block.nBits != GetNextTargetRequired(pindex->pprev, &block, chainparams.GetConsensus(), block.IsProofOfStake()))
+    if (block.nBits != GetNextTargetRequired(pindex->pprev, &block, chainparams.GetConsensus(), block.IsProofOfStake()))
          return state.DoS(100, error("ConnectBlock(): incorrect difficulty"),
                         REJECT_INVALID, "bad-diffbits");
 
