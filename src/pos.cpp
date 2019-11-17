@@ -595,7 +595,7 @@ bool CheckProofOfStake(CBlockIndex* pindexPrev, const CTransaction& tx, unsigned
        return state.DoS(100, error("CheckProofOfStake() : VerifySignature failed on coinstake %s", tx.GetHash().ToString()));
 
     // Verify kernel hash
-    if (!CheckStakeKernelHash(pindexPrev, nBits, header, postx.nTxOffset, txPrev, txin.prevout, tx.nTime, hashProofOfStake, fDebug))
+    if (!CheckStakeKernelHash(pindexPrev, nBits, header, txin.prevout.n, txPrev, txin.prevout, tx.nTime, hashProofOfStake, fDebug))
        return state.DoS(1, error("CheckProofOfStake() : INFO: check kernel failed on coinstake %s", tx.GetHash().ToString())); // may occur during initial download or if behind on block chain sync
 
     return true;
@@ -666,5 +666,5 @@ bool CheckKernel(CBlockIndex* pindexPrev, unsigned int nBits, uint32_t nTime, co
     if (pBlockTime)
         *pBlockTime = pblockindex->GetBlockTime();
 
-    return CheckStakeKernelHash(pindexPrev, nBits, header, postx.nTxOffset, txPrev, prevout, nTime, hashProofOfStake);
+    return CheckStakeKernelHash(pindexPrev, nBits, header, prevout.n, txPrev, prevout, nTime, hashProofOfStake);
 }
