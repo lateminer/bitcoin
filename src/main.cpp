@@ -2440,8 +2440,12 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         return true;
     }
 
-    uint256 hashProofOfStake;
+    // Check difficulty
+    if (block.nBits != GetNextTargetRequired(pindex->pprev, &block, chainparams.GetConsensus(), block.IsProofOfStake()))
+        return state.DoS(100, error("%s: incorrect difficulty", __func__),
+                        REJECT_INVALID, "bad-diffbits");
 
+    uint256 hashProofOfStake;
     if (block.IsProofOfStake()) {
         const COutPoint &prevout = block.vtx[1].vin[0].prevout;
         const CCoins *coins = view.AccessCoins(prevout.hash);
@@ -2452,43 +2456,39 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         if (!CheckProofOfStake(pindex->pprev, block.vtx[1], block.nBits, hashProofOfStake, state))
             return error("%s: check proof-of-stake failed for block %s", __func__, block.GetHash().GetHex(),
                                 REJECT_INVALID, "bad-proof-of-stake");
-    }   
+    }  
 
     if (block.IsProofOfWork())
         hashProofOfStake = block.GetPoWHash(); 
 
-    if (!pindex->SetStakeEntropyBit(block.GetStakeEntropyBit()))
-        return state.DoS(1,error("ConnectBlock() : SetStakeEntropyBit() failed"), REJECT_INVALID, "bad-entropy-bit");
+    // Potcoin: necessary hack to make PoS work on the original chain
+    if (!chainparams.GetConsensus().IsProtocolV3(block.GetBlockTime()))
+        hashProofOfStake = uint256();
 
-    // Record proof hash value
-    pindex->hashProofOfStake = hashProofOfStake;
-
+    // peercoin: compute stake modifier
     uint64_t nStakeModifier = 0;
     bool fGeneratedStakeModifier = false;
     if (!ComputeNextStakeModifier(pindex->pprev, nStakeModifier, fGeneratedStakeModifier))
         return state.DoS(1, error("ConnectBlock() : ComputeNextStakeModifier() failed"), REJECT_INVALID, "bad-stake-modifier");
 
-    // Set proof-of-stake hash modifier
+    // set necessary pindex fields
+    if (!pindex->SetStakeEntropyBit(block.GetStakeEntropyBit()))
+        return state.DoS(1, error("ConnectBlock() : SetStakeEntropyBit() failed"), REJECT_INVALID, "bad-entropy-bit");
     pindex->SetStakeModifier(nStakeModifier, fGeneratedStakeModifier);
-
-    // Set proof-of-stake hash modifier V2
     pindex->nStakeModifierV2 = ComputeStakeModifierV2(pindex->pprev, block.IsProofOfStake() ? block.vtx[1].vin[0].prevout.hash : block.GetHash());
+    pindex->hashProofOfStake = hashProofOfStake;
 
-    // Check difficulty
-    if (block.nBits != GetNextTargetRequired(pindex->pprev, &block, chainparams.GetConsensus(), block.IsProofOfStake()))
-         return state.DoS(100, error("ConnectBlock(): incorrect difficulty"),
-                        REJECT_INVALID, "bad-diffbits");
+    // write everything to index
+    if (block.IsProofOfStake())
+    {
+        pindex->prevoutStake = block.vtx[1].vin[0].prevout;
+        pindex->nStakeTime = block.vtx[1].nTime;
+        pindex->hashProofOfStake = hashProofOfStake;
+    }
 
     // Potcoin ToDo: enable script checks
     // bool fScriptChecks = true;
-    bool fScriptChecks = chainparams.GetConsensus().IsProtocolV3(block.GetBlockTime());
-    if (fCheckpointsEnabled) {
-        CBlockIndex *pindexLastCheckpoint = Checkpoints::GetLastCheckpoint(chainparams.Checkpoints());
-        if (pindexLastCheckpoint && pindexLastCheckpoint->GetAncestor(pindex->nHeight) == pindex) {
-            // This block is an ancestor of a checkpoint: disable script checks
-            fScriptChecks = false;
-        }
-    }
+    bool fScriptChecks = false;
 
     int64_t nTime1 = GetTimeMicros(); nTimeCheck += nTime1 - nTimeStart;
     LogPrint("bench", "    - Sanity checks: %.2fms [%.2fs]\n", 0.001 * (nTime1 - nTimeStart), nTimeCheck * 0.000001);

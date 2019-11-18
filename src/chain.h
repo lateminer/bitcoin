@@ -257,20 +257,6 @@ public:
     {
         SetNull();
 
-        /*
-        if (block.IsProofOfStake())
-        {
-            SetProofOfStake();
-            prevoutStake = block.vtx[1].vin[0].prevout;
-            nStakeTime = block.vtx[1].nTime;
-        }
-        else
-        {
-            prevoutStake.SetNull();
-            nStakeTime = 0;
-        }
-        */
-
         nVersion       = block.nVersion;
         hashMerkleRoot = block.hashMerkleRoot;
         nTime          = block.nTime;

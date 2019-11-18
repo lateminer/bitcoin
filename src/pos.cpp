@@ -136,8 +136,11 @@ static bool GetLastStakeModifier(const CBlockIndex* pindex, uint64_t& nStakeModi
         return error("GetLastStakeModifier: null pindex");
     while (pindex && pindex->pprev && !pindex->GeneratedStakeModifier())
         pindex = pindex->pprev;
-    if (!pindex->GeneratedStakeModifier())
-        return error("GetLastStakeModifier: no generation at genesis block");
+    if (!pindex->GeneratedStakeModifier()){
+        nStakeModifier = 0;
+        nModifierTime = pindex->GetBlockTime();
+        return true;
+    }
     nStakeModifier = pindex->nStakeModifier;
     nModifierTime = pindex->GetBlockTime();
     return true;
@@ -182,9 +185,8 @@ static bool SelectBlockFromCandidates(vector<pair<int64_t, uint256> >& vSortedBy
             continue;
         // compute the selection hash by hashing its proof-hash and the
         // previous proof-of-stake modifier
-        uint256 hashProof = pindex->IsProofOfStake() ? pindex->hashProofOfStake : pindex->GetBlockHash();
         CDataStream ss(SER_GETHASH, 0);
-        ss << hashProof << nStakeModifierPrev;
+        ss << pindex->hashProofOfStake << nStakeModifierPrev;
         arith_uint256 hashSelection = UintToArith256(Hash(ss.begin(), ss.end()));
 
         // the selection hash is divided by 2**32 so that proof-of-stake block
@@ -231,7 +233,7 @@ bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeMod
     if (!pindexPrev)
     {
         fGeneratedStakeModifier = true;
-        return true;  // genesis block's modifier is 0
+        return true; // genesis block's modifier is 0
     }
     // First find current stake modifier and its generation block time
     // if it's not old enough, return the same stake modifier
@@ -239,9 +241,12 @@ bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeMod
     if (!GetLastStakeModifier(pindexPrev, nStakeModifier, nModifierTime))
         return error("ComputeNextStakeModifier: unable to get last modifier");
     if (fDebug)
-        LogPrint("stakemodifier", "ComputeNextStakeModifier: prev modifier=0x%016x time=%s\n", nStakeModifier, DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nModifierTime));
-    if (nModifierTime / params.nModifierInterval >= pindexPrev->GetBlockTime() / params.nModifierInterval)
+        LogPrint("stakemodifier", "ComputeNextStakeModifier: prev modifier=0x%016x time=%s epoch=%u\n", nStakeModifier, DateTimeStrFormat(nModifierTime), (unsigned int)nModifierTime);
+    if (nModifierTime / params.nModifierInterval >= pindexPrev->GetBlockTime() / params.nModifierInterval) {
+        if (fDebug)
+            LogPrint("stakemodifier", "ComputeNextStakeModifier: no new interval keep current modifier: pindexPrev nHeight=%d nTime=%u\n", pindexPrev->nHeight, (unsigned int)pindexPrev->GetBlockTime());
         return true;
+    }
 
     // Sort candidate blocks by timestamp
     vector<pair<int64_t, uint256> > vSortedByTimestamp;
@@ -611,7 +616,7 @@ bool VerifySignature(const CTransaction& txFrom, const CTransaction& txTo, unsig
 
     if (txin.prevout.hash != txFrom.GetHash())
         return false;
-    // Potcoin ToDo: DEBUG
+
     return VerifyScript(txin.scriptSig, txout.scriptPubKey, flags, TransactionSignatureChecker(&txTo, nIn, 0),  NULL);
 }
 
