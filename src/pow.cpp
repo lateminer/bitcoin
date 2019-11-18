@@ -312,18 +312,6 @@ unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, const CBlockHe
     if (pindexLast == NULL)
         return UintToArith256(params.powLimit).GetCompact();
 
-    /*
-    unsigned int nTargetLimit = GetTargetLimit(pindexLast->GetBlockTime(), params, fProofOfStake).GetCompact();
-
-    const CBlockIndex* pindexPrev = GetLastBlockIndex(pindexLast, fProofOfStake);
-
-    if (pindexPrev->pprev == NULL)
-        return nTargetLimit; // first block
-    const CBlockIndex* pindexPrevPrev = GetLastBlockIndex(pindexPrev->pprev, fProofOfStake);
-    if (pindexPrevPrev->pprev == NULL)
-        return nTargetLimit; // second block
-    */
-
     const CBlockIndex* pindexPrev = GetLastBlockIndex(pindexLast, fProofOfStake);
     const CBlockIndex* pindexPrevPrev = GetLastBlockIndex(pindexPrev->pprev, fProofOfStake);
 
