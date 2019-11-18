@@ -2486,7 +2486,8 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         pindex->hashProofOfStake = hashProofOfStake;
     }
 
-    bool fScriptChecks = true;
+    // Potcoin ToDo: enable script checks
+    bool fScriptChecks = false;
 
     int64_t nTime1 = GetTimeMicros(); nTimeCheck += nTime1 - nTimeStart;
     LogPrint("bench", "    - Sanity checks: %.2fms [%.2fs]\n", 0.001 * (nTime1 - nTimeStart), nTimeCheck * 0.000001);
