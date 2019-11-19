@@ -2488,7 +2488,8 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         pindex->hashProofOfStake = hashProofOfStake;
     }
 
-    bool fScriptChecks = true;
+    // Potcoin ToDo: enable script checks
+    bool fScriptChecks = false;
     if (!hashAssumeValid.IsNull()) {
         // We've been configured with the hash of a block which has been externally verified to have a valid history.
         // A suitable default value is included with the software and updated from time to time.  Because validity
