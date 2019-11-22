@@ -66,7 +66,7 @@ int64_t GetCoinAgeWeight(int64_t nIntervalBeginning, int64_t nIntervalEnd)
         return 0;
     }
 
-    int64_t nSeconds = max((int64_t)0, nIntervalEnd - nIntervalBeginning - Params().GetConsensus().nStakeMinAge);
+    int64_t nSeconds = max((int64_t)0, nIntervalEnd - nIntervalBeginning - (int64_t)Params().GetConsensus().nStakeMinAge);
     double days = double(nSeconds) / (24 * 60 * 60);
     double weight = 0;
 
@@ -84,6 +84,7 @@ int64_t GetCoinAgeWeight(int64_t nIntervalBeginning, int64_t nIntervalEnd)
 
 bool GetCoinAge(CTransaction& tx, uint64_t& nCoinAge)
 {
+    const Consensus::Params& params = Params().GetConsensus();
     arith_uint256 bnCentSecond = 0; // coin age in the unit of cent-seconds
     nCoinAge = 0;
 
@@ -96,18 +97,15 @@ bool GetCoinAge(CTransaction& tx, uint64_t& nCoinAge)
         CTransaction txPrev;
         uint256 hashBlock = uint256();
 
-        if (!GetTransaction(txin.prevout.hash, txPrev, Params().GetConsensus(), hashBlock, true))
-            continue;  // previous transaction not in main chain
-
-        if (tx.nTime < txPrev.nTime)
-            return false;  // Transaction timestamp violation
+        if (!GetTransaction(txin.prevout.hash, txPrev, params, hashBlock, true))
+            continue; // previous transaction not in main chain
 
         if (mapBlockIndex.count(hashBlock) == 0)
-            return false; //Block not found
+            return false; // Block not found
 
         CBlockIndex* pblockindex = mapBlockIndex[hashBlock];
 
-        if (pblockindex->nTime + Params().GetConsensus().nStakeMinAge > tx.nTime)
+        if (pblockindex->nTime + params.nStakeMinAge > tx.nTime)
             continue; // only count coins meeting min age requirement
 
         // deal with missing timestamps in PoW blocks
@@ -124,7 +122,7 @@ bool GetCoinAge(CTransaction& tx, uint64_t& nCoinAge)
         LogPrint("coinage", "coin age nValueIn=%d nTimeDiff=%d bnCentSecond=%s\n", nValueIn, tx.nTime - txPrev.nTime, bnCentSecond.ToString());
     }
 
-    arith_uint256 bnCoinDay = ((bnCentSecond * CENT) / COIN) / (24 * 60 * 60);
+    arith_uint256 bnCoinDay = bnCentSecond * CENT / COIN / (24 * 60 * 60);
     LogPrint("coinage", "coin age bnCoinDay=%s\n", bnCoinDay.ToString());
     nCoinAge = bnCoinDay.GetLow64();
 
@@ -139,7 +137,7 @@ static bool GetLastStakeModifier(const CBlockIndex* pindex, uint64_t& nStakeModi
     while (pindex && pindex->pprev && !pindex->GeneratedStakeModifier())
         pindex = pindex->pprev;
     if (!pindex->GeneratedStakeModifier()){
-        nStakeModifier = 1;
+        nStakeModifier = 0;
         nModifierTime = pindex->GetBlockTime();
         return true;
     }
@@ -178,8 +176,7 @@ static bool SelectBlockFromCandidates(vector<pair<int64_t, uint256> >& vSortedBy
         if (!mapBlockIndex.count(item.second))
             return error("SelectBlockFromCandidates: failed to find block index for candidate block %s", item.second.ToString());
         const CBlockIndex* pindex = mapBlockIndex[item.second];
-        if (fSelected && pindex->GetBlockTime() > nSelectionIntervalStop){
-            // LogPrint("stakemodifier", "SelectBlockFromCandidates: selection hash=%s index=%d proofhash=%s nStakeModifierPrev=%08x\n", hashBest.ToString(), pindex->nHeight, pindex->hashProof.ToString(), nStakeModifierPrev);
+        if (fSelected && pindex->GetBlockTime() > nSelectionIntervalStop) {
             break;
         }
 
@@ -187,9 +184,8 @@ static bool SelectBlockFromCandidates(vector<pair<int64_t, uint256> >& vSortedBy
             continue;
         // compute the selection hash by hashing its proof-hash and the
         // previous proof-of-stake modifier
-        uint256 hashProof = pindex->IsProofOfStake() ? pindex->hashProofOfStake : pindex->GetBlockHash();
         CDataStream ss(SER_GETHASH, 0);
-        ss << hashProof << nStakeModifierPrev;
+        ss << pindex->hashProofOfStake << nStakeModifierPrev;
         arith_uint256 hashSelection = UintToArith256(Hash(ss.begin(), ss.end()));
 
         // the selection hash is divided by 2**32 so that proof-of-stake block
@@ -210,6 +206,8 @@ static bool SelectBlockFromCandidates(vector<pair<int64_t, uint256> >& vSortedBy
             *pindexSelected = (const CBlockIndex*) pindex;
         }
     }
+    if (fDebug)
+        LogPrintf("SelectBlockFromCandidates: selection hash=%s\n", hashBest.ToString());
     return fSelected;
 }
 
@@ -228,16 +226,14 @@ static bool SelectBlockFromCandidates(vector<pair<int64_t, uint256> >& vSortedBy
 // blocks.
 bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeModifier, bool& fGeneratedStakeModifier)
 {
+    // Peercoin 0.8
+    const Consensus::Params& params = Params().GetConsensus();
     nStakeModifier = 0;
     fGeneratedStakeModifier = false;
-
-    unsigned int nModifierInterval = Params().GetConsensus().nModifierInterval;
-    int64_t nTargetSpacing = Params().GetConsensus().nTargetSpacing;
-
     if (!pindexPrev)
     {
         fGeneratedStakeModifier = true;
-        return true;  // genesis block's modifier is 0
+        return true; // genesis block's modifier is 0
     }
     // First find current stake modifier and its generation block time
     // if it's not old enough, return the same stake modifier
@@ -245,15 +241,18 @@ bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeMod
     if (!GetLastStakeModifier(pindexPrev, nStakeModifier, nModifierTime))
         return error("ComputeNextStakeModifier: unable to get last modifier");
     if (fDebug)
-        LogPrint("stakemodifier", "ComputeNextStakeModifier: prev modifier=0x%016x time=%s\n", nStakeModifier, DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nModifierTime));
-    if (nModifierTime / nModifierInterval >= pindexPrev->GetBlockTime() / nModifierInterval)
+        LogPrint("stakemodifier", "ComputeNextStakeModifier: prev modifier=0x%016x time=%s epoch=%u\n", nStakeModifier, DateTimeStrFormat(nModifierTime), (unsigned int)nModifierTime);
+    if (nModifierTime / params.nModifierInterval >= pindexPrev->GetBlockTime() / params.nModifierInterval) {
+        if (fDebug)
+            LogPrint("stakemodifier", "ComputeNextStakeModifier: no new interval keep current modifier: pindexPrev nHeight=%d nTime=%u\n", pindexPrev->nHeight, (unsigned int)pindexPrev->GetBlockTime());
         return true;
+    }
 
     // Sort candidate blocks by timestamp
     vector<pair<int64_t, uint256> > vSortedByTimestamp;
-    vSortedByTimestamp.reserve(64 * nModifierInterval / nTargetSpacing);
+    vSortedByTimestamp.reserve(64 * params.nModifierInterval / params.nTargetSpacing);
     int64_t nSelectionInterval = GetStakeModifierSelectionInterval();
-    int64_t nSelectionIntervalStart = (pindexPrev->GetBlockTime() / nModifierInterval) * nModifierInterval - nSelectionInterval;
+    int64_t nSelectionIntervalStart = (pindexPrev->GetBlockTime() / params.nModifierInterval) * params.nModifierInterval - nSelectionInterval;
     const CBlockIndex* pindex = pindexPrev;
     while (pindex && pindex->GetBlockTime() >= nSelectionIntervalStart)
     {
@@ -261,8 +260,26 @@ bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeMod
         pindex = pindex->pprev;
     }
     int nHeightFirstCandidate = pindex ? (pindex->nHeight + 1) : 0;
-    reverse(vSortedByTimestamp.begin(), vSortedByTimestamp.end());
-    sort(vSortedByTimestamp.begin(), vSortedByTimestamp.end());
+
+    // Shuffle before sort
+    for(int i = vSortedByTimestamp.size() - 1; i > 1; --i)
+    std::swap(vSortedByTimestamp[i], vSortedByTimestamp[GetRand(i)]);
+
+    sort(vSortedByTimestamp.begin(), vSortedByTimestamp.end(), [] (const pair<int64_t, uint256> &a, const pair<int64_t, uint256> &b)
+    {
+        if (a.first != b.first)
+            return a.first < b.first;
+        // Timestamp equals - compare block hashes
+        const uint32_t *pa = a.second.GetDataPtr();
+        const uint32_t *pb = b.second.GetDataPtr();
+        int cnt = 256 / 32;
+        do {
+            --cnt;
+            if (pa[cnt] != pb[cnt])
+                return pa[cnt] < pb[cnt];
+        } while(cnt);
+            return false; // Elements are equal
+    });
 
     // Select 64 blocks from candidate blocks to generate stake modifier
     uint64_t nStakeModifierNew = 0;
@@ -298,7 +315,7 @@ bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeMod
                 strSelectionMap.replace(pindex->nHeight - nHeightFirstCandidate, 1, "=");
             pindex = pindex->pprev;
         }
-        BOOST_FOREACH(const PAIRTYPE(uint256, const CBlockIndex*)& item, mapSelectedBlocks)
+        for (const auto& item : mapSelectedBlocks)
         {
             // 'S' indicates selected proof-of-stake blocks
             // 'W' indicates selected proof-of-work blocks
@@ -306,8 +323,8 @@ bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeMod
         }
         LogPrint("stakemodifier", "ComputeNextStakeModifier: selection height [%d, %d] map %s\n", nHeightFirstCandidate, pindexPrev->nHeight, strSelectionMap.c_str());
     }
-
-    // LogPrint("stakemodifier", "ComputeNextStakeModifier: new modifier=0x%016x time=%s\n", nStakeModifierNew, DateTimeStrFormat("%Y-%m-%d %H:%M:%S", pindexPrev->GetBlockTime()));
+    if (fDebug)
+        LogPrint("stakemodifier", "ComputeNextStakeModifier: new modifier=0x%016x time=%s\n", nStakeModifierNew, DateTimeStrFormat("%Y-%m-%d %H:%M:%S", pindexPrev->GetBlockTime()));
 
     nStakeModifier = nStakeModifierNew;
     fGeneratedStakeModifier = true;
@@ -318,7 +335,7 @@ bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeMod
 // modifier about a selection interval later than the coin generating the kernel
 static bool GetKernelStakeModifier(CBlockIndex* pindexPrev, uint256 hashBlockFrom, uint64_t& nStakeModifier, int& nStakeModifierHeight, int64_t& nStakeModifierTime, bool fPrintProofOfStake)
 {
-    // Peercoin
+    // Peercoin 0.8
     const Consensus::Params& params = Params().GetConsensus();
     nStakeModifier = 0;
     if (!mapBlockIndex.count(hashBlockFrom))
@@ -383,7 +400,7 @@ uint256 ComputeStakeModifierV2(const CBlockIndex* pindexPrev, const uint256& ker
     return ss.GetHash();
 }
 
-// ppcoin kernel protocol
+// peercoin kernel protocol (v0.3)
 // coinstake must meet hash target according to the protocol:
 // kernel (input 0) must meet the formula
 //     hash(nStakeModifier + txPrev.block.nTime + txPrev.offset + txPrev.nTime + txPrev.vout.n + nTime) < bnTarget * nCoinDayWeight
@@ -601,7 +618,7 @@ bool CheckProofOfStake(CBlockIndex* pindexPrev, const CTransaction& tx, unsigned
        return state.DoS(100, error("CheckProofOfStake() : VerifySignature failed on coinstake %s", tx.GetHash().ToString()));
 
     // Verify kernel hash
-    if (!CheckStakeKernelHash(pindexPrev, nBits, header, postx.nTxOffset, txPrev, txin.prevout, tx.nTime, hashProofOfStake, fDebug))
+    if (!CheckStakeKernelHash(pindexPrev, nBits, header, txin.prevout.n, txPrev, txin.prevout, tx.nTime, hashProofOfStake, fDebug))
        return state.DoS(1, error("CheckProofOfStake() : INFO: check kernel failed on coinstake %s", tx.GetHash().ToString())); // may occur during initial download or if behind on block chain sync
 
     return true;
@@ -617,7 +634,7 @@ bool VerifySignature(const CTransaction& txFrom, const CTransaction& txTo, unsig
 
     if (txin.prevout.hash != txFrom.GetHash())
         return false;
-    // Potcoin ToDo: DEBUG
+
     return VerifyScript(txin.scriptSig, txout.scriptPubKey, flags, TransactionSignatureChecker(&txTo, nIn, 0),  NULL);
 }
 
@@ -672,5 +689,5 @@ bool CheckKernel(CBlockIndex* pindexPrev, unsigned int nBits, uint32_t nTime, co
     if (pBlockTime)
         *pBlockTime = pblockindex->GetBlockTime();
 
-    return CheckStakeKernelHash(pindexPrev, nBits, header, postx.nTxOffset, txPrev, prevout, nTime, hashProofOfStake);
+    return CheckStakeKernelHash(pindexPrev, nBits, header, prevout.n, txPrev, prevout, nTime, hashProofOfStake);
 }
