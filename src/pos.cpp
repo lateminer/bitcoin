@@ -469,12 +469,9 @@ bool CheckStakeKernelHashV1(unsigned int nBits, CBlockIndex* pindexPrev, const C
             hashProofOfStake.ToString());
     }
 
-    // Potcoin ToDo: enable proof-of-stake hash checks
-    /*
     // Now check if proof-of-stake hash meets target protocol
     if (UintToArith256(hashProofOfStake) > bnCoinDayWeight * bnTargetPerCoinDay)
         return false;
-    */
 
     if (fDebug && !fPrintProofOfStake)
     {
@@ -658,10 +655,10 @@ bool CheckKernel(CBlockIndex* pindexPrev, unsigned int nBits, uint32_t nTime, co
             fseek(file.Get(), postx.nTxOffset, SEEK_CUR);
             file >> txPrev;
         } catch (std::exception &e) {
-            return error("%s() : deserialize or I/O error in CheckProofOfStake()", __PRETTY_FUNCTION__);
+            return error("%s() : deserialize or I/O error in CheckKernel()", __PRETTY_FUNCTION__);
         }
         if (txPrev.GetHash() != prevout.hash)
-            return error("%s() : txid mismatch in CheckProofOfStake()", __PRETTY_FUNCTION__);
+            return error("%s() : txid mismatch in CheckKernel()", __PRETTY_FUNCTION__);
     }
 
     // Try finding the previous transaction in database

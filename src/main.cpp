@@ -2455,9 +2455,12 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
             return state.DoS(100, error("%s: kernel input unavailable", __func__),
                                 REJECT_INVALID, "bad-cs-kernel");
 
+        /*
+        // Potcoin ToDo: enable proof-of-stake checks
         if (!CheckProofOfStake(pindex->pprev, block.vtx[1], block.nBits, hashProofOfStake, state))
             return error("%s: check proof-of-stake failed for block %s", __func__, block.GetHash().GetHex(),
                                 REJECT_INVALID, "bad-proof-of-stake");
+        */
     }  
 
     if (block.IsProofOfWork())
