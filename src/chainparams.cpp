@@ -112,10 +112,10 @@ public:
         consensus.nStakeMaxAge = 365 * 24 * 60 * 60; // Potcoin: 365 days
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x00");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000300c32884233faf");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x00");
+        consensus.defaultAssumeValid = uint256S("0x475e42eace5706469310b955d58d0f18376f65e32f5a6aec7348a8cd034df54e");
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
