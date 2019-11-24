@@ -3744,15 +3744,10 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
         return state.Invalid(error("%s: block's timestamp is too early", __func__),
                              REJECT_INVALID, "time-too-old");
 
-    // Reject outdated version blocks when 95% (75% on testnet) of the network has upgraded:
-    // check for version 2, 3 and 4 upgrades
-    if (block.nVersion < 2)
-    {
-        if ((Params().NetworkIDString() == CBaseChainParams::MAIN && IsSuperMajority(2, pindexPrev, 950, consensusParams)) || (Params().NetworkIDString() != CBaseChainParams::MAIN && IsSuperMajority(2, pindexPrev, 75, consensusParams))) {
-            return state.Invalid(false, REJECT_OBSOLETE, strprintf("bad-version(0x%08x)", block.nVersion),
+    // Potcoin: reject outdated version blocks since PoSV3
+    if (consensusParams.IsProtocolV3(block.GetBlockTime()) && block.nVersion < 2)
+        return state.Invalid(false, REJECT_OBSOLETE, strprintf("bad-version(0x%08x)", block.nVersion),
                                  strprintf("rejected nVersion=0x%08x block", block.nVersion));
-        }
-    }
          
     return true;
 }
@@ -3764,7 +3759,7 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIn
 
     // Potcoin: enforce BIP113 (Median Time Past) since PoSV3
     int nLockTimeFlags = 0;
-    if (Params().GetConsensus().IsProtocolV3(block.GetBlockTime())) {
+    if (consensusParams.IsProtocolV3(block.GetBlockTime())) {
         nLockTimeFlags |= LOCKTIME_MEDIAN_TIME_PAST;
     }
 
@@ -3779,21 +3774,15 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIn
         }
     }
 
-    /*
-    // Potcoin ToDo: enable coinbase checks
-    // Enforce rule that the coinbase starts with serialized block height
-    if (block.nVersion >= 2)
+    // Enforce rule that the coinbase starts with serialized block height since PoSV3
+    if (consensusParams.IsProtocolV3(block.GetBlockTime()))
     {
-        // if 750 of the last 1,000 blocks are version 2 or greater (51/100 if testnet):
-        if ((Params().NetworkIDString() == CBaseChainParams::MAIN && IsSuperMajority(2, pindexPrev, 750, consensusParams)) || (Params().NetworkIDString() != CBaseChainParams::MAIN && IsSuperMajority(2, pindexPrev, 51, consensusParams))) {
-            CScript expect = CScript() << nHeight;
-            if (block.vtx[0].vin[0].scriptSig.size() < expect.size() ||
-                !std::equal(expect.begin(), expect.end(), block.vtx[0].vin[0].scriptSig.begin())) {
-                return state.DoS(100, false, REJECT_INVALID, "bad-cb-height", false, strprintf("block height mismatch in coinbase at height %d, block version %d", nHeight, block.nVersion));
-            }
+        CScript expect = CScript() << nHeight;
+        if (block.vtx[0].vin[0].scriptSig.size() < expect.size() ||
+            !std::equal(expect.begin(), expect.end(), block.vtx[0].vin[0].scriptSig.begin())) {
+            return state.DoS(100, false, REJECT_INVALID, "bad-cb-height", false, strprintf("block height mismatch in coinbase at height %d, block version %d", nHeight, block.nVersion));
         }
     }
-    */
 
     return true;
 }
