@@ -5321,6 +5321,16 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             }
             addrman.Good(pfrom->addr);
         }
+        
+        // Potcoin: disconnect from peers without "potcoin" in subversion
+        if (pfrom->cleanSubVer.find("Potcoin") == std::string::npos)
+        {
+            LogPrintf("peer=%d using wrong subversion %s; disconnecting\n", pfrom->id, pfrom->cleanSubVer);
+            pfrom->PushMessage(NetMsgType::REJECT, strCommand, REJECT_NONSTANDARD,
+                               strprintf("Expected to see \"potcoin\" in subversion %s", pfrom->cleanSubVer));
+            pfrom->fDisconnect = true;
+            return false;
+        }
 
         pfrom->fSuccessfullyConnected = true;
 
