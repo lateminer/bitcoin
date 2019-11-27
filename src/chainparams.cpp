@@ -134,8 +134,7 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0xde36b0cb2a9c7d1d7ac0174d0a89918f874fabcf5f9741dd52cd6d04ee1335ec"));
         assert(genesis.hashMerkleRoot == uint256S("0xd5a08606e06eea7eae8a889dbcdcdd84917c10fc8e177ec013a9005305afe53d"));
 
-        vSeeds.push_back(CDNSSeedData("seedz.potcoin.info", "dnsseedz.potcoin.info"));
-        vSeeds.push_back(CDNSSeedData("dns1.potcoin.info", "dns1.potcoin.info"));
+        vSeeds.push_back(CDNSSeedData("potcoinseed.com", "mother.potcoinseed.com"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,55);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,117);
