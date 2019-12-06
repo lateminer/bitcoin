@@ -55,10 +55,13 @@ bool IsStandard(const CScript& scriptPubKey, txnouttype& whichType)
 
 int64_t FutureDrift(int64_t nTime)
 {
-	// loose policy for FutureDrift in regtest mode
-	if (Params().GetConsensus().fPowNoRetargeting && chainActive.Height() <= Params().GetConsensus().nLastPOWBlock) {
-	         return nTime + 24 * 60 * 60;
+    /*
+    // loose policy for FutureDrift in regtest mode
+    if (Params().GetConsensus().fPowNoRetargeting && chainActive.Height() <= Params().GetConsensus().nLastPOWBlock) {
+        return nTime + 24 * 60 * 60;
 	}
+    */
+
     // Potcoin: actually, disable FutureDrift check until PoSV3
     return Params().GetConsensus().IsProtocolV3(nTime) ? nTime + 15 : std::numeric_limits<int64_t>::max();
 }
