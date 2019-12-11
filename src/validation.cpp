@@ -1232,7 +1232,6 @@ double ConvertBitsToDouble(unsigned int nBits)
 // CAmount GetBlockSubsidy(int nHeight, CBlockHeader pblock, const Consensus::Params& consensusParams, bool fSuperblockPartOnly)
 CAmount GetBlockSubsidy(int nHeight, CBlockHeader pblock, const Consensus::Params& consensusParams, bool fSuperblockPartOnly)
 {
-    bool fSuperblockPartOnly = false;
 	
 	//int halvings = nHeight / consensusParams.nSubsidyHalvingInterval;
     // Force block reward to zero when right shift is undefined.
@@ -1261,11 +1260,10 @@ CAmount GetBlockSubsidy(int nHeight, CBlockHeader pblock, const Consensus::Param
 	    if (halvings >= 256) return 0; //if (halvings >= 64) Bitcoin _ We have more blocks factor 4
 	    nSubsidy >>= halvings;
         }   
-    }
-    
+      
     // Bitcore 1.00
     // Hard fork to reduce the block reward by 10 extra percent (allowing budget/superblocks))
-	CAmount nSuperblockPart = (nPrevHeight > consensusParams.nBudgetPaymentsStartBlock) ? nSubsidy/10 : 0;
+	CAmount nSuperblockPart = (nHeight > consensusParams.nBudgetPaymentsStartBlock) ? nSubsidy/10 : 0;
 
     return fSuperblockPartOnly ? nSuperblockPart : nSubsidy - nSuperblockPart; 
 }
@@ -2220,7 +2218,7 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
 
     CAmount blockReward = nFees + GetBlockSubsidy(pindex->nHeight, pindex->GetBlockHeader(), chainparams.GetConsensus());
     //if (block.vtx[0]->GetValueOut() > blockReward * (!sporkManager.IsSporkActive(SPORK_BTX_02_IGNORE_SLIGHTLY_HIGHER_COINBASE) ? 1 : 2))
-    if (block.vtx[0]->GetValueOut() > blockReward))
+    if (block.vtx[0]->GetValueOut() > blockReward)
         return state.DoS(100,
                          error("ConnectBlock(): coinbase pays too much (actual=%d vs limit=%d)",
                                block.vtx[0]->GetValueOut(), blockReward),
