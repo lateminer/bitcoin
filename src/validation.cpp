@@ -1229,10 +1229,10 @@ double ConvertBitsToDouble(unsigned int nBits)
     return dDiff;
 }
 //FXTC END
-
-CAmount GetBlockSubsidy(int nHeight, CBlockHeader pblock, const Consensus::Params& consensusParams)
+// CAmount GetBlockSubsidy(int nHeight, CBlockHeader pblock, const Consensus::Params& consensusParams, bool fSuperblockPartOnly)
+CAmount GetBlockSubsidy(int nHeight, CBlockHeader pblock, const Consensus::Params& consensusParams, bool fSuperblockPartOnly)
 {
-    //bool fSuperblockPartOnly = false;
+    bool fSuperblockPartOnly = false;
 	
 	//int halvings = nHeight / consensusParams.nSubsidyHalvingInterval;
     // Force block reward to zero when right shift is undefined.
@@ -1260,55 +1260,14 @@ CAmount GetBlockSubsidy(int nHeight, CBlockHeader pblock, const Consensus::Param
 	    int halvings = (nHeight+BTXFullblock) / nSubsidyHalvingInterval2;
 	    if (halvings >= 256) return 0; //if (halvings >= 64) Bitcoin _ We have more blocks factor 4
 	    nSubsidy >>= halvings;
-		
-		// Bitcore 1.00
-        // Hard fork to reduce the block reward by 10 extra percent (allowing budget/superblocks)
-		if (nHeight >= consensusParams.nBudgetPaymentsStartBlock && sporkManager.GetSporkValue(SPORK_BTX_03_BLOCK_REWARD_PERCENT_START))
-		{ 
-			int nSubsidySuperblockPercent = 10;
-			CAmount nSuperblockPart = (nSubsidy / 100) * nSubsidySuperblockPercent;
-			return nSubsidy - nSuperblockPart;
-		// Bitcore 1.00
-	    return nSubsidy;
         }   
     }
-	return nSubsidy; // We should never here
-	/*
-	int halvings = nHeight / consensusParams.nSubsidyHalvingInterval;
-    // Force block reward to zero when right shift is undefined.
-    if (halvings >= 64)
-        return 0;
+    
+    // Bitcore 1.00
+    // Hard fork to reduce the block reward by 10 extra percent (allowing budget/superblocks))
+	CAmount nSuperblockPart = (nPrevHeight > consensusParams.nBudgetPaymentsStartBlock) ? nSubsidy/10 : 0;
 
-    // FXTC BEGIN
-    if (nHeight == 1)
-        return 1 * COIN;        // Founder marker (Ownership is transferred by moving this coin)
-    else if (nHeight == 2)
-        return 200000 * COIN;   // Exchange Fund (Exchange fees, Masternode listing fees, ...)
-    else if (nHeight == 3)
-        return 10000 * COIN;    // Marketing Fund (Wallet, Website, Marketing, ...)
-    else if (nHeight == 4)
-        return 789999 * COIN;   // Reserve Fund (Locked for future use)
-
-    CAmount nSubsidy = ConvertBitsToDouble(pblock.nBits) * COIN / (49500000 / pblock.GetAlgoEfficiency(nHeight)); // dynamic block reward by algo efficiency
-    nSubsidy /= GetHandbrakeForce(pblock.nVersion, nHeight);
-
-    // Subsidy is cut in half every 865,000 blocks which will occur approximately every 3 years.
-    nSubsidy >>= halvings;
-    // Make halvings linear since start block defined in spork
-    if (nHeight >= sporkManager.GetSporkValue(SPORK_BTX_03_BLOCK_REWARD_PERCENT_START)) {
-        nSubsidy -= ((nSubsidy >> 1) * (nHeight % consensusParams.nSubsidyHalvingInterval)) / consensusParams.nSubsidyHalvingInterval;
-    }
-    // Force minimum subsidy allowed
-    if (nSubsidy < consensusParams.nMinimumSubsidy) {
-        nSubsidy = consensusParams.nMinimumSubsidy;
-    }
-    // FXTC END
-
-    // Hard fork to reduce the block reward by 10 extra percent (allowing budget/superblocks)
-    CAmount nSuperblockPart = (nHeight >= consensusParams.nBudgetPaymentsStartBlock) ? nSubsidy/10 : 0;
-
-    return fSuperblockPartOnly ? nSuperblockPart : nSubsidy - nSuperblockPart;
-	*/
+    return fSuperblockPartOnly ? nSuperblockPart : nSubsidy - nSuperblockPart; 
 }
 
 //FXTC BEGIN
@@ -2260,7 +2219,8 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
     LogPrint(BCLog::BENCH, "      - Connect %u transactions: %.2fms (%.3fms/tx, %.3fms/txin) [%.2fs (%.2fms/blk)]\n", (unsigned)block.vtx.size(), MILLI * (nTime3 - nTime2), MILLI * (nTime3 - nTime2) / block.vtx.size(), nInputs <= 1 ? 0 : MILLI * (nTime3 - nTime2) / (nInputs-1), nTimeConnect * MICRO, nTimeConnect * MILLI / nBlocksTotal);
 
     CAmount blockReward = nFees + GetBlockSubsidy(pindex->nHeight, pindex->GetBlockHeader(), chainparams.GetConsensus());
-    if (block.vtx[0]->GetValueOut() > blockReward * (!sporkManager.IsSporkActive(SPORK_BTX_02_IGNORE_SLIGHTLY_HIGHER_COINBASE) ? 1 : 2))
+    //if (block.vtx[0]->GetValueOut() > blockReward * (!sporkManager.IsSporkActive(SPORK_BTX_02_IGNORE_SLIGHTLY_HIGHER_COINBASE) ? 1 : 2))
+    if (block.vtx[0]->GetValueOut() > blockReward))
         return state.DoS(100,
                          error("ConnectBlock(): coinbase pays too much (actual=%d vs limit=%d)",
                                block.vtx[0]->GetValueOut(), blockReward),
@@ -2503,6 +2463,7 @@ void static UpdateTip(const CBlockIndex *pindexNew, const CChainParams& chainPar
     {
         int nUpgraded = 0;
         const CBlockIndex* pindex = pindexNew;
+/*
         for (int bit = 0; bit < VERSIONBITS_NUM_BITS; bit++) {
             WarningBitsConditionChecker checker(bit);
             ThresholdState state = checker.GetStateFor(pindex, chainParams.GetConsensus(), warningcache[bit]);
@@ -2515,6 +2476,7 @@ void static UpdateTip(const CBlockIndex *pindexNew, const CChainParams& chainPar
                 }
             }
         }
+*/
         // Check the version of the last 100 blocks to see if we need to upgrade:
         for (int i = 0; i < 100 && pindex != nullptr; i++)
         {

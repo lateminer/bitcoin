@@ -85,17 +85,19 @@ public:
         consensus.nMasternodePaymentsStartBlock = 50;
         consensus.nMasternodePaymentsIncreaseBlock = 50;
         consensus.nMasternodePaymentsIncreasePeriod = 365 * 1440; // 1 common year
-        consensus.nMasternodeCollateralMinimum = 2100; // starting MN collateral
-        consensus.nMasternodeCollateralMaximum = 10000; // MN collateral at infinity
+        consensus.nMasternodeCollateralMinimum = 10000; // starting MN collateral
+        consensus.nMasternodeCollateralMaximum = 21000; // MN collateral at infinity
 
         consensus.nInstantSendKeepLock = 24;
-
-        consensus.nBudgetPaymentsStartBlock = 365 * 1440; // 1 common year
+        
+        // We need a seperate Update for that!! Limxdev 2019
+        consensus.nBudgetPaymentsStartBlock = 99999999; // 1 common year
         consensus.nBudgetPaymentsCycleBlocks = 10958; // weekly
         consensus.nBudgetPaymentsWindowBlocks = 100;
         consensus.nBudgetProposalEstablishingTime = 86400; // 1 day
-
-        consensus.nSuperblockStartBlock = 365 * 1440; // 1 common year
+        
+        // We need a seperate Update for that!! Limxdev 2019
+        consensus.nSuperblockStartBlock = 99999999; // 1 common year
         consensus.nSuperblockCycle = 10958; // weekly
 
         consensus.nGovernanceMinQuorum = 10;
