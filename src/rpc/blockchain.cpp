@@ -63,13 +63,14 @@ double GetDifficulty(const CBlockIndex* blockindex)
     return dDiff;
 }
 
+// PoS
 double GetPoSKernelPS()
 {
     int nPoSInterval = 72;
     double dStakeKernelsTriedAvg = 0;
     int nStakesHandled = 0, nStakesTime = 0;
 
-    CBlockIndex* pindex = chainActive.Tip();;
+    CBlockIndex* pindex = chainActive.Tip();
     CBlockIndex* pindexPrevStake = NULL;
 
     while (pindex && nStakesHandled < nPoSInterval)
@@ -96,6 +97,18 @@ double GetPoSKernelPS()
     result *= 16;
 
     return result;
+}
+
+// PoSV
+double GetPoSVKernelPS()
+{
+    CBlockIndex* pindex = chainActive.Tip();
+
+    if (pindex == NULL || pindex->nHeight <= Params().GetConsensus().nLastPOWBlock || !pindex->IsProofOfStake())
+        return 0;
+
+    double dStakeKernelsTriedAvg = GetDifficulty(pindex) * 4294967296.0; // 2^32
+    return dStakeKernelsTriedAvg / Params().GetConsensus().nTargetSpacing;
 }
 
 UniValue blockheaderToJSON(const CBlockIndex* blockindex)
