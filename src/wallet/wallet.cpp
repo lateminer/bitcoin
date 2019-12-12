@@ -3598,8 +3598,7 @@ uint64_t CWallet::GetStakeWeight() const
     if (setCoins.empty())
         return 0;
 
-    // PoSV3
-    // uint64_t nWeight = 0;
+    // PoSV
     uint64_t nAverageWeight = 0;
     uint64_t nTotalWeight = 0;
     uint64_t nWeightCount = 0;
@@ -3635,12 +3634,6 @@ uint64_t CWallet::GetStakeWeight() const
             nTotalWeight += bnCoinDayWeight.GetLow64();
             nWeightCount++;
         }
-
-        /*
-        // PoSV3
-		if (pcoin.first->GetDepthInMainChain() >= Params().GetConsensus().nCoinbaseMaturity)
-			nWeight += pcoin.first->vout[pcoin.second].nValue;
-        */
     }
 
     if (nWeightCount > 0)
@@ -3648,8 +3641,20 @@ uint64_t CWallet::GetStakeWeight() const
 
     return nAverageWeight;
 
+    /*
     // PoSV3
-    // return nWeight;
+    uint64_t nWeight = 0;
+
+    LOCK2(cs_main, cs_wallet);
+    BOOST_FOREACH(PAIRTYPE(const CWalletTx*, unsigned int) pcoin, setCoins)
+    {
+		if (pcoin.first->GetDepthInMainChain() >= Params().GetConsensus().nCoinbaseMaturity)
+			nWeight += pcoin.first->vout[pcoin.second].nValue;
+    }
+
+    return nWeight;
+    */
+    
 }
 
 /** @} */ // end of Actions
