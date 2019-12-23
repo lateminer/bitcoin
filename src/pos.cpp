@@ -3,6 +3,9 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+// arith_uint512 patch by Navcoin
+// Copyright (c) 2017-2019 The Navcoin developers
+
 #include "pos.h"
 
 #include "chain.h"
@@ -436,11 +439,19 @@ bool CheckStakeKernelHashV1(unsigned int nBits, CBlockIndex* pindexPrev, const C
     if (nTimeBlockFrom + params.nStakeMinAge > nTimeTx) // Min age requirement
         return error("CheckStakeKernelHash() : min age violation");
 
-    arith_uint256 bnTargetPerCoinDay;
-    bnTargetPerCoinDay.SetCompact(nBits);
+    // Base target
+    arith_uint256 targetProofOfStake;
+    targetProofOfStake.SetCompact(nBits);
+
+    // Weighted target
     int64_t nValueIn = txPrev.vout[prevout.n].nValue;
+    arith_uint512 bnWeight = arith_uint512(nValueIn) * GetCoinAgeWeight((int64_t)nTimeTxPrev, (int64_t)nTimeTx) / COIN / (24 * 60 * 60);
+
+    // We need to convert to uint512 to prevent overflow
+    base_uint<512> targetProofOfStake512(targetProofOfStake.GetHex());
+    targetProofOfStake512 *= bnWeight;
+
     uint256 hashBlockFrom = blockFrom.GetHash();
-    arith_uint256 bnCoinDayWeight = arith_uint256(nValueIn) * GetCoinAgeWeight((int64_t)nTimeTxPrev, (int64_t)nTimeTx) / COIN / (24 * 60 * 60);
 
     // Calculate hash
     CDataStream ss(SER_GETHASH, 0);
@@ -451,7 +462,7 @@ bool CheckStakeKernelHashV1(unsigned int nBits, CBlockIndex* pindexPrev, const C
     if (!GetKernelStakeModifier(pindexPrev, hashBlockFrom, nStakeModifier, nStakeModifierHeight, nStakeModifierTime, fPrintProofOfStake)){
         LogPrintf("CheckStakeKernelHash() : GetKernelStakeModifier failed\n");
         return false;
-	}
+    }
 
     ss << nStakeModifier;
     ss << nTimeBlockFrom << nTxPrevOffset << nTimeTxPrev << prevout.n << nTimeTx;
@@ -463,14 +474,17 @@ bool CheckStakeKernelHashV1(unsigned int nBits, CBlockIndex* pindexPrev, const C
             DateTimeStrFormat(nStakeModifierTime),
             mapBlockIndex[hashBlockFrom]->nHeight,
             DateTimeStrFormat(blockFrom.GetBlockTime()));
-        LogPrintf("CheckStakeKernelHash() : check modifier=0x%016x nTimeBlockFrom=%u nTxPrevOffset=%u nTimeTxPrev=%u nPrevout=%u nTimeTx=%u hashProof=%s\n",
+        LogPrintf("CheckStakeKernelHash() : check modifier=0x%016x nTimeBlockFrom=%u nTxPrevOffset=%u nTimeTxPrev=%u nPrevout=%u nTimeTx=%u hashProofOfStake=%s targetProofOfStake=%s\n",
             nStakeModifier,
             nTimeBlockFrom, nTxPrevOffset, nTimeTxPrev, prevout.n, nTimeTx,
-            hashProofOfStake.ToString());
+            hashProofOfStake.ToString(), targetProofOfStake512.ToString());
     }
 
+    // We need to convert type so it can be compared to target
+    base_uint<512> hashProofOfStake512(hashProofOfStake.GetHex());
+
     // Now check if proof-of-stake hash meets target protocol
-    if (UintToArith256(hashProofOfStake) > bnCoinDayWeight * bnTargetPerCoinDay)
+    if (hashProofOfStake512 > targetProofOfStake512)
         return false;
 
     if (fDebug && !fPrintProofOfStake)
@@ -480,10 +494,10 @@ bool CheckStakeKernelHashV1(unsigned int nBits, CBlockIndex* pindexPrev, const C
             DateTimeStrFormat(nStakeModifierTime),
             mapBlockIndex[hashBlockFrom]->nHeight,
             DateTimeStrFormat(blockFrom.GetBlockTime()));
-        LogPrintf("CheckStakeKernelHash() : pass modifier=0x%016x nTimeBlockFrom=%u nTxPrevOffset=%u nTimeTxPrev=%u nPrevout=%u nTimeTx=%u hashProof=%s\n",
+        LogPrintf("CheckStakeKernelHash() : pass modifier=0x%016x nTimeBlockFrom=%u nTxPrevOffset=%u nTimeTxPrev=%u nPrevout=%u nTimeTx=%u hashProofOfStake=%s targetProofOfStake=%s\n",
             nStakeModifier,
             nTimeBlockFrom, nTxPrevOffset, nTimeTxPrev, prevout.n, nTimeTx,
-            hashProofOfStake.ToString());
+            hashProofOfStake.ToString(), targetProofOfStake512.ToString());
     }
     return true;
 }
@@ -520,8 +534,11 @@ bool CheckStakeKernelHashV2(const CBlockIndex* pindexPrev, unsigned int nBits, c
     int64_t nValueIn = txPrev.vout[prevout.n].nValue;
     if (nValueIn == 0)
         return error("CheckStakeKernelHash() : nValueIn = 0");
-    arith_uint256 bnWeight = arith_uint256(nValueIn);
-    bnTarget *= bnWeight;
+    arith_uint512 bnWeight = arith_uint512(nValueIn);
+
+    // We need to convert to uint512 to prevent overflow
+    base_uint<512> targetProofOfStake512(targetProofOfStake.GetHex());
+    targetProofOfStake512 *= bnWeight;
 
     uint256 nStakeModifierV2 = pindexPrev->nStakeModifierV2;
 
@@ -534,22 +551,25 @@ bool CheckStakeKernelHashV2(const CBlockIndex* pindexPrev, unsigned int nBits, c
 
     if (fPrintProofOfStake)
     {
-        LogPrintf("CheckStakeKernelHash() : nStakeModifierV2=%s, txPrev.nTime=%u, txPrev.vout.hash=%s, txPrev.vout.n=%u, nTime=%u, hashProofOfStake=%s\n",
+        LogPrintf("CheckStakeKernelHash() : nStakeModifierV2=%s, txPrev.nTime=%u, txPrev.vout.hash=%s, txPrev.vout.n=%u, nTime=%u, hashProofOfStake=%s, targetProofOfStake=%s\n",
             nStakeModifierV2.GetHex().c_str(),
             txPrev.nTime, prevout.hash.ToString(), prevout.n, nTimeTx,
-            hashProofOfStake.ToString());
+            hashProofOfStake.ToString(), targetProofOfStake512.ToString());
     }
 
+    // We need to convert type so it can be compared to target
+    base_uint<512> hashProofOfStake512(hashProofOfStake.GetHex());
+
     // Now check if proof-of-stake hash meets target protocol
-    if (UintToArith256(hashProofOfStake) > bnTarget)
+    if (hashProofOfStake512 > targetProofOfStake512)
         return false;
 
     if (fDebug && !fPrintProofOfStake)
     {
-        LogPrintf("CheckStakeKernelHash() : nStakeModifierV2=%s, txPrev.nTime=%u, txPrev.vout.hash=%s, txPrev.vout.n=%u, nTime=%u, hashProofOfStake=%s\n",
+        LogPrintf("CheckStakeKernelHash() : nStakeModifierV2=%s, txPrev.nTime=%u, txPrev.vout.hash=%s, txPrev.vout.n=%u, nTime=%u, hashProofOfStake=%s, targetProofOfStake=%s\n",
             nStakeModifierV2.GetHex().c_str(),
             txPrev.nTime, prevout.hash.ToString(), prevout.n, nTimeTx,
-            hashProofOfStake.ToString());
+            hashProofOfStake.ToString(), targetProofOfStake512.ToString());
     }
 
     return true;

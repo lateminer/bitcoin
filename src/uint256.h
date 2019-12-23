@@ -3,6 +3,9 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+// arith_uint512 patch by Navcoin
+// Copyright (c) 2017-2019 The Navcoin developers
+
 #ifndef BITCOIN_UINT256_H
 #define BITCOIN_UINT256_H
 
@@ -112,6 +115,10 @@ public:
     {
         s.read((char*)data, sizeof(data));
     }
+
+    friend class uint160;
+    friend class uint256;
+    friend class uint512;
 };
 
 /** 160-bit opaque blob.
@@ -157,8 +164,24 @@ public:
         }
         return false;
     }
+};
 
-    uint64_t GetLow64() const;
+/** 512-bit opaque blob.
+ */
+class uint512 : public base_blob<512> {
+public:
+    uint512() {}
+    uint512(const base_blob<512>& b) : base_blob<512>(b) {}
+    explicit uint512(const std::vector<unsigned char>& vch) : base_blob<512>(vch) {}
+
+    uint256 trim256() const
+    {
+        uint256 ret;
+        for (unsigned int i = 0; i < uint256::WIDTH; i++){
+            ret.data[i] = data[i];
+        }
+        return ret;
+    }
 };
 
 /* uint256 from const char *.
@@ -195,4 +218,12 @@ inline uint160 uint160S(const std::string &str)
     rv.SetHex(str);
     return rv;
 }
+
+inline uint512 uint512S(const std::string& str)
+{
+    uint512 rv;
+    rv.SetHex(str);
+    return rv;
+}
+
 #endif // BITCOIN_UINT256_H
