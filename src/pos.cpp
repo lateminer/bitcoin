@@ -527,8 +527,8 @@ bool CheckStakeKernelHashV2(const CBlockIndex* pindexPrev, unsigned int nBits, c
         return error("CheckStakeKernelHash() : nTime violation");
 
     // Base target
-    arith_uint256 bnTarget;
-    bnTarget.SetCompact(nBits);
+    arith_uint256 targetProofOfStake;
+    targetProofOfStake.SetCompact(nBits);
 
     // Weighted target
     int64_t nValueIn = txPrev.vout[prevout.n].nValue;
