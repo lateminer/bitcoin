@@ -3,6 +3,9 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+// arith_uint512 patch by Navcoin
+// Copyright (c) 2017-2019 The Navcoin developers
+
 #include "uint256.h"
 
 #include "utilstrencodings.h"
@@ -80,10 +83,3 @@ template std::string base_blob<256>::GetHex() const;
 template std::string base_blob<256>::ToString() const;
 template void base_blob<256>::SetHex(const char*);
 template void base_blob<256>::SetHex(const std::string&);
-
-uint64_t uint256::GetLow64() const
-{
-   assert(sizeof(data) >= 2);
-   const uint32_t *pn = (const uint32_t*)data;
-   return pn[0] | (uint64_t)pn[1] << 32;
-}
