@@ -1126,8 +1126,6 @@ public:
     void Serialize(S &s, int nType, int nVersion) const {
         // Serialize nVersion
         ::Serialize(s, txTo.nVersion, nType, nVersion);
-        // Serialize nTime
-        ::Serialize(s, txTo.nTime, nType, nVersion);
         // Serialize vin
         unsigned int nInputs = fAnyoneCanPay ? 1 : txTo.vin.size();
         ::WriteCompactSize(s, nInputs);
@@ -1140,6 +1138,11 @@ public:
              SerializeOutput(s, nOutput, nType, nVersion);
         // Serialize nLockTime
         ::Serialize(s, txTo.nLockTime, nType, nVersion);
+
+        // Potcoin
+        // Serialize nTime
+        if (nVersion > 3)
+             ::Serialize(s, txTo.nTime, nType, nVersion);
     }
 };
 
@@ -1328,11 +1331,8 @@ bool VerifyScript(const CScript& scriptSig, const CScript& scriptPubKey, unsigne
         return false;
     if (stack.empty())
         return set_error(serror, SCRIPT_ERR_EVAL_FALSE);
-    /*
-    // Potcoin ToDo: enable this check
     if (CastToBool(stack.back()) == false)
         return set_error(serror, SCRIPT_ERR_EVAL_FALSE);
-    */
 
     // Additional validation for spend-to-script-hash transactions:
     if ((flags & SCRIPT_VERIFY_P2SH) && scriptPubKey.IsPayToScriptHash())
