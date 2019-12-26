@@ -1138,10 +1138,9 @@ public:
              SerializeOutput(s, nOutput, nType, nVersion);
         // Serialize nLockTime
         ::Serialize(s, txTo.nLockTime, nType, nVersion);
-
         // Potcoin
         // Serialize nTime
-        if (nVersion > 3)
+        if (txTo.nVersion > 3)
              ::Serialize(s, txTo.nTime, nType, nVersion);
     }
 };

@@ -238,10 +238,10 @@ public:
     // and bypass the constness. This is safe, as they update the entire
     // structure, including the hash.
     const int32_t nVersion;
-    unsigned int nTime;
     const std::vector<CTxIn> vin;
     const std::vector<CTxOut> vout;
     const uint32_t nLockTime;
+    unsigned int nTime;
 
     /** Construct a CTransaction that qualifies as IsNull() */
     CTransaction();
@@ -261,7 +261,7 @@ public:
         READWRITE(*const_cast<std::vector<CTxOut>*>(&vout));
         READWRITE(*const_cast<uint32_t*>(&nLockTime));
         // Potcoin
-        if (this->nVersion > 3)
+        if (nVersion > 3)
             READWRITE(*const_cast<uint32_t*>(&nTime));
         if (ser_action.ForRead())
             UpdateHash();
@@ -320,10 +320,10 @@ public:
 struct CMutableTransaction
 {
     int32_t nVersion;
-    uint32_t nTime;
     std::vector<CTxIn> vin;
     std::vector<CTxOut> vout;
     uint32_t nLockTime;
+    uint32_t nTime;
 
     CMutableTransaction();
     CMutableTransaction(const CTransaction& tx);
@@ -334,10 +334,12 @@ struct CMutableTransaction
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(this->nVersion);
         nVersion = this->nVersion;
-        READWRITE(nTime);
         READWRITE(vin);
         READWRITE(vout);
         READWRITE(nLockTime);
+        // Potcoin
+        if (nVersion > 3)
+            READWRITE(nTime);
     }
 
     /** Compute the hash of this CMutableTransaction. This is computed on the
