@@ -459,10 +459,8 @@ bool CheckStakeKernelHashV1(unsigned int nBits, CBlockIndex* pindexPrev, const C
     int nStakeModifierHeight = 0;
     int64_t nStakeModifierTime = 0;
 
-    if (!GetKernelStakeModifier(pindexPrev, hashBlockFrom, nStakeModifier, nStakeModifierHeight, nStakeModifierTime, fPrintProofOfStake)){
-        LogPrintf("CheckStakeKernelHash() : GetKernelStakeModifier failed\n");
+    if (!GetKernelStakeModifier(pindexPrev, hashBlockFrom, nStakeModifier, nStakeModifierHeight, nStakeModifierTime, fPrintProofOfStake))
         return false;
-    }
 
     ss << nStakeModifier;
     ss << nTimeBlockFrom << nTxPrevOffset << nTimeTxPrev << prevout.n << nTimeTx;
