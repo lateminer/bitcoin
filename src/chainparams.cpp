@@ -361,7 +361,7 @@ public:
         consensus.nStakeTimestampMask = 0xf;
         consensus.nCoinbaseMaturity = 5;
         consensus.nCoinbaseMaturityNEW = 5;
-        consensus.nStakeMinAge = 1 * 60 * 60;
+        consensus.nStakeMinAge = 1 * 60;
         consensus.nStakeMaxAge = 365 * 24 * 60 * 60;
 
         pchMessageStart[0] = 0x70;
