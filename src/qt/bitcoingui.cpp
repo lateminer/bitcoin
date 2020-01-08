@@ -1138,13 +1138,13 @@ void BitcoinGUI::updateWeight()
 
 void BitcoinGUI::updateStakingIcon()
 {
-	updateWeight();
+    updateWeight();
 
     if (nLastCoinStakeSearchInterval && nWeight)
     {
-    	uint64_t nWeight = this->nWeight;
-    	uint64_t nNetworkWeight = GetPoSVKernelPS();
-    	unsigned nEstimateTime = Params().GetConsensus().nTargetSpacing * nNetworkWeight / nWeight;
+        uint64_t nWeight = this->nWeight;
+        uint64_t nNetworkWeight = GetPoSVKernelPS();
+        unsigned nEstimateTime = Params().GetConsensus().nTargetSpacing * nNetworkWeight / nWeight;
 
         QString text;
         if (nEstimateTime < 60)
@@ -1164,8 +1164,10 @@ void BitcoinGUI::updateStakingIcon()
             text = tr("%n day(s)", "", nEstimateTime/(60*60*24));
         }
 
+        /*
         nWeight /= COIN;
         nNetworkWeight /= COIN;
+        */
         labelStakingIcon->setPixmap(platformStyle->SingleColorIcon(":/icons/staking_on").pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
         labelStakingIcon->setToolTip(tr("Staking.<br>Your weight is %1<br>Network weight is %2<br>Expected time to earn reward is %3").arg(nWeight).arg(nNetworkWeight).arg(text));
     }
@@ -1180,7 +1182,7 @@ void BitcoinGUI::updateStakingIcon()
             labelStakingIcon->setToolTip(tr("Not staking because wallet is syncing"));
         else if (!nWeight)
             labelStakingIcon->setToolTip(tr("Not staking because you don't have mature coins"));
-		else if (pwalletMain && pwalletMain->IsLocked())
+        else if (pwalletMain && pwalletMain->IsLocked())
             labelStakingIcon->setToolTip(tr("Not staking because wallet is locked"));
         else
             labelStakingIcon->setToolTip(tr("Not staking"));
