@@ -693,10 +693,15 @@ bool CheckKernel(CBlockIndex* pindexPrev, unsigned int nBits, uint32_t nTime, co
 
     CBlockIndex* pblockindex = mapBlockIndex[hashBlock];
 
+    // Check minimum age requirement
     if (params.IsProtocolV3(nTime)) {
-        // Check minimum age requirement
         if (pindexPrev->nHeight + 1 - pblockindex->nHeight < params.nCoinbaseMaturity) {
-            LogPrintf("CheckKernel() : stake prevout is not mature in block %s\n", hashBlock.ToString());
+            // LogPrintf("CheckKernel() : stake prevout is not mature in block %s\n", hashBlock.ToString());
+            return false;
+        }
+    } else {
+        if (header.GetBlockTime() + params.nStakeMinAge > nTime) {
+            // LogPrintf("CheckKernel() : stake prevout is not mature in block %s\n", hashBlock.ToString());
             return false;
         }
     }

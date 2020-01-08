@@ -706,26 +706,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     CScript scriptPubKeyKernel;
     for (const auto& pcoin : setCoins)
     {
-        CDiskTxPos postx;
-        if (!pblocktree->ReadTxIndex(pcoin.first->GetHash(), postx))
-            continue;
-
-        // Read block header
-        CAutoFile file(OpenBlockFile(postx, true), SER_DISK, CLIENT_VERSION);
-        CBlockHeader header;
-        CTransaction tx;
-        try {
-            file >> header;
-            fseek(file.Get(), postx.nTxOffset, SEEK_CUR);
-            file >> tx;
-        } catch (std::exception &e) {
-            return error("%s() : deserialize or I/O error in CreateCoinStake()", __PRETTY_FUNCTION__);
-        }
-
         static int nMaxStakeSearchInterval = 60;
-        if (header.GetBlockTime() + Params().GetConsensus().nStakeMinAge > txNew.nTime - nMaxStakeSearchInterval)
-            continue; // only count coins meeting min age requirement
-
         bool fKernelFound = false;
         for (unsigned int n=0; n<min(nSearchInterval,(int64_t)nMaxStakeSearchInterval) && !fKernelFound && pindexPrev == pindexBestHeader; n++)
         {
@@ -788,7 +769,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                 vwtxPrev.push_back(pcoin.first);
                 txNew.vout.push_back(CTxOut(0, scriptPubKeyOut));
 
-                if (GetCoinAgeWeight(header.GetBlockTime(), (int64_t)txNew.nTime) < nStakeSplitAge && nCredit >= GetStakeCombineThreshold())
+                if (GetCoinAgeWeight(nBlockTime, (int64_t)txNew.nTime) < nStakeSplitAge && nCredit >= GetStakeCombineThreshold())
                     txNew.vout.push_back(CTxOut(0, scriptPubKeyOut)); //split stake
 
                 LogPrint("coinstake", "CreateCoinStake : added kernel type=%d\n", whichType);
