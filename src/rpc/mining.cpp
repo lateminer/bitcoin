@@ -267,15 +267,24 @@ UniValue getstakinginfo(const UniValue& params, bool fHelp)
             "Returns an object containing staking-related information.");
 
     uint64_t nWeight = 0;
+    uint64_t nNetworkWeight = 0;
+    uint64_t nExpectedTime = 0;
+    const Consensus::Params& consensusParams = Params().GetConsensus();
 
 #ifdef ENABLE_WALLET
     if (pwalletMain)
         nWeight = pwalletMain->GetStakeWeight();
 #endif
 
-    uint64_t nNetworkWeight = GetPoSVKernelPS();
     bool staking = nLastCoinStakeSearchInterval && nWeight;
-    uint64_t nExpectedTime = staking ? Params().GetConsensus().nTargetSpacing * nNetworkWeight / nWeight : 0;
+
+    if (consensusParams.IsProtocolV3(chainActive.Tip()->GetBlockTime())) {
+        nNetworkWeight = GetPoSKernelPS();
+        nExpectedTime = staking ? consensusParams.nTargetSpacingNEW * nNetworkWeight / nWeight : 0;
+    } else {
+        nNetworkWeight = GetPoSVKernelPS();
+        nExpectedTime = staking ? consensusParams.nTargetSpacing * nNetworkWeight / nWeight : 0;
+    }
 
     UniValue obj(UniValue::VOBJ);
 

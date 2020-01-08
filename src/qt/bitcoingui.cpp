@@ -1142,9 +1142,18 @@ void BitcoinGUI::updateStakingIcon()
 
     if (nLastCoinStakeSearchInterval && nWeight)
     {
+        const Consensus::Params& params = Params().GetConsensus();
         uint64_t nWeight = this->nWeight;
-        uint64_t nNetworkWeight = GetPoSVKernelPS();
-        unsigned nEstimateTime = Params().GetConsensus().nTargetSpacing * nNetworkWeight / nWeight;
+        uint64_t nNetworkWeight = 0;
+        unsigned nEstimateTime = 0;
+        
+        if (params.IsProtocolV3(clientModel->getHeaderTipTime())) {
+            nNetworkWeight = GetPoSKernelPS();
+            nEstimateTime = params.nTargetSpacingNEW * nNetworkWeight / nWeight;
+        } else {
+            nNetworkWeight = GetPoSVKernelPS();
+            nEstimateTime = params.nTargetSpacing * nNetworkWeight / nWeight;
+        }
 
         QString text;
         if (nEstimateTime < 60)
@@ -1164,10 +1173,11 @@ void BitcoinGUI::updateStakingIcon()
             text = tr("%n day(s)", "", nEstimateTime/(60*60*24));
         }
 
-        /*
-        nWeight /= COIN;
-        nNetworkWeight /= COIN;
-        */
+        if (params.IsProtocolV3(clientModel->getHeaderTipTime())) {
+            nWeight /= COIN;
+            nNetworkWeight /= COIN;
+        }
+
         labelStakingIcon->setPixmap(platformStyle->SingleColorIcon(":/icons/staking_on").pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
         labelStakingIcon->setToolTip(tr("Staking.<br>Your weight is %1<br>Network weight is %2<br>Expected time to earn reward is %3").arg(nWeight).arg(nNetworkWeight).arg(text));
     }
