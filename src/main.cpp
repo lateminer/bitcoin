@@ -625,7 +625,7 @@ void MaybeSetPeerAsAnnouncingHeaderAndIDs(const CNodeState* nodestate, CNode* pf
 // Requires cs_main
 bool CanDirectFetch(const Consensus::Params &consensusParams)
 {
-    return chainActive.Tip()->GetBlockTime() > GetAdjustedTime() - consensusParams.nTargetSpacing * 20;
+    return chainActive.Tip()->GetBlockTime() > GetAdjustedTime() - consensusParams.GetTargetSpacing(chainActive.Tip()->GetBlockTime()) * 20;
 }
 
 // Requires cs_main
@@ -1799,10 +1799,10 @@ CAmount GetProofOfWorkSubsidy(int nHeight, const Consensus::Params& consensusPar
     return nSubsidy;
 }
 
-CAmount GetProofOfStakeSubsidy(int nHeight, int64_t nCoinAge, int64_t nFees, bool IsStaticRewardEnabled)
+CAmount GetProofOfStakeSubsidy(CBlockIndex* pindexPrev, int64_t nCoinAge, int64_t nFees)
 {
     CAmount nSubsidy;
-    if (IsStaticRewardEnabled)
+    if (Params().GetConsensus().IsProtocolV3(pindexPrev->GetBlockTime()))
         nSubsidy = COIN * 42;
     else
         nSubsidy = nCoinAge * 5 * CENT * 33 / (365 * 33 + 8);
@@ -2675,7 +2675,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         if (!GetCoinAge(const_cast<CTransaction&>(block.vtx[1]), nCoinAge))
             return error("ConnectBlock() : %s unable to get coin age for coinstake", block.vtx[1].GetHash().ToString());
 
-        CAmount blockReward = nFees + GetProofOfStakeSubsidy(pindex->nHeight, nCoinAge, nFees, chainparams.GetConsensus().IsProtocolV3(block.GetBlockTime()));
+        CAmount blockReward = GetProofOfStakeSubsidy(pindex->pprev, nCoinAge, nFees);
         if (nActualStakeReward > blockReward)
             return state.DoS(100,
                             error("ConnectBlock(): coinstake pays too much (actual=%d vs limit=%d)",
@@ -3562,7 +3562,7 @@ static bool CheckBlockSignature(const CBlock& block)
         vector<unsigned char>& vchPubKey = vSolutions[0];
         return CPubKey(vchPubKey).Verify(block.GetHash(), block.vchBlockSig);
     }
-    else
+    else /* if (Params().GetConsensus().IsProtocolV3(nTime)) */
     {
         // Block signing key also can be encoded in the nonspendable output
         // This allows to not pollute UTXO set with useless outputs e.g. in case of multisig staking
@@ -3822,7 +3822,7 @@ bool CheckStake(CBlock* pblock, CWallet& wallet, const CChainParams& chainparams
 }
 
 // novacoin: attempt to generate suitable proof-of-stake
-bool SignBlock(CBlock& block, CWallet& wallet, int64_t& nFees)
+bool SignBlock(CBlock& block, CWallet& wallet, int64_t nFees)
 {
     // if we are trying to sign
     // something except proof-of-stake block template
@@ -3839,12 +3839,13 @@ bool SignBlock(CBlock& block, CWallet& wallet, int64_t& nFees)
     }
 
     static int64_t nLastCoinStakeSearchTime = GetAdjustedTime(); // startup timestamp
+    const Consensus::Params& consensusParams = Params().GetConsensus();
 
     CKey key;
     CMutableTransaction txCoinBase(block.vtx[0]);
     CMutableTransaction txCoinStake;
     txCoinStake.nTime = GetAdjustedTime();
-    txCoinStake.nTime &= ~Params().GetConsensus().nStakeTimestampMask;
+    txCoinStake.nTime &= ~consensusParams.nStakeTimestampMask;
 
     int64_t nMinTime;
     int64_t nSearchTime = txCoinStake.nTime; // search to current time
@@ -3852,10 +3853,11 @@ bool SignBlock(CBlock& block, CWallet& wallet, int64_t& nFees)
 
     if (nSearchTime > nLastCoinStakeSearchTime)
     {
-        if (wallet.CreateCoinStake(wallet, block.nBits, 1, nFees, txCoinStake, key))
+        int64_t nSearchInterval = consensusParams.IsProtocolV3(nSearchTime) ? 1 : nSearchTime - nLastCoinStakeSearchTime;
+        if (wallet.CreateCoinStake(wallet, block.nBits, nSearchInterval, nFees, txCoinStake, key))
         {
             // Potcoin
-            if (Params().GetConsensus().IsProtocolV3(GetAdjustedTime()))
+            if (consensusParams.IsProtocolV3(nSearchTime))
                 nMinTime = pindexBestHeader->GetPastTimeLimit()+1;
             else
                 nMinTime = max(pindexBestHeader->GetPastTimeLimit()+1, PastDrift(pindexBestHeader->GetBlockTime()));

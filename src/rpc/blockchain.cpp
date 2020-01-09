@@ -94,7 +94,7 @@ double GetPoSKernelPS()
     if (nStakesTime)
         result = dStakeKernelsTriedAvg / nStakesTime;
 
-    result *= 16;
+    result *= Params().GetConsensus().nStakeTimestampMask + 1;
 
     return result;
 }

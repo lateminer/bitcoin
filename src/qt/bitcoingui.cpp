@@ -1144,16 +1144,8 @@ void BitcoinGUI::updateStakingIcon()
     {
         const Consensus::Params& params = Params().GetConsensus();
         uint64_t nWeight = this->nWeight;
-        uint64_t nNetworkWeight = 0;
-        unsigned nEstimateTime = 0;
-        
-        if (params.IsProtocolV3(clientModel->getHeaderTipTime())) {
-            nNetworkWeight = GetPoSKernelPS();
-            nEstimateTime = params.nTargetSpacingNEW * nNetworkWeight / nWeight;
-        } else {
-            nNetworkWeight = GetPoSVKernelPS();
-            nEstimateTime = params.nTargetSpacing * nNetworkWeight / nWeight;
-        }
+        uint64_t nNetworkWeight = params.IsProtocolV3(clientModel->getHeaderTipTime()) ? GetPoSKernelPS() : GetPoSVKernelPS();
+        unsigned nEstimateTime = params.GetTargetSpacing(clientModel->getHeaderTipTime()) * nNetworkWeight / nWeight;
 
         QString text;
         if (nEstimateTime < 60)
