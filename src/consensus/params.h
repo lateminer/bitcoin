@@ -70,7 +70,9 @@ struct Params {
     int nCoinbaseMaturitySwitch;
     int64_t nCheckPOWFromnTime;
     int64_t nProtocolV3Time;
-    bool IsProtocolV3(int64_t nTime) const { return nTime > nProtocolV3Time && nTime != 1444028400; }
+    bool IsProtocolV3(int64_t nTime) const { return nTime > nProtocolV3Time; /* && nTime != 1444028400; */}
+    int64_t GetTargetSpacing(int64_t nTime) const { return IsProtocolV3(nTime) ? nTargetSpacingNEW : nTargetSpacing; }
+    
     int nLastPOWBlock;
     int nStakeTimestampMask;
     int nCoinbaseMaturity;

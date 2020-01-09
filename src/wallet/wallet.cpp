@@ -668,7 +668,7 @@ bool CWallet::SelectCoinsForStaking(CAmount& nTargetValue, std::set<std::pair<co
     return true;
 }
 
-bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int64_t nSearchInterval, CAmount& nFees, CMutableTransaction& tx, CKey& key)
+bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int64_t nSearchInterval, CAmount nFees, CMutableTransaction& tx, CKey& key)
 {
     CBlockIndex* pindexPrev = pindexBestHeader;
     arith_uint256 bnTargetPerCoinDay;
@@ -706,26 +706,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     CScript scriptPubKeyKernel;
     for (const auto& pcoin : setCoins)
     {
-        CDiskTxPos postx;
-        if (!pblocktree->ReadTxIndex(pcoin.first->GetHash(), postx))
-            continue;
-
-        // Read block header
-        CAutoFile file(OpenBlockFile(postx, true), SER_DISK, CLIENT_VERSION);
-        CBlockHeader header;
-        CTransaction tx;
-        try {
-            file >> header;
-            fseek(file.Get(), postx.nTxOffset, SEEK_CUR);
-            file >> tx;
-        } catch (std::exception &e) {
-            return error("%s() : deserialize or I/O error in CreateCoinStake()", __PRETTY_FUNCTION__);
-        }
-
         static int nMaxStakeSearchInterval = 60;
-        if (header.GetBlockTime() + Params().GetConsensus().nStakeMinAge > txNew.nTime - nMaxStakeSearchInterval)
-            continue; // only count coins meeting min age requirement
-
         bool fKernelFound = false;
         for (unsigned int n=0; n<min(nSearchInterval,(int64_t)nMaxStakeSearchInterval) && !fKernelFound && pindexPrev == pindexBestHeader; n++)
         {
@@ -788,7 +769,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                 vwtxPrev.push_back(pcoin.first);
                 txNew.vout.push_back(CTxOut(0, scriptPubKeyOut));
 
-                if (GetCoinAgeWeight(header.GetBlockTime(), (int64_t)txNew.nTime) < nStakeSplitAge && nCredit >= GetStakeCombineThreshold())
+                if (GetCoinAgeWeight(nBlockTime, (int64_t)txNew.nTime) < nStakeSplitAge && nCredit >= GetStakeCombineThreshold())
                     txNew.vout.push_back(CTxOut(0, scriptPubKeyOut)); //split stake
 
                 LogPrint("coinstake", "CreateCoinStake : added kernel type=%d\n", whichType);
@@ -860,7 +841,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
         if (!GetCoinAge(ptxNew, nCoinAge))
             return error("CreateCoinStake : failed to calculate coin age");
 
-        int64_t nReward = GetProofOfStakeSubsidy(pindexPrev->nHeight + 1, nCoinAge, nFees, Params().GetConsensus().IsProtocolV3(GetAdjustedTime()));
+        int64_t nReward = GetProofOfStakeSubsidy(pindexPrev, nCoinAge, nFees);
 
         if (nReward < 0)
            return false;
@@ -3580,6 +3561,8 @@ CAmount CWallet::GetWatchOnlyStake() const
 
 uint64_t CWallet::GetStakeWeight() const
 {
+    const Consensus::Params& consensusParams = Params().GetConsensus();
+
     // Choose coins to use
     CAmount nBalance = GetBalance();
 
@@ -3598,63 +3581,60 @@ uint64_t CWallet::GetStakeWeight() const
     if (setCoins.empty())
         return 0;
 
-    // PoSV
-    uint64_t nAverageWeight = 0;
-    uint64_t nTotalWeight = 0;
-    uint64_t nWeightCount = 0;
+    if (consensusParams.IsProtocolV3(chainActive.Tip()->GetBlockTime())) {
+        uint64_t nWeight = 0;
 
-    LOCK2(cs_main, cs_wallet);
-    for (const auto& pcoin : setCoins)
-    {
-        CDiskTxPos postx;
-        if (!pblocktree->ReadTxIndex(pcoin.first->GetHash(), postx))
-            continue;
-
-        // Read block header
-        CAutoFile file(OpenBlockFile(postx, true), SER_DISK, CLIENT_VERSION);
-        CBlockHeader header;
-        CTransaction tx;
-        try {
-            file >> header;
-            fseek(file.Get(), postx.nTxOffset, SEEK_CUR);
-            file >> tx;
-        } catch (std::exception &e) {
-            return error("%s() : deserialize or I/O error in CreateCoinStake()", __PRETTY_FUNCTION__);
-        }
-
-        // Deal with transaction timestmap
-        unsigned int nTimeTx = tx.nTime ? tx.nTime : header.GetBlockTime();
-
-        int64_t nTimeWeight = GetCoinAgeWeight((int64_t)nTimeTx, (int64_t)GetTime());
-        arith_uint256 bnCoinDayWeight = arith_uint256(pcoin.first->vout[pcoin.second].nValue) * nTimeWeight / COIN / (24 * 60 * 60);
-
-        // Weight is greater than zero
-        if (nTimeWeight > 0)
+        LOCK2(cs_main, cs_wallet);
+        for (const auto& pcoin : setCoins)
         {
-            nTotalWeight += bnCoinDayWeight.GetLow64();
-            nWeightCount++;
+            if (pcoin.first->GetDepthInMainChain() >= consensusParams.nCoinbaseMaturity)
+                nWeight += pcoin.first->vout[pcoin.second].nValue;
         }
+
+        return nWeight;
+    } else {
+        uint64_t nAverageWeight = 0;
+        uint64_t nTotalWeight = 0;
+        uint64_t nWeightCount = 0;
+
+        LOCK2(cs_main, cs_wallet);
+        for (const auto& pcoin : setCoins)
+        {
+            CDiskTxPos postx;
+            if (!pblocktree->ReadTxIndex(pcoin.first->GetHash(), postx))
+                continue;
+
+            // Read block header
+            CAutoFile file(OpenBlockFile(postx, true), SER_DISK, CLIENT_VERSION);
+            CBlockHeader header;
+            CTransaction tx;
+            try {
+                file >> header;
+                fseek(file.Get(), postx.nTxOffset, SEEK_CUR);
+                file >> tx;
+            } catch (std::exception &e) {
+                return error("%s() : deserialize or I/O error in CreateCoinStake()", __PRETTY_FUNCTION__);
+            }
+
+            // Deal with transaction timestmap
+            unsigned int nTimeTx = tx.nTime ? tx.nTime : header.GetBlockTime();
+
+            int64_t nTimeWeight = GetCoinAgeWeight((int64_t)nTimeTx, (int64_t)GetTime());
+            arith_uint256 bnCoinDayWeight = arith_uint256(pcoin.first->vout[pcoin.second].nValue) * nTimeWeight / COIN / (24 * 60 * 60);
+
+            // Weight is greater than zero
+            if (nTimeWeight > 0)
+            {
+                nTotalWeight += bnCoinDayWeight.GetLow64();
+                nWeightCount++;
+            }
+        }
+
+        if (nWeightCount > 0)
+            nAverageWeight = nTotalWeight / nWeightCount;
+
+        return nAverageWeight;
     }
-
-    if (nWeightCount > 0)
-        nAverageWeight = nTotalWeight / nWeightCount;
-
-    return nAverageWeight;
-
-    /*
-    // PoSV3
-    uint64_t nWeight = 0;
-
-    LOCK2(cs_main, cs_wallet);
-    BOOST_FOREACH(PAIRTYPE(const CWalletTx*, unsigned int) pcoin, setCoins)
-    {
-		if (pcoin.first->GetDepthInMainChain() >= Params().GetConsensus().nCoinbaseMaturity)
-			nWeight += pcoin.first->vout[pcoin.second].nValue;
-    }
-
-    return nWeight;
-    */
-    
 }
 
 /** @} */ // end of Actions
