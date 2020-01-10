@@ -6854,8 +6854,8 @@ BTDX核心钱包</translation>
 </translation>
     </message>
     <message>
-        <source>Disable all Bitcloud specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
-        <translation>禁用所有BTDX特定功能(主节点, 零币, SwiftX, budget)(0-1，默认值:%u)</translation>
+        <source>Disable all PIVX & Bitcloud specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
+        <translation>禁用所有PIVX & Bitcloud特定功能(主节点, 零币, SwiftX, budget)(0-1，默认值:%u)</translation>
     </message>
     <message>
         <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>

@@ -3562,8 +3562,8 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>uklonjene nepotvrđene transakcije</translation>
     </message>
     <message>
-        <source>Disable all Bitcloud specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
-        <translation>Onemogući sve specifične funkcije Bitcloud (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, zadano: %u)</translation>
+        <source>Disable all PIVX & Bitcloud specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
+        <translation>Onemogući sve specifične funkcije PIVX & Bitcloud (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, zadano: %u)</translation>
     </message>
     <message>
         <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>

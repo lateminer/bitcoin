@@ -1358,7 +1358,7 @@ Użyj hasła składającego się z dziesięciu lub więcej losowych znaków lub 
         <source>Language missing or translation incomplete? Help contributing translations here:
 https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Brakuje języka bądź nieukończona pełnego tłumaczenia? Pomóż w tłumaczeniu tutaj:
-https://www.transifex.com/pivx-project/pivx-project-translations </translation>
+https://www.transifex.com/pivx-project/pivx-project-translations</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -4208,8 +4208,8 @@ Sprawdź adres i spróbuj ponownie.</translation>
 </translation>
     </message>
     <message>
-        <source>Disable all Bitcloud specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
-        <translation>Wyłącz wszystkie funkcje specyficzne dla Bitcloud (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, domyślnie: %u)</translation>
+        <source>Disable all PIVX & Bitcloud specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
+        <translation>Wyłącz wszystkie funkcje specyficzne dla PIVX & Bitcloud (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, domyślnie: %u)</translation>
     </message>
     <message>
         <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>

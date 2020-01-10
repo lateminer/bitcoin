@@ -2042,8 +2042,8 @@ Emin misiniz?</translation>
         <translation>Ayrıştırılmış bilgi çok büyük</translation>
     </message>
     <message>
-        <source>Invalid URI, not starting with "pivx" prefix</source>
-        <translation>Geçersiz URI, "pivx" ön adıyla başlamıyor</translation>
+        <source>Invalid URI, not starting with "bitcloud" prefix</source>
+        <translation>Geçersiz URI, "bitcloud" ön adıyla başlamıyor</translation>
     </message>
 </context>
 <context>
@@ -2448,7 +2448,7 @@ Adres: %4
     </message>
     <message>
         <source>Cannot start bitcloud: click-to-pay handler</source>
-        <translation>Pivx başlatılamıyor: tıkla ve ödeme işleyicisi</translation>
+        <translation>Bitcloud başlatılamıyor: tıkla ve ödeme işleyicisi</translation>
     </message>
     <message>
         <source>URI cannot be parsed! This can be caused by an invalid Bitcloud address or malformed URI parameters.</source>
@@ -4309,7 +4309,7 @@ gizlilik-odaklı opsiyonel bir metoddur. Temel olarak işlemleriniz
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           Bitcloud cüzdanınız ağa destek olmak için varsayılan olarak tüm BTDX bakiyenizin 10% 'unu zBTDX'e dönüştürecektir. Getirdiği gizlilik avantajını istemiyor veya zBTDX stakelemek istemiyorsanız cüzdanınızın otomint özelliğini Ayarlar-&gt;Seçenekler içindeki “zBTDX Otomint etkin” seçeneğini değiştirerek devredışı bırakabilirsiniz. PIVXQT veya GUI kullanmıyorsanız, bitcloud.conf dosyası içine  &lt;i&gt;enablezeromint=0&lt;/i&gt; ifadesini tırnak işareti olmadan girerek devredışı bırakabilirsiniz. &lt;/p&gt;
+                           Bitcloud cüzdanınız ağa destek olmak için varsayılan olarak tüm BTDX bakiyenizin 10% 'unu zBTDX'e dönüştürecektir. Getirdiği gizlilik avantajını istemiyor veya zBTDX stakelemek istemiyorsanız cüzdanınızın otomint özelliğini Ayarlar-&gt;Seçenekler içindeki “zBTDX Otomint etkin” seçeneğini değiştirerek devredışı bırakabilirsiniz. BitcloudQT veya GUI kullanmıyorsanız, bitcloud.conf dosyası içine  &lt;i&gt;enablezeromint=0&lt;/i&gt; ifadesini tırnak işareti olmadan girerek devredışı bırakabilirsiniz. &lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            Teknik detayları hakkında daha çok bilgi almak için
                            &lt;a style='color: #b088ff' href='https://pivx.org/zpiv/'&gt; "PIVX Zerocoin (zPIV) Teknik Makalesi"&lt;/a&gt;.
@@ -4367,7 +4367,7 @@ zBTDX Protokolü ile anonimleştirilmiş olacaktır.
                            &lt;li&gt;
                            Once all those steps are followed staking should be enabled.
                            &lt;li&gt;
-                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (pivx-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
+                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (bitcloud-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
                            &lt;/li&gt;&lt;/ol&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            To Stake zBTDX:
@@ -4395,7 +4395,7 @@ zBTDX Protokolü ile anonimleştirilmiş olacaktır.
                            &lt;li&gt;
                            Bu adımlar tamamlanmışsa staking çalışıyor olmalıdır.
                            &lt;li&gt;
-                           Staking durumunu kontrol etmek için fare imlecini cüzdanın sol üst kısmındaki paket ikonu üzerinde tuttuğunuzda görebilirsiniz. Yaptığını göstermek için paket ikonunun ışığı yanacak ve "Staking aktif" yazacaktır. Komut satırı arayüzünden (pivx-cli);  &lt;i&gt;getstakingstatus&lt;/i&gt; komutunu çalıştırarak staking'in etkin olduğunu onaylayabilirsiniz.
+                           Staking durumunu kontrol etmek için fare imlecini cüzdanın sol üst kısmındaki paket ikonu üzerinde tuttuğunuzda görebilirsiniz. Yaptığını göstermek için paket ikonunun ışığı yanacak ve "Staking aktif" yazacaktır. Komut satırı arayüzünden (bitcloud-cli);  &lt;i&gt;getstakingstatus&lt;/i&gt; komutunu çalıştırarak staking'in etkin olduğunu onaylayabilirsiniz.
                            &lt;/li&gt;&lt;/ol&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            zBTDX Staking yapabilmek için:
@@ -4403,7 +4403,7 @@ zBTDX Protokolü ile anonimleştirilmiş olacaktır.
                            &lt;ol&gt;&lt;li&gt;
                            Cüzdanınızı tamamen senkronize olduğundan ve son versiyonu kullandığınızdan emin olun.
                            &lt;li&gt;
-                           En az 200 onay almış yeni oluşturulmuş veya eskiden bulunan zPIVX bakiyeniz olmaldır.
+                           En az 200 onay almış yeni oluşturulmuş veya eskiden bulunan zBTDX bakiyeniz olmaldır.
                            &lt;li&gt;
                            Cüzdanınız online olmalı, stake ve anonimleştirme işlemleri için kilidini açılmış olmalıdır.
                            Bu adımlar tamamlanmışsa staking çalışıyor olmalıdır.
@@ -6198,7 +6198,7 @@ Hoşgeldiniz</translation>
     </message>
 </context>
 <context>
-    <name>pivx-core</name>
+    <name>bitcloud-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = tx meta verileri, örneğin hesap sahibi ve ödeme talebi bilgileri, 2 = tx meta verileri bırak)</translation>
@@ -6892,8 +6892,8 @@ Hoşgeldiniz</translation>
 </translation>
     </message>
     <message>
-        <source>Disable all Bitcloud specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
-        <translation>Bitcloud spesifik tüm fonksiyonaliteyi devre dışı bırak (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, varsayılan: %u)</translation>
+        <source>Disable all PIVX & Bitcloud specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
+        <translation>PIVX & Bitcloud spesifik tüm fonksiyonaliteyi devre dışı bırak (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, varsayılan: %u)</translation>
     </message>
     <message>
         <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>

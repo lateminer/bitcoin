@@ -3074,7 +3074,7 @@ bool RecalculatePIVSupply(int nHeightStart)
 
 bool ReindexAccumulators(std::list<uint256>& listMissingCheckpoints, std::string& strError)
 {
-    // PIVX: recalculate Accumulator Checkpoints that failed to database properly
+    // PIVX & Bitcloud: recalculate Accumulator Checkpoints that failed to database properly
     if (!listMissingCheckpoints.empty()) {
         uiInterface.ShowProgress(_("Calculating missing accumulators..."), 0);
         LogPrintf("%s : finding missing checkpoints\n", __func__);
@@ -4528,7 +4528,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
                 nHeight = (*mi).second->nHeight + 1;
         }
 
-        // PIVX
+        // PIVX & Bitcloud
         // It is entierly possible that we don't have enough data and this could fail
         // (i.e. the block could indeed be valid). Store the block for later consideration
         // but issue an initial reject message.
@@ -6342,7 +6342,7 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
             return true;
         }
 
-        // PIVX: We use certain sporks during IBD, so check to see if they are
+        // PIVX & Bitcloud: We use certain sporks during IBD, so check to see if they are
         // available. If not, ask the first peer connected for them.
         // TODO: Move this to an instant broadcast of the sporks.
         bool fMissingSporks = !pSporkDB->SporkExists(SPORK_14_NEW_PROTOCOL_ENFORCEMENT) ||

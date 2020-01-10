@@ -2036,8 +2036,8 @@ Are you sure?</source>
         <translation>Los datos analizados son demasiado grandes</translation>
     </message>
     <message>
-        <source>Invalid URI, not starting with "pivx" prefix</source>
-        <translation>URI inválido, no empezar con el prefijo "pivx"</translation>
+        <source>Invalid URI, not starting with "bitcloud" prefix</source>
+        <translation>URI inválido, no empezar con el prefijo "bitcloud"</translation>
     </message>
 </context>
 <context>
@@ -4345,7 +4345,7 @@ Si quieres más zBTDX necesitarás acuñar tu saldo en la pestaña "Privacidad".
                            &lt;li&gt;
                            Once all those steps are followed staking should be enabled.
                            &lt;li&gt;
-                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (pivx-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
+                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (bitcloud-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
                            &lt;/li&gt;&lt;/ol&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            To Stake zBTDX:
@@ -4372,7 +4372,7 @@ Asegúrate de que tu billetera esté completamente sincronizada y de que esté u
 &lt;li&gt;
 Una vez que se siguen todos estos pasos, se debe habilitar el stake.
 &lt;li&gt;
- Puedes ver el estado del stake en la billetera pasando el ratón sobre el icono del paquete en la fila de la parte superior izquierda de la interfaz de la billetera. El paquete se iluminará y mostrará el mensaje "Stake Activado" para indicar que está hecho el stake. Usando la interfaz de línea de comandos (pivx-cli); el comando &lt;i&gt;getstakingstatus&lt;/i&gt; confirmará que el stake está activo.
+ Puedes ver el estado del stake en la billetera pasando el ratón sobre el icono del paquete en la fila de la parte superior izquierda de la interfaz de la billetera. El paquete se iluminará y mostrará el mensaje "Stake Activado" para indicar que está hecho el stake. Usando la interfaz de línea de comandos (bitcloud-cli); el comando &lt;i&gt;getstakingstatus&lt;/i&gt; confirmará que el stake está activo.
 &lt;/li&gt;&lt;/ol&gt;
 &lt;/p&gt;&lt;p align="justify"&gt;
 Para hacer stake zBTDX:
@@ -6827,8 +6827,8 @@ Bitcloud Core Wallet</translation>
 </translation>
     </message>
     <message>
-        <source>Disable all Bitcloud specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
-        <translation>Desabilitar toda la funcionalidad especifica Bitcloud (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, predeterminado: %u)</translation>
+        <source>Disable all PIVX & Bitcloud specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
+        <translation>Desabilitar toda la funcionalidad especifica PIVX & Bitcloud (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, predeterminado: %u)</translation>
     </message>
     <message>
         <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>

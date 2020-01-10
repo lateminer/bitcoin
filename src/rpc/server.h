@@ -129,7 +129,7 @@ public:
 };
 
 /**
- * PIVX RPC command dispatcher.
+ * Bitcloud RPC command dispatcher.
  */
 class CRPCTable
 {

@@ -2521,7 +2521,7 @@ Are you sure?</source>
     </message>
     <message>
         <location line="+6"/>
-        <source>Invalid URI, not starting with &quot;pivx&quot; prefix</source>
+        <source>Invalid URI, not starting with &quot;bitcloud&quot; prefix</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8520,7 +8520,7 @@ Bitcloud Core Wallet</source>
     </message>
     <message>
         <location line="+38"/>
-        <source>Disable all Bitcloud specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
+        <source>Disable all PIVX & Bitcloud specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

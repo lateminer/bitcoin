@@ -19,8 +19,8 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "PIVX"
-            VALUE "FileDescription",    "Bitcloud Core (OSS GUI client for PIVX)"
+            VALUE "CompanyName",        "Bitcloud"
+            VALUE "FileDescription",    "Bitcloud Core (OSS GUI client for Bitcloud)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "bitcloud-qt"
             VALUE "LegalCopyright",     COPYRIGHT_STR

@@ -11,7 +11,7 @@
 
 /**
  * CBaseChainParams defines the base parameters (shared between bitcloud-cli and bitcloudd)
- * of a given instance of the Pivx system.
+ * of a given instance of the Bitcloud system.
  */
 class CBaseChainParams
 {

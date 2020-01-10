@@ -577,7 +577,7 @@ UniValue CreateColdStakeDelegation(const UniValue& params, CWalletTx& wtxNew, CR
     CBitcoinAddress stakeAddr(params[0].get_str());
     CKeyID stakeKey;
     if (!stakeAddr.IsValid() || !stakeAddr.IsStakingAddress())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid PIVX staking address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Bitcloud staking address");
     if (!stakeAddr.GetKeyID(stakeKey))
         throw JSONRPCError(RPC_WALLET_ERROR, "Unable to get stake pubkey hash from stakingaddress");
 
@@ -607,7 +607,7 @@ UniValue CreateColdStakeDelegation(const UniValue& params, CWalletTx& wtxNew, CR
         // Address provided
         ownerAddr.SetString(params[2].get_str());
         if (!ownerAddr.IsValid() || ownerAddr.IsStakingAddress())
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid PIVX spending address");
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Bitcloud spending address");
         if (!ownerAddr.GetKeyID(ownerKey))
             throw JSONRPCError(RPC_WALLET_ERROR, "Unable to get spend pubkey hash from owneraddress");
         // Check that the owner address belongs to this wallet, or fForceExternalAddr is true
@@ -655,7 +655,7 @@ UniValue delegatestake(const UniValue& params, bool fHelp)
             HelpRequiringPassphrase() + "\n"
 
             "\nArguments:\n"
-            "1. \"stakingaddress\"      (string, required) The pivx staking address to delegate.\n"
+            "1. \"stakingaddress\"      (string, required) The bitcloud staking address to delegate.\n"
             "2. \"amount\"              (numeric, required) The amount in BTDX to delegate for staking. eg 100\n"
             "3. \"owneraddress\"        (string, optional) The bitcloud address corresponding to the key that will be able to spend the stake. \n"
             "                               If not provided, or empty string, a new wallet address is generated.\n"
@@ -699,7 +699,7 @@ UniValue rawdelegatestake(const UniValue& params, bool fHelp)
             HelpRequiringPassphrase() + "\n"
 
             "\nArguments:\n"
-            "1. \"stakingaddress\"      (string, required) The pivx staking address to delegate.\n"
+            "1. \"stakingaddress\"      (string, required) The bitcloud staking address to delegate.\n"
             "2. \"amount\"              (numeric, required) The amount in BTDX to delegate for staking. eg 100\n"
             "3. \"owneraddress\"        (string, optional) The bitcloud address corresponding to the key that will be able to spend the stake. \n"
             "                               If not provided, or empty string, a new wallet address is generated.\n"
@@ -2506,7 +2506,7 @@ UniValue encryptwallet(const UniValue& params, bool fHelp)
     // slack space in .dat files; that is bad if the old data is
     // unencrypted private keys. So:
     StartShutdown();
-    return "wallet encrypted; pivx server stopping, restart to run with encrypted wallet. The keypool has been flushed, you need to make a new backup.";
+    return "wallet encrypted; bitcloud server stopping, restart to run with encrypted wallet. The keypool has been flushed, you need to make a new backup.";
 }
 
 UniValue lockunspent(const UniValue& params, bool fHelp)

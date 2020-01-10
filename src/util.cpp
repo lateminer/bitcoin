@@ -85,7 +85,7 @@
 #include <openssl/rand.h>
 
 
-// PIVX only features
+// PIVX & Bitcloud only features
 // Masternode
 bool fMasterNode = false;
 std::string strMasterNodePrivKey = "";

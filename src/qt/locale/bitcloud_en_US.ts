@@ -3930,8 +3930,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</translation>
     </message>
     <message>
-        <source>Disable all Bitcloud specific functionality (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, default: %u)</source>
-        <translation>Disable all Bitcloud specific functionality (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, default: %u)</translation>
+        <source>Disable all PIVX & Bitcloud specific functionality (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, default: %u)</source>
+        <translation>Disable all PIVX & Bitcloud specific functionality (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, default: %u)</translation>
     </message>
     <message>
         <source>Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</source>

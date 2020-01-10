@@ -2042,8 +2042,8 @@ Sei sicuro?</translation>
         <translation>Dati analizzati troppo grandi</translation>
     </message>
     <message>
-        <source>Invalid URI, not starting with "pivx" prefix</source>
-        <translation>URI non valido, che non inizia con il prefisso "pivx"</translation>
+        <source>Invalid URI, not starting with "bitcloud" prefix</source>
+        <translation>URI non valido, che non inizia con il prefisso "bitcloud"</translation>
     </message>
 </context>
 <context>
@@ -4374,7 +4374,7 @@ Se desideri più zBTDX, dovrai forgiare il saldo nella scheda "Privacy".
                            &lt;li&gt;
                            Once all those steps are followed staking should be enabled.
                            &lt;li&gt;
-                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (pivx-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
+                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (bitcloud-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
                            &lt;/li&gt;&lt;/ol&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            To Stake zBTDX:
@@ -4402,7 +4402,7 @@ Se desideri più zBTDX, dovrai forgiare il saldo nella scheda "Privacy".
                            &lt;li&gt;
                            Una volta seguiti tutti questi passaggi, è necessario abilitare lo staking.
                            &lt;li&gt;
-                           Puoi vedere lo stato dello staking nel portafoglio spostando il mouse sull'icona del pacchetto nella riga in alto a sinistra dell'interfaccia del portafoglio. Il pacchetto verrà illuminato e indicherà "Staking Enabled" per indicare che sta effettuando lo staking. Utilizzando l'interfaccia della riga di comando (pivx-cli); il comando&lt;i&gt;getstakingstatus&lt;/i&gt; confermerà che lo staking é attivo.
+                           Puoi vedere lo stato dello staking nel portafoglio spostando il mouse sull'icona del pacchetto nella riga in alto a sinistra dell'interfaccia del portafoglio. Il pacchetto verrà illuminato e indicherà "Staking Enabled" per indicare che sta effettuando lo staking. Utilizzando l'interfaccia della riga di comando (bitcloud-cli); il comando&lt;i&gt;getstakingstatus&lt;/i&gt; confermerà che lo staking é attivo.
                            &lt;/li&gt;&lt;/ol&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            Per fare Staking zBTDX:
@@ -6205,7 +6205,7 @@ Portafoglio Bitcloud Core.</translation>
     </message>
 </context>
 <context>
-    <name>pivx-core</name>
+    <name>bitcloud-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = conserva i metadati tx, ad esempio il proprietario dell'account e le informazioni sulla richiesta di pagamento, 2 = elimina i metadati tx)</translation>
@@ -6899,8 +6899,8 @@ Portafoglio Bitcloud Core.</translation>
 </translation>
     </message>
     <message>
-        <source>Disable all Bitcloud specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
-        <translation>Disabilita tutte le funzionalità specifiche di Bitcloud (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</translation>
+        <source>Disable all PIVX & Bitcloud specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
+        <translation>Disabilita tutte le funzionalità specifiche di PIVX & Bitcloud (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</translation>
     </message>
     <message>
         <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>

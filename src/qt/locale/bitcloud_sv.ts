@@ -4888,8 +4888,8 @@ Var vänlig kontrollera adressen och försök igen.</translation>
 </translation>
     </message>
     <message>
-        <source>Disable all Bitcloud specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
-        <translation>Avaktivera all Bitcloud funktionalitet (Huvudnoder, Zerocoin, SwiftX, Budgeting) (0-1, standard: %u)</translation>
+        <source>Disable all PIVX & Bitcloud specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
+        <translation>Avaktivera all PIVX & Bitcloud funktionalitet (Huvudnoder, Zerocoin, SwiftX, Budgeting) (0-1, standard: %u)</translation>
     </message>
     <message>
         <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>

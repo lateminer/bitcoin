@@ -636,7 +636,7 @@ bool ProcessBlockFound(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
     {
         WaitableLock lock(g_best_block_mutex);
         if (pblock->hashPrevBlock != g_best_block)
-            return error("PIVXMiner : generated block is stale");
+            return error("BitcloudMiner : generated block is stale");
     }
 
     // Remove key from key pool
@@ -658,7 +658,7 @@ bool ProcessBlockFound(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
             pwalletMain->zpivTracker->RemovePending(pblock->vtx[1].GetHash());
             pwalletMain->zpivTracker->ListMints(true, true, true); //update the state
         }
-        return error("PIVXMiner : ProcessNewBlock, block not accepted");
+        return error("BitcloudMiner : ProcessNewBlock, block not accepted");
     }
 
     for (CNode* node : vNodes) {

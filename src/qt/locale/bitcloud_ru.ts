@@ -2040,8 +2040,8 @@ Are you sure?</source>
         <translation>Проанализированные данные слишком большие</translation>
     </message>
     <message>
-        <source>Invalid URI, not starting with "pivx" prefix</source>
-        <translation>Неверный URI, не начинается с префикса "pivx"</translation>
+        <source>Invalid URI, not starting with "bitcloud" prefix</source>
+        <translation>Неверный URI, не начинается с префикса "bitcloud"</translation>
     </message>
 </context>
 <context>
@@ -4363,7 +4363,7 @@ zBTDX можно потратить и отправить на любой адр
                            &lt;li&gt;
                            Once all those steps are followed staking should be enabled.
                            &lt;li&gt;
-                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (pivx-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
+                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (bitcloud-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
                            &lt;/li&gt;&lt;/ol&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            To Stake zBTDX:
@@ -4389,7 +4389,7 @@ zBTDX можно потратить и отправить на любой адр
 &lt;li&gt;
 После того, как все эти шаги будут выполнены, следует включить стекинг.
 &lt;li&gt;
-Вы можете увидеть статус стекинга в кошельке, наведя курсор на соответствующий значок в строке в левом верхнем углу интерфейса кошелька. Там будет подсвечен значек, в котором будет указано «Стекинг включен», а это значит, что делает стекинг запущен. Использование интерфейса командной строки (pivx-cli); команда getstakingstatus подтвердит, что стекинг активен. Чтобы запустить стекинг zBTDX: убедитесь, что ваш кошелек полностью синхронизирован и вы используете последнюю версию. Ваш недавно отчеканенный или существующий баланс zBTDX должен иметь, как минимум, 200 подтверждений. Ваш кошелек должен оставаться в сети и быть разблокированным для анонимизации и стекинга. Стекинг будет включен.</translation>
+Вы можете увидеть статус стекинга в кошельке, наведя курсор на соответствующий значок в строке в левом верхнем углу интерфейса кошелька. Там будет подсвечен значек, в котором будет указано «Стекинг включен», а это значит, что делает стекинг запущен. Использование интерфейса командной строки (bitcloud-cli); команда getstakingstatus подтвердит, что стекинг активен. Чтобы запустить стекинг zBTDX: убедитесь, что ваш кошелек полностью синхронизирован и вы используете последнюю версию. Ваш недавно отчеканенный или существующий баланс zBTDX должен иметь, как минимум, 200 подтверждений. Ваш кошелек должен оставаться в сети и быть разблокированным для анонимизации и стекинга. Стекинг будет включен.</translation>
     </message>
     <message>
         <source>8</source>
@@ -6821,8 +6821,8 @@ Bitcloud Core Wallet</source>
 </translation>
     </message>
     <message>
-        <source>Disable all Bitcloud specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
-        <translation>Отключите все специфические функции Bitcloud (Masternodes, Zerocoin, SwiftX, Бюджетирование) (0-1, по умолчанию: %u)</translation>
+        <source>Disable all PIVX & Bitcloud specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
+        <translation>Отключите все специфические функции PIVX & Bitcloud (Masternodes, Zerocoin, SwiftX, Бюджетирование) (0-1, по умолчанию: %u)</translation>
     </message>
     <message>
         <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>

@@ -8,7 +8,7 @@
 #else
 #define UNUSED
 #endif
-static const char UNUSED *pivx_strings[] = {
+static const char UNUSED *bitcloud_strings[] = {
 QT_TRANSLATE_NOOP("bitcloud-core", " mints deleted\n"),
 QT_TRANSLATE_NOOP("bitcloud-core", " mints updated, "),
 QT_TRANSLATE_NOOP("bitcloud-core", " unconfirmed transactions removed\n"),
@@ -50,7 +50,7 @@ QT_TRANSLATE_NOOP("bitcloud-core", ""
 "Delete all zerocoin spends and mints that have been recorded to the "
 "blockchain database and reindex them (0-1, default: %u)"),
 QT_TRANSLATE_NOOP("bitcloud-core", ""
-"Disable all PIVX specific functionality (Masternodes, Zerocoin, SwiftX, "
+"Disable all PIVX & Bitcloud specific functionality (Masternodes, Zerocoin, SwiftX, "
 "Budgeting) (0-1, default: %u)"),
 QT_TRANSLATE_NOOP("bitcloud-core", ""
 "Distributed under the MIT software license, see the accompanying file "
@@ -229,7 +229,7 @@ QT_TRANSLATE_NOOP("bitcloud-core", ""
 "pay if you send a transaction."),
 QT_TRANSLATE_NOOP("bitcloud-core", ""
 "Warning: Peers are being disconnected due time differences. Please check "
-"that your computer's date and time are correct! If your clock is wrong PIVX "
+"that your computer's date and time are correct! If your clock is wrong Bitcloud "
 "Core will not work properly."),
 QT_TRANSLATE_NOOP("bitcloud-core", ""
 "Warning: Please check that your computer's date and time are correct! If "
