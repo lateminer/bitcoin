@@ -142,10 +142,8 @@ bool GetCoinAge(CTransaction& tx, uint64_t& nCoinAge)
 unsigned int GetStakeEntropyBit(const CBlock& block)
 {
     unsigned int nEntropyBit = ((UintToArith256(block.GetHash()).GetLow64()) & 1llu);
-    // old protocol for entropy bit pre v0.4
 	if (fDebug)
-        uint160 hashSig = Hash160(block.vchBlockSig);
-	LogPrintf("GetStakeEntropyBit: nTime=%u hashBlock=%s nEntropyBit=%u\n", block.nTime, block.GetHash().ToString().c_str(), nEntropyBit);
+        LogPrintf("GetStakeEntropyBit: nTime=%u hashBlock=%s nEntropyBit=%u\n", block.nTime, block.GetHash().ToString().c_str(), nEntropyBit);
 
     /*
     unsigned int nEntropyBit = 0;
