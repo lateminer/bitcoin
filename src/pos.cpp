@@ -138,6 +138,38 @@ bool GetCoinAge(CTransaction& tx, uint64_t& nCoinAge)
     return true;
 }
 
+// entropy bit for stake modifier if chosen by modifier
+unsigned int GetStakeEntropyBit(const CBlock& block)
+{
+    unsigned int nEntropyBit = ((UintToArith256(block.GetHash()).GetLow64()) & 1llu);
+    // old protocol for entropy bit pre v0.4
+	if (fDebug)
+        uint160 hashSig = Hash160(block.vchBlockSig);
+	LogPrintf("GetStakeEntropyBit: nTime=%u hashBlock=%s nEntropyBit=%u\n", block.nTime, block.GetHash().ToString().c_str(), nEntropyBit);
+
+    /*
+    unsigned int nEntropyBit = 0;
+    if (IsProtocolV04(block.nTime))
+    {
+        nEntropyBit = UintToArith256(block.GetHash()).GetLow64() & 1llu;// last bit of block hash
+        if (gArgs.GetBoolArg("-printstakemodifier", false))
+            LogPrintf("GetStakeEntropyBit(v0.4+): nTime=%u hashBlock=%s entropybit=%d\n", block.nTime, block.GetHash().ToString(), nEntropyBit);
+    }
+    else
+    {
+        // old protocol for entropy bit pre v0.4
+        uint160 hashSig = Hash160(block.vchBlockSig);
+        if (gArgs.GetBoolArg("-printstakemodifier", false))
+            LogPrintf("GetStakeEntropyBit(v0.3): nTime=%u hashSig=%s", block.nTime, hashSig.ToString());
+        nEntropyBit = hashSig.GetDataPtr()[4] >> 31;  // take the first bit of the hash
+        if (gArgs.GetBoolArg("-printstakemodifier", false))
+            LogPrintf(" entropybit=%d\n", nEntropyBit);
+    }
+    */
+
+    return nEntropyBit;
+}
+
 // Get the last stake modifier and its generation time from a given block
 static bool GetLastStakeModifier(const CBlockIndex* pindex, uint64_t& nStakeModifier, int64_t& nModifierTime)
 {

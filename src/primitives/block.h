@@ -71,12 +71,6 @@ public:
         return (int64_t)nTime;
     }
 
-    unsigned int GetStakeEntropyBit() const
-    {
-        // Take last bit of block hash as entropy bit
-        unsigned int nEntropyBit = ((UintToArith256(GetHash()).GetLow64()) & 1llu);
-        return nEntropyBit;
-    }
 };
 
 
@@ -123,17 +117,6 @@ public:
         fChecked = false;
     }
 
-    // two types of block: proof-of-work or proof-of-stake
-    bool IsProofOfStake() const
-    {
-        return (vtx.size() > 1 && vtx[1].IsCoinStake());
-    }
-
-    bool IsProofOfWork() const
-    {
-        return !IsProofOfStake();
-    }
-
     CBlockHeader GetBlockHeader() const
     {
         CBlockHeader block;
@@ -145,6 +128,19 @@ public:
         block.nNonce         = nNonce;
         return block;
     }
+    
+    // two types of block: proof-of-work or proof-of-stake
+    bool IsProofOfStake() const
+    {
+        return (vtx.size() > 1 && vtx[1].IsCoinStake());
+    }
+
+    bool IsProofOfWork() const
+    {
+        return !IsProofOfStake();
+    }
+
+    unsigned int GetStakeEntropyBit() const; // entropy bit for stake modifier if chosen by modifier
 
     std::string ToString() const;
 };

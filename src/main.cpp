@@ -2467,6 +2467,9 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     if (!chainparams.GetConsensus().IsProtocolV3(block.GetBlockTime()))
         hashProofOfStake = uint256();
 
+    // peercoin: compute stake entropy bit for stake modifier
+    unsigned int nEntropyBit = GetStakeEntropyBit(block);
+
     // peercoin: compute stake modifier
     uint64_t nStakeModifier = 0;
     bool fGeneratedStakeModifier = false;
@@ -2474,7 +2477,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         return state.DoS(1, error("ConnectBlock() : ComputeNextStakeModifier() failed"), REJECT_INVALID, "bad-stake-modifier");
 
     // set necessary pindex fields
-    if (!pindex->SetStakeEntropyBit(block.GetStakeEntropyBit()))
+    if (!pindex->SetStakeEntropyBit(nEntropyBit))
         return state.DoS(1, error("ConnectBlock() : SetStakeEntropyBit() failed"), REJECT_INVALID, "bad-entropy-bit");
     pindex->SetStakeModifier(nStakeModifier, fGeneratedStakeModifier);
     pindex->nStakeModifierV2 = ComputeStakeModifierV2(pindex->pprev, block.IsProofOfStake() ? block.vtx[1].vin[0].prevout.hash : block.GetHash());
