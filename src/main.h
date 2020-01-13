@@ -282,7 +282,7 @@ bool GetTransaction(const uint256 &hash, CTransaction &tx, const Consensus::Para
 /** Find the best known block, and make it the tip of the block chain */
 bool ActivateBestChain(CValidationState& state, const CChainParams& chainparams, const CBlock* pblock = NULL);
 CAmount GetProofOfWorkSubsidy(int nHeight, const Consensus::Params& consensusParams);
-CAmount GetProofOfStakeSubsidy(int nHeight, int64_t nCoinAge, int64_t nFees, bool IsStaticRewardEnabled);
+CAmount GetProofOfStakeSubsidy(CBlockIndex* pindexPrev, int64_t nCoinAge, int64_t nFees);
 
 /**
  * Prune block and undo files (blk???.dat and undo???.dat) so that the disk space used is less than a user-defined target.
@@ -483,7 +483,7 @@ bool DisconnectBlock(const CBlock& block, CValidationState& state, const CBlockI
 
 /** Proof-of-stake checks */
 bool CheckStake(CBlock* pblock, CWallet& wallet, const CChainParams& chainparams);
-bool SignBlock(CBlock& block, CWallet& wallet, int64_t& nFees);
+bool SignBlock(CBlock& block, CWallet& wallet, int64_t nFees);
 
 /** Check a block is completely valid from start to finish (only works on top of our current best block, with cs_main held) */
 bool TestBlockValidity(CValidationState& state, const CChainParams& chainparams, const CBlock& block, CBlockIndex* pindexPrev, bool fCheckPOW = true, bool fCheckMerkleRoot = true, bool fCheckSig = true);

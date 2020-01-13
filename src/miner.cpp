@@ -72,7 +72,7 @@ int64_t UpdateTime(CBlock* pblock, const Consensus::Params& consensusParams, con
 
     // Updating time can change work required on testnet:
     if (consensusParams.fPowAllowMinDifficultyBlocks)
-        pblock->nBits =  GetNextTargetRequired(pindexPrev, pblock, consensusParams, pblock->IsProofOfStake());
+        pblock->nBits = GetNextTargetRequired(pindexPrev, pblock, consensusParams, pblock->IsProofOfStake());
 
     return nNewTime - nOldTime;
 }
@@ -173,21 +173,18 @@ CBlockTemplate* BlockAssembler::CreateNewBlock(const CScript& scriptPubKeyIn, in
     pblock->vtx[0] = coinbaseTx;
     pblocktemplate->vTxFees[0] = -nFees;
 
-    /*
     LogPrintf("CreateNewBlock(): total size %u txs: %u fees: %ld sigops %d\n", nBlockSize, nBlockTx, nFees, nBlockSigOps);
-    */
 
     if (pFees)
         *pFees = nFees;
 
     // Fill in header
-    pblock->hashPrevBlock  = pindexPrev->GetBlockHash();
-    pblock->nTime = max(pindexPrev->GetPastTimeLimit()+1, GetMaxTransactionTime(pblock));
-    // Potcoin: only for PoW and PoSV
-    if (!chainparams.GetConsensus().IsProtocolV3(pblock->GetBlockTime())) {
-        pblock->nTime = max(pblock->GetBlockTime(), PastDrift(pindexPrev->GetBlockTime()));
+    pblock->hashPrevBlock = pindexPrev->GetBlockHash();
+    // Potcoin
+    if (chainparams.GetConsensus().IsProtocolV3(pblock->GetBlockTime()))
+        pblock->nTime = max(pindexPrev->GetPastTimeLimit()+1, GetMaxTransactionTime(pblock)); 
+    else
         UpdateTime(pblock, chainparams.GetConsensus(), pindexPrev);
-    }
     pblock->nBits          = GetNextTargetRequired(pindexPrev, pblock, chainparams.GetConsensus(), fProofOfStake);
     pblock->nNonce         = 0;
     pblocktemplate->vTxSigOpsCost[0] = GetSigOpCountWithoutP2SH(pblock->vtx[0]);

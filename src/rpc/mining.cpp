@@ -267,8 +267,6 @@ UniValue getstakinginfo(const UniValue& params, bool fHelp)
             "Returns an object containing staking-related information.");
 
     uint64_t nWeight = 0;
-    uint64_t nNetworkWeight = 0;
-    uint64_t nExpectedTime = 0;
     const Consensus::Params& consensusParams = Params().GetConsensus();
 
 #ifdef ENABLE_WALLET
@@ -276,15 +274,9 @@ UniValue getstakinginfo(const UniValue& params, bool fHelp)
         nWeight = pwalletMain->GetStakeWeight();
 #endif
 
+    uint64_t nNetworkWeight = consensusParams.IsProtocolV3(chainActive.Tip()->GetBlockTime()) ? GetPoSKernelPS() : GetPoSVKernelPS();
     bool staking = nLastCoinStakeSearchInterval && nWeight;
-
-    if (consensusParams.IsProtocolV3(chainActive.Tip()->GetBlockTime())) {
-        nNetworkWeight = GetPoSKernelPS();
-        nExpectedTime = staking ? consensusParams.nTargetSpacingNEW * nNetworkWeight / nWeight : 0;
-    } else {
-        nNetworkWeight = GetPoSVKernelPS();
-        nExpectedTime = staking ? consensusParams.nTargetSpacing * nNetworkWeight / nWeight : 0;
-    }
+    uint64_t nExpectedTime = staking ? consensusParams.GetTargetSpacing(chainActive.Tip()->GetBlockTime()) * nNetworkWeight / nWeight : 0;
 
     UniValue obj(UniValue::VOBJ);
 
@@ -328,7 +320,7 @@ UniValue getstakesubsidy(const UniValue& params, bool fHelp)
     if (!GetCoinAge(tx, nCoinAge))
         throw JSONRPCError(RPC_MISC_ERROR, "GetCoinAge failed");
 
-    return (uint64_t)GetProofOfStakeSubsidy(pindexBestHeader->nHeight, nCoinAge, 0, pindexBestHeader);
+    return (uint64_t)GetProofOfStakeSubsidy(pindexBestHeader, nCoinAge, 0);
 } 
 
 // NOTE: Unlike wallet RPC (which use BTC values), mining RPCs follow GBT (BIP 22) in using satoshi amounts

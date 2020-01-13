@@ -108,15 +108,21 @@ bool GetCoinAge(CTransaction& tx, uint64_t& nCoinAge)
 
         CBlockIndex* pblockindex = mapBlockIndex[hashBlock];
 
-        if (pblockindex->nTime + params.nStakeMinAge > tx.nTime)
-            continue; // only count coins meeting min age requirement
-
         // deal with missing timestamps in PoW blocks
         if (txPrev.nTime == 0)
             txPrev.nTime = pblockindex->nTime;
 
         if (tx.nTime < txPrev.nTime)
-            return false;  // Transaction timestamp violation
+            return false; // Transaction timestamp violation
+
+        // Check minimum age requirement
+        if (params.IsProtocolV3(tx.nTime)) {
+            if (chainActive.Tip()->nHeight - pblockindex->nHeight < params.nCoinbaseMaturity)
+                continue; // only count coins meeting min age requirement
+        } else {
+            if (pblockindex->nTime + params.nStakeMinAge > tx.nTime)
+                continue; // only count coins meeting min age requirement
+        }
 
         int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
         int64_t nTimeWeight = GetCoinAgeWeight(txPrev.nTime, tx.nTime);
@@ -130,6 +136,36 @@ bool GetCoinAge(CTransaction& tx, uint64_t& nCoinAge)
     nCoinAge = bnCoinDay.GetLow64();
 
     return true;
+}
+
+// entropy bit for stake modifier if chosen by modifier
+unsigned int GetStakeEntropyBit(const CBlock& block)
+{
+    unsigned int nEntropyBit = ((UintToArith256(block.GetHash()).GetLow64()) & 1llu);
+	if (fDebug)
+        LogPrintf("GetStakeEntropyBit: nTime=%u hashBlock=%s nEntropyBit=%u\n", block.nTime, block.GetHash().ToString().c_str(), nEntropyBit);
+
+    /*
+    unsigned int nEntropyBit = 0;
+    if (IsProtocolV04(block.nTime))
+    {
+        nEntropyBit = UintToArith256(block.GetHash()).GetLow64() & 1llu;// last bit of block hash
+        if (gArgs.GetBoolArg("-printstakemodifier", false))
+            LogPrintf("GetStakeEntropyBit(v0.4+): nTime=%u hashBlock=%s entropybit=%d\n", block.nTime, block.GetHash().ToString(), nEntropyBit);
+    }
+    else
+    {
+        // old protocol for entropy bit pre v0.4
+        uint160 hashSig = Hash160(block.vchBlockSig);
+        if (gArgs.GetBoolArg("-printstakemodifier", false))
+            LogPrintf("GetStakeEntropyBit(v0.3): nTime=%u hashSig=%s", block.nTime, hashSig.ToString());
+        nEntropyBit = hashSig.GetDataPtr()[4] >> 31;  // take the first bit of the hash
+        if (gArgs.GetBoolArg("-printstakemodifier", false))
+            LogPrintf(" entropybit=%d\n", nEntropyBit);
+    }
+    */
+
+    return nEntropyBit;
 }
 
 // Get the last stake modifier and its generation time from a given block
@@ -253,7 +289,7 @@ bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeMod
 
     // Sort candidate blocks by timestamp
     vector<pair<int64_t, uint256> > vSortedByTimestamp;
-    vSortedByTimestamp.reserve(64 * params.nModifierInterval / params.nTargetSpacing);
+    vSortedByTimestamp.reserve(64 * params.nModifierInterval / params.GetTargetSpacing(pindexPrev->GetBlockTime()));
     int64_t nSelectionInterval = GetStakeModifierSelectionInterval();
     int64_t nSelectionIntervalStart = (pindexPrev->GetBlockTime() / params.nModifierInterval) * params.nModifierInterval - nSelectionInterval;
     const CBlockIndex* pindex = pindexPrev;
@@ -612,20 +648,24 @@ bool CheckProofOfStake(CBlockIndex* pindexPrev, const CTransaction& tx, unsigned
         if (txPrev.GetHash() != txin.prevout.hash)
             return error("%s() : txid mismatch in CheckProofOfStake()", __PRETTY_FUNCTION__);
     }
+    
+    // Try finding the previous transaction in database
+    uint256 hashBlock = uint256();
+    CTransaction txPrevDummy;
+    if (!GetTransaction(txin.prevout.hash, txPrevDummy, params, hashBlock, true))
+        return state.DoS(100, error("CheckProofOfStake() : read txPrev failed")); // previous transaction not in main chain, may occur during initial download
+    if (mapBlockIndex.count(hashBlock) == 0)
+        return state.DoS(100, error("CheckProofOfStake() : read block failed")); // unable to read block of previous transaction
 
+    CBlockIndex* pblockindex = mapBlockIndex[hashBlock];
+
+    // Check minimum age requirement
     if (params.IsProtocolV3(tx.nTime)) {
-        // Try finding the previous transaction in database
-        uint256 hashBlock = uint256();
-        if (!GetTransaction(txin.prevout.hash, txPrev, params, hashBlock, true))
-            return state.DoS(100, error("CheckProofOfStake() : read txPrev failed")); // previous transaction not in main chain, may occur during initial download
-        if (mapBlockIndex.count(hashBlock) == 0)
-            return state.DoS(100, error("CheckProofOfStake() : read block failed")); // unable to read block of previous transaction
-
-        CBlockIndex* pblockindex = mapBlockIndex[hashBlock];
-
-        // Check minimum age requirement
         if (pindexPrev->nHeight + 1 - pblockindex->nHeight < params.nCoinbaseMaturity)
             return state.DoS(100, error("CheckProofOfStake() : stake prevout is not mature, expecting %i and only matured to %i", params.nCoinbaseMaturity, pindexPrev->nHeight + 1 - pblockindex->nHeight));
+    } else {
+        if (header.GetBlockTime() + params.nStakeMinAge > tx.nTime)
+            return state.DoS(100, error("CheckProofOfStake() : min age violation"));
     }
 
     // Verify signature
