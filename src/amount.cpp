@@ -26,7 +26,9 @@ CAmount CFeeRate::GetFee(size_t nBytes_) const
     assert(nBytes_ <= uint64_t(std::numeric_limits<int64_t>::max()));
     int64_t nSize = int64_t(nBytes_);
 
-    CAmount nFee = nSatoshisPerK * nSize / 1000;
+    // Potcoin: minimum fee
+    // int64 nMinFee = (1 + (int64)nBytes / 1000) * nBaseFee;
+    CAmount nFee = nSatoshisPerK * (1 + nSize / 1000);
 
     if (nFee == 0 && nSize != 0) {
         if (nSatoshisPerK > 0)
