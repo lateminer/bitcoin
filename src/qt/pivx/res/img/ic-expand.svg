@@ -1,16 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-    <defs>
-        <style type="text/css">
-            .cls-1{opacity:.6}.cls-2{fill:none}
-        </style>
-    </defs>
-    <g id="ic-expand" class="cls-1">
-        <g id="Group_8821" data-name="Group 8821">
-            <path id="Path_18875" d="M4 5.54l5.3 5.176 1.4-1.431L5.285 4H8V2H2v6h2z" data-name="Path 18875"/>
-            <path id="Path_18876" d="M20 18.586l-5.293-5.293-1.414 1.414L18.586 20H16v2h6v-6h-2z" data-name="Path 18876"/>
-            <path id="Path_18877" d="M9.284 13.3L4 18.715V16H2v6h6v-2H5.541l5.175-5.3z" data-name="Path 18877"/>
-            <path id="Path_18878" d="M16 2v2h2.586l-5.293 5.293 1.414 1.414L20 5.414V8h2V2z" data-name="Path 18878"/>
-        </g>
-        <path id="Rectangle_4404" d="M0 0h24v24H0z" class="cls-2" data-name="Rectangle 4404"/>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+<path id="Path_18875" d="M4,5.5L8.6,10c0.4,0.4,1,0.4,1.4,0l0,0c0.4-0.4,0.4-1,0-1.4L5.3,4H8V2H2v6h2V5.5z"/>
+<path id="Path_18876" d="M20,18.6L15.4,14c-0.4-0.4-1-0.4-1.4,0l0,0c-0.4,0.4-0.4,1,0,1.4l4.6,4.6H16v2h6v-6h-2V18.6z"/>
+<path id="Path_18877" d="M8.6,14L4,18.7V16H2v6h6v-2H5.5l4.5-4.6c0.4-0.4,0.4-1,0-1.4l0,0C9.6,13.6,9,13.6,8.6,14z"/>
+<path id="Path_18878" d="M16,2v2h2.6L14,8.6c-0.4,0.4-0.4,1,0,1.4l0,0c0.4,0.4,1,0.4,1.4,0L20,5.4V8h2V2H16z"/>
 </svg>

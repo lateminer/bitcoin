@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="40px" viewBox="0 0 24 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
-    <title>Send Off Copy</title>
-    <desc>Created with Sketch.</desc>
-    <g id="Send-Off-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="ic-send-off" transform="translate(0.000000, 11.000000)">
-            <g id="Group_8811" transform="translate(0.000000, 1.000000)" fill="#938DA5">
-                <polygon id="Path_18865" points="0.352 9.1 7.562 13.606 9.014 12.154 4.914 9.59 19.714 4.283 14.407 19.083 11.842 14.983 10.391 16.434 14.9 23.648 23.025 0.975"></polygon>
-                <g id="Group_8810" transform="translate(8.000000, 8.000000)">
-                    <polygon id="Rectangle_4394" transform="translate(3.823718, 4.176339) rotate(-45.000000) translate(-3.823718, -4.176339) " points="-0.176282346 3.17633883 7.82371765 3.17633883 7.82371765 5.17633883 -0.176282346 5.17633883"></polygon>
-                </g>
-            </g>
-            <polygon id="Rectangle_4395" points="1 0 27 0 27 26 1 26"></polygon>
-        </g>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 24 40" style="enable-background:new 0 0 24 40;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#8DB3FF;}
+</style>
+<title>Send Off Copy</title>
+<desc>Created with Sketch.</desc>
+<g>
+	<circle class="st0" cx="7.8" cy="27.8" r="5.4"/>
+	<path class="st0" d="M1.7,21.5L4,22.7l0,0c0.8-0.6,1.7-1,2.8-1.1L7,21.5c0.2,0,0.5,0,0.7,0c3.5,0,6.3,2.8,6.3,6.3
+		c0,0.3,0,0.7-0.1,1L13.8,29c-0.2,0.9-0.6,1.8-1.1,2.5l0,0l1.3,2.4l8-20.4L1.7,21.5z"/>
+</g>
 </svg>

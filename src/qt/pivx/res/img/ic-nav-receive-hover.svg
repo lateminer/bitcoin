@@ -1,10 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="40px" viewBox="0 0 24 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
-    <title>Receive off</title>
-    <desc>Created with Sketch.</desc>
-    <g id="Receive-off" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <polygon id="Path_18953" fill="#FFFFFF" points="19.178 23.734 17.822 22.265 13 26.716 13 13 11 13 11 26.716 6.178 22.266 4.822 23.734 12 30.361"></polygon>
-        <polygon id="Path_18954" fill="#FFFFFF" points="21 28 21 33 3 33 3 28 1 28 1 35 23 35 23 28"></polygon>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 24 40" style="enable-background:new 0 0 24 40;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+</style>
+<title>Receive off</title>
+<desc>Created with Sketch.</desc>
+<g id="ic-transaction-received_1_">
+	<g id="Group_8834_1_">
+		<path class="st0" d="M19.3,23.6l-7.3,6.7l-7.3-6.7L6.1,22l4.7,4.4v-4.9c0.3,0.1,0.7,0.1,1.1,0.1c0.3,0,0.8,0,1.1-0.1v5l4.7-4.4
+			L19.3,23.6z"/>
+		<path class="st0" d="M23,28.3v2.4c0,2.3-1.9,4.2-4.2,4.2H5.3c-2.3,0-4.2-1.9-4.2-4.2v-2.4h2.2v2c0,1.3,1.1,2.4,2.4,2.4h12.6
+			c1.3,0,2.4-1.1,2.4-2.4v-2H23z"/>
+	</g>
+	<path class="st0" d="M20.8,28.3v2c0,1.3-1.1,2.4-2.4,2.4H5.7c-1.3,0-2.4-1.1-2.4-2.4v-2H1.1v2.4c0,2.3,1.9,4.2,4.2,4.2h13.6
+		c2.3,0,4.2-1.9,4.2-4.2v-2.4H20.8z M19.3,23.6L17.7,22L13,26.4v-4.9c-0.3,0.1-0.8,0.1-1.1,0.1c-0.4,0-0.8,0-1.1-0.1v5l-4.7-4.4
+		l-1.5,1.6l7.3,6.7L19.3,23.6z"/>
+</g>
+<circle class="st0" cx="12" cy="16.5" r="4.1"/>
 </svg>

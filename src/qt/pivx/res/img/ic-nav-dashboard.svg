@@ -1,19 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="40px" viewBox="0 0 24 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
-    <title>Dashboard</title>
-    <desc>Created with Sketch.</desc>
-    <g id="Dashboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group" transform="translate(1.000000, 11.000000)" fill="#938DA5" fill-rule="nonzero">
-            <g id="Group_8812">
-                <path d="M10,8 L0,8 L0,0 L10,0 L10,8 Z M2,6 L8,6 L8,2 L2,2 L2,6 Z" id="Path_18866"></path>
-            </g>
-            <g id="Group_8813" transform="translate(12.000000, 0.000000)">
-                <path d="M10,22 L0,22 L0,0 L10,0 L10,22 Z M2,20 L8,20 L8,2 L2,2 L2,20 Z" id="Path_18867"></path>
-            </g>
-            <g id="Group_8814" transform="translate(0.000000, 10.000000)">
-                <path d="M10,12 L0,12 L0,0 L10,0 L10,12 Z M2,10 L8,10 L8,2 L2,2 L2,10 Z" id="Path_18868"></path>
-            </g>
-        </g>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 24 40" style="enable-background:new 0 0 24 40;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#47AFFC;}
+</style>
+<title>Dashboard</title>
+<desc>Created with Sketch.</desc>
+<title>Dashboard</title>
+<desc>Created with Sketch.</desc>
+<g id="Dashboard_1_">
+	<path id="Path_18866_1_" class="st0" d="M9.3,20.1h-7c-0.8,0-1.5-0.7-1.5-1.5v-5c0-0.8,0.7-1.5,1.5-1.5h7c0.8,0,1.5,0.7,1.5,1.5v5
+		C10.8,19.4,10.1,20.1,9.3,20.1z"/>
+	<path id="Path_18867_1_" class="st0" d="M21.3,34.1h-7c-0.8,0-1.5-0.7-1.5-1.5v-19c0-0.8,0.7-1.5,1.5-1.5h7c0.8,0,1.5,0.7,1.5,1.5
+		v19C22.8,33.4,22.1,34.1,21.3,34.1z"/>
+	<path id="Path_18868_1_" class="st0" d="M9.3,34.1h-7c-0.8,0-1.5-0.7-1.5-1.5v-9c0-0.8,0.7-1.5,1.5-1.5h7c0.8,0,1.5,0.7,1.5,1.5v9
+		C10.8,33.4,10.1,34.1,9.3,34.1z"/>
+</g>
 </svg>

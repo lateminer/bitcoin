@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="40px" viewBox="0 0 24 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
-    <title>Address</title>
-    <desc>Created with Sketch.</desc>
-    <g id="Address" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group-2" transform="translate(3.000000, 12.000000)" fill="#938DA5" fill-rule="nonzero">
-            <path d="M4,0 L0,0 L0,22 L18,22 L18,0 L4,0 Z M2,20 L2,2 L3,2 L3,20 L2,20 Z M16,20 L5,20 L5,2 L16,2 L16,20 Z" id="Path_18863"></path>
-            <path d="M15,4 L6,4 L6,10 L15,10 L15,4 Z M13,8 L8,8 L8,6 L13,6 L13,8 Z" id="Path_18864"></path>
-        </g>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 24 40" style="enable-background:new 0 0 24 40;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#4C96ED;}
+</style>
+<title>Address</title>
+<desc>Created with Sketch.</desc>
+<g id="Address_1_">
+	<g id="Group-2_1_" transform="translate(3.000000, 12.000000)">
+		<path id="Path_18863_1_" class="st0" d="M3.9-0.2H1.5c-0.9,0-1.6,0.7-1.6,1.6v18.9c0,0.9,0.7,1.6,1.6,1.6h14.9
+			c0.9,0,1.6-0.7,1.6-1.6V1.4c0-0.9-0.7-1.6-1.6-1.6H3.9z M1.9,19.8v-18h1v18H1.9z M14.4,19.8H4.9v-18h9.5c0.8,0,1.5,0.7,1.5,1.5
+			v15.1C15.9,19.2,15.2,19.8,14.4,19.8z"/>
+		<path id="Path_18864_1_" class="st0" d="M13.8,3.8H7C6.4,3.8,5.9,4.3,5.9,5v3.7c0,0.6,0.5,1.1,1.1,1.1h6.7c0.6,0,1.1-0.5,1.1-1.1
+			V5C14.9,4.3,14.4,3.8,13.8,3.8z M12.3,7.8H8.6c-0.4,0-0.7-0.3-0.7-0.7V6.5c0-0.4,0.3-0.7,0.7-0.7h3.7c0.4,0,0.7,0.3,0.7,0.7v0.7
+			C12.9,7.5,12.6,7.8,12.3,7.8z"/>
+	</g>
+</g>
 </svg>

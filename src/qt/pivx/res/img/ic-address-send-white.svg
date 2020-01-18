@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="70px" height="40px" viewBox="0 0 70 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
-    <title>Address Book Send</title>
-    <desc>Created with Sketch.</desc>
-    <g id="Address-Book-Send" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.7">
-        <g id="Group_8809" transform="translate(12.000000, 9.000000)" fill="#FFFFFF" fill-rule="nonzero">
-            <path d="M4,0 L0,0 L0,22 L18,22 L18,0 L4,0 Z M2,20 L2,2 L3,2 L3,20 L2,20 Z M16,20 L5,20 L5,2 L16,2 L16,20 Z" id="Path_18863"></path>
-            <path d="M15,4 L6,4 L6,10 L15,10 L15,4 Z M13,8 L8,8 L8,6 L13,6 L13,8 Z" id="Path_18864"></path>
-        </g>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 70 40" style="enable-background:new 0 0 70 40;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+</style>
+<title>Address Book Send</title>
+<desc>Created with Sketch.</desc>
+<g id="Address">
+	<g id="Group-2" transform="translate(3.000000, 12.000000)">
+		<path id="Path_18863_1_" class="st0" d="M13.2-2.8h-2.4c-0.9,0-1.6,0.7-1.6,1.6v18.9c0,0.9,0.7,1.6,1.6,1.6h14.9
+			c0.9,0,1.6-0.7,1.6-1.6V-1.2c0-0.9-0.7-1.6-1.6-1.6H13.2z M11.2,17.2v-18h1v18H11.2z M23.7,17.2h-9.5v-18h9.5
+			c0.8,0,1.5,0.7,1.5,1.5v15.1C25.2,16.5,24.5,17.2,23.7,17.2z"/>
+		<path id="Path_18864_1_" class="st0" d="M23,1.2h-6.7c-0.6,0-1.1,0.5-1.1,1.1v3.7c0,0.6,0.5,1.1,1.1,1.1H23c0.6,0,1.1-0.5,1.1-1.1
+			V2.3C24.2,1.7,23.7,1.2,23,1.2z M21.5,5.2h-3.7c-0.4,0-0.7-0.3-0.7-0.7V3.9c0-0.4,0.3-0.7,0.7-0.7h3.7c0.4,0,0.7,0.3,0.7,0.7v0.7
+			C22.2,4.9,21.9,5.2,21.5,5.2z"/>
+	</g>
+</g>
 </svg>

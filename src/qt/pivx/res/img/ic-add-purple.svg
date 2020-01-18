@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="30px" height="22px" viewBox="0 0 30 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
-    <title>Add purple</title>
-    <desc>Created with Sketch.</desc>
-    <g id="Add-purple" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="ic-add-purple" transform="translate(5.000000, 3.000000)">
-            <polygon id="Path_18951" fill="#5C4B7D" points="14 7 9 7 9 2 7 2 7 7 2 7 2 9 7 9 7 14 9 14 9 9 14 9"></polygon>
-            <polygon id="Rectangle_4603" points="0 0 16 0 16 16 0 16"></polygon>
-        </g>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 30 22" style="enable-background:new 0 0 30 22;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#3192DB;}
+</style>
+<title>Add purple</title>
+<desc>Created with Sketch.</desc>
+<path id="Path_18951" class="st0" d="M18,10h-4V6c0-0.6-0.4-1-1-1h0c-0.6,0-1,0.4-1,1v4H8c-0.6,0-1,0.4-1,1v0c0,0.6,0.4,1,1,1h4v4
+	c0,0.6,0.4,1,1,1h0c0.6,0,1-0.4,1-1v-4h4c0.6,0,1-0.4,1-1v0C19,10.4,18.6,10,18,10z"/>
 </svg>
