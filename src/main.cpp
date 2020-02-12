@@ -4038,16 +4038,19 @@ bool static IsCanonicalBlockSignature(const CBlock* pblock, bool checkLowS)
 
 bool ProcessNewBlock(CValidationState& state, const CChainParams& chainparams, CNode* pfrom, const CBlock* pblock, bool fForceProcessing, const CDiskBlockPos* dbp, bool fMayBanPeerIfInvalid)
 {
-    if (!IsCanonicalBlockSignature(pblock, false)) {
-        if (pfrom && pfrom->nVersion >= CANONICAL_BLOCK_SIG_VERSION)
-            return state.DoS(100, error("ProcessNewBlock(): bad block signature encoding"),
-                            REJECT_INVALID, "bad-block-signature-encoding");
-    }
+    // Potcoin: do not require canonical signatures until PoSV3
+    if (chainparams.GetConsensus().IsProtocolV3(pblock->GetBlockTime())) {
+        if (!IsCanonicalBlockSignature(pblock, false)) {
+            if (pfrom && pfrom->nVersion >= CANONICAL_BLOCK_SIG_VERSION)
+                return state.DoS(100, error("ProcessNewBlock(): bad block signature encoding"),
+                                REJECT_INVALID, "bad-block-signature-encoding");
+        }
 
-    if (!IsCanonicalBlockSignature(pblock, true)) {
-        if (pfrom && pfrom->nVersion >= CANONICAL_BLOCK_SIG_LOW_S_VERSION)
-            return state.DoS(100, error("ProcessNewBlock(): bad block signature encoding (low-s)"),
-                            REJECT_INVALID, "bad-block-signature-encoding");
+        if (!IsCanonicalBlockSignature(pblock, true)) {
+            if (pfrom && pfrom->nVersion >= CANONICAL_BLOCK_SIG_LOW_S_VERSION)
+                return state.DoS(100, error("ProcessNewBlock(): bad block signature encoding (low-s)"),
+                                REJECT_INVALID, "bad-block-signature-encoding");
+        }
     }
 
     {
