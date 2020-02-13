@@ -173,7 +173,7 @@ CBlockTemplate* BlockAssembler::CreateNewBlock(const CScript& scriptPubKeyIn, in
     pblock->vtx[0] = coinbaseTx;
     pblocktemplate->vTxFees[0] = -nFees;
 
-    LogPrintf("CreateNewBlock(): total size %u txs: %u fees: %ld sigops %d\n", nBlockSize, nBlockTx, nFees, nBlockSigOps);
+    // LogPrintf("CreateNewBlock(): total size %u txs: %u fees: %ld sigops %d\n", nBlockSize, nBlockTx, nFees, nBlockSigOps);
 
     if (pFees)
         *pFees = nFees;
