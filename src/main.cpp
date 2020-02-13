@@ -6340,11 +6340,14 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
         // PIVX & Bitcloud: We use certain sporks during IBD, so check to see if they are
         // available. If not, ask the first peer connected for them.
         // TODO: Move this to an instant broadcast of the sporks.
+
+        // BTDX
         bool fMissingSporks = !pSporkDB->SporkExists(SPORK_14_NEW_PROTOCOL_ENFORCEMENT) ||
                               !pSporkDB->SporkExists(SPORK_15_NEW_PROTOCOL_ENFORCEMENT_2) ||
                               !pSporkDB->SporkExists(SPORK_16_ZEROCOIN_MAINTENANCE_MODE) ||
                               !pSporkDB->SporkExists(SPORK_17_COLDSTAKING_ENFORCEMENT) ||
-                              !pSporkDB->SporkExists(SPORK_18_ZEROCOIN_PUBLICSPEND_V4);
+                              !pSporkDB->SporkExists(SPORK_18_ZEROCOIN_PUBLICSPEND_V4) ||
+                              !pSporkDB->SporkExists(SPORK_19_NEW_PROTOCOL_ENFORCEMENT_3);
 
         if (fMissingSporks || !fRequestedSporksIDB){
             LogPrintf("asking peer for sporks\n");
@@ -7209,6 +7212,10 @@ int ActiveProtocol()
     // SPORK_15 is used for 70918 (v4.0+)
     if (sporkManager.IsSporkActive(SPORK_15_NEW_PROTOCOL_ENFORCEMENT_2))
             return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
+
+    // BTDX
+    if (sporkManager.IsSporkActive(SPORK_19_NEW_PROTOCOL_ENFORCEMENT_3))
+            return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_NEW;
 
     return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
 }
