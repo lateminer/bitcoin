@@ -117,7 +117,7 @@ class CMainParams : public CChainParams {
 public:
     CMainParams() {
         strNetworkID = "main";
-        consensus.nMaxReorganizationDepth = 500;
+        consensus.nMaxReorganizationDepth = 60 * 4; // Potcoin, equals to nCoinbaseMaturityNEW
         consensus.nMajorityEnforceBlockUpgrade = 750;
         consensus.nMajorityRejectBlockOutdated = 950;
         consensus.nMajorityWindow = 1000;
@@ -223,7 +223,7 @@ class CTestNetParams : public CChainParams {
 public:
     CTestNetParams() {
         strNetworkID = "test";
-        consensus.nMaxReorganizationDepth = 50;
+        consensus.nMaxReorganizationDepth = 5;
         consensus.nMajorityEnforceBlockUpgrade = 75;
         consensus.nMajorityRejectBlockOutdated = 95;
         consensus.nMajorityWindow = 100;
@@ -322,7 +322,7 @@ class CRegTestParams : public CChainParams {
 public:
     CRegTestParams() {
         strNetworkID = "regtest";
-        consensus.nMaxReorganizationDepth = 50;
+        consensus.nMaxReorganizationDepth = 5;
         consensus.nMajorityEnforceBlockUpgrade = 51;
         consensus.nMajorityRejectBlockOutdated = 75;
         consensus.nMajorityWindow = 100;
