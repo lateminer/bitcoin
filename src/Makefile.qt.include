@@ -514,16 +514,16 @@ RES_ICONS = \
   qt/pivx/res/img/ic-arrow-drop-up.svg \
   qt/pivx/res/img/ic-coin-zpiv.svg \
   qt/pivx/res/img/ic-received.svg \
-  qt/pivx/res/img/img-logo-pivx.png \
+  qt/pivx/res/img/img-logo-btdx.png \
   qt/pivx/res/img/ic-arrow-drop-white-down.svg \
   qt/pivx/res/img/ic-combo-box.svg \
   qt/pivx/res/img/ic-send.svg \
-  qt/pivx/res/img/img-logo-pivx@2x.png \
+  qt/pivx/res/img/img-logo-btdx@2x.png \
   qt/pivx/res/img/ic-arrow-purple-down.svg \
   qt/pivx/res/img/ic-connect.svg \
   qt/pivx/res/img/ic-submenu-lock.svg \
-  qt/pivx/res/img/img-logo-pivx@3x.png \
-  qt/pivx/res/img/img-logo-pivx.svg \
+  qt/pivx/res/img/img-logo-btdx@3x.png \
+  qt/pivx/res/img/img-logo-btdx.svg \
   qt/pivx/res/img/ic-arrow-right-white.svg \
   qt/pivx/res/img/ic-arrow-left-white.svg \
   qt/pivx/res/img/ic-arrow-left.svg \
