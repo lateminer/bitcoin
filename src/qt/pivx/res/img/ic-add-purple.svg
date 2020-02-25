@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!-- Generator: Adobe Illustrator 24.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 30 22" style="enable-background:new 0 0 30 22;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#3192DB;}
+	.st0{fill:url(#SVGID_1_);}
+	.st1{fill:#FFFFFF;}
 </style>
 <title>Add purple</title>
 <desc>Created with Sketch.</desc>
-<path id="Path_18951" class="st0" d="M18,10h-4V6c0-0.6-0.4-1-1-1h0c-0.6,0-1,0.4-1,1v4H8c-0.6,0-1,0.4-1,1v0c0,0.6,0.4,1,1,1h4v4
-	c0,0.6,0.4,1,1,1h0c0.6,0,1-0.4,1-1v-4h4c0.6,0,1-0.4,1-1v0C19,10.4,18.6,10,18,10z"/>
+<g>
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="4.0359" y1="17812.5293" x2="20.4884" y2="17812.5293" gradientTransform="matrix(1 0 0 1 0 -17802)">
+		<stop  offset="0" style="stop-color:#00C7FF"/>
+		<stop  offset="0.2807" style="stop-color:#00BEFF"/>
+		<stop  offset="0.7459" style="stop-color:#00A4FF"/>
+		<stop  offset="0.9944" style="stop-color:#0094FF"/>
+	</linearGradient>
+	<path class="st0" d="M20.5,10.5c0,4.5-3.7,8.2-8.2,8.2S4,15.1,4,10.5s3.7-8.2,8.2-8.2S20.5,6,20.5,10.5z"/>
+	<g>
+		<path class="st1" d="M12.3,4.1c-0.3,0-0.5,0.2-0.5,0.5s0.2,0.5,0.5,0.5c3,0,5.5,2.5,5.5,5.5S15.3,16,12.3,16s-5.5-2.5-5.5-5.5
+			c0-0.3-0.2-0.5-0.5-0.5s-0.5,0.2-0.5,0.5c0,3.5,2.9,6.4,6.4,6.4s6.4-2.9,6.4-6.4S15.8,4.1,12.3,4.1z"/>
+		<path class="st1" d="M9.7,5.7c0.1,0,0.1,0,0.2,0l0.7-0.3c0.2-0.1,0.4-0.4,0.3-0.6c-0.1-0.2-0.4-0.4-0.6-0.3L9.5,4.7
+			C9.2,4.8,9.1,5.1,9.2,5.4C9.3,5.5,9.5,5.7,9.7,5.7z"/>
+		<path class="st1" d="M7.8,7.1c0.1,0,0.2,0,0.3-0.1l0.5-0.5c0.2-0.2,0.2-0.5,0-0.7C8.5,5.5,8.2,5.5,8,5.7L7.5,6.2
+			c-0.2,0.2-0.2,0.5,0,0.7C7.6,7,7.7,7.1,7.8,7.1z"/>
+		<path class="st1" d="M6.5,9c0.1,0,0.1,0,0.2,0c0.2,0,0.4-0.1,0.4-0.3l0.3-0.7c0.1-0.2,0-0.5-0.3-0.6c-0.2-0.1-0.5,0-0.6,0.3
+			L6.2,8.4C6.1,8.6,6.2,8.9,6.5,9z"/>
+		<path class="st1" d="M12.3,8c-0.3,0-0.5,0.2-0.5,0.5V10h-1.5c-0.3,0-0.5,0.2-0.5,0.5S10,11,10.2,11h1.5v1.5c0,0.3,0.2,0.5,0.5,0.5
+			s0.5-0.2,0.5-0.5V11h1.5c0.3,0,0.5-0.2,0.5-0.5S14.5,10,14.3,10h-1.5V8.5C12.7,8.2,12.5,8,12.3,8z"/>
+	</g>
+</g>
 </svg>

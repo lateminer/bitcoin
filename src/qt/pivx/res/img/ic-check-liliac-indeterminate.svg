@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!-- Generator: Adobe Illustrator 24.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 22 22" style="enable-background:new 0 0 22 22;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#3578EF;}
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#0396E8;}
 </style>
-<title>ic-check-active</title>
-<desc>Created with Sketch.</desc>
-<path class="st0" d="M10.9-0.1C4.9-0.1,0,4.8,0,10.9s4.9,10.9,10.9,10.9s10.9-4.9,10.9-10.9S17-0.1,10.9-0.1z M4.5,10h13
-	c0.8,0,1.5,0.7,1.5,1.5v0c0,0.8-0.7,1.5-1.5,1.5h-13C3.7,13,3,12.3,3,11.5v0C3,10.7,3.7,10,4.5,10z"/>
+<circle class="st0" cx="11" cy="10.9" r="8.9"/>
+<path class="st1" d="M21.1,10.9C21.1,16.5,16.6,21,11,21C5.5,21,1,16.5,1,10.9C1,5.3,5.5,0.8,11,0.8C16.6,0.8,21.1,5.3,21.1,10.9z
+	 M19.5,10.9c0-4.7-3.8-8.5-8.5-8.5c-4.7,0-8.5,3.8-8.5,8.5c0,4.7,3.8,8.5,8.5,8.5C15.7,19.4,19.5,15.6,19.5,10.9z M14.3,11.9H7.4
+	c-0.5,0-0.9-0.4-0.9-0.9v0c0-0.5,0.4-0.9,0.9-0.9h6.9c0.5,0,0.9,0.4,0.9,0.9v0C15.3,11.5,14.9,11.9,14.3,11.9z"/>
 </svg>

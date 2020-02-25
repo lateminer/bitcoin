@@ -77,7 +77,7 @@
     </qresource>
     <qresource prefix="/images">
         <file alias="about">res/images/about.png</file>
-        <file alias="pivx_logo_horizontal">res/images/pivx_logo_horizontal.png</file>
+        <file alias="btdx_logo_horizontal">res/images/btdx_logo_horizontal.png</file>
         <file alias="downArrow">res/images/downArrow_dark.png</file>
         <file alias="downArrow_small">res/images/downArrow_small_dark.png</file>
         <file alias="downArrow_small_white">res/images/downArrow_small.png</file>
@@ -130,10 +130,10 @@
     <qresource prefix="/">
         <file alias="bg-splash">pivx/res/img/bg-splash.svg</file>
         <file alias="bg-splash-png">pivx/res/img/bg-splash.png</file>
-        <file alias="img-logo-pivx-png">pivx/res/img/img-logo-pivx.png</file>
-        <file alias="img-logo-pivx-2x">pivx/res/img/img-logo-pivx@2x.png</file>
-        <file alias="img-logo-pivx-3x">pivx/res/img/img-logo-pivx@3x.png</file>
-        <file alias="img-nav-logo-pivx">pivx/res/img/img-nav-logo-pivx.png</file>
+        <file alias="img-logo-pivx-png">pivx/res/img/img-logo-btdx.png</file>
+        <file alias="img-logo-pivx-2x">pivx/res/img/img-logo-btdx@2x.png</file>
+        <file alias="img-logo-pivx-3x">pivx/res/img/img-logo-btdx@3x.png</file>
+        <file alias="img-nav-logo-pivx">pivx/res/img/img-nav-logo-btdx.png</file>
         <file alias="img-qr-test-big">pivx/res/img/img-qr-test-big.png</file>
         <file alias="img-qr-test">pivx/res/img/img-qr-test.png</file>
         <file alias="img-welcome-step1">pivx/res/img/img-welcome-step1.png</file>
