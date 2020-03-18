@@ -55,6 +55,13 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits
 
 static CBlock CreateGenesisBlockTestnet(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
+    const char* pszTimestamp = "Banks Aren't Accepting Legal Marijuana Money. Here's Why";
+    const CScript genesisOutputScript = CScript() << ParseHex("040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9") << OP_CHECKSIG;
+    return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
+}
+
+static CBlock CreateGenesisBlockRegtest(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
+{
     const char* pszTimestamp = "New testnet for Potcoin!";
     const CScript genesisOutputScript = CScript() << ParseHex("040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
@@ -223,14 +230,14 @@ class CTestNetParams : public CChainParams {
 public:
     CTestNetParams() {
         strNetworkID = "test";
-        consensus.nMaxReorganizationDepth = 5;
-        consensus.nMajorityEnforceBlockUpgrade = 75;
-        consensus.nMajorityRejectBlockOutdated = 95;
-        consensus.nMajorityWindow = 100;
-        consensus.powLimit = uint256S("0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.nMaxReorganizationDepth = 60 * 4;
+        consensus.nMajorityEnforceBlockUpgrade = 750;
+        consensus.nMajorityRejectBlockOutdated = 950;
+        consensus.nMajorityWindow = 1000;
+        consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.posLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.posLimitV2 = uint256S("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.nTargetTimespan = 40;
+        consensus.nTargetTimespan = 108 * 40;
         consensus.nTargetTimespanNEW = 40;
         consensus.nTargetSpacing = 40;
         consensus.nTargetSpacingNEW = 48;
@@ -246,17 +253,17 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
 
-        consensus.nDifficultyKGW = 500;
-        consensus.nDifficultyDigiShield = 750; 
-        consensus.nCoinbaseMaturitySwitch = -1;
-        consensus.nCheckPOWFromnTime = 1575659030;
+        consensus.nDifficultyKGW = 5;
+        consensus.nDifficultyDigiShield = 10; 
+        consensus.nCoinbaseMaturitySwitch = 10;
+        consensus.nCheckPOWFromnTime = 1414964233;
         consensus.nProtocolV3Time = std::numeric_limits<int64_t>::max();
 
-        consensus.nLastPOWBlock = 1000;
+        consensus.nLastPOWBlock = 9999;
         consensus.nStakeTimestampMask = 0xf;
         consensus.nCoinbaseMaturity = 5;
-        consensus.nCoinbaseMaturityNEW = 5;
-        consensus.nStakeMinAge = 1 * 60 * 60;
+        consensus.nCoinbaseMaturityNEW = 60 * 4;
+        consensus.nStakeMinAge = 10 * 60;
         consensus.nStakeMaxAge = 365 * 24 * 60 * 60;
 
         // The best chain should have at least this much work.
@@ -265,10 +272,10 @@ public:
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x00");
 
-        pchMessageStart[0] = 0x0b;
-        pchMessageStart[1] = 0x13;
-        pchMessageStart[2] = 0x0b;
-        pchMessageStart[3] = 0x09;
+        pchMessageStart[0] = 0xfe;
+        pchMessageStart[1] = 0xc3;
+        pchMessageStart[2] = 0xb9;
+        pchMessageStart[3] = 0xde;
         nDefaultPort = 14200;
         nPruneAfterHeight = 1000;
 
@@ -278,13 +285,13 @@ public:
         MineNewGenesisBlock(consensus, genesis);
         */
 
-        genesis = CreateGenesisBlockTestnet(1575659029, 195958, 0x1f00ffff, 1, 0);
+        genesis = CreateGenesisBlock(1420924223, 1729989, 0x1e0ffff0, 1, 420 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x000070cc8f8f03c7b68890c134af7872f48efdae024541694b0ddaba0da225ea"));
-        assert(genesis.hashMerkleRoot == uint256S("0x15d1b22c75054f04486de21455b82b20f3d5c5ec68f783399cd4728ac395518d"));
+        assert(consensus.hashGenesisBlock == uint256S("0x375a10038dbcbf09dbf211280ffa68f5d0138be4c177bff231e28665b3eb8e91"));
+        assert(genesis.hashMerkleRoot == uint256S("0xd5a08606e06eea7eae8a889dbcdcdd84917c10fc8e177ec013a9005305afe53d"));
 
-        vFixedSeeds.clear();
-        vSeeds.clear();
+        vSeeds.push_back(CDNSSeedData("51.15.34.13", "51.15.34.13"));
+        vSeeds.push_back(CDNSSeedData("51.15.55.7", "51.15.55.7"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,55);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,117);
@@ -302,13 +309,11 @@ public:
         fTestnetToBeDeprecatedFieldRPC = true;
 
         checkpointData = (CCheckpointData) {
-            /*
             boost::assign::map_list_of
-            ( 90235, uint256S("0x567898e79184dc2f7dc3a661f794f28566e4b856d70180914f7371b1b3cc82d8")),
-            1549558800,
-            179080,
+            ( 100, uint256S("0x6928085ed93ea4ac9478bf0f49f84087b8d17fe244ba579dff1be939223bfa6a")),
+            1582398859,
+            2000,
             2.0
-            */
         };
 
     }
@@ -371,7 +376,7 @@ public:
         nDefaultPort = 24200;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlockTestnet(1575660752, 1, 0x207fffff, 1, 0);
+        genesis = CreateGenesisBlockRegtest(1575660752, 1, 0x207fffff, 1, 0);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x7afed6aa0abc766870909b1c5e1f7e9d7347e3e28351e3d829a7dee888f5d99d"));
         assert(genesis.hashMerkleRoot == uint256S("0x15d1b22c75054f04486de21455b82b20f3d5c5ec68f783399cd4728ac395518d"));

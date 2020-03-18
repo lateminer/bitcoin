@@ -315,14 +315,9 @@ unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, const CBlockHe
     const CBlockIndex* pindexPrev = GetLastBlockIndex(pindexLast, fProofOfStake);
     const CBlockIndex* pindexPrevPrev = GetLastBlockIndex(pindexPrev->pprev, fProofOfStake);
 
-    // No retargeting
-    if (fProofOfStake) {
-        if (params.fPoSNoRetargeting)
-            return pindexLast->nBits;
-    } else {
-        if (params.fPowNoRetargeting)
-            return pindexLast->nBits;
-    }
+    // Always mine PoW blocks at the lowest diff on testnet
+    if (params.fPowAllowMinDifficultyBlocks && pindexLast->nHeight < params.nLastPOWBlock)
+        return UintToArith256(params.powLimit).GetCompact();
 
     // Newest mode for PoSV3
     if (params.IsProtocolV3(pindexLast->GetBlockTime()))
