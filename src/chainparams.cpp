@@ -338,24 +338,26 @@ public:
         nMasternodeCountDrift = 4;
         nModifierUpdateBlock = 51197; //approx Mon, 17 Apr 2017 04:00:00 GMT
         nMaxMoneyOut = 43199500 * COIN;
-        nZerocoinStartHeight = 201576;
-        nZerocoinStartTime = 1501776000;
+
+        // BTDX
+        nZerocoinStartHeight = std::numeric_limits<int>::max();;
+        nZerocoinStartTime = std::numeric_limits<int>::max();;
         nBlockEnforceSerialRange = 1; //Enforce serial range starting this block
-        nBlockRecalculateAccumulators = 9908000; //Trigger a recalculation of accumulators
-        nBlockFirstFraudulent = 9891737; //First block that bad serials emerged
-        nBlockLastGoodCheckpoint = 9891730; //Last valid accumulator checkpoint
-        nBlockEnforceInvalidUTXO = 9902850; //Start enforcing the invalid UTXO's
+        nBlockRecalculateAccumulators = std::numeric_limits<int>::max();; //Trigger a recalculation of accumulators
+        nBlockFirstFraudulent = std::numeric_limits<int>::max();; //First block that bad serials emerged
+        nBlockLastGoodCheckpoint = std::numeric_limits<int>::max();; //Last valid accumulator checkpoint
+        nBlockEnforceInvalidUTXO = std::numeric_limits<int>::max();; //Start enforcing the invalid UTXO's
         nInvalidAmountFiltered = 0; //Amount of invalid coins filtered through exchanges, that should be considered valid
-        nBlockZerocoinV2 = 444020; //!> The block that zerocoin v2 becomes active
-        nEnforceNewSporkKey = 1566860400; //!> Sporks signed after Monday, August 26, 2019 11:00:00 PM GMT must use the new spork key
-        nRejectOldSporkKey = 1569538800; //!> Reject old spork key after Thursday, September 26, 2019 11:00:00 PM GMT
-        nBlockStakeModifierlV2 = 1214000;
-        nBIP65ActivationHeight = 851019;
+        nBlockZerocoinV2 = std::numeric_limits<int>::max();; //!> The block that zerocoin v2 becomes active
+        nEnforceNewSporkKey = std::numeric_limits<int>::max();; //!> Sporks signed after Monday, August 26, 2019 11:00:00 PM GMT must use the new spork key
+        nRejectOldSporkKey = std::numeric_limits<int>::max();; //!> Reject old spork key after Thursday, September 26, 2019 11:00:00 PM GMT
+        nBlockStakeModifierlV2 = std::numeric_limits<int>::max();;
+        nBIP65ActivationHeight = std::numeric_limits<int>::max();
         // Activation height for TimeProtocolV2, Blocks V7 and newMessageSignatures
-        nBlockTimeProtocolV2 = 1347000;
+        nBlockTimeProtocolV2 = std::numeric_limits<int>::max();
 
         // Public coin spend enforcement
-        nPublicZCSpends = 1106100;
+        nPublicZCSpends = std::numeric_limits<int>::max();
 
         // New P2P messages signatures
         nBlockEnforceNewMessageSignatures = nBlockTimeProtocolV2;
