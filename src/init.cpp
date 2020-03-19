@@ -1554,7 +1554,7 @@ bool AppInit2()
                 }
 
                 // Check Recalculation result
-				// BTDX: do not perform this check until Zerocoin activates
+                // BTDX: do not perform this check until Zerocoin activates
                 if(Params().NetworkID() == CBaseChainParams::MAIN && chainHeight > Params().Zerocoin_Block_EndFakeSerial() && chainHeight > Params().Zerocoin_StartHeight()) {
                     CBlockIndex* pblockindex = chainActive[Params().Zerocoin_Block_EndFakeSerial() + 1];
                     CAmount zpivSupplyCheckpoint = Params().GetSupplyBeforeFakeSerial() + GetWrapppedSerialInflationAmount();

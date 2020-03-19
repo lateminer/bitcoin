@@ -75,7 +75,7 @@ public:
     /** Make standard checks */
     bool RequireStandard() const { return fRequireStandard; }
     int64_t TargetSpacing() const { return nTargetSpacing; }
-    int64_t TargetTimespan(const bool fV2 = true) const { return fV2 ? nTargetTimespan_V2 : nTargetTimespan; }
+    int64_t TargetTimespan(const bool fV2 = false) const { return fV2 ? nTargetTimespan_V2 : nTargetTimespan; }
 
     /** returns the coinbase maturity **/
     int COINBASE_MATURITY() const { return nMaturity; }

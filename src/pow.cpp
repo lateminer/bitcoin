@@ -39,7 +39,10 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 
     if (pindexLast->nHeight >= Params().LAST_POW_BLOCK()) {
         const bool fTimeV2 = Params().IsTimeProtocolV2(pindexLast->nHeight+1);
-        const uint256 bnTargetLimit = Params().ProofOfStakeLimit(fTimeV2);
+
+        // BTDX
+        const uint256 bnTargetLimit = fTimeV2 ? Params().ProofOfStakeLimit(fTimeV2) : Params().ProofOfWorkLimit();
+
         const int64_t nTargetSpacing = Params().TargetSpacing();
         const int64_t nTargetTimespan = Params().TargetTimespan(fTimeV2);
 
