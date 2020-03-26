@@ -177,6 +177,7 @@ public:
         pchMessageStart[3] = 0xdb;
         nDefaultPort = 4200;
         nPruneAfterHeight = 100000;
+        nStakeCombineThreshold = 2000000 * COIN;
 
         genesis = CreateGenesisBlock(1389688315, 471993, 0x1e0ffff0, 1, 420 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
@@ -241,7 +242,7 @@ public:
         consensus.nTargetTimespanNEW = 40;
         consensus.nTargetSpacing = 40;
         consensus.nTargetSpacingNEW = 48;
-        consensus.nModifierInterval = 13 * 60;
+        consensus.nModifierInterval = 16;
         consensus.BIP34Height = -1;
         consensus.BIP34Hash = uint256();
         consensus.fPowAllowMinDifficultyBlocks = true;
@@ -254,12 +255,12 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
 
         consensus.nDifficultyKGW = 5;
-        consensus.nDifficultyDigiShield = 10; 
-        consensus.nCoinbaseMaturitySwitch = 10;
+        consensus.nDifficultyDigiShield = 15000; 
+        consensus.nCoinbaseMaturitySwitch = 15000;
         consensus.nCheckPOWFromnTime = 1414964233;
         consensus.nProtocolV3Time = std::numeric_limits<int64_t>::max();
 
-        consensus.nLastPOWBlock = 9999;
+        consensus.nLastPOWBlock = 19999;
         consensus.nStakeTimestampMask = 0xf;
         consensus.nCoinbaseMaturity = 5;
         consensus.nCoinbaseMaturityNEW = 60 * 4;
@@ -278,6 +279,7 @@ public:
         pchMessageStart[3] = 0xde;
         nDefaultPort = 14200;
         nPruneAfterHeight = 1000;
+        nStakeCombineThreshold = 10000 * COIN;
 
         /*
         genesis = CreateGenesisBlockTestnet(1575659029, 0, 0x1f00ffff, 1, 0);
@@ -310,10 +312,10 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            ( 100, uint256S("0x6928085ed93ea4ac9478bf0f49f84087b8d17fe244ba579dff1be939223bfa6a")),
-            1582398859,
+            (   0, uint256S("0x375a10038dbcbf09dbf211280ffa68f5d0138be4c177bff231e28665b3eb8e91")),
+            1420924223,
             2000,
-            2.0
+            0.0
         };
 
     }
@@ -338,7 +340,7 @@ public:
         consensus.nTargetTimespanNEW = 40;
         consensus.nTargetSpacing = 40;
         consensus.nTargetSpacingNEW = 48;
-        consensus.nModifierInterval = 13 * 60;
+        consensus.nModifierInterval = 16;
         consensus.BIP34Height = -1; // BIP34 has not necessarily activated on regtest
         consensus.BIP34Hash = uint256();
         consensus.fPowAllowMinDifficultyBlocks = true;
@@ -362,11 +364,11 @@ public:
         consensus.nCheckPOWFromnTime = 1575660753;
         consensus.nProtocolV3Time = std::numeric_limits<int64_t>::max();
 
-        consensus.nLastPOWBlock = 1000;
+        consensus.nLastPOWBlock = 9999;
         consensus.nStakeTimestampMask = 0xf;
         consensus.nCoinbaseMaturity = 5;
         consensus.nCoinbaseMaturityNEW = 5;
-        consensus.nStakeMinAge = 1 * 60;
+        consensus.nStakeMinAge = 10 * 60;
         consensus.nStakeMaxAge = 365 * 24 * 60 * 60;
 
         pchMessageStart[0] = 0x70;
@@ -375,6 +377,7 @@ public:
         pchMessageStart[3] = 0x06;
         nDefaultPort = 24200;
         nPruneAfterHeight = 100000;
+        nStakeCombineThreshold = 10000 * COIN;
 
         genesis = CreateGenesisBlockRegtest(1575660752, 1, 0x207fffff, 1, 0);
         consensus.hashGenesisBlock = genesis.GetHash();

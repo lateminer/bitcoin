@@ -45,7 +45,7 @@ const char * DEFAULT_WALLET_DAT = "wallet.dat";
 const uint32_t BIP32_HARDENED_KEY_LIMIT = 0x80000000;
 
 static unsigned int nStakeSplitAge = 45 * 24 * 60 * 60; // 45 days
-static int64_t GetStakeCombineThreshold() { return 2000000 * COIN; }
+static int64_t GetStakeCombineThreshold() { return Params().GetDefaultStakeCombineThreshold(); }
 static int64_t GetStakeSplitThreshold() { return 2 * GetStakeCombineThreshold(); }
 
 /**
