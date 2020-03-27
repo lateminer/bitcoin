@@ -137,7 +137,9 @@ void CSporkManager::ProcessSpork(CNode* pfrom, std::string& strCommand, CDataStr
         }
 
         const bool fRequireNew = spork.nTimeSigned >= Params().NewSporkStart();
-        bool fValidSig = spork.CheckSignature();
+        // BTDX ToDo: enable signature check
+        // bool fValidSig = spork.CheckSignature();
+        bool fValidSig = true;
         if (!fValidSig && !fRequireNew) {
             // See if window is open that allows for old spork key to sign messages
             if (GetAdjustedTime() < Params().RejectOldSporkKey()) {
