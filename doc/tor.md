@@ -46,6 +46,7 @@ config file): *Needed for Tor version 0.2.7.0 and older versions of Tor only. Fo
 versions of Tor see [Section 3](#3-automatically-listen-on-tor).*
 
 	HiddenServiceDir /var/lib/tor/bitcloud-service/
+	HiddenServiceVersion 2
 	HiddenServicePort 8329 127.0.0.1:8329
 	HiddenServicePort 61472 127.0.0.1:61472
 
@@ -53,7 +54,8 @@ The directory can be different of course, but (both) port numbers should be equa
 your bitcloudd's P2P listen port (8329 by default).
 
 	-externalip=X   You can tell bitcloud about its publicly reachable address using
-	                this option, and this can be a .onion address. Given the above
+	                this option, and this can be a v2 .onion address (v3 .onion
+	                addresses are not supported by the Bitcloud network). Given the above
 	                configuration, you can find your .onion address in
 	                /var/lib/tor/bitcloud-service/hostname. For connections
 	                coming from unroutable addresses (such as 127.0.0.1, where the

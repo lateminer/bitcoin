@@ -5,49 +5,14 @@
 bin_PROGRAMS += qt/bitcloud-qt
 EXTRA_LIBRARIES += qt/libbitcoinqt.a
 
-# pivx qt core #
-QT_TS = \
-  qt/locale/bitcloud_bg.ts \
-  qt/locale/bitcloud_ca.ts \
-  qt/locale/bitcloud_cs.ts \
-  qt/locale/bitcloud_da.ts \
-  qt/locale/bitcloud_de.ts \
-  qt/locale/bitcloud_en.ts \
-  qt/locale/bitcloud_en_GB.ts \
-  qt/locale/bitcloud_en_US.ts \
-  qt/locale/bitcloud_eo.ts \
-  qt/locale/bitcloud_es.ts \
-  qt/locale/bitcloud_es_ES.ts \
-  qt/locale/bitcloud_fi.ts \
-  qt/locale/bitcloud_fr_FR.ts \
-  qt/locale/bitcloud_hi_IN.ts \
-  qt/locale/bitcloud_hr.ts \
-  qt/locale/bitcloud_hr_HR.ts \
-  qt/locale/bitcloud_it.ts \
-  qt/locale/bitcloud_ja.ts \
-  qt/locale/bitcloud_ko_KR.ts \
-  qt/locale/bitcloud_lt_LT.ts \
-  qt/locale/bitcloud_nl.ts \
-  qt/locale/bitcloud_pl.ts \
-  qt/locale/bitcloud_pt.ts \
-  qt/locale/bitcloud_pt_BR.ts \
-  qt/locale/bitcloud_ro_RO.ts \
-  qt/locale/bitcloud_ru.ts \
-  qt/locale/bitcloud_sk.ts \
-  qt/locale/bitcloud_sv.ts \
-  qt/locale/bitcloud_tr.ts \
-  qt/locale/bitcloud_uk.ts \
-  qt/locale/bitcloud_vi.ts \
-  qt/locale/bitcloud_zh_CN.ts \
-  qt/locale/bitcloud_zh_TW.ts
+# bitcloud qt core #
+include Makefile.qt_locale.include
 
 QT_FORMS_UI = \
   qt/forms/addressbookpage.ui \
   qt/forms/askpassphrasedialog.ui \
   qt/forms/coincontroldialog.ui \
-  qt/forms/blockexplorer.ui \
   qt/forms/editaddressdialog.ui \
-  qt/forms/governancepage.ui \
   qt/forms/helpmessagedialog.ui \
   qt/forms/intro.ui \
   qt/forms/openuridialog.ui \
@@ -60,11 +25,9 @@ QT_FORMS_UI = \
   qt/pivx/forms/lockunlock.ui \
   qt/pivx/forms/expandablebutton.ui \
   qt/pivx/forms/receivedialog.ui \
-  qt/pivx/forms/walletpassworddialog.ui \
   qt/pivx/forms/topbar.ui \
   qt/pivx/forms/txrow.ui \
   qt/pivx/forms/dashboardwidget.ui \
-  qt/pivx/forms/coincontrolpivwidget.ui \
   qt/pivx/forms/addresslabelrow.ui \
   qt/pivx/forms/contactdropdownrow.ui \
   qt/pivx/forms/mninfodialog.ui \
@@ -87,10 +50,10 @@ QT_FORMS_UI = \
   qt/pivx/forms/tooltipmenu.ui \
   qt/pivx/forms/addresseswidget.ui \
   qt/pivx/forms/defaultdialog.ui \
-  qt/pivx/forms/denomgenerationdialog.ui \
   qt/pivx/forms/privacywidget.ui \
   qt/pivx/forms/coldstakingwidget.ui \
   qt/pivx/settings/forms/settingsbackupwallet.ui \
+  qt/pivx/settings/forms/settingsexportcsv.ui \
   qt/pivx/settings/forms/settingsbittoolwidget.ui \
   qt/pivx/settings/forms/settingsconsolewidget.ui \
   qt/pivx/settings/forms/settingsdisplayoptionswidget.ui \
@@ -115,13 +78,11 @@ QT_MOC_CPP = \
   qt/moc_bitcoinamountfield.cpp \
   qt/pivx/moc_pivxgui.cpp \
   qt/moc_bitcoinunits.cpp \
-  qt/moc_blockexplorer.cpp \
   qt/moc_clientmodel.cpp \
   qt/moc_coincontroldialog.cpp \
   qt/moc_coincontroltreewidget.cpp \
   qt/moc_csvmodelwriter.cpp \
   qt/moc_editaddressdialog.cpp \
-  qt/moc_governancepage.cpp \
   qt/moc_guiutil.cpp \
   qt/moc_intro.cpp \
   qt/moc_macdockiconhandler.cpp \
@@ -134,7 +95,6 @@ QT_MOC_CPP = \
   qt/moc_paymentserver.cpp \
   qt/moc_qvalidatedlineedit.cpp \
   qt/moc_qvaluecombobox.cpp \
-  qt/moc_proposalframe.cpp \
   qt/moc_recentrequeststablemodel.cpp \
   qt/moc_rpcconsole.cpp \
   qt/moc_splashscreen.cpp \
@@ -153,12 +113,10 @@ QT_MOC_CPP = \
   qt/pivx/moc_expandablebutton.cpp \
   qt/pivx/moc_furabstractlistitemdelegate.cpp \
   qt/pivx/moc_receivedialog.cpp \
-  qt/pivx/moc_walletpassworddialog.cpp \
   qt/pivx/moc_pfborderimage.cpp \
   qt/pivx/moc_topbar.cpp \
   qt/pivx/moc_txrow.cpp \
   qt/pivx/moc_dashboardwidget.cpp \
-  qt/pivx/moc_coincontrolpivwidget.cpp \
   qt/pivx/moc_addresslabelrow.cpp \
   qt/pivx/moc_contactdropdownrow.cpp \
   qt/pivx/moc_mninfodialog.cpp \
@@ -184,10 +142,10 @@ QT_MOC_CPP = \
   qt/pivx/moc_tooltipmenu.cpp \
   qt/pivx/moc_addresseswidget.cpp \
   qt/pivx/moc_defaultdialog.cpp \
-  qt/pivx/moc_denomgenerationdialog.cpp \
   qt/pivx/moc_privacywidget.cpp \
   qt/pivx/moc_coldstakingwidget.cpp \
   qt/pivx/settings/moc_settingsbackupwallet.cpp \
+  qt/pivx/settings/moc_settingsexportcsv.cpp \
   qt/pivx/settings/moc_settingsbittoolwidget.cpp \
   qt/pivx/settings/moc_settingsconsolewidget.cpp \
   qt/pivx/settings/moc_settingsdisplayoptionswidget.cpp \
@@ -232,13 +190,11 @@ BITCOIN_QT_H = \
   qt/bitcoinamountfield.h \
   qt/pivx/pivxgui.h \
   qt/bitcoinunits.h \
-  qt/blockexplorer.h \
   qt/clientmodel.h \
   qt/coincontroldialog.h \
   qt/coincontroltreewidget.h \
   qt/csvmodelwriter.h \
   qt/editaddressdialog.h \
-  qt/governancepage.h \
   qt/guiconstants.h \
   qt/guiutil.h \
   qt/intro.h \
@@ -253,7 +209,6 @@ BITCOIN_QT_H = \
   qt/paymentserver.h \
   qt/peertablemodel.h \
   qt/platformstyle.h \
-  qt/proposalframe.h \
   qt/qvalidatedlineedit.h \
   qt/qvaluecombobox.h \
   qt/recentrequeststablemodel.h \
@@ -283,13 +238,11 @@ BITCOIN_QT_H = \
   qt/pivx/txviewholder.h \
   qt/pivx/qtutils.h \
   qt/pivx/expandablebutton.h \
-  qt/pivx/walletpassworddialog.h \
   qt/pivx/topbar.h \
   qt/pivx/txrow.h \
   qt/pivx/addressholder.h \
   qt/pivx/addressfilterproxymodel.h \
   qt/pivx/dashboardwidget.h \
-  qt/pivx/coincontrolpivwidget.h \
   qt/pivx/addresslabelrow.h \
   qt/pivx/contactdropdownrow.h \
   qt/pivx/mninfodialog.h \
@@ -315,10 +268,10 @@ BITCOIN_QT_H = \
   qt/pivx/tooltipmenu.h \
   qt/pivx/addresseswidget.h \
   qt/pivx/defaultdialog.h \
-  qt/pivx/denomgenerationdialog.h \
   qt/pivx/privacywidget.h \
   qt/pivx/coldstakingwidget.h \
   qt/pivx/settings/settingsbackupwallet.h \
+  qt/pivx/settings/settingsexportcsv.h \
   qt/pivx/settings/settingsbittoolwidget.h \
   qt/pivx/settings/settingsconsolewidget.h \
   qt/pivx/settings/settingsdisplayoptionswidget.h \
@@ -337,8 +290,6 @@ BITCOIN_QT_H = \
 RES_ICONS = \
   qt/res/icons/add.png \
   qt/res/icons/address-book.png \
-  qt/res/icons/automint_active.png \
-  qt/res/icons/automint_inactive.png \
   qt/res/icons/bitcoin.ico \
   qt/res/icons/bitcoin.png \
   qt/res/icons/bitcoin_testnet.ico \
@@ -563,6 +514,8 @@ RES_ICONS = \
   qt/pivx/res/img/dark/ic-transaction-cs-contract-inactive.svg \
   qt/pivx/res/img/img-qr.svg \
   qt/pivx/res/img/ic-check-connect-off.svg \
+  qt/pivx/res/img/ic-check-tor-off.svg \
+  qt/pivx/res/img/ic-check-tor.svg \
   qt/pivx/res/img/ic-label.svg \
   qt/pivx/res/img/ic-transaction-received.svg \
   qt/pivx/res/img/dark/ic-transaction-received.svg \
@@ -619,7 +572,6 @@ BITCOIN_QT_BASE_CPP = \
   qt/bitcoinamountfield.cpp \
   qt/pivx/pivxgui.cpp \
   qt/bitcoinunits.cpp \
-  qt/blockexplorer.cpp \
   qt/clientmodel.cpp \
   qt/csvmodelwriter.cpp \
   qt/guiutil.cpp \
@@ -643,15 +595,12 @@ BITCOIN_QT_WALLET_CPP = \
   qt/addressbookpage.cpp \
   qt/addresstablemodel.cpp \
   qt/askpassphrasedialog.cpp \
-  qt/blockexplorer.cpp \
   qt/coincontroldialog.cpp \
   qt/coincontroltreewidget.cpp \
   qt/editaddressdialog.cpp \
-  qt/governancepage.cpp \
   qt/openuridialog.cpp \
   qt/paymentrequestplus.cpp \
   qt/paymentserver.cpp \
-  qt/proposalframe.cpp \
   qt/recentrequeststablemodel.cpp \
   qt/transactiondesc.cpp \
   qt/transactionfilterproxy.cpp \
@@ -671,13 +620,11 @@ BITCOIN_QT_WALLET_CPP = \
   qt/pivx/txviewholder.cpp \
   qt/pivx/qtutils.cpp \
   qt/pivx/expandablebutton.cpp \
-  qt/pivx/walletpassworddialog.cpp \
   qt/pivx/topbar.cpp \
   qt/pivx/txrow.cpp \
   qt/pivx/addressholder.cpp \
   qt/pivx/addressfilterproxymodel.cpp \
   qt/pivx/dashboardwidget.cpp \
-  qt/pivx/coincontrolpivwidget.cpp \
   qt/pivx/addresslabelrow.cpp \
   qt/pivx/contactdropdownrow.cpp \
   qt/pivx/contactsdropdown.cpp \
@@ -703,10 +650,10 @@ BITCOIN_QT_WALLET_CPP = \
   qt/pivx/tooltipmenu.cpp \
   qt/pivx/addresseswidget.cpp \
   qt/pivx/defaultdialog.cpp \
-  qt/pivx/denomgenerationdialog.cpp \
   qt/pivx/privacywidget.cpp \
   qt/pivx/coldstakingwidget.cpp \
   qt/pivx/settings/settingsbackupwallet.cpp \
+  qt/pivx/settings/settingsexportcsv.cpp \
   qt/pivx/settings/settingsbittoolwidget.cpp \
   qt/pivx/settings/settingsconsolewidget.cpp \
   qt/pivx/settings/settingsdisplayoptionswidget.cpp \
@@ -756,7 +703,7 @@ RES_MOVIES = $(wildcard $(srcdir)/qt/res/movies/spinner-*.png)
 BITCOIN_RC = qt/res/bitcloud-qt-res.rc
 
 BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
-  -I$(builddir)/qt/forms
+  -I$(builddir)/qt/forms -DQT_NO_KEYWORDS
 
 qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
   $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)

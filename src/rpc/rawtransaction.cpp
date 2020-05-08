@@ -1,7 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2019 The PIVX developers
+// Copyright (c) 2015-2020 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -231,7 +231,7 @@ UniValue listunspent(const UniValue& params, bool fHelp)
             "    \"txid\" : \"txid\",        (string) the transaction id\n"
             "    \"vout\" : n,               (numeric) the vout value\n"
             "    \"address\" : \"address\",  (string) the bitcloud address\n"
-            "    \"account\" : \"account\",  (string) The associated account, or \"\" for the default account\n"
+            "    \"account\" : \"account\",  (string) DEPRECATED. The associated account, or \"\" for the default account\n"
             "    \"scriptPubKey\" : \"key\", (string) the script key\n"
             "    \"redeemScript\" : \"key\", (string) the redeemscript key\n"
             "    \"amount\" : x.xxx,         (numeric) the transaction amount in btc\n"
@@ -279,7 +279,15 @@ UniValue listunspent(const UniValue& params, bool fHelp)
     std::vector<COutput> vecOutputs;
     assert(pwalletMain != NULL);
     LOCK2(cs_main, pwalletMain->cs_wallet);
-    pwalletMain->AvailableCoins(vecOutputs, false, NULL, false, ALL_COINS, false, nWatchonlyConfig);
+    pwalletMain->AvailableCoins(&vecOutputs,
+            nullptr,    // coin control
+            true,       // include delegated
+            false,      // include cold staking
+            ALL_COINS,  // coin type
+            false,      // only confirmed
+            false,      // include zero value
+            false,      // use IX
+            nWatchonlyConfig);
     for (const COutput& out : vecOutputs) {
         if (out.nDepth < nMinDepth || out.nDepth > nMaxDepth)
             continue;
@@ -484,7 +492,7 @@ UniValue decoderawtransaction(const UniValue& params, bool fHelp)
         throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "TX decode failed");
 
     UniValue result(UniValue::VOBJ);
-    TxToJSON(tx, 0, result);
+    TxToJSON(tx, UINT256_ZERO, result);
 
     return result;
 }
@@ -631,7 +639,7 @@ UniValue signrawtransaction(const UniValue& params, bool fHelp)
 
     // Fetch previous transactions (inputs):
     std::map<COutPoint, CScript> mapPrevOut;
-    if (Params().NetworkID() == CBaseChainParams::REGTEST) {
+    if (Params().IsRegTestNet()) {
         for (const CTxIn &txbase : mergedTx.vin)
         {
             CTransaction tempTx;
@@ -756,7 +764,7 @@ UniValue signrawtransaction(const UniValue& params, bool fHelp)
     for (unsigned int i = 0; i < mergedTx.vin.size(); i++) {
         CTxIn& txin = mergedTx.vin[i];
         const CCoins* coins = view.AccessCoins(txin.prevout.hash);
-        if (Params().NetworkID() == CBaseChainParams::REGTEST) {
+        if (Params().IsRegTestNet()) {
             if (mapPrevOut.count(txin.prevout) == 0 && (coins == NULL || !coins->IsAvailable(txin.prevout.n)))
             {
                 TxInErrorToJSON(txin, vErrors, "Input not found");
@@ -768,7 +776,7 @@ UniValue signrawtransaction(const UniValue& params, bool fHelp)
                 continue;
             }
         }
-        const CScript& prevPubKey = (Params().NetworkID() == CBaseChainParams::REGTEST && mapPrevOut.count(txin.prevout) != 0 ? mapPrevOut[txin.prevout] : coins->vout[txin.prevout.n].scriptPubKey);
+        const CScript& prevPubKey = (Params().IsRegTestNet() && mapPrevOut.count(txin.prevout) != 0 ? mapPrevOut[txin.prevout] : coins->vout[txin.prevout.n].scriptPubKey);
 
         txin.scriptSig.clear();
 
@@ -827,7 +835,6 @@ UniValue sendrawtransaction(const UniValue& params, bool fHelp)
             "\nSend the transaction (signed hex)\n" + HelpExampleCli("sendrawtransaction", "\"signedhex\"") +
             "\nAs a json rpc call\n" + HelpExampleRpc("sendrawtransaction", "\"signedhex\""));
 
-    LOCK(cs_main);
     RPCTypeCheck(params, boost::assign::list_of(UniValue::VSTR)(UniValue::VBOOL));
 
     // parse hex string from parameter
@@ -844,6 +851,7 @@ UniValue sendrawtransaction(const UniValue& params, bool fHelp)
     if (params.size() > 2)
         fSwiftX = params[2].get_bool();
 
+    AssertLockNotHeld(cs_main);
     CCoinsViewCache& view = *pcoinsTip;
     const CCoins* existingCoins = view.AccessCoins(hashTx);
     bool fHaveMempool = mempool.exists(hashTx);
@@ -900,7 +908,7 @@ UniValue getspentzerocoinamount(const UniValue& params, bool fHelp)
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter for transaction input");
 
     CTransaction tx;
-    uint256 hashBlock = 0;
+    uint256 hashBlock = UINT256_ZERO;
     if (!GetTransaction(txHash, tx, hashBlock, true))
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "No information available about transaction");
 
@@ -917,104 +925,18 @@ UniValue getspentzerocoinamount(const UniValue& params, bool fHelp)
 }
 
 #ifdef ENABLE_WALLET
-UniValue createrawzerocoinstake(const UniValue& params, bool fHelp)
-{
-    if (fHelp || params.size() != 1)
-        throw std::runtime_error(
-            "createrawzerocoinstake mint_input \n"
-            "\nCreates raw zBTDX coinstakes (without MN output). Only for regtest\n" +
-            HelpRequiringPassphrase() + "\n"
-
-            "\nArguments:\n"
-            "1. mint_input      (hex string, required) serial hash of the mint used as input\n"
-
-            "\nResult:\n"
-            "{\n"
-            "   \"hex\": \"xxx\",           (hex string) raw coinstake transaction\n"
-            "   \"private-key\": \"xxx\"    (hex string) private key of the input mint [needed to\n"
-            "                                            sign a block with this stake]"
-            "}\n"
-            "\nExamples\n" +
-            HelpExampleCli("createrawzerocoinstake", "0d8c16eee7737e3cc1e4e70dc006634182b175e039700931283b202715a0818f") +
-            HelpExampleRpc("createrawzerocoinstake", "0d8c16eee7737e3cc1e4e70dc006634182b175e039700931283b202715a0818f"));
-
-
-    if (Params().NetworkID() != CBaseChainParams::REGTEST)
-        throw JSONRPCError(RPC_WALLET_ERROR, "createrawzerocoinstake is available only on regtest net");
-
-    assert(pwalletMain != NULL);
-    LOCK2(cs_main, pwalletMain->cs_wallet);
-
-    if(sporkManager.IsSporkActive(SPORK_16_ZEROCOIN_MAINTENANCE_MODE))
-        throw JSONRPCError(RPC_WALLET_ERROR, "zBTDX is currently disabled due to maintenance.");
-
-    std::string serial_hash = params[0].get_str();
-    if (!IsHex(serial_hash))
-        throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, expected hex serial hash");
-
-    EnsureWalletIsUnlocked();
-
-    uint256 hashSerial(serial_hash);
-    CZerocoinMint input_mint;
-    if (!pwalletMain->GetMint(hashSerial, input_mint)) {
-        std::string strErr = "Failed to fetch mint associated with serial hash " + serial_hash;
-        throw JSONRPCError(RPC_WALLET_ERROR, strErr);
-    }
-
-    CMutableTransaction coinstake_tx;
-
-    // create the zerocoinmint output (one spent denom + three 1-zBTDX denom)
-    libzerocoin::CoinDenomination staked_denom = input_mint.GetDenomination();
-    std::vector<CTxOut> vOutMint(5);
-    // Mark coin stake transaction
-    CScript scriptEmpty;
-    scriptEmpty.clear();
-    vOutMint[0] = CTxOut(0, scriptEmpty);
-    CDeterministicMint dMint;
-    if (!pwalletMain->CreateZPIVOutPut(staked_denom, vOutMint[1], dMint))
-        throw JSONRPCError(RPC_WALLET_ERROR, "failed to create new zpiv output");
-
-    for (int i=2; i<5; i++) {
-        if (!pwalletMain->CreateZPIVOutPut(libzerocoin::ZQ_ONE, vOutMint[i], dMint))
-            throw JSONRPCError(RPC_WALLET_ERROR, "failed to create new zpiv output");
-    }
-    coinstake_tx.vout = vOutMint;
-
-    //hash with only the output info in it to be used in Signature of Knowledge
-    uint256 hashTxOut = coinstake_tx.GetHash();
-    CZerocoinSpendReceipt receipt;
-
-    // create the zerocoinspend input
-    CTxIn newTxIn;
-    // Use v2 spends for input (with v3 zpiv staking is disabled)
-    if (!pwalletMain->MintToTxIn(input_mint, hashTxOut, newTxIn, receipt, libzerocoin::SpendType::STAKE, nullptr, false))
-        throw JSONRPCError(RPC_WALLET_ERROR, "failed to create zc-spend stake input");
-
-    coinstake_tx.vin.push_back(newTxIn);
-
-    UniValue ret(UniValue::VOBJ);
-    ret.push_back(Pair("hex", EncodeHexTx(coinstake_tx)));
-    CPrivKey pk = input_mint.GetPrivKey();
-    CKey key;
-    key.SetPrivKey(pk, true);
-    ret.push_back(Pair("private-key", HexStr(key)));
-    return ret;
-
-}
 
 UniValue createrawzerocoinspend(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() < 1 || params.size() > 3)
         throw std::runtime_error(
-            "createrawzerocoinspend mint_input ( \"address\" isPublicSpend )\n"
+            "createrawzerocoinspend mint_input ( \"address\" )\n"
             "\nCreates raw zBTDX public spend.\n" +
             HelpRequiringPassphrase() + "\n"
 
             "\nArguments:\n"
             "1. mint_input      (hex string, required) serial hash of the mint used as input\n"
             "2. \"address\"     (string, optional, default=change) Send to specified address or to a new change address.\n"
-            "3. isPublicSpend   (boolean, optional, default=true) create a public zc spend."
-            "                       If false, instead create spend version 2 (only for regression tests)"
 
 
             "\nResult:\n"
@@ -1027,7 +949,6 @@ UniValue createrawzerocoinspend(const UniValue& params, bool fHelp)
 
     const std::string serial_hash = params[0].get_str();
     const std::string address_str = (params.size() > 1 ? params[1].get_str() : "");
-    const bool isPublicSpend = (params.size() > 2 ? params[2].get_bool() : true);
 
     if (!IsHex(serial_hash))
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, expected hex serial hash");
@@ -1041,14 +962,11 @@ UniValue createrawzerocoinspend(const UniValue& params, bool fHelp)
         addr_ptr = &address;
     }
 
-    if (Params().NetworkID() != CBaseChainParams::REGTEST && !isPublicSpend)
-        throw JSONRPCError(RPC_WALLET_ERROR, "zPIV old spend only available in regtest for tests purposes");
-
     assert(pwalletMain != NULL);
     EnsureWalletIsUnlocked();
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
-    uint256 hashSerial(serial_hash);
+    uint256 hashSerial(uint256S(serial_hash));
     CZerocoinMint input_mint;
     if (!pwalletMain->GetMint(hashSerial, input_mint)) {
         std::string strErr = "Failed to fetch mint associated with serial hash " + serial_hash;
@@ -1066,7 +984,7 @@ UniValue createrawzerocoinspend(const UniValue& params, bool fHelp)
     if (addr_ptr) {
         outputs.push_back(std::pair<CBitcoinAddress*, CAmount>(addr_ptr, nAmount));
     }
-    if (!pwalletMain->CreateZerocoinSpendTransaction(nAmount, rawTx, reserveKey, receipt, vMintsSelected, vNewMints, false, true, outputs, nullptr, isPublicSpend))
+    if (!pwalletMain->CreateZCPublicSpendTransaction(nAmount, rawTx, reserveKey, receipt, vMintsSelected, vNewMints, outputs, nullptr))
         throw JSONRPCError(RPC_WALLET_ERROR, receipt.GetStatusMessage());
 
     // output the raw transaction

@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2019 The PIVX developers
+// Copyright (c) 2015-2020 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,9 +11,9 @@
 #include "masternode.h"
 
 
-extern CCriticalSection cs_vecPayments;
-extern CCriticalSection cs_mapMasternodeBlocks;
-extern CCriticalSection cs_mapMasternodePayeeVotes;
+extern RecursiveMutex cs_vecPayments;
+extern RecursiveMutex cs_mapMasternodeBlocks;
+extern RecursiveMutex cs_mapMasternodePayeeVotes;
 
 class CMasternodePayments;
 class CMasternodePaymentWinner;
@@ -235,7 +235,7 @@ private:
 public:
     std::map<uint256, CMasternodePaymentWinner> mapMasternodePayeeVotes;
     std::map<int, CMasternodeBlockPayees> mapMasternodeBlocks;
-    std::map<uint256, int> mapMasternodesLastVote; //prevout.hash + prevout.n, nBlockHeight
+    std::map<COutPoint, int> mapMasternodesLastVote; //prevout, nBlockHeight
 
     CMasternodePayments()
     {
@@ -265,14 +265,14 @@ public:
     {
         LOCK(cs_mapMasternodePayeeVotes);
 
-        if (mapMasternodesLastVote.count(outMasternode.hash + outMasternode.n)) {
-            if (mapMasternodesLastVote[outMasternode.hash + outMasternode.n] == nBlockHeight) {
+        if (mapMasternodesLastVote.count(outMasternode)) {
+            if (mapMasternodesLastVote[outMasternode] == nBlockHeight) {
                 return false;
             }
         }
 
         //record this masternode voted
-        mapMasternodesLastVote[outMasternode.hash + outMasternode.n] = nBlockHeight;
+        mapMasternodesLastVote[outMasternode] = nBlockHeight;
         return true;
     }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2019 The PIVX developers
+// Copyright (c) 2019-2020 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -35,10 +35,9 @@ public:
     ~PrivacyWidget();
 
     void loadWalletModel() override;
-private slots:
+private Q_SLOTS:
     void changeTheme(bool isLightTheme, QString &theme) override;
     void onCoinControlClicked();
-    void onDenomClicked();
     void onRescanMintsClicked();
     void onResetZeroClicked();
     void onTotalZpivClicked();

@@ -229,7 +229,6 @@ Create (and optionally verify) the signed Windows binaries:
     ./bin/gsign --signer "$SIGNER" --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../bitcloud/contrib/gitian-descriptors/gitian-win-signer.yml
     ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-signed ../bitcloud/contrib/gitian-descriptors/gitian-win-signer.yml
     mv build/out/bitcloud-*win64-setup.exe ../bitcloud-${VERSION}-win64-setup.exe
-    mv build/out/bitcloud-*win32-setup.exe ../bitcloud-${VERSION}-win32-setup.exe
     popd
 
 Commit your signature for the signed macOS/Windows binaries:
@@ -259,8 +258,6 @@ bitcloud-${VERSION}-x86_64-linux-gnu.tar.gz
 bitcloud-${VERSION}-osx64.tar.gz
 bitcloud-${VERSION}-osx.dmg
 bitcloud-${VERSION}.tar.gz
-bitcloud-${VERSION}-win32-setup.exe
-bitcloud-${VERSION}-win32.zip
 bitcloud-${VERSION}-win64-setup.exe
 bitcloud-${VERSION}-win64.zip
 ```

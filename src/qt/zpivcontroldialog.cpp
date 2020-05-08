@@ -1,11 +1,10 @@
-// Copyright (c) 2017-2019 The PIVX developers
+// Copyright (c) 2017-2020 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "zpivcontroldialog.h"
 #include "ui_zpivcontroldialog.h"
 
-#include "zpiv/accumulators.h"
 #include "main.h"
 #include "walletmodel.h"
 #include "guiutil.h"
@@ -56,9 +55,9 @@ ZPivControlDialog::ZPivControlDialog(QWidget *parent) :
     ui->pushButtonAll->setProperty("cssClass", "btn-check");
 
     // click on checkbox
-    connect(ui->treeWidget, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(updateSelection(QTreeWidgetItem*, int)));
+    connect(ui->treeWidget, &QTreeWidget::itemChanged, this, &ZPivControlDialog::updateSelection);
     // push select/deselect all button
-    connect(ui->pushButtonAll, SIGNAL(clicked()), this, SLOT(ButtonAllClicked()));
+    connect(ui->pushButtonAll, &QPushButton::clicked, this, &ZPivControlDialog::ButtonAllClicked);
 }
 
 ZPivControlDialog::~ZPivControlDialog()
@@ -102,7 +101,6 @@ void ZPivControlDialog::updateList()
 
     //populate rows with mint info
     int nBestHeight = chainActive.Height();
-    //map<CoinDenomination, int> mapMaturityHeight = GetMintMaturityHeight();
     for (const CMintMeta& mint : setMints) {
         // assign this mint to the correct denomination in the tree view
         libzerocoin::CoinDenomination denom = mint.denom;
@@ -138,7 +136,8 @@ void ZPivControlDialog::updateList()
         //    isMature = mint.nHeight < mapMaturityHeight.at(denom);
 
         // disable selecting this mint if it is not spendable - also display a reason why
-        bool fSpendable = isMature && nConfirmations >= Params().Zerocoin_MintRequiredConfirmations() && mint.isSeedCorrect;
+        const int nRequiredConfs = Params().GetConsensus().ZC_MinMintConfirmations;
+        bool fSpendable = isMature && nConfirmations >= nRequiredConfs && mint.isSeedCorrect;
         if(!fSpendable) {
             itemMint->setDisabled(true);
             itemMint->setCheckState(COLUMN_CHECKBOX, Qt::Unchecked);
@@ -148,14 +147,14 @@ void ZPivControlDialog::updateList()
                 setSelectedMints.erase(strPubCoinHash);
 
             std::string strReason = "";
-            if(nConfirmations < Params().Zerocoin_MintRequiredConfirmations())
-                strReason = strprintf("Needs %d more confirmations", Params().Zerocoin_MintRequiredConfirmations() - nConfirmations);
+            if(nConfirmations < nRequiredConfs)
+                strReason = strprintf("Needs %d more confirmations", nRequiredConfs - nConfirmations);
             else if (model->getEncryptionStatus() == WalletModel::EncryptionStatus::Locked)
                 strReason = "Your wallet is locked. Impossible to spend zBTDX.";
             else if (!mint.isSeedCorrect)
                 strReason = "The zBTDX seed used to mint this zBTDX is not the same as currently hold in the wallet";
             else
-                strReason = strprintf("Needs %d more mints added to network", Params().Zerocoin_RequiredAccumulation());
+                strReason = "Needs 1 more mint added to network";
 
             itemMint->setText(COLUMN_ISSPENDABLE, QString::fromStdString(strReason));
         } else {

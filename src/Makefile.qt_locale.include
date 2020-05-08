@@ -1,0 +1,14 @@
+QT_TS = \
+  qt/locale/bitcloud_de.ts \
+  qt/locale/bitcloud_en.ts \
+  qt/locale/bitcloud_en_US.ts \
+  qt/locale/bitcloud_es.ts \
+  qt/locale/bitcloud_fr_FR.ts \
+  qt/locale/bitcloud_hr_HR.ts \
+  qt/locale/bitcloud_it.ts \
+  qt/locale/bitcloud_ko_KR.ts \
+  qt/locale/bitcloud_nl.ts \
+  qt/locale/bitcloud_pl.ts \
+  qt/locale/bitcloud_ru.ts \
+  qt/locale/bitcloud_tr.ts \
+  qt/locale/bitcloud_zh_CN.ts

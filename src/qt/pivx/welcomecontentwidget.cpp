@@ -158,10 +158,10 @@ WelcomeContentWidget::WelcomeContentWidget(QWidget *parent) :
     ui->pushButtonSkip->setProperty("cssClass", "btn-close-white");
     onNextClicked();
 
-    connect(ui->pushButtonSkip, SIGNAL(clicked()), this, SLOT(close()));
-    connect(nextButton, SIGNAL(clicked()), this, SLOT(onNextClicked()));
-    connect(backButton, SIGNAL(clicked()), this, SLOT(onBackClicked()));
-
+    connect(ui->pushButtonSkip, &QPushButton::clicked, this, &WelcomeContentWidget::close);
+    connect(nextButton, &QPushButton::clicked, this, &WelcomeContentWidget::onNextClicked);
+    connect(backButton, &QPushButton::clicked, this, &WelcomeContentWidget::onBackClicked);
+    connect(ui->comboBoxLanguage, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &WelcomeContentWidget::checkLanguage);
     initLanguages();
 
 
@@ -176,7 +176,7 @@ void WelcomeContentWidget::initLanguages(){
     /* Language selector */
     QDir translations(":translations");
     ui->comboBoxLanguage->addItem(QString("(") + tr("default") + QString(")"), QVariant(""));
-    foreach (const QString& langStr, translations.entryList()) {
+    Q_FOREACH (const QString& langStr, translations.entryList()) {
         QLocale locale(langStr);
 
         /** check if the locale name consists of 2 parts (language_country) */
@@ -200,7 +200,9 @@ void WelcomeContentWidget::checkLanguage(){
     QSettings settings;
     if (settings.value("language") != sel){
         settings.setValue("language", sel);
-        emit onLanguageSelected();
+        settings.sync();
+        Q_EMIT onLanguageSelected();
+        ui->retranslateUi(this);
     }
 }
 

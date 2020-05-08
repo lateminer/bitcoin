@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2019 The PIVX developers
+// Copyright (c) 2015-2020 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -19,7 +19,7 @@
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader* pblock)
 {
-    if (Params().NetworkID() == CBaseChainParams::REGTEST)
+    if (Params().IsRegTestNet())
         return pindexLast->nBits;
 
     /* current difficulty formula, bitcloud - DarkGravity v3, written by Evan Duffield - evan@dashpay.io */
@@ -32,19 +32,16 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     int64_t CountBlocks = 0;
     uint256 PastDifficultyAverage;
     uint256 PastDifficultyAveragePrev;
+    const Consensus::Params& consensus = Params().GetConsensus();
 
     if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || BlockLastSolved->nHeight < PastBlocksMin) {
-        return Params().ProofOfWorkLimit().GetCompact();
+        return consensus.powLimit.GetCompact();
     }
 
-    if (pindexLast->nHeight >= Params().LAST_POW_BLOCK()) {
-        const bool fTimeV2 = Params().IsTimeProtocolV2(pindexLast->nHeight+1);
-
-        // BTDX
-        const uint256 bnTargetLimit = fTimeV2 ? Params().ProofOfStakeLimit(fTimeV2) : Params().ProofOfWorkLimit();
-
-        const int64_t nTargetSpacing = Params().TargetSpacing();
-        const int64_t nTargetTimespan = Params().TargetTimespan(fTimeV2);
+    if (pindexLast->nHeight >= Params().GetConsensus().height_last_PoW) {
+        const bool fTimeV2 = consensus.IsTimeProtocolV2(pindexLast->nHeight+1);
+        const uint256& bnTargetLimit = consensus.ProofOfStakeLimit(fTimeV2);
+        const int64_t& nTargetTimespan = consensus.TargetTimespan(fTimeV2);
 
         int64_t nActualSpacing = 0;
         if (pindexLast->nHeight != 0)
@@ -52,10 +49,8 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 
         if (nActualSpacing < 0)
             nActualSpacing = 1;
-
-        // update for V2 time protocol
-        if (fTimeV2 && nActualSpacing > nTargetSpacing*10)
-            nActualSpacing = nTargetSpacing*10;
+        if (fTimeV2 && nActualSpacing > consensus.nTargetSpacing*10)
+            nActualSpacing = consensus.nTargetSpacing*10;
 
         // ppcoin: target change every block
         // ppcoin: retarget with exponential moving toward target spacing
@@ -63,15 +58,15 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
         bnNew.SetCompact(pindexLast->nBits);
 
         // on first block with V2 time protocol, reduce the difficulty by a factor 16
-        if (fTimeV2 && !Params().IsTimeProtocolV2(pindexLast->nHeight))
+        if (fTimeV2 && !consensus.IsTimeProtocolV2(pindexLast->nHeight))
             bnNew <<= 4;
 
-        int64_t nInterval = nTargetTimespan / nTargetSpacing;
-        bnNew *= ((nInterval - 1) * nTargetSpacing + nActualSpacing + nActualSpacing);
-        bnNew /= ((nInterval + 1) * nTargetSpacing);
+        int64_t nInterval = nTargetTimespan / consensus.nTargetSpacing;
+        bnNew *= ((nInterval - 1) * consensus.nTargetSpacing + nActualSpacing + nActualSpacing);
+        bnNew /= ((nInterval + 1) * consensus.nTargetSpacing);
         
         // BTDX
-        if (pindexLast->nHeight == Params().LAST_POW_BLOCK() || pindexLast->nHeight <= Params().LAST_POW_BLOCK() + 2)
+        if (pindexLast->nHeight == Params().GetConsensus().height_last_PoW || pindexLast->nHeight <= Params().GetConsensus().height_last_PoW + 2)
             bnNew = bnTargetLimit;
 
         if (bnNew <= 0 || bnNew > bnTargetLimit)
@@ -110,7 +105,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 
     uint256 bnNew(PastDifficultyAverage);
 
-    int64_t _nTargetTimespan = CountBlocks * Params().TargetSpacing();
+    int64_t _nTargetTimespan = CountBlocks * consensus.nTargetSpacing;
 
     if (nActualTimespan < _nTargetTimespan / 3)
         nActualTimespan = _nTargetTimespan / 3;
@@ -122,11 +117,11 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     bnNew /= _nTargetTimespan;
 
 	// BTDX: set the diff down for POS LimxDev 02-07-2017
-	if (pindexLast->nHeight <= Params().LAST_POW_BLOCK())
-        bnNew = Params().ProofOfWorkLimit();
+	if (pindexLast->nHeight <= Params().GetConsensus().height_last_PoW)
+        bnNew = consensus.powLimit;
 
-    if (bnNew > Params().ProofOfWorkLimit()) {
-        bnNew = Params().ProofOfWorkLimit();
+    if (bnNew > consensus.powLimit) {
+        bnNew = consensus.powLimit;
     }
 
     return bnNew.GetCompact();
@@ -138,22 +133,17 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
     bool fOverflow;
     uint256 bnTarget;
 
-    if (Params().SkipProofOfWorkCheck())
-        return true;
+    if (Params().IsRegTestNet()) return true;
 
     bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
 
     // Check range
-    if (fNegative || bnTarget == 0 || fOverflow || bnTarget > Params().ProofOfWorkLimit())
+    if (fNegative || bnTarget.IsNull() || fOverflow || bnTarget > Params().GetConsensus().powLimit)
         return error("CheckProofOfWork() : nBits below minimum work");
 
     // Check proof of work matches claimed amount
-    if (hash > bnTarget) {
-        if (Params().MineBlocksOnDemand())
-            return false;
-        else
-            return error("CheckProofOfWork() : hash doesn't match nBits");
-    }
+    if (hash > bnTarget)
+        return error("CheckProofOfWork() : hash doesn't match nBits");
 
     return true;
 }
@@ -164,8 +154,8 @@ uint256 GetBlockProof(const CBlockIndex& block)
     bool fNegative;
     bool fOverflow;
     bnTarget.SetCompact(block.nBits, &fNegative, &fOverflow);
-    if (fNegative || fOverflow || bnTarget == 0)
-        return 0;
+    if (fNegative || fOverflow || bnTarget.IsNull())
+        return UINT256_ZERO;
     // We need to compute 2**256 / (bnTarget+1), but we can't represent 2**256
     // as it's too large for a uint256. However, as 2**256 is at least as large
     // as bnTarget+1, it is equal to ((2**256 - bnTarget - 1) / (bnTarget+1)) + 1,

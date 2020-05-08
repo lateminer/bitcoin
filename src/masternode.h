@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2019 The PIVX developers
+// Copyright (c) 2015-2020 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -103,14 +103,14 @@ public:
 };
 
 //
-// The Masternode Class. For managing the Obfuscation process. It contains the input of the 10000 BTDX, signature to prove
+// The Masternode Class. It contains the input of the 10000 BTDX, signature to prove
 // it's the one who own that ip address and code for calculating the payment election.
 //
 class CMasternode : public CSignedMessage
 {
 private:
     // critical section to protect the inner data structures
-    mutable CCriticalSection cs;
+    mutable RecursiveMutex cs;
     int64_t lastTimeChecked;
 
 public:
@@ -145,9 +145,6 @@ public:
     int nScanningErrorCount;
     int nLastScanningErrorBlockHeight;
     CMasternodePing lastPing;
-
-    int64_t nLastDsee;  // temporary, do not save. Remove after migration to v12
-    int64_t nLastDseep; // temporary, do not save. Remove after migration to v12
 
     CMasternode();
     CMasternode(const CMasternode& other);
@@ -228,13 +225,6 @@ public:
     int64_t SecondsSincePayment();
 
     bool UpdateFromNewBroadcast(CMasternodeBroadcast& mnb);
-
-    inline uint64_t SliceHash(uint256& hash, int slice)
-    {
-        uint64_t n = 0;
-        memcpy(&n, &hash + slice * 64, 64);
-        return n;
-    }
 
     void Check(bool forceCheck = false);
 

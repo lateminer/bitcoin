@@ -1,4 +1,4 @@
-// Copyright (c) 2019 The PIVX developers
+// Copyright (c) 2019-2020 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -18,6 +18,10 @@
 #include "qt/pivx/defaultdialog.h"
 #include "qt/pivx/settings/settingsfaqwidget.h"
 
+#include "init.h"
+#include "util.h"
+
+#include <QDesktopWidget>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QApplication>
@@ -26,11 +30,11 @@
 #include <QKeySequence>
 #include <QWindowStateChangeEvent>
 
-#include "util.h"
 
 #define BASE_WINDOW_WIDTH 1200
 #define BASE_WINDOW_HEIGHT 740
 #define BASE_WINDOW_MIN_HEIGHT 620
+#define BASE_WINDOW_MIN_WIDTH 1100
 
 
 const QString PIVXGUI::DEFAULT_WALLET = "~Default";
@@ -41,8 +45,18 @@ PIVXGUI::PIVXGUI(const NetworkStyle* networkStyle, QWidget* parent) :
 
     /* Open CSS when configured */
     this->setStyleSheet(GUIUtil::loadStyleSheet());
-    this->setMinimumSize(BASE_WINDOW_WIDTH, BASE_WINDOW_MIN_HEIGHT);
-    GUIUtil::restoreWindowGeometry("nWindow", QSize(BASE_WINDOW_WIDTH, BASE_WINDOW_HEIGHT), this);
+    this->setMinimumSize(BASE_WINDOW_MIN_WIDTH, BASE_WINDOW_MIN_HEIGHT);
+
+
+    // Adapt screen size
+    QRect rec = QApplication::desktop()->screenGeometry();
+    int adaptedHeight = (rec.height() < BASE_WINDOW_HEIGHT) ?  BASE_WINDOW_MIN_HEIGHT : BASE_WINDOW_HEIGHT;
+    int adaptedWidth = (rec.width() < BASE_WINDOW_WIDTH) ?  BASE_WINDOW_MIN_WIDTH : BASE_WINDOW_WIDTH;
+    GUIUtil::restoreWindowGeometry(
+            "nWindow",
+            QSize(adaptedWidth, adaptedHeight),
+            this
+    );
 
 #ifdef ENABLE_WALLET
     /* if compiled with wallet support, -disablewallet can still disable the wallet */
@@ -51,27 +65,23 @@ PIVXGUI::PIVXGUI(const NetworkStyle* networkStyle, QWidget* parent) :
     enableWallet = false;
 #endif // ENABLE_WALLET
 
-    QString windowTitle = tr("Bitcloud Core") + " - ";
-    windowTitle += ((enableWallet) ? tr("Wallet") : tr("Node"));
+    QString windowTitle = QString::fromStdString(GetArg("-windowtitle", ""));
+    if (windowTitle.isEmpty()) {
+        windowTitle = tr("Bitcloud Core") + " - ";
+        windowTitle += ((enableWallet) ? tr("Wallet") : tr("Node"));
+    }
     windowTitle += " " + networkStyle->getTitleAddText();
     setWindowTitle(windowTitle);
 
-#ifndef Q_OS_MAC
     QApplication::setWindowIcon(networkStyle->getAppIcon());
     setWindowIcon(networkStyle->getAppIcon());
-#else
-    MacDockIconHandler::instance()->setIcon(networkStyle->getAppIcon());
-#endif
-
-
-
 
 #ifdef ENABLE_WALLET
     // Create wallet frame
     if(enableWallet){
 
         QFrame* centralWidget = new QFrame(this);
-        this->setMinimumWidth(BASE_WINDOW_WIDTH);
+        this->setMinimumWidth(BASE_WINDOW_MIN_WIDTH);
         this->setMinimumHeight(BASE_WINDOW_MIN_HEIGHT);
         QHBoxLayout* centralWidgetLayouot = new QHBoxLayout();
         centralWidget->setLayout(centralWidgetLayouot);
@@ -116,7 +126,6 @@ PIVXGUI::PIVXGUI(const NetworkStyle* networkStyle, QWidget* parent) :
         sendWidget = new SendWidget(this);
         receiveWidget = new ReceiveWidget(this);
         addressesWidget = new AddressesWidget(this);
-        privacyWidget = new PrivacyWidget(this);
         masterNodesWidget = new MasterNodesWidget(this);
         coldStakingWidget = new ColdStakingWidget(this);
         settingsWidget = new SettingsWidget(this);
@@ -126,7 +135,6 @@ PIVXGUI::PIVXGUI(const NetworkStyle* networkStyle, QWidget* parent) :
         stackedContainer->addWidget(sendWidget);
         stackedContainer->addWidget(receiveWidget);
         stackedContainer->addWidget(addressesWidget);
-        stackedContainer->addWidget(privacyWidget);
         stackedContainer->addWidget(masterNodesWidget);
         stackedContainer->addWidget(coldStakingWidget);
         stackedContainer->addWidget(settingsWidget);
@@ -168,8 +176,8 @@ void PIVXGUI::createActions(const NetworkStyle* networkStyle){
     quitAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
     quitAction->setMenuRole(QAction::QuitRole);
 
-    connect(toggleHideAction, SIGNAL(triggered()), this, SLOT(toggleHidden()));
-    connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
+    connect(toggleHideAction, &QAction::triggered, this, &PIVXGUI::toggleHidden);
+    connect(quitAction, &QAction::triggered, qApp, &QApplication::quit);
 }
 
 /**
@@ -190,7 +198,6 @@ void PIVXGUI::connectActions() {
     connect(sendWidget, &SendWidget::showHide, this, &PIVXGUI::showHide);
     connect(receiveWidget, &ReceiveWidget::showHide, this, &PIVXGUI::showHide);
     connect(addressesWidget, &AddressesWidget::showHide, this, &PIVXGUI::showHide);
-    connect(privacyWidget, &PrivacyWidget::showHide, this, &PIVXGUI::showHide);
     connect(masterNodesWidget, &MasterNodesWidget::showHide, this, &PIVXGUI::showHide);
     connect(masterNodesWidget, &MasterNodesWidget::execDialog, this, &PIVXGUI::execDialog);
     connect(coldStakingWidget, &ColdStakingWidget::showHide, this, &PIVXGUI::showHide);
@@ -227,7 +234,7 @@ PIVXGUI::~PIVXGUI() {
 /** Get restart command-line parameters and request restart */
 void PIVXGUI::handleRestart(QStringList args){
     if (!ShutdownRequested())
-        emit requestedRestart(args);
+        Q_EMIT requestedRestart(args);
 }
 
 
@@ -245,9 +252,9 @@ void PIVXGUI::setClientModel(ClientModel* clientModel) {
         settingsWidget->setClientModel(clientModel);
 
         // Receive and report messages from client model
-        connect(clientModel, SIGNAL(message(QString, QString, unsigned int)), this, SLOT(message(QString, QString, unsigned int)));
-        connect(topBar, SIGNAL(walletSynced(bool)), dashboard, SLOT(walletSynced(bool)));
-        connect(topBar, SIGNAL(walletSynced(bool)), coldStakingWidget, SLOT(walletSynced(bool)));
+        connect(clientModel, &ClientModel::message, this, &PIVXGUI::message);
+        connect(topBar, &TopBar::walletSynced, dashboard, &DashboardWidget::walletSynced);
+        connect(topBar, &TopBar::walletSynced, coldStakingWidget, &ColdStakingWidget::walletSynced);
 
         // Get restart command-line parameters and handle restart
         connect(settingsWidget, &SettingsWidget::handleRestart, [this](QStringList arg){handleRestart(arg);});
@@ -271,27 +278,28 @@ void PIVXGUI::setClientModel(ClientModel* clientModel) {
 
 void PIVXGUI::createTrayIconMenu() {
 #ifndef Q_OS_MAC
-    // return if trayIcon is unset (only on non-Mac OSes)
+    // return if trayIcon is unset (only on non-macOSes)
     if (!trayIcon)
         return;
 
     trayIconMenu = new QMenu(this);
     trayIcon->setContextMenu(trayIconMenu);
 
-    connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
-            this, SLOT(trayIconActivated(QSystemTrayIcon::ActivationReason)));
+    connect(trayIcon, &QSystemTrayIcon::activated, this, &PIVXGUI::trayIconActivated);
 #else
-    // Note: On Mac, the dock icon is used to provide the tray's functionality.
+    // Note: On macOS, the Dock icon is used to provide the tray's functionality.
     MacDockIconHandler* dockIconHandler = MacDockIconHandler::instance();
-    dockIconHandler->setMainWindow((QMainWindow*)this);
-    trayIconMenu = dockIconHandler->dockMenu();
+    connect(dockIconHandler, &MacDockIconHandler::dockIconClicked, this, &PIVXGUI::macosDockIconActivated);
+
+    trayIconMenu = new QMenu(this);
+    trayIconMenu->setAsDockMenu();
 #endif
 
-    // Configuration of the tray icon (or dock icon) icon menu
+    // Configuration of the tray icon (or Dock icon) icon menu
     trayIconMenu->addAction(toggleHideAction);
     trayIconMenu->addSeparator();
 
-#ifndef Q_OS_MAC // This is built-in on Mac
+#ifndef Q_OS_MAC // This is built-in on macOS
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);
 #endif
@@ -305,6 +313,12 @@ void PIVXGUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
         toggleHidden();
     }
 }
+#else
+void PIVXGUI::macosDockIconActivated()
+ {
+     show();
+     activateWindow();
+ }
 #endif
 
 void PIVXGUI::changeEvent(QEvent* e)
@@ -315,7 +329,7 @@ void PIVXGUI::changeEvent(QEvent* e)
         if (clientModel && clientModel->getOptionsModel() && clientModel->getOptionsModel()->getMinimizeToTray()) {
             QWindowStateChangeEvent* wsevt = static_cast<QWindowStateChangeEvent*>(e);
             if (!(wsevt->oldState() & Qt::WindowMinimized) && isMinimized()) {
-                QTimer::singleShot(0, this, SLOT(hide()));
+                QTimer::singleShot(0, this, &PIVXGUI::hide);
                 e->ignore();
             }
         }
@@ -427,18 +441,11 @@ bool PIVXGUI::openStandardDialog(QString title, QString body, QString okBtn, QSt
 void PIVXGUI::showNormalIfMinimized(bool fToggleHidden) {
     if (!clientModel)
         return;
-    // activateWindow() (sometimes) helps with keyboard focus on Windows
-    if (isHidden()) {
-        show();
-        activateWindow();
-    } else if (isMinimized()) {
-        showNormal();
-        activateWindow();
-    } else if (GUIUtil::isObscured(this)) {
-        raise();
-        activateWindow();
-    } else if (fToggleHidden)
+    if (!isHidden() && !isMinimized() && !GUIUtil::isObscured(this) && fToggleHidden) {
         hide();
+    } else {
+        GUIUtil::bringToFront(this);
+    }
 }
 
 void PIVXGUI::toggleHidden() {
@@ -469,7 +476,7 @@ void PIVXGUI::goToAddresses(){
 }
 
 void PIVXGUI::goToPrivacy(){
-    showTop(privacyWidget);
+    if (privacyWidget) showTop(privacyWidget);
 }
 
 void PIVXGUI::goToMasterNodes(){
@@ -501,7 +508,7 @@ void PIVXGUI::changeTheme(bool isLightTheme){
     this->setStyleSheet(css);
 
     // Notify
-    emit themeChanged(isLightTheme, css);
+    Q_EMIT themeChanged(isLightTheme, css);
 
     // Update style
     updateStyle(this);
@@ -513,7 +520,7 @@ void PIVXGUI::resizeEvent(QResizeEvent* event){
     // background
     showHide(opEnabled);
     // Notify
-    emit windowResizeEvent(event);
+    Q_EMIT windowResizeEvent(event);
 }
 
 bool PIVXGUI::execDialog(QDialog *dialog, int xDiv, int yDiv){
@@ -574,15 +581,23 @@ bool PIVXGUI::addWallet(const QString& name, WalletModel* walletModel)
     receiveWidget->setWalletModel(walletModel);
     sendWidget->setWalletModel(walletModel);
     addressesWidget->setWalletModel(walletModel);
-    privacyWidget->setWalletModel(walletModel);
     masterNodesWidget->setWalletModel(walletModel);
     coldStakingWidget->setWalletModel(walletModel);
     settingsWidget->setWalletModel(walletModel);
 
+    // Privacy screen
+    if (walletModel->getZerocoinBalance() > 0) {
+        privacyWidget = new PrivacyWidget(this);
+        stackedContainer->addWidget(privacyWidget);
+
+        privacyWidget->setWalletModel(walletModel);
+        connect(privacyWidget, &PrivacyWidget::message, this, &PIVXGUI::message);
+        connect(privacyWidget, &PrivacyWidget::showHide, this, &PIVXGUI::showHide);
+    }
+
     // Connect actions..
-    connect(privacyWidget, &PrivacyWidget::message, this, &PIVXGUI::message);
     connect(masterNodesWidget, &MasterNodesWidget::message, this, &PIVXGUI::message);
-    connect(coldStakingWidget, &MasterNodesWidget::message, this, &PIVXGUI::message);
+    connect(coldStakingWidget, &ColdStakingWidget::message, this, &PIVXGUI::message);
     connect(topBar, &TopBar::message, this, &PIVXGUI::message);
     connect(sendWidget, &SendWidget::message,this, &PIVXGUI::message);
     connect(receiveWidget, &ReceiveWidget::message,this, &PIVXGUI::message);
@@ -590,7 +605,7 @@ bool PIVXGUI::addWallet(const QString& name, WalletModel* walletModel)
     connect(settingsWidget, &SettingsWidget::message, this, &PIVXGUI::message);
 
     // Pass through transaction notifications
-    connect(dashboard, SIGNAL(incomingTransaction(QString, int, CAmount, QString, QString)), this, SLOT(incomingTransaction(QString, int, CAmount, QString, QString)));
+    connect(dashboard, &DashboardWidget::incomingTransaction, this, &PIVXGUI::incomingTransaction);
 
     return true;
 }

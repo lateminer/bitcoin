@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2019 The PIVX developers
+// Copyright (c) 2015-2020 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -78,6 +78,15 @@ extern double NSAppKitVersionNumber;
 
 #define URI_SCHEME "bitcloud"
 
+#if defined(Q_OS_MAC)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include <CoreServices/CoreServices.h>
+
+void ForceActivation();
+#endif
+
 namespace GUIUtil
 {
 QString dateTimeStr(const QDateTime& date)
@@ -120,17 +129,9 @@ CAmount parseValue(const QString& text, int displayUnit, bool* valid_out)
     return valid ? val : 0;
 }
 
-QString formatBalance(CAmount amount, int nDisplayUnit, bool isZpiv){
+QString formatBalance(CAmount amount, int nDisplayUnit, bool isZpiv)
+{
     return (amount == 0) ? ("0.00 " + BitcoinUnits::name(nDisplayUnit, isZpiv)) : BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, amount, false, BitcoinUnits::separatorAlways, true, isZpiv);
-}
-
-bool requestUnlock(WalletModel* walletModel, AskPassphraseDialog::Context context, bool relock){
-    // Request unlock if wallet was locked or unlocked for mixing:
-    WalletModel::EncryptionStatus encStatus = walletModel->getEncryptionStatus();
-    if (encStatus == walletModel->Locked) {
-        return WalletModel::UnlockContext(walletModel->requestUnlock(context, relock)).isValid();
-    }
-    return true;
 }
 
 void setupAddressWidget(QValidatedLineEdit* widget, QWidget* parent)
@@ -284,11 +285,11 @@ void copyEntryData(QAbstractItemView* view, int column, int role)
 
 QString getEntryData(QAbstractItemView *view, int column, int role)
 {
-    if(!view || !view->selectionModel())
+    if (!view || !view->selectionModel())
         return QString();
     QModelIndexList selection = view->selectionModel()->selectedRows(column);
 
-    if(!selection.isEmpty()) {
+    if (!selection.isEmpty()) {
         // Return first item
         return (selection.at(0).data(role).toString());
     }
@@ -381,6 +382,24 @@ bool checkPoint(const QPoint& p, const QWidget* w)
 bool isObscured(QWidget* w)
 {
     return !(checkPoint(QPoint(0, 0), w) && checkPoint(QPoint(w->width() - 1, 0), w) && checkPoint(QPoint(0, w->height() - 1), w) && checkPoint(QPoint(w->width() - 1, w->height() - 1), w) && checkPoint(QPoint(w->width() / 2, w->height() / 2), w));
+}
+
+void bringToFront(QWidget* w)
+{
+#ifdef Q_OS_MAC
+    ForceActivation();
+#endif
+
+    if (w) {
+        // activateWindow() (sometimes) helps with keyboard focus on Windows
+        if (w->isMinimized()) {
+            w->showNormal();
+        } else {
+            w->show();
+        }
+        w->activateWindow();
+        w->raise();
+    }
 }
 
 bool openDebugLogfile()
@@ -483,15 +502,15 @@ bool ToolTipToRichTextFilter::eventFilter(QObject* obj, QEvent* evt)
 
 void TableViewLastColumnResizingFixer::connectViewHeadersSignals()
 {
-    connect(tableView->horizontalHeader(), SIGNAL(sectionResized(int, int, int)), this, SLOT(on_sectionResized(int, int, int)));
-    connect(tableView->horizontalHeader(), SIGNAL(geometriesChanged()), this, SLOT(on_geometriesChanged()));
+    connect(tableView->horizontalHeader(), &QHeaderView::sectionResized, this, &TableViewLastColumnResizingFixer::on_sectionResized);
+    connect(tableView->horizontalHeader(), &QHeaderView::geometriesChanged, this, &TableViewLastColumnResizingFixer::on_geometriesChanged);
 }
 
 // We need to disconnect these while handling the resize events, otherwise we can enter infinite loops.
 void TableViewLastColumnResizingFixer::disconnectViewHeadersSignals()
 {
-    disconnect(tableView->horizontalHeader(), SIGNAL(sectionResized(int, int, int)), this, SLOT(on_sectionResized(int, int, int)));
-    disconnect(tableView->horizontalHeader(), SIGNAL(geometriesChanged()), this, SLOT(on_geometriesChanged()));
+    disconnect(tableView->horizontalHeader(), &QHeaderView::sectionResized, this, &TableViewLastColumnResizingFixer::on_sectionResized);
+    disconnect(tableView->horizontalHeader(), &QHeaderView::geometriesChanged, this, &TableViewLastColumnResizingFixer::on_geometriesChanged);
 }
 
 // Setup the resize mode, handles compatibility for Qt5 and below as the method signatures changed.
@@ -747,12 +766,7 @@ bool SetStartOnSystemStartup(bool fAutoStart)
 
 
 #elif defined(Q_OS_MAC)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 // based on: https://github.com/Mozketo/LaunchAtLoginController/blob/master/LaunchAtLoginController.m
-
-#include <CoreFoundation/CoreFoundation.h>
-#include <CoreServices/CoreServices.h>
 
 LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef findUrl);
 LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef findUrl)
@@ -765,7 +779,7 @@ LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef
         CFURLRef currentItemURL = NULL;
 
 #if defined(MAC_OS_X_VERSION_MAX_ALLOWED) && MAC_OS_X_VERSION_MAX_ALLOWED >= 10100
-    if(&LSSharedFileListItemCopyResolvedURL)
+    if (&LSSharedFileListItemCopyResolvedURL)
         currentItemURL = LSSharedFileListItemCopyResolvedURL(item, resolutionFlags, NULL);
 #if defined(MAC_OS_X_VERSION_MIN_REQUIRED) && MAC_OS_X_VERSION_MIN_REQUIRED < 10100
     else
@@ -775,7 +789,7 @@ LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef
     LSSharedFileListItemResolve(item, resolutionFlags, &currentItemURL, NULL);
 #endif
 
-        if(currentItemURL && CFEqual(currentItemURL, findUrl)) {
+        if (currentItemURL && CFEqual(currentItemURL, findUrl)) {
             // found
             CFRelease(currentItemURL);
             return item;
@@ -949,9 +963,6 @@ QString formatServicesStr(quint64 mask)
             case NODE_BLOOM:
             case NODE_BLOOM_WITHOUT_MN:
                 strList.append(QObject::tr("BLOOM"));
-                break;
-            case NODE_BLOOM_LIGHT_ZC:
-                strList.append(QObject::tr("ZK_BLOOM"));
                 break;
             default:
                 strList.append(QString("%1[%2]").arg(QObject::tr("UNKNOWN")).arg(check));

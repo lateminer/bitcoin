@@ -1,4 +1,4 @@
-// Copyright (c) 2019 The PIVX developers
+// Copyright (c) 2019-2020 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -56,10 +56,10 @@ SendMultiRow::SendMultiRow(PWidget *parent) :
     int posIconY = 14;
     iconNumber->move(posIconX, posIconY);
 
-    connect(ui->lineEditAmount, SIGNAL(textChanged(const QString&)), this, SLOT(amountChanged(const QString&)));
-    connect(ui->lineEditAddress, SIGNAL(textChanged(const QString&)), this, SLOT(addressChanged(const QString&)));
-    connect(btnContact, &QAction::triggered, [this](){emit onContactsClicked(this);});
-    connect(ui->btnMenu, &QPushButton::clicked, [this](){emit onMenuClicked(this);});
+    connect(ui->lineEditAmount, &QLineEdit::textChanged, this, &SendMultiRow::amountChanged);
+    connect(ui->lineEditAddress, &QLineEdit::textChanged, [this](){addressChanged(ui->lineEditAddress->text());});
+    connect(btnContact, &QAction::triggered, [this](){Q_EMIT onContactsClicked(this);});
+    connect(ui->btnMenu, &QPushButton::clicked, [this](){Q_EMIT onMenuClicked(this);});
 }
 
 void SendMultiRow::amountChanged(const QString& amount){
@@ -71,7 +71,7 @@ void SendMultiRow::amountChanged(const QString& amount){
             setCssEditLine(ui->lineEditAmount, true, true);
         }
     }
-    emit onValueChanged();
+    Q_EMIT onValueChanged();
 }
 
 /**
@@ -83,10 +83,11 @@ CAmount SendMultiRow::getAmountValue(QString amount){
     return isValid ? value : -1;
 }
 
-bool SendMultiRow::addressChanged(const QString& str){
+bool SendMultiRow::addressChanged(const QString& str, bool fOnlyValidate)
+{
     if(!str.isEmpty()) {
         QString trimmedStr = str.trimmed();
-        bool valid = (this->onlyStakingAddressAccepted) ? walletModel->validateStakingAddress(trimmedStr) : walletModel->validateAddress(trimmedStr);
+        const bool valid = walletModel->validateAddress(trimmedStr, this->onlyStakingAddressAccepted);
         if (!valid) {
             // check URI
             SendCoinsRecipient rcp;
@@ -100,15 +101,17 @@ bool SendMultiRow::addressChanged(const QString& str){
                 } else if(!rcp.message.isEmpty())
                     ui->lineEditDescription->setText(rcp.message);
 
-                emit onUriParsed(rcp);
+                Q_EMIT onUriParsed(rcp);
             } else {
                 setCssProperty(ui->lineEditAddress, "edit-primary-multi-book-error");
             }
         } else {
             setCssProperty(ui->lineEditAddress, "edit-primary-multi-book");
-            QString label = walletModel->getAddressTableModel()->labelForAddress(trimmedStr);
-            if (!label.isNull()){
-                ui->lineEditDescription->setText(label);
+            if (!fOnlyValidate) {
+                QString label = walletModel->getAddressTableModel()->labelForAddress(trimmedStr);
+                if (!label.isEmpty()) {
+                    ui->lineEditDescription->setText(label);
+                }
             }
         }
         updateStyle(ui->lineEditAddress);
@@ -121,7 +124,7 @@ bool SendMultiRow::addressChanged(const QString& str){
 void SendMultiRow::loadWalletModel() {
     if (walletModel && walletModel->getOptionsModel()) {
         displayUnit = walletModel->getOptionsModel()->getDisplayUnit();
-        connect(walletModel->getOptionsModel(), SIGNAL(displayUnitChanged(int)), this, SLOT(updateDisplayUnit()));
+        connect(walletModel->getOptionsModel(), &OptionsModel::displayUnitChanged, this, &SendMultiRow::updateDisplayUnit);
     }
     clear();
 }
@@ -132,7 +135,7 @@ void SendMultiRow::updateDisplayUnit(){
 }
 
 void SendMultiRow::deleteClicked() {
-    emit removeEntry(this);
+    Q_EMIT removeEntry(this);
 }
 
 void SendMultiRow::clear() {
@@ -160,7 +163,7 @@ bool SendMultiRow::validate()
         retval = false;
         setCssProperty(ui->lineEditAddress, "edit-primary-multi-book-error", true);
     } else
-        retval = addressChanged(address);
+        retval = addressChanged(address, true);
 
     CAmount value = getAmountValue(ui->lineEditAmount->text());
 

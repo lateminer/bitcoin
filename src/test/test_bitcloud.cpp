@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2013 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The PIVX developers
+// Copyright (c) 2017-2020 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,16 +11,10 @@
 #include "random.h"
 #include "txdb.h"
 #include "guiinterface.h"
-#include "util.h"
-#ifdef ENABLE_WALLET
-#include "wallet/db.h"
-#include "wallet/wallet.h"
-#endif
 
 #include <boost/test/unit_test.hpp>
 
 CClientUIInterface uiInterface;
-CWallet* pwalletMain;
 
 uint256 insecure_rand_seed = GetRandHash();
 FastRandomContext insecure_rand_ctx(insecure_rand_seed);
@@ -33,9 +27,8 @@ BasicTestingSetup::BasicTestingSetup()
         RandomInit();
         ECC_Start();
         SetupEnvironment();
-        fPrintToDebugLog = false; // don't want to write to debug.log file
         fCheckBlockIndex = true;
-        SelectParams(CBaseChainParams::UNITTEST);
+        SelectParams(CBaseChainParams::MAIN);
 }
 BasicTestingSetup::~BasicTestingSetup()
 {
@@ -44,9 +37,6 @@ BasicTestingSetup::~BasicTestingSetup()
 
 TestingSetup::TestingSetup()
 {
-#ifdef ENABLE_WALLET
-        bitdb.MakeMock();
-#endif
         ClearDatadirCache();
         pathTemp = GetTempPath() / strprintf("test_bitcloud_%lu_%i", (unsigned long)GetTime(), (int)(InsecureRandRange(100000)));
         boost::filesystem::create_directories(pathTemp);
@@ -55,12 +45,11 @@ TestingSetup::TestingSetup()
         pcoinsdbview = new CCoinsViewDB(1 << 23, true);
         pcoinsTip = new CCoinsViewCache(pcoinsdbview);
         InitBlockIndex();
-#ifdef ENABLE_WALLET
-        bool fFirstRun;
-        pwalletMain = new CWallet("wallet.dat");
-        pwalletMain->LoadWallet(fFirstRun);
-        RegisterValidationInterface(pwalletMain);
-#endif
+        {
+            CValidationState state;
+            bool ok = ActivateBestChain(state);
+            BOOST_CHECK(ok);
+        }
         nScriptCheckThreads = 3;
         for (int i=0; i < nScriptCheckThreads-1; i++)
             threadGroup.create_thread(&ThreadScriptCheck);
@@ -72,19 +61,10 @@ TestingSetup::~TestingSetup()
         UnregisterNodeSignals(GetNodeSignals());
         threadGroup.interrupt_all();
         threadGroup.join_all();
-#ifdef ENABLE_WALLET
-        UnregisterValidationInterface(pwalletMain);
-        delete pwalletMain;
-        pwalletMain = NULL;
-#endif
         UnloadBlockIndex();
         delete pcoinsTip;
         delete pcoinsdbview;
         delete pblocktree;
-#ifdef ENABLE_WALLET
-        bitdb.Flush(true);
-        bitdb.Reset();
-#endif
         boost::filesystem::remove_all(pathTemp);
 }
 
