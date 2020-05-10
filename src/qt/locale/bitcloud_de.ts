@@ -3453,6 +3453,7 @@ Transaktion gibt eine cold-staking Zuweisung aus und macht diese nichtig. Diese 
     <message>
         <source>Too much inputs (</source>
         <translation>Zu viele Eingaben (</translation>
+    </message>
     <message>
         <source>) needed.
 Maximum allowed: </source>

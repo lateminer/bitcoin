@@ -120,8 +120,6 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
     CBlock* pblock = &pblocktemplate->block; // pointer for convenience
 
     // Tip
-    /*
-    // BTDX: block version 3
     CBlockIndex* pindexPrev = GetChainTip();
     if (!pindexPrev) return nullptr;
     const int nHeight = pindexPrev->nHeight + 1;
@@ -136,14 +134,6 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
     if (Params().IsRegTestNet()) {
         pblock->nVersion = GetArg("-blockversion", pblock->nVersion);
     }
-    */
-    const int nHeight = pindexPrev->nHeight + 1;
-    bool fZerocoinActive = nHeight >= Params().Zerocoin_StartHeight();
-    
-    // -regtest only: allow overriding block.nVersion with
-    // -blockversion=N to test forking scenarios
-    if (Params().MineBlocksOnDemand())
-        pblock->nVersion = GetArg("-blockversion", pblock->nVersion);
 
     // Create coinbase tx
     CMutableTransaction txNew;
