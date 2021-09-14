@@ -930,6 +930,10 @@ bool ReadBlockFromDisk(CBlock& block, const FlatFilePos& pos, const Consensus::P
             return error("ReadBlockFromDisk: Errors in block header at %s", pos.ToString());
     }
 
+    // peercoin/blackcoin: set flag if proof of stake
+    if (block.IsProofOfStake())
+        block.nFlags |= CBlockIndex::BLOCK_PROOF_OF_STAKE;
+
     return true;
 }
 
