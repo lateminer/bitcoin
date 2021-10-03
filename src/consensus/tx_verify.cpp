@@ -220,8 +220,12 @@ CAmount GetMinFee(const CTransaction& tx)
 CAmount GetMinFee(size_t nBytes, uint32_t nTime)
 {
     CAmount nMinFee;
-    
-    nMinFee = (1 + (CAmount)nBytes / 1000) * MIN_TX_FEE;
+
+    // Blackcoin ToDo: 
+    //if (IsProtocolV3_1(nTime))
+    //    nMinFee = (1 + (CAmount)nBytes / 1000) * MIN_TX_FEE;
+    //else
+        nMinFee = MIN_TX_FEE;
 
     if (!MoneyRange(nMinFee))
         nMinFee = MAX_MONEY;
