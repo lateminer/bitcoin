@@ -1242,7 +1242,7 @@
     <message>
         <location line="+4"/>
         <source>%1 will download and store a copy of the Bitcoin block chain.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 will download and store a copy of the Blackcoin block chain.</translation>
     </message>
     <message>
         <location line="+2"/>
