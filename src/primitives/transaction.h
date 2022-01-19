@@ -197,7 +197,10 @@ struct CMutableTransaction;
 template<typename Stream, typename TxType>
 inline void UnserializeTransaction(TxType& tx, Stream& s) {
     s >> tx.nVersion;
-    s >> tx.nTime;
+    if (tx.nVersion < 2)
+        s >> tx.nTime;
+    else
+        tx.nTime = 0;
     tx.vin.clear();
     tx.vout.clear();
     /* Try to read the vin. In case the dummy is there, this will be read as an empty vector. */
@@ -210,7 +213,8 @@ inline void UnserializeTransaction(TxType& tx, Stream& s) {
 template<typename Stream, typename TxType>
 inline void SerializeTransaction(const TxType& tx, Stream& s) {
     s << tx.nVersion;
-    s << tx.nTime;
+    if (tx.nVersion < 2)
+        s << tx.nTime;
     s << tx.vin;
     s << tx.vout;
     s << tx.nLockTime;
@@ -223,6 +227,8 @@ class CTransaction
 {
 public:
     // Default transaction version.
+    //Blackcoin ToDo: enable after fork
+    //static const int32_t CURRENT_VERSION=2;
     static const int32_t CURRENT_VERSION=1;
 
     // Changing the default transaction version requires a two step process: first

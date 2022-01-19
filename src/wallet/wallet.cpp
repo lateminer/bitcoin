@@ -1764,6 +1764,9 @@ bool CWallet::SetWalletFlags(uint64_t overwriteFlags, bool memonly)
 
 int64_t CWalletTx::GetTxTime() const
 {
+    // peercoin: we still have the timestamp, so use it to avoid confusion
+    if (tx->nTime)
+        return tx->nTime;
     int64_t n = nTimeSmart;
     return n ? n : nTimeReceived;
 }
@@ -2649,12 +2652,8 @@ bool CWallet::SelectCoinsMinConf(const CAmount& nTargetValue, const CoinEligibil
 
     std::vector<OutputGroup> utxo_pool;
     if (coin_selection_params.use_bnb) {
-        // Get long term estimate
-        CCoinControl temp;
-        CFeeRate long_term_feerate = GetMinimumFeeRate(*this, temp);
-
         // Calculate cost of change
-        CAmount cost_of_change = GetDiscardRate(*this).GetFee(coin_selection_params.change_spend_size) + coin_selection_params.effective_fee.GetFee(coin_selection_params.change_output_size);
+        CAmount cost_of_change = GetMinFee(coin_selection_params.change_spend_size, GetAdjustedTime()) + GetMinFee(coin_selection_params.change_output_size, GetAdjustedTime());
 
         // Filter by the min conf specs and add to utxo_pool and calculate effective value
         for (OutputGroup& group : groups) {
@@ -2668,8 +2667,8 @@ bool CWallet::SelectCoinsMinConf(const CAmount& nTargetValue, const CoinEligibil
                 CAmount effective_value = coin.txout.nValue - (coin.m_input_bytes < 0 ? 0 : coin_selection_params.effective_fee.GetFee(coin.m_input_bytes));
                 // Only include outputs that are positive effective value (i.e. not dust)
                 if (effective_value > 0) {
-                    group.fee += coin.m_input_bytes < 0 ? 0 : coin_selection_params.effective_fee.GetFee(coin.m_input_bytes);
-                    group.long_term_fee += coin.m_input_bytes < 0 ? 0 : long_term_feerate.GetFee(coin.m_input_bytes);
+                    group.fee += coin.m_input_bytes < 0 ? 0 : GetMinFee(coin.m_input_bytes, GetAdjustedTime());
+                    group.long_term_fee += coin.m_input_bytes < 0 ? 0 : GetMinFee(coin.m_input_bytes, GetAdjustedTime());
                     if (coin_selection_params.m_subtract_fee_outputs) {
                         group.effective_value += coin.txout.nValue;
                     } else {
@@ -2683,7 +2682,7 @@ bool CWallet::SelectCoinsMinConf(const CAmount& nTargetValue, const CoinEligibil
             if (group.effective_value > 0) utxo_pool.push_back(group);
         }
         // Calculate the fees for things that aren't inputs
-        CAmount not_input_fees = coin_selection_params.effective_fee.GetFee(coin_selection_params.tx_noinputs_size);
+        CAmount not_input_fees = GetMinFee(coin_selection_params.tx_noinputs_size, GetAdjustedTime());
         bnb_used = true;
         return SelectCoinsBnB(utxo_pool, nTargetValue, cost_of_change, setCoinsRet, nValueRet, not_input_fees);
     } else {
@@ -2740,7 +2739,7 @@ bool CWallet::SelectCoins(const std::vector<COutput>& vAvailableCoins, const CAm
             if (coin.m_input_bytes <= 0) {
                 return false; // Not solvable, can't estimate size for fee
             }
-            coin.effective_value = coin.txout.nValue - coin_selection_params.effective_fee.GetFee(coin.m_input_bytes);
+            coin.effective_value = coin.txout.nValue - GetMinFee(coin.m_input_bytes, GetAdjustedTime());
             if (coin_selection_params.use_bnb) {
                 value_to_select -= coin.effective_value;
             } else {
@@ -3040,7 +3039,6 @@ bool CWallet::CreateTransaction(interfaces::Chain::Lock& locked_chain, const std
     CMutableTransaction txNew;
 
     txNew.nLockTime = GetLocktimeForNewTransaction(chain(), locked_chain);
-    txNew.nTime = GetAdjustedTime();
 
     CAmount nFeeNeeded;
     int nBytes;
@@ -3228,7 +3226,7 @@ bool CWallet::CreateTransaction(interfaces::Chain::Lock& locked_chain, const std
                     return false;
                 }
 
-                nFeeNeeded = GetMinimumFee(*this, nBytes, coin_control);
+                nFeeNeeded = GetMinFee(nBytes, txNew.nVersion < 2 ? txNew.nTime : Params().GetConsensus().nProtocolV3_1Time);
 
                 if (nFeeRet >= nFeeNeeded) {
                     // Reduce fee to only the needed amount if possible. This
@@ -3243,7 +3241,7 @@ bool CWallet::CreateTransaction(interfaces::Chain::Lock& locked_chain, const std
                     // change output. Only try this once.
                     if (nChangePosInOut == -1 && nSubtractFeeFromAmount == 0 && pick_new_inputs) {
                         unsigned int tx_size_with_change = nBytes + coin_selection_params.change_output_size + 2; // Add 2 as a buffer in case increasing # of outputs changes compact size
-                        CAmount fee_needed_with_change = GetMinimumFee(*this, tx_size_with_change, coin_control);
+                        CAmount fee_needed_with_change = GetMinFee(tx_size_with_change, txNew.nVersion < 2 ? txNew.nTime : Params().GetConsensus().nProtocolV3_1Time);
                         CAmount minimum_value_for_change = GetDustThreshold(change_prototype_txout, discard_rate);
                         if (nFeeRet >= fee_needed_with_change + minimum_value_for_change) {
                             pick_new_inputs = false;

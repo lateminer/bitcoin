@@ -152,7 +152,7 @@ int64_t GetTransactionSigOpCount(const CTransaction& tx, const CCoinsViewCache& 
     return nSigOps;
 }
 
-bool Consensus::CheckTxInputs(const CTransaction& tx, TxValidationState& state, const CCoinsViewCache& inputs, int nSpendHeight, CAmount& txfee)
+bool Consensus::CheckTxInputs(const CTransaction& tx, TxValidationState& state, const CCoinsViewCache& inputs, int nSpendHeight, CAmount& txfee, unsigned int nTimeTx)
 {
     // are the actual inputs available?
     if (!inputs.HaveInputs(tx)) {
@@ -173,7 +173,7 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, TxValidationState& state, 
         }
 
         // Check transaction timestamp
-        if (coin.nTime > tx.nTime)
+        if (coin.nTime > nTimeTx)
             return state.Invalid(TxValidationResult::TX_CONSENSUS, "bad-txns-time-earlier-than-input");
 
         // Check for negative or overflow input values
@@ -197,12 +197,9 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, TxValidationState& state, 
             return state.Invalid(TxValidationResult::TX_CONSENSUS, "bad-txns-fee-outofrange");
         }
 
-        // Minimum fee
-        if (!Params().IsProtocolV3(tx.nTime)) {
-            // enforce transaction fees for every block
-            if (txfee_aux < GetMinFee(tx))
-                return state.Invalid(TxValidationResult::TX_CONSENSUS, "bad-txns-fee-not-enough");
-        }
+        // peercoin: enforce transaction fees for every block
+        if (txfee_aux < GetMinFee(tx, nTimeTx))
+            return state.Invalid(TxValidationResult::TX_CONSENSUS, "bad-txns-fee-not-enough");
 
         txfee = txfee_aux; 
     }
@@ -211,10 +208,10 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, TxValidationState& state, 
 }
 
 // Blackcoin: GetMinFee
-CAmount GetMinFee(const CTransaction& tx)
+CAmount GetMinFee(const CTransaction& tx, unsigned int nTimeTx)
 {
     size_t nBytes = ::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION);
-    return GetMinFee(nBytes, tx.nTime);
+    return GetMinFee(nBytes, nTimeTx);
 }
 
 CAmount GetMinFee(size_t nBytes, uint32_t nTime)
