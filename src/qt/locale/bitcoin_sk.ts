@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Delete the currently selected address from the list</source>
-        <translation>Vymaž vybranú adresu zo zoznamu</translation>
+        <translation>Vymazať vybranú adresu zo zoznamu</translation>
     </message>
     <message>
         <source>Enter address or label to search</source>
