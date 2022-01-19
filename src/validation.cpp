@@ -668,13 +668,6 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
         return state.Invalid(TxValidationResult::TX_NOT_STANDARD,
                 "absurdly-high-fee", strprintf("%d > %d", nFees, nAbsurdFee));
 
-    // Blackcoin
-    // Compare a package's feerate against minimum allowed.
-    CAmount mempoolRejectFee = GetMinFee(tx);
-    if (nModifiedFees < mempoolRejectFee) 
-        return state.Invalid(TxValidationResult::TX_MEMPOOL_POLICY,
-                "insufficient fee", strprintf("%d < %d", nModifiedFees, mempoolRejectFee));
-
     const CTxMemPool::setEntries setIterConflicting = m_pool.GetIterSet(setConflicts);
     // Calculate in-mempool ancestors, up to a limit.
     if (setConflicts.size() == 1) {
