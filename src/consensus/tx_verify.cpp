@@ -218,7 +218,7 @@ CAmount GetMinFee(size_t nBytes, uint32_t nTime)
 {
     CAmount nMinFee;
 
-    if (IsProtocolV3_1(nTime))
+    if (Params().GetConsensus().IsProtocolV3_1(nTime))
         nMinFee = (1 + (CAmount)nBytes / 1000) * MIN_TX_FEE;
     else
         nMinFee = MIN_TX_FEE;
