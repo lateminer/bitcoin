@@ -245,7 +245,7 @@ public:
     const std::vector<CTxIn> vin;
     const std::vector<CTxOut> vout;
     const int32_t nVersion;
-    unsigned int nTime;
+    const uint32_t nTime;
     const uint32_t nLockTime;
 
 private:

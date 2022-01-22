@@ -22,6 +22,8 @@
 #include <policy/policy.h>
 #include <wallet/wallet.h>
 
+#include <consensus/tx_verify.h>
+
 #include <QApplication>
 #include <QCheckBox>
 #include <QCursor>

@@ -10,6 +10,7 @@
 #include <util/strencodings.h>
 
 #include <assert.h>
+#include <timedata.h>
 
 std::string COutPoint::ToString() const
 {

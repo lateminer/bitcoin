@@ -11,6 +11,7 @@
 #include <chain.h>
 #include <consensus/consensus.h>
 #include <consensus/validation.h>
+#include <consensus/tx_verify.h>
 #include <fs.h>
 #include <interfaces/chain.h>
 #include <interfaces/wallet.h>

@@ -7,6 +7,7 @@
 
 #include <policy/policy.h>
 
+#include <chainparams.h>
 #include <consensus/validation.h>
 #include <coins.h>
 
@@ -64,7 +65,7 @@ bool IsStandardTx(const CTransaction& tx, bool permit_bare_multisig, const CFeeR
 {
     //Blackcoin ToDo: enable after fork
     //if (tx.nVersion > CTransaction::MAX_STANDARD_VERSION || tx.nVersion < 1) {
-    if ((!IsProtocolV3_1(tx.nTime) && (tx.nVersion > CTransaction::MAX_STANDARD_VERSION-1)) || tx.nVersion < 1) {
+    if ((!Params().GetConsensus().IsProtocolV3_1(tx.nTime) && (tx.nVersion > CTransaction::MAX_STANDARD_VERSION-1)) || tx.nVersion < 1) {
         reason = "version";
         return false;
     }

@@ -15,6 +15,7 @@
 #include <policy/fees.h>
 #include <policy/settings.h>
 #include <reverse_iterator.h>
+#include <timedata.h>
 #include <util/system.h>
 #include <util/moneystr.h>
 #include <util/time.h>
@@ -408,7 +409,6 @@ void CTxMemPool::removeUnchecked(txiter it, MemPoolRemovalReason reason)
         GetMainSignals().TransactionRemovedFromMempool(it->GetSharedTx(), reason);
     }
 
-    const uint256 hash = it->GetTx().GetHash();
     for (const CTxIn& txin : it->GetTx().vin)
         mapNextTx.erase(txin.prevout);
 
