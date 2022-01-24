@@ -3040,8 +3040,6 @@ bool CWallet::CreateTransaction(interfaces::Chain::Lock& locked_chain, const std
     CMutableTransaction txNew;
 
     txNew.nLockTime = GetLocktimeForNewTransaction(chain(), locked_chain);
-    //Blackcoin ToDo: remove and initialize nTime in CMutableTransaction constructor
-    txNew.nTime = GetAdjustedTime();
 
     CAmount nFeeNeeded;
     int nBytes;

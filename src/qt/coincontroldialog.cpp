@@ -33,6 +33,8 @@
 #include <QSettings>
 #include <QTreeWidget>
 
+#include <timedata.h> // for GetAdjustedTime()
+
 QList<CAmount> CoinControlDialog::payAmounts;
 bool CoinControlDialog::fSubtractFeeFromAmount = false;
 
