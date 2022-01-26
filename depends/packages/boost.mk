@@ -22,12 +22,11 @@ $(package)_toolset_$(host_os)=clang
 else
 $(package)_toolset_$(host_os)=gcc
 endif
-$(package)_config_libraries=filesystem,system,test
-$(package)_cxxflags+=-std=c++17
+$(package)_config_libraries=chrono,filesystem,program_options,system,thread,test,random
+$(package)_cxxflags=-std=c++17 -fvisibility=hidden
 $(package)_cxxflags_linux=-fPIC
 $(package)_cxxflags_android=-fPIC
 $(package)_cxxflags_x86_64_darwin=-fcf-protection=full
-$(package)_cxxflags_mingw32=-fcf-protection=full
 endef
 
 define $(package)_preprocess_cmds
@@ -43,5 +42,5 @@ define $(package)_build_cmds
 endef
 
 define $(package)_stage_cmds
-  b2 -d0 -j4 --prefix=$($(package)_staging_prefix_dir) $($(package)_config_opts) toolset=$($(package)_toolset_$(host_os)) --no-cmake-config install
+  b2 -d0 -j4 --prefix=$($(package)_staging_prefix_dir) $($(package)_config_opts) toolset=$($(package)_toolset_$(host_os)) install
 endef

@@ -1,12 +1,12 @@
-package=xproto
-$(package)_version=7.0.31
-$(package)_download_path=https://xorg.freedesktop.org/releases/individual/proto
+package=xtrans
+$(package)_version=1.4.0
+$(package)_download_path=https://xorg.freedesktop.org/releases/individual/lib/
 $(package)_file_name=$(package)-$($(package)_version).tar.bz2
-$(package)_sha256_hash=c6f9747da0bd3a95f86b17fb8dd5e717c8f3ab7f0ece3ba1b247899ec1ef7747
+$(package)_sha256_hash=377c4491593c417946efcd2c7600d1e62639f7a8bbca391887e2c4679807d773
+$(package)_dependencies=
 
 define $(package)_set_vars
-$(package)_config_opts=--without-fop --without-xmlto --without-xsltproc --disable-specs
-$(package)_config_opts += --disable-dependency-tracking --enable-option-checking
+$(package)_config_opts_linux=--with-pic --disable-static
 endef
 
 define $(package)_preprocess_cmds
